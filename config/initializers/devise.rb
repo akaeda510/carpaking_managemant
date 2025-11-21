@@ -226,25 +226,25 @@ Devise.setup do |config|
   # change their passwords.
   config.reset_password_within = 6.hours
 
-  # When set to false, does not sign a user in automatically after their password is
-  # reset. Defaults to true, so a user is signed in automatically after a reset.
-  # config.sign_in_after_reset_password = true
+   # When set to false, does not sign a user in automatically after their password is
+   # reset. Defaults to true, so a user is signed in automatically after a reset.
+   # config.sign_in_after_reset_password = true
 
-  # ==> Configuration for :encryptable
-  # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
-  # You can use :sha1, :sha512 or algorithms from others authentication tools as
-  # :clearance_sha1, :authlogic_sha512 (then you should set stretches above to 20
-  # for default behavior) and :restful_authentication_sha1 (then you should set
-  # stretches to 10, and copy REST_AUTH_SITE_KEY to pepper).
-  #
-  # Require the `devise-encryptable` gem when using anything other than bcrypt
-  # config.encryptor = :sha512
+   # ==> Configuration for :encryptable
+   # Allow you to use another hashing or encryption algorithm besides bcrypt (default).
+   # You can use :sha1, :sha512 or algorithms from others authentication tools as
+   # :clearance_sha1, :authlogic_sha512 (then you should set stretches above to 20
+   # for default behavior) and :restful_authentication_sha1 (then you should set
+   # stretches to 10, and copy REST_AUTH_SITE_KEY to pepper).
+   #
+   # Require the `devise-encryptable` gem when using anything other than bcrypt
+   # config.encryptor = :sha512
 
-  # ==> Scopes configuration
-  # Turn scoped views on. Before rendering "sessions/new", it will first check for
-  # "users/sessions/new". It's turned off by default because it's slower if you
-  # are using only default views.
-  # config.scoped_views = false
+   # ==> Scopes configuration
+   # Turn scoped views on. Before rendering "sessions/new", it will first check for
+   # "users/sessions/new". It's turned off by default because it's slower if you
+   # are using only default views.
+   config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
