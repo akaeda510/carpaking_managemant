@@ -351,10 +351,10 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
-  pg (~> 1.1)
+  pg (~> 1.6)
   propshaft
   puma (>= 5.0)
-  rails (~> 8.1.1)
+  rails (~> 8.1)
   rubocop-rails-omakase
   selenium-webdriver
   stimulus-rails
