@@ -24,6 +24,11 @@
   </head>
 
   <body>
+  　 <% if parking_manager_signed_in? %>
+      <%= render 'shared/header_signed_in' %>
+    <% else %>
+      <%= render 'shared/header_public' %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
