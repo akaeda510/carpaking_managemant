@@ -3,7 +3,7 @@
 class DeviseCreateParkingManagers < ActiveRecord::Migration[8.1]
   def change
     create_table :parking_managers do |t|
-      ## Database authenticatable
+         ## Database authenticatable
          t.string :first_name,         null: false, default: ""
          t.string :last_name,          null: false, default: ""
          t.string :email,              null: false, default: ""
@@ -14,7 +14,7 @@ class DeviseCreateParkingManagers < ActiveRecord::Migration[8.1]
          t.string :building,                        default: ""
          t.string :phone_number,       null: false, default: ""
          t.string :contact_number,                  default: ""
-     ## Recoverable
+      ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
 
