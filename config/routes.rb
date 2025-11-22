@@ -17,9 +17,6 @@ Rails.application.routes.draw do
   #
   authenticated :parking_manager do
     root to: "dashboards#index", as: :authenticated_root
-    get "login" => "parking_managers#new", :as => :login
-    post "login" => "parking_managers#create"
-    delete "logout" => "parking_managers#destroy", :as => :logout
   end
 
   unauthenticated :parking_manager do
