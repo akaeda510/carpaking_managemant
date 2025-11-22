@@ -5,15 +5,30 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   # GET /resource/sign_up
+   # def new
+   #   super
+   # end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+   # POST /resource
+   def create
+     build_resource(sign_up_params)
+
+     if resource.save
+
+       if resource.active_for_authentication?
+         set_flash_message! :notice, :signed_up
+         respond_with resource, location: after_sign_up_path_for(resource)
+       else
+         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+         respond_with resource, location: after_inactive_sign_up_path_for(resource)
+       end
+
+     else
+       clean_up_passwords resource
+       respond_with resource
+     end
+   end
 
   # GET /resource/edit
   # def edit
@@ -41,7 +56,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
-  def configure_permittered_parameters
+  def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :first_name,
       :last_name,
