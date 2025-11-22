@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "dashboards/index"
   devise_for :parking_managers, controllers: { sessions: "parking_managers/sessions" }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -14,7 +15,10 @@ Rails.application.routes.draw do
   # root "posts#index"
   #
   authenticated :parking_manager do
-    root to: "dashboards#show", as: :authenticated_root
+    root to: "dashboards#index", as: :authenticated_root
+    get 'login' => 'parking_managers#new', :as => :login
+    post 'login' => "parking_managers#create"
+    delete 'logout' => 'parking_managers#destroy', :as => :logout
   end
 
   unauthenticated :parking_manager do
