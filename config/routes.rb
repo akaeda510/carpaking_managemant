@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get "dashboards/index"
-  devise_for :parking_managers, controllers: { sessions: "parking_managers/sessions", registrations: "parking_managers/registrations" }
+  devise_for :parking_managers, controllers: { 
+    sessions: "parking_managers/sessions",
+    registrations: "parking_managers/registrations"
+  }
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
