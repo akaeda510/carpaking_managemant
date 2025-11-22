@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get "dashboards/index"
-  devise_for :parking_managers, controllers: { 
+  devise_for :parking_managers, controllers: {
     sessions: "parking_managers/sessions",
     registrations: "parking_managers/registrations"
   }
