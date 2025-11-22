@@ -1,6 +1,6 @@
 <h2>アカウント作成</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_with model: resource, scope: resource_name, url: registration_path(resource_name) do |f| %>
   <%= render "parking_managers/shared/error_messages", resource: resource %>
   <div class="field mb-3">
     <%= f.label :first_name, class: "form-label" %><br />
@@ -14,7 +14,7 @@
   
   <div class="field mb-3">
     <%= f.label :email, class: "form-label" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
   </div>
 
   <div class="field mb-3">
@@ -22,12 +22,12 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
   </div>
 
   <div class="field mb-3">
     <%= f.label :password_confirmation, class: "form-label"%><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
   <div class="field mb-3">
@@ -40,22 +40,22 @@
     <%= f.text_field :city, class: "form-control" %>
   </div>
 
-  <div class="label mb-3">
+  <div class="field mb-3">
     <%= f.label :street_address, class: "form-label" %><br />
     <%= f.text_field :street_address, class: "form-control" %>
   </div>
 
-  <div class="label mb-3">
+  <div class="field mb-3">
     <%= f.label :building, class: "form-label" %><br />
     <%= f.text_field :building, class: "form-control" %>
   </div>
 
-  <div class="label mb-3">
+  <div class="field mb-3">
     <%= f.label :phone_number, class: "form-label" %><br />
     <%= f.text_field :phone_number, class: "form-control" %>
   </div>
 
-  <div class="label mb-3">
+  <div class="field mb-3">
     <%= f.label :contact_number, class: "form-label" %><br />
     <%= f.text_field :contact_number, class: "form-control" %>
   </div>
