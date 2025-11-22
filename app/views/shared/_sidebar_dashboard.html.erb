@@ -8,19 +8,17 @@
     
     <nav class="flex-grow overflow-y-auto">
       
-      <% menu_class = "block px-4 py-3 hover:bg-gray-700 transition duration-150 ease-in-out" %>
-      
-       <% is_active = current_page?(root_path) %>
-      <%= link_to '🏠 ダッシュボード', root_path, 
-          class: "#{menu_class} #{is_active ? 'bg-gray-700 font-bold' : ''}" %>
-      
+      <div class = "block p-4 text-lg text-gray-400 transition duration-150 ease-in-out">
+        🏠 ダッシュボード
+      </div>
+     
        <div class="my-1 border-t border-gray-700"></div>
 
       <%# 🅿️ 駐車場管理機能 %>
-      <%= link_to '🅿️ 駐車場管理', '#', class: menu_class %>
+      <%#= link_to '🅿️ 駐車場管理', '#', class: menu_class %>
       
       <%# 👤 契約者管理機能 %>
-      <%= link_to '👤 契約者管理', '#', class: menu_class %>
+      <%#= link_to '👤 契約者管理', '#', class: menu_class %>
 
       <div class="my-1 border-t border-gray-700"></div>
       
