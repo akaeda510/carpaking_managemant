@@ -1,43 +1,131 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-12 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8">
+    
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      管理者アカウント編集
+    </h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "parking_managers/shared/error_messages", resource: resource %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <div>
+            <%= f.label :first_name, '名 (First Name)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+          <div>
+            <%= f.label :last_name, '姓 (Last Name)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :last_name, autocomplete: "family-name", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+          <div>
+            <%= f.label :phone_number, '電話番号 (ハイフンなし 必須)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :phone_number, autocomplete: "tel-national", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
+                maxlength: 11, placeholder: "09012345678" %>
+          </div>
+          
+          <div>
+            <%= f.label :contact_number, '電話番号 (任意)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :contact_number, autocomplete: "tel-other", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
+                maxlength: 11, placeholder: "0312345678" %>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">住所</h3>
+
+        <div class="grid grid-cols-1 gap-6">
+
+          <div>
+            <%= f.label :prefecture, '都道府県', class: "block text-sm font-medium text-gray-700" %>
+            <%# ここは通常セレクトボックスを使用しますが、ここではシンプルにtext_fieldとしています %>
+            <%= f.text_field :prefecture, autocomplete: "address-level1", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          
+          <div>
+            <%= f.label :city, '市区町村', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :city, autocomplete: "address-level2", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div>
+            <%= f.label :street_address, '丁目番地号', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :street_address, autocomplete: "address-line1", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div>
+            <%= f.label :building, '建物名・部屋番号等 (任意)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :building, autocomplete: "address-line2", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">認証情報</h3>
+
+        <div class="field mb-4">
+          <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+          <%= f.email_field :email, autocomplete: "email", 
+              class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="text-sm text-yellow-600 mt-1">
+              現在、確認待ちのメールアドレス: <%= resource.unconfirmed_email %>
+            </p>
+          <% end %>
+        </div>
+
+        <div class="field mb-4">
+          <%= f.label :password, '新しいパスワード (変更しない場合は空欄)', class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password, autocomplete: "new-password", 
+              class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          <% if @minimum_password_length %>
+            <p class="text-xs text-gray-500 mt-1">
+              <%= @minimum_password_length %>文字以上
+            </p>
+          <% end %>
+        </div>
+
+        <div class="field mb-4">
+          <%= f.label :password_confirmation, '新しいパスワード（確認用）', class: "block text-sm font-medium text-gray-700" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", 
+              class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :current_password, '現在のパスワード (変更には必須)', class: "block text-sm font-medium text-red-600" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", 
+              class: "mt-1 block w-full border border-red-300 rounded-md shadow-sm py-2 px-3 focus:ring-red-500 focus:border-red-500 sm:text-sm" %>
+          <p class="text-xs text-red-500 mt-1">
+            セキュリティのため、他の項目を変更する場合でも入力が必要です。
+          </p>
+        </div>
+
+      </section>
+
+      <div class="actions pt-4">
+        <%= f.submit "アカウント情報を更新", 
+            class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
     <% end %>
+        
+        <%= link_to "プロフィールに戻る", profile_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
