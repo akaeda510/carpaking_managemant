@@ -21,8 +21,8 @@ Rails.application.routes.draw do
   #
   authenticated :parking_manager do
     root to: "dashboards#show", as: :authenticated_root
-    resource :dashboard, only: %i[show edit update], path: '/my_dashboard'
-    get 'dashboards', to: 'dashboards#index', as: 'dashboards_index'
+    resource :dashboard, only: %i[show edit update], path: "/my_dashboard"
+    get "dashboards", to: "dashboards#index", as: "dashboards_index"
   end
 
   unauthenticated :parking_manager do
