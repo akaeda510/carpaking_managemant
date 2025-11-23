@@ -14,26 +14,26 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           
           <div>
-            <%= f.label :first_name, '名 (First Name)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.label :first_name, '姓氏 (First Name)', class: "block text-sm font-medium text-gray-700" %>
             <%= f.text_field :first_name, autofocus: true, autocomplete: "given-name", 
                 class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
 
           <div>
-            <%= f.label :last_name, '姓 (Last Name)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.label :last_name, '名前 (Last Name)', class: "block text-sm font-medium text-gray-700" %>
             <%= f.text_field :last_name, autocomplete: "family-name", 
                 class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
 
           <div>
-            <%= f.label :phone_number, '電話番号 (ハイフンなし 必須)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.label :phone_number, '携帯電話番号 (記号 -なし 必須)', class: "block text-sm font-medium text-gray-700" %>
             <%= f.text_field :phone_number, autocomplete: "tel-national", 
                 class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
                 maxlength: 11, placeholder: "09012345678" %>
           </div>
           
           <div>
-            <%= f.label :contact_number, '電話番号 (任意)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.label :contact_number, '電話番号 (記号 -なし 任意)', class: "block text-sm font-medium text-gray-700" %>
             <%= f.text_field :contact_number, autocomplete: "tel-other", 
                 class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", 
                 maxlength: 11, placeholder: "0312345678" %>
@@ -49,7 +49,6 @@
 
           <div>
             <%= f.label :prefecture, '都道府県', class: "block text-sm font-medium text-gray-700" %>
-            <%# ここは通常セレクトボックスを使用しますが、ここではシンプルにtext_fieldとしています %>
             <%= f.text_field :prefecture, autocomplete: "address-level1", 
                 class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
