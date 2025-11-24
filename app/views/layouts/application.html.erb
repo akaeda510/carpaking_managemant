@@ -26,10 +26,17 @@
   <body>
     <% if parking_manager_signed_in? %>
       <%= render 'shared/header_signed_in' %>
-      <%= render 'shared/sidebar_dashboard' %>
+      <div class="flex min-h-[calc(100vh-4rem)]" id="wrapper">
+        <%= render 'shared/sidebar_dashboard' %>
+        <main class="flex-grow">
+          <%= yield %>
+        </main>
+      </div>
     <% else %>
       <%= render 'shared/header_public' %>
+      <main class="min-h-screen">
+        <%= yield %>
+      </main>
     <% end %>
-    <%= yield %>
   </body>
 </html>

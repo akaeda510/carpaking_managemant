@@ -1,8 +1,13 @@
 require "test_helper"
 
 class DashboardsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    get dashboards_index_url
+  setup do
+    @parking_manager = parking_managers(:one)
+    sign_in @parking_manager
+  end
+
+  test "should get show" do
+    get dashboard_url
     assert_response :success
   end
 end

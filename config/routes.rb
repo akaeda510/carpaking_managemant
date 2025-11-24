@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  get "dashboards/index"
+  get "parking_managers/show"
+  get "dashboards/show"
   devise_for :parking_managers, controllers: {
     sessions: "parking_managers/sessions",
     registrations: "parking_managers/registrations"
   }
-
+  resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,7 +20,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   #
   authenticated :parking_manager do
-    root to: "dashboards#index", as: :authenticated_root
+    root to: "dashboards#show", as: :authenticated_root
+    resource :dashboard, only: %i[show edit update], path: "/my_dashboard"
   end
 
   unauthenticated :parking_manager do

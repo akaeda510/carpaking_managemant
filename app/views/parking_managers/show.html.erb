@@ -1,0 +1,101 @@
+<main class="py-10 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-6 sm:p-8">
+
+    <header class="pb-6 border-b border-gray-200">
+      <h1 class="text-3xl font-extrabold text-gray-900 flex items-center">
+        👤 アカウント詳細情報
+      </h1>
+      <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認・編集できます。</p>
+    </header>
+
+    <div class="mt-8 divide-y divide-gray-200">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">基本情報</h2>
+        <dl class="space-y-4">
+
+          <%# 氏名 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">氏名</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @parking_manager.first_name %> <%= @parking_manager.last_name %>
+            </dd>
+          </div>
+
+          <%# メールアドレス %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">メールアドレス</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2"><%= @parking_manager.email %></dd>
+          </div>
+
+          <%# 連絡先電話番号 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">携帯電話番号 </dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @parking_manager.phone_number.to_s.gsub(/(\d{3})(\d{4})(\d{4})/, '\1-\2-\3') %>
+            </dd>
+          </div>
+
+          <%# 自宅住所 (任意) %>
+          <% if @parking_manager.contact_number.present? %>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
+              <dt class="text-sm font-medium text-gray-500">電話番号 (任意)</dt>
+              <dd class="text-sm text-gray-900 sm:col-span-2">
+                <%= @parking_manager.contact_number.present? ? @parking_manager.contact_number.to_s.gsub(/(\d{2,5})(\d{1,4})(\d{4})/, '\1-\2-\3') : "未登録" %>
+              </dd>
+            </div>
+          <% end %>
+
+        </dl>
+      </section>
+
+      <hr class="my-6">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">🏠 住所情報</h2>
+        <dl class="space-y-4">
+
+          <%# 住所 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">住所</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @parking_manager.prefecture %>
+              <%= @parking_manager.city %>
+              <%= @parking_manager.street_address %>
+            </dd>
+          </div>
+
+          <%# 建物名 (任意) %>
+          <% if @parking_manager.building.present? %>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
+              <dt class="text-sm font-medium text-gray-500">建物名・部屋番号</dt>
+              <dd class="text-sm text-gray-900 sm:col-span-2"><%= @parking_manager.building %></dd>
+            </div>
+          <% end %>
+
+        </dl>
+      </section>
+
+      <hr class="my-6">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">アカウントステータス</h2>
+        <dl class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">登録日</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @parking_manager.created_at.strftime("%Y年%m月%d日") %>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+    </div>
+
+    <div class="mt-10 flex justify-end">
+      <%= link_to 'アカウント情報を編集', edit_parking_manager_registration_path, 
+        class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    </div>
+
+  </div>
+</main>
