@@ -3,6 +3,7 @@ class ParkingManager < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 50 }
@@ -16,5 +17,7 @@ class ParkingManager < ApplicationRecord
   validates :building, length: { maximum: 55 }, allow_nil: true
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
   validates :contact_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
+
+  # 駐車場区画
   has_many :parking_lots, dependent: :destroy
 end
