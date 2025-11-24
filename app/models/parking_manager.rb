@@ -16,4 +16,5 @@ class ParkingManager < ApplicationRecord
   validates :building, length: { maximum: 55 }, allow_nil: true
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
   validates :contact_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
+  has_many :parking_lots, dependent: :destroy
 end
