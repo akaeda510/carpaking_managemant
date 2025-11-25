@@ -5,7 +5,7 @@ class CreateParkingLots < ActiveRecord::Migration[8.1]
       t.string :prefecture,         null: false, default: ""
       t.string :city,               null: false, default: ""
       t.string :street_address,     null: false, default: ""
-      t.text :description,                       default: ""
+      t.string :description,                     default: ""
       t.string :total_spaces,       null: false, default: ""
 
       t.references :parking_manager, foreign_key: true

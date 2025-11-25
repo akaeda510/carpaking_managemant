@@ -17,7 +17,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_24_122633) do
   create_table "parking_lots", force: :cascade do |t|
     t.string "city", default: "", null: false
     t.datetime "created_at", null: false
-    t.text "description", default: ""
+    t.string "description", default: ""
     t.string "name", default: "", null: false
     t.bigint "parking_manager_id"
     t.string "prefecture", default: "", null: false
