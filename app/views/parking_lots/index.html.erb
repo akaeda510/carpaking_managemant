@@ -1,0 +1,70 @@
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-extrabold text-gray-900">
+      🅿️ 駐車場一覧
+    </h1>
+    
+    <%# 新規作成ボタン %>
+    <%= link_to '➕ 新しい駐車場を登録', new_parking_lot_path, 
+                class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+  </div>
+  
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <% if @parking_lots.any? %>
+      
+      <%# テーブルヘッダー %>
+      <div class="hidden sm:block">
+        <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
+          <div class="col-span-2">駐車場名</div>
+          <div>総スペース数</div>
+          <div class="col-span-2">説明</div>
+          <div class="text-right">アクション</div>
+        </div>
+      </div>
+      
+      <%# 駐車場リスト %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @parking_lots.each do |parking_lot| %>
+          <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+            <div class="grid grid-cols-6 gap-4 items-center">
+              
+              <%# 駐車場名 (col-span-2) %>
+              <div class="col-span-2 text-sm font-medium text-indigo-600 truncate">
+                <%= link_to parking_lot.name, parking_lot_path(parking_lot), class: "hover:underline" %>
+              </div>
+              
+              <%# 総スペース数 %>
+              <div class="text-sm text-gray-900">
+                <%= parking_lot.total_spaces %> 台
+              </div>
+
+              <%# 説明 (col-span-2) %>
+              <div class="col-span-2 text-sm text-gray-500 truncate">
+                <%# description がない場合は '---' を表示 %>
+                <%= parking_lot.description.present? ? parking_lot.description : '---' %>
+              </div>
+              
+              <%# アクションボタン (text-right) %>
+              <div class="text-right flex justify-end space-x-2">
+                <%= link_to '詳細', parking_lot_path(parking_lot), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
+                <%= link_to '編集', edit_parking_lot_path(parking_lot), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
+                
+                <%# 削除リンク - 確認ダイアログは後で実装します %>
+                <%= link_to '削除', parking_lot_path(parking_lot), 
+                            data: { turbo_method: :delete },
+                            class: 'text-red-600 hover:text-red-900 text-sm' %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      
+    <% else %>
+      <%# 駐車場が登録されていない場合 %>
+      <div class="p-8 text-center text-gray-500">
+        <p class="text-lg mb-2">まだ駐車場が登録されていません。</p>
+        <p>すぐに新しい駐車場を登録して管理を開始しましょう！</p>
+      </div>
+    <% end %>
+  </div>
+</div>

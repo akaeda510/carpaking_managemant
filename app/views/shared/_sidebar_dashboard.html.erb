@@ -1,27 +1,23 @@
 <div class="flex" id="wrapper">
-  
-   <div class="w-64 bg-gray-900 text-white border-r border-gray-700 flex flex-col hidden md:block" id="sidebar-wrapper">
-    
+
+  <div class="w-64 bg-gray-900 text-white border-r border-gray-700 flex flex-col hidden md:block" id="sidebar-wrapper">
+
     <div class="p-4 text-lg font-semibold border-b border-gray-700">
       🚗 **管理システム**
     </div>
-    
-    <nav class="flex-grow overflow-y-auto">
-      
-      <div class = "block p-4 text-lg text-gray-400 transition duration-150 ease-in-out">
-        🏠 ダッシュボード
-      </div>
-     
-       <div class="my-1 border-t border-gray-700"></div>
 
-      <%# 🅿️ 駐車場管理機能 %>
-      <%#= link_to '🅿️ 駐車場管理', '#', class: menu_class %>
-      
-      <%# 👤 契約者管理機能 %>
-      <%#= link_to '👤 契約者管理', '#', class: menu_class %>
+    <nav class="flex-grow overflow-y-auto">
 
       <div class="my-1 border-t border-gray-700"></div>
-      
-     </nav>
+
+      <%# 🅿️ 駐車場管理機能 %>
+      <%= link_to '🅿️ 駐車場管理', parking_lots_path, class: "block p-4 text-lg transition duration-150 ease-in-out hover:bg-gray-700" %>
+
+      <%# 👤 契約者管理機能 %>
+      <%#= link_to '👤 契約者管理', '#', class: "block p-4 text-lg transition duration-150 ease-in-out hover:bg-gray-700 #{parking_class}" %>
+
+      <div class="my-1 border-t border-gray-700"></div>
+
+    </nav>
   </div> 
 </div>
