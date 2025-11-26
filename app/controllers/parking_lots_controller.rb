@@ -23,7 +23,7 @@ class ParkingLotsController < ApplicationController
   def edit; end
 
   def update
-    if @patking_lot.update(parking_lot_params)
+    if @parking_lot.update(parking_lot_params)
       redirect_to parking_lots_path
     else
       render :edit, status: :unprocessable_entity
