@@ -1,0 +1,62 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-12 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8">
+    
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+     駐車場エリア編集 
+    </h2>
+
+    <%= form_with(model: @parking_lot, class: "space-y-6" ) do |f| %>
+
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <div class="col-span-1 sm:col-span-2">
+            <%= f.label :name, '駐車場エリア名', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "off", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div class="col-span-1 sm:col-span-2">
+            <%= f.label :prefecture, '都道府県', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :prefecture, autocomplete: "address-level1", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          
+          <div class="col-span-1 sm:col-span-2">
+            <%= f.label :city, '市区町村', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :city, autocomplete: "address-level2", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div class="col-span-1 sm:col-span-2">
+            <%= f.label :street_address, '丁目番地号', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :street_address, autocomplete: "address-line1", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          <div class="col-span-1 sm:col-span-2">
+            <%= f.label :description, '説明、概要', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_area :description, autocomplete: "#", rows: 5, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          <div>
+            <%= f.label :total_spaces, '総駐車台数', class: "block text-sm font-medium text-gray-700" %>
+
+            <%# type="number" を追加し、最大値（max）のヒントを提供 %>
+            <%= f.number_field :total_spaces,
+                               min: 1,
+                               max: 99,
+                              autocomplete: "off", class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+                               placeholder: "例: 25 (最大99台)" %>
+
+          </div>
+        </div>
+      </section>
+
+      <div class="actions pt-4">
+        <%= f.submit "更新", 
+            class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
+    <% end %>
+        
+        <%= link_to "駐車場一覧に戻る", parking_lots_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      </div>
+    </div>
+  </div>
+</div>
