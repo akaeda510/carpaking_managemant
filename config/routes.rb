@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     registrations: "parking_managers/registrations"
   }
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
-  resources :parking_lots, only: %i[ new create show index update edit destroy ] 
+  resources :parking_lots, only: %i[ new create show index update edit destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

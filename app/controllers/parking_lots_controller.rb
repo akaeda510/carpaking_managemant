@@ -10,7 +10,7 @@ class ParkingLotsController < ApplicationController
   def create
     @parking_lot = current_parking_manager.parking_lots.build(parking_lot_params)
     if @parking_lot.save
-      redirect_to parking_lots_path 
+      redirect_to parking_lots_path
     else
       render :new, status: :unprocessable_entity
     end
