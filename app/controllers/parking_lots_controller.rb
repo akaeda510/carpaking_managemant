@@ -31,7 +31,7 @@ class ParkingLotsController < ApplicationController
   end
 
   def destroy
-    parking_lot.destroy!
+    @parking_lot.destroy!
     redirect_to parking_lot_path, status: :see_other
   end
 
