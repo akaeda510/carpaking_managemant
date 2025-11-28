@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_24_122633) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -47,5 +47,21 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_24_122633) do
     t.index ["reset_password_token"], name: "index_parking_managers_on_reset_password_token", unique: true
   end
 
+  create_table "parking_spaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.string "length"
+    t.string "name", null: false
+    t.bigint "parking_lot_id"
+    t.bigint "parking_manager_id"
+    t.datetime "updated_at", null: false
+    t.string "width"
+    t.index ["name"], name: "index_parking_spaces_on_name"
+    t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
+    t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
+  end
+
   add_foreign_key "parking_lots", "parking_managers"
+  add_foreign_key "parking_spaces", "parking_lots"
+  add_foreign_key "parking_spaces", "parking_managers"
 end
