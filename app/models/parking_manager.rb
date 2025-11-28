@@ -20,4 +20,6 @@ class ParkingManager < ApplicationRecord
 
   # 駐車場区画
   has_many :parking_lots, dependent: :destroy
+  # 駐車スペース
+  has_many :parking_spaces, dependent: :destroy
 end
