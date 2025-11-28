@@ -50,12 +50,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
   create_table "parking_spaces", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "description"
-    t.string "length"
+    t.decimal "length", precision: 3, scale: 2
     t.string "name", null: false
     t.bigint "parking_lot_id"
     t.bigint "parking_manager_id"
     t.datetime "updated_at", null: false
-    t.string "width"
+    t.decimal "width", precision: 3, scale: 2
     t.index ["name"], name: "index_parking_spaces_on_name"
     t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
     t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
