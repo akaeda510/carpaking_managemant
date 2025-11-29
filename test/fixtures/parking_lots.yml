@@ -10,6 +10,7 @@ one:
   city: 大阪市
   street_address: 西成区
   total_spaces: 10
+  parking_manager_id: 1
 
 two:
   name: 青色駐車場
@@ -17,4 +18,5 @@ two:
   city: 大阪市
   street_address: 西成区
   total_spaces: 10
+  parking_manager_id: 1
 # column: value
