@@ -7,5 +7,4 @@ class ParkingSpace < ApplicationRecord
   validates :parking_manager_id, presence: true
   belongs_to :parking_lot
   belongs_to :parking_manager
-
 end
