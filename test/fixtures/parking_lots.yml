@@ -4,8 +4,17 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
+one:
+  name: 赤色駐車場
+  prefecture: 大阪府
+  city: 大阪市
+  street_address: 西成区
+  total_spaces: 10
+
+two:
+  name: 青色駐車場
+  prefecture: 大阪府
+  city: 大阪市
+  street_address: 西成区
+  total_spaces: 10
 # column: value
