@@ -15,14 +15,14 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "parking_lots", force: :cascade do |t|
-    t.string "city", default: "", null: false
+    t.string "city", null: false
     t.datetime "created_at", null: false
-    t.string "description", default: ""
-    t.string "name", default: "", null: false
-    t.bigint "parking_manager_id"
-    t.string "prefecture", default: "", null: false
-    t.string "street_address", default: "", null: false
-    t.string "total_spaces", default: "", null: false
+    t.string "description"
+    t.string "name", null: false
+    t.bigint "parking_manager_id", null: false
+    t.string "prefecture", null: false
+    t.string "street_address", null: false
+    t.string "total_spaces", null: false
     t.datetime "updated_at", null: false
     t.index ["parking_manager_id"], name: "index_parking_lots_on_parking_manager_id"
   end
