@@ -4,7 +4,7 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+lot_one:
   name: 赤色駐車場
   prefecture: 大阪府
   city: 大阪市
@@ -12,7 +12,7 @@ one:
   total_spaces: 10
   parking_manager: manager_one
 
-two:
+lot_two:
   name: 青色駐車場
   prefecture: 大阪府
   city: 大阪市
