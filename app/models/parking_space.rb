@@ -6,5 +6,4 @@ class ParkingSpace < ApplicationRecord
 
   belongs_to :parking_lot
   belongs_to :parking_manager
-
 end
