@@ -18,5 +18,5 @@ lot_two:
   city: 大阪市
   street_address: 西成区
   total_spaces: 10
-  parking_manager: manater_one
+  parking_manager: manager_one
 # column: value
