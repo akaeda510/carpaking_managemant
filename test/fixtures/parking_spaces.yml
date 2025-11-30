@@ -12,6 +12,6 @@ one:
 #
 two:
   name: 2
-  parking_manager: manger_one
+  parking_manager: manager_one
   parking_lot_id: lot_one
 # column: value
