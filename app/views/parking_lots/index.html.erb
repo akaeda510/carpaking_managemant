@@ -28,9 +28,9 @@
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
             <div class="grid grid-cols-6 gap-4 items-center">
               
-              <%# 駐車場名 (col-span-2) %>
+              <%# 駐車場名から駐車スペース一覧へ (col-span-2) %>
               <div class="col-span-2 text-sm font-medium text-indigo-600 truncate">
-                <%= link_to parking_lot.name, parking_lot_path(parking_lot), class: "hover:underline" %>
+                <%= link_to parking_lot.name, parking_lot_parking_spaces_path(parking_lot), class: "hover:underline" %>
               </div>
               
               <%# 総スペース数 %>
