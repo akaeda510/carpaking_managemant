@@ -7,11 +7,11 @@
 one:
   name: 1
   parking_manager: manager_one
-  parking_lot_id: 1
+  parking_lot_id: lot_one
 # column: value
 #
 two:
   name: 2
   parking_manager: manger_one
-  parking_lot_id: 1
+  parking_lot_id: lot_one
 # column: value
