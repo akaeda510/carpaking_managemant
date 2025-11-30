@@ -13,6 +13,5 @@ class CreateParkingSpaces < ActiveRecord::Migration[8.1]
 
       t.index :name
     end
-    add_index :parking_spaces, [ :parking_manager_id, :parking_lot_id ], unique: true
   end
 end
