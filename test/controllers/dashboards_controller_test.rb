@@ -2,7 +2,7 @@ require "test_helper"
 
 class DashboardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @parking_manager = parking_managers(:one)
+    @parking_manager = parking_managers(:manager_one)
     sign_in @parking_manager
   end
 

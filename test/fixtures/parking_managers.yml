@@ -4,7 +4,7 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+manager_one:
   first_name: 田中
   last_name: 太郎
   email: tanaka@example.com
@@ -15,7 +15,7 @@ one:
   phone_number: 09099999999
 # column: value
 #
-two:
+manager_two:
   first_name: 山田
   last_name: 花子
   email: yamada@example.com
