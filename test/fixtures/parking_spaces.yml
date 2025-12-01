@@ -6,10 +6,12 @@
 #
 one:
   name: 1
+  parking_manager: manager_one
   parking_lot: lot_one
 # column: value
 #
 two:
   name: 2
+  parking_manager: manager_one
   parking_lot: lot_one
 # column: value
