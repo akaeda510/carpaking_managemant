@@ -6,8 +6,10 @@
 #
 one:
   name: 1
+  parking_lot: lot_one
 # column: value
 #
 two:
   name: 2
+  parking_lot: lot_one
 # column: value
