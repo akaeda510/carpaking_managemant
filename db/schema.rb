@@ -54,6 +54,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "name", null: false
     t.bigint "parking_lot_id", null: false
     t.bigint "parking_manager_id", null: false
+    t.integer "parking_type", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 3, scale: 2
     t.index ["name"], name: "index_parking_spaces_on_name"
