@@ -6,7 +6,7 @@ class CreateParkingSpaces < ActiveRecord::Migration[8.1]
       t.decimal :width,              precision: 3, scale: 2
       t.decimal :length,             precision: 3, scale: 2
       
-      t.integer :parking_type,               null: false, default: 0 
+      t.integer :parking_type,       null: false, default: 0 
 
       t.references :parking_lot,     null: false, foreign_key: true
       t.references :parking_manager, null: false, foreign_key: true
@@ -14,6 +14,7 @@ class CreateParkingSpaces < ActiveRecord::Migration[8.1]
       t.timestamps
 
       t.index :name
+      t.index :parking_type
     end
   end
 end

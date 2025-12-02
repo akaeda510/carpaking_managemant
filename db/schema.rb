@@ -60,6 +60,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.index ["name"], name: "index_parking_spaces_on_name"
     t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
     t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
+    t.index ["parking_type"], name: "index_parking_spaces_on_parking_type"
   end
 
   add_foreign_key "parking_lots", "parking_managers"
