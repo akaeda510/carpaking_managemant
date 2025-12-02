@@ -11,11 +11,11 @@ ParkingManager.find_or_create_by!(email: 'test@example.com') do |manager|
   manager.password = 'password'
   manager.password_confirmation = 'password'
 
-  manager.first_name = '田中',
-  manager.last_name = '太郎',
-  manager.prefecture = '東京都',
-  manager.city = '品川区',
-  manager.street_address = '西品川',
+  manager.first_name = '田中'
+  manager.last_name = '太郎'
+  manager.prefecture = '東京都'
+  manager.city = '品川区'
+  manager.street_address = '西品川'
   manager.phone_number = '09012345678'
 end
 puts "ParkingManager: created or found."
