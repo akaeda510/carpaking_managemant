@@ -1,0 +1,45 @@
+<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
+  <h1 class="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">
+    駐車スペース詳細: <%= @parking_space.name %>
+  </h1>
+
+  <div class="space-y-4">
+    <div class="flex items-center">
+      <p class="w-32 font-semibold text-gray-600">名前:</p>
+      <p class="text-gray-900"><%= @parking_space.name %></p>
+    </div>
+
+    <div class="flex items-center">
+      <p class="w-32 font-semibold text-gray-600">横幅:</p>
+      <p class="text-gray-900"><%= @parking_space.width %> m</p>
+    </div>
+
+    <div class="flex items-center">
+      <p class="w-32 font-semibold text-gray-600">長さ:</p>
+      <p class="text-gray-900"><%= @parking_space.length %> m</p>
+    </div>
+
+    <%# 5. 説明 (description) %>
+    <div class="border-t pt-4 mt-6">
+      <p class="font-semibold text-gray-600 mb-2">説明:</p>
+      <p class="text-gray-900 whitespace-pre-wrap"><%= @parking_space.description %></p>
+    </div>
+  </div>
+
+  <%# 💡 ボタンセクション %>
+  <div class="mt-8 pt-6 border-t flex space-x-4">
+    <%# 編集ボタン %>
+    <%= link_to '編集', '#', class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150" %>
+
+    <%# 削除ボタン %>
+    <%= link_to '削除', '#', 
+        data: { 
+          turbo_method: :delete, 
+          turbo_confirm: "本当にこの駐車スペースを削除しますか？" 
+        },
+        class: "px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150" %>
+
+    <%# 戻るボタン (親の ParkingLot の index に戻ることを想定) %>
+    <%= link_to '一覧に戻る', parking_lot_parking_spaces_path, class: "px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-150" %>
+  </div>
+</div>
