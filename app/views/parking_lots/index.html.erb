@@ -51,7 +51,8 @@
                 
                 <%# 削除リンク - 確認ダイアログは後で実装します %>
                 <%= link_to '削除', parking_lot_path(parking_lot), 
-                            data: { turbo_method: :delete },
+                data: { turbo_method: :delete,
+                turbo_confirm: "本当にこの駐車場区画を削除しますか？"},
                             class: 'text-red-600 hover:text-red-900 text-sm' %>
               </div>
             </div>
