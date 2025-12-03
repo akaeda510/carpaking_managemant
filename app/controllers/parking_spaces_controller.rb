@@ -1,7 +1,7 @@
 class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
-  before_action :set_parking_space, only: %i[show edit update]
+  before_action :set_parking_space, only: %i[show edit update destroy]
 
   def new
     @parking_space = @parking_lot.parking_spaces.build
@@ -32,6 +32,11 @@ class ParkingSpacesController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @parking_space.destroy!
+    redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
   end
 
   private
