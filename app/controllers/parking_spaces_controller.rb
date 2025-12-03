@@ -28,7 +28,7 @@ class ParkingSpacesController < ApplicationController
 
   def update
     if @parking_space.update(parking_space_params)
-      redirect_to [@parking_lot, @parking_space]
+      redirect_to [ @parking_lot, @parking_space ]
     else
       render :edit, status: :unprocessable_entity
     end
