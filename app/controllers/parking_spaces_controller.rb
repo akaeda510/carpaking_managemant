@@ -1,6 +1,7 @@
 class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
+  before_action :set_parking_space, only: %i[show]
 
   def new
     @parking_space = @parking_lot.parking_spaces.build
@@ -21,6 +22,8 @@ class ParkingSpacesController < ApplicationController
     @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC)
   end
 
+  def show; end
+
   private
 
   def parking_space_params
@@ -28,7 +31,9 @@ class ParkingSpacesController < ApplicationController
   end
 
   def set_parking_space
-    @parking_space = @parking_lot.parking_spaces.find(params[:id]) end
+    @parking_space = @parking_lot.parking_spaces.find(params[:id])
+  end
+
   def set_parking_lot
     @parking_lot = ParkingLot.find(params[:parking_lot_id])
   end
