@@ -1,0 +1,100 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-12 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8">
+
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      <%# 新規作成と編集でタイトルを切り替え %>
+      <%= @parking_space.new_record? ? '駐車場スペース作成' : '駐車場スペース編集' %>
+    </h2>
+    
+    <%# ---------------------------------------------------- %>
+    <%# エラー表示セクション %>
+    <%# ---------------------------------------------------- %>
+    <% if @parking_space.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+        <p class="font-bold"><%= parking_space.errors.count %>件のエラーがあります:</p>
+        <ul>
+          <% @parking_space.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# form_with は @parking_lot とローカル変数 parking_space の組み合わせでネストに対応 %>
+    <%= form_with(model: [@parking_lot, @parking_space], local: true, class: "space-y-6" ) do |f| %>
+
+      <%# ---------------------------------------------------- %>
+      <%# Section 1: 基本情報 (駐車場スペース名) %>
+      <%# ---------------------------------------------------- %>
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
+        <div class="grid grid-cols-1 gap-6">
+          <div class="col-span-1">
+            <%= f.label :name, '駐車場スペース名', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+        </div>
+      </section>
+
+      <%# ---------------------------------------------------- %>
+      <%# Section 2: 駐車スペースのサイズ (横幅、長さ) %>
+      <%# ---------------------------------------------------- %>
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">駐車スペースのサイズ (m)</h3>
+        
+        <%# 💡 修正: grid-cols-2 に変更して、横幅と長さを並べる (高さは削除) %>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          
+          <%# 1. 横幅フィールド %>
+          <div>
+            <%= f.label :width, '横幅', class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <%= f.number_field :width, step: '0.01', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <span class="text-gray-500 sm:text-sm">m</span>
+              </div>
+            </div>
+          </div>
+          
+          <%# 2. 長さフィールド %>
+          <div>
+            <%= f.label :length, '長さ', class: "block text-sm font-medium text-gray-700" %>
+            <div class="mt-1 relative rounded-md shadow-sm">
+              <%= f.number_field :length, step: '0.01', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                <span class="text-gray-500 sm:text-sm">m</span>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </section>
+      
+      <%# ---------------------------------------------------- %>
+      <%# Section 3: 説明 概要 %>
+      <%# ---------------------------------------------------- %>
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">説明 概要</h3>
+
+        <div class="grid grid-cols-1 gap-6">
+          <div class="col-span-1">
+            <%= f.label :description, '説明', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions pt-4">
+        <%= f.submit "変更を保存",
+          class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
+      
+    <% end %>
+
+    <div class="mt-6 text-center">
+      <%# 一覧への戻るリンク %>
+      <%= link_to "戻る", [@parking_lot, @parking_space], class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+    
+  </div>
+</div>

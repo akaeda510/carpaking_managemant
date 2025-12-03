@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
-  resources :parking_spaces, only: %i[ new create index show ]
+  resources :parking_spaces, only: %i[ new create index show edit update ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
