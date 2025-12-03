@@ -32,7 +32,7 @@
     <%= link_to '編集', edit_parking_lot_parking_space_path, class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150" %>
 
     <%# 削除ボタン %>
-    <%= link_to '削除', '#', 
+    <%= link_to '削除', parking_lot_parking_space_path(@parking_lot, @parking_space), 
         data: { 
           turbo_method: :delete, 
           turbo_confirm: "本当にこの駐車スペースを削除しますか？" 
