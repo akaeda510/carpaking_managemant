@@ -8,5 +8,5 @@ class ParkingLot < ApplicationRecord
 
   belongs_to :parking_manager
 
-  has_many :parking_spaces
+  has_many :parking_spaces, dependent: :destroy
 end
