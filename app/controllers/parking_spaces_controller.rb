@@ -24,13 +24,11 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :width, :length, :description)
+    params.require(:parking_space).permit(:name, :width, :length, :height, :description)
   end
 
   def set_parking_space
-    @parking_space = @parking_lot.parking_spaces.find(params[:id])
-  end
-
+    @parking_space = @parking_lot.parking_spaces.find(params[:id]) end
   def set_parking_lot
     @parking_lot = ParkingLot.find(params[:parking_lot_id])
   end
