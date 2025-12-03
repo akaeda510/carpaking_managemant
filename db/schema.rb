@@ -55,13 +55,11 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "name", null: false
     t.bigint "parking_lot_id", null: false
     t.bigint "parking_manager_id", null: false
-    t.integer "parking_type", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1
     t.index ["name"], name: "index_parking_spaces_on_name"
     t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
     t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
-    t.index ["parking_type"], name: "index_parking_spaces_on_parking_type"
   end
 
   add_foreign_key "parking_lots", "parking_managers"
