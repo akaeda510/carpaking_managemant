@@ -7,9 +7,6 @@ class CreateParkingSpaces < ActiveRecord::Migration[8.1]
                                      default: 0
       t.decimal :length,             precision: 2, scale: 1,
                                      default: 0
-      t.decimal :height,             precision: 2, scale: 1,
-                                     default: 0
-
       t.references :parking_lot,     null: false, foreign_key: true
       t.references :parking_manager, null: false, foreign_key: true
 
