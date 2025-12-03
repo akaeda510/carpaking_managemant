@@ -18,8 +18,6 @@
           <div class="col-span-2">駐車場スペース名</div>
           <div class="col-span-1">横幅 (m)</div>
           <div class="col-span-1">長さ (m)</div>
-          <div class="col-span-1">説明</div>
-          <div class="col-span-1 text-right">アクション</div>
         </div>
       </div>
 
@@ -32,7 +30,7 @@
               <%# 1. 駐車場スペース名 (全画面で表示) %>
               <div class="col-span-6 sm:col-span-2 text-sm font-medium text-indigo-600 truncate">
                 <span class="sm:hidden text-gray-500 font-semibold mr-2">名前:</span>
-                <%= parking_space.name %> 
+                <%= link_to parking_space.name, [@parking_lot, parking_space] %> 
               </div>
 
               <%# 2. 横幅 (PCではcol-span-1, スマホでは新しい行のcol-span-3) %>
@@ -45,22 +43,7 @@
               <div class="col-span-3 sm:col-span-1 text-sm text-gray-500 truncate">
                 <span class="sm:hidden text-gray-500 font-semibold mr-2">長さ:</span>
                 <%= parking_space.length.present? ? "#{parking_space.length} m" : '---' %>
-              </div>
-              
-              <%# 4. 説明 (PCではcol-span-1, スマホでは新しい行のcol-span-6) %>
-              <div class="col-span-6 sm:col-span-1 text-sm text-gray-500 truncate">
-                <span class="sm:hidden text-gray-500 font-semibold mr-2">説明:</span>
-                <%= parking_space.description.present? ? parking_space.description : '---' %>
-              </div>
-
-              <%# 5. アクションボタン (col-span-6, PCではcol-span-1) %>
-              <div class="col-span-6 sm:col-span-1 text-right flex justify-end space-x-2 mt-2 sm:mt-0">
-                <%= link_to '詳細', "#", class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
-                <%= link_to '編集', "#", class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
-                <%# link_to '削除', "#"
-                data: { turbo_method: :delete, turbo_confirm: "本当にこのスペースを削除しますか？" },
-                class: 'text-red-600 hover:text-red-900 text-sm' %>
-              </div>
+              </div> 
             </div>
           </li>
         <% end %>
