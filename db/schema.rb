@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "street_address", null: false
     t.string "total_spaces", null: false
     t.datetime "updated_at", null: false
-    t.index ["parking_manager_id"], name: "index_parking_lots_on_parking_manager_id"
+    t.index [ "parking_manager_id" ], name: "index_parking_lots_on_parking_manager_id"
   end
 
   create_table "parking_managers", force: :cascade do |t|
@@ -43,8 +43,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "reset_password_token"
     t.string "street_address", default: "", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_parking_managers_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_parking_managers_on_reset_password_token", unique: true
+    t.index [ "email" ], name: "index_parking_managers_on_email", unique: true
+    t.index [ "reset_password_token" ], name: "index_parking_managers_on_reset_password_token", unique: true
   end
 
   create_table "parking_spaces", force: :cascade do |t|
@@ -56,9 +56,9 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.bigint "parking_manager_id", null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
-    t.index ["name"], name: "index_parking_spaces_on_name"
-    t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
-    t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
+    t.index [ "name" ], name: "index_parking_spaces_on_name"
+    t.index [ "parking_lot_id" ], name: "index_parking_spaces_on_parking_lot_id"
+    t.index [ "parking_manager_id" ], name: "index_parking_spaces_on_parking_manager_id"
   end
 
   add_foreign_key "parking_lots", "parking_managers"
