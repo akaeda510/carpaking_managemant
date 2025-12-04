@@ -10,9 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_04_114202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "contractors", force: :cascade do |t|
+    t.string "building"
+    t.string "city", null: false
+    t.string "contact_number"
+    t.datetime "created_at", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.bigint "parking_manager_id", null: false
+    t.string "phone_number", null: false
+    t.string "prefecture", null: false
+    t.string "street_address", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_manager_id"], name: "index_contractors_on_parking_manager_id"
+  end
 
   create_table "parking_lots", force: :cascade do |t|
     t.string "city", null: false
@@ -24,7 +39,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "street_address", null: false
     t.string "total_spaces", null: false
     t.datetime "updated_at", null: false
-    t.index [ "parking_manager_id" ], name: "index_parking_lots_on_parking_manager_id"
+    t.index ["parking_manager_id"], name: "index_parking_lots_on_parking_manager_id"
   end
 
   create_table "parking_managers", force: :cascade do |t|
@@ -43,8 +58,8 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.string "reset_password_token"
     t.string "street_address", default: "", null: false
     t.datetime "updated_at", null: false
-    t.index [ "email" ], name: "index_parking_managers_on_email", unique: true
-    t.index [ "reset_password_token" ], name: "index_parking_managers_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_parking_managers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_parking_managers_on_reset_password_token", unique: true
   end
 
   create_table "parking_spaces", force: :cascade do |t|
@@ -56,11 +71,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_28_133802) do
     t.bigint "parking_manager_id", null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
-    t.index [ "name" ], name: "index_parking_spaces_on_name"
-    t.index [ "parking_lot_id" ], name: "index_parking_spaces_on_parking_lot_id"
-    t.index [ "parking_manager_id" ], name: "index_parking_spaces_on_parking_manager_id"
+    t.index ["name"], name: "index_parking_spaces_on_name"
+    t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
+    t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
   end
 
+  add_foreign_key "contractors", "parking_managers"
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_spaces", "parking_lots"
   add_foreign_key "parking_spaces", "parking_managers"

@@ -8,7 +8,7 @@ class CreateParkingLots < ActiveRecord::Migration[8.1]
       t.string :description
       t.string :total_spaces,        null: false
 
-      t.references :parking_manager, null: false,  foreign_key: true
+      t.references :parking_manager, null: false, foreign_key: true
       t.timestamps
     end
   end
