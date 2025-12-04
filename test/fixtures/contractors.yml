@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  first_name: '田中'
+  last_name: '太郎'
+  prefecture: '東京都'
+  city: '渋谷区'
+  street_address: '代々木'
+  phone_number: '09029292929'
+
+  parking_manager: manager_one
+
+two:
+  first_name: '山本'
+  last_name: '大介'
+  prefecture: '東京都'
+  city: '渋谷区'
+  street_address: '代々木'
+  phone_number: '09011291129'
+
+  parking_manager: manager_one

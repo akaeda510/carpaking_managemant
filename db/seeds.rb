@@ -20,6 +20,17 @@ manager = ParkingManager.find_or_create_by!(email: 'test@example.com') do |manag
 end
 puts "ParkingManager: created or found."
 
+Contractor.find_or_create_by!(first_name: '坂本') do |user|
+  user.parking_manager = manager
+
+  user.last_name = '龍馬'
+  user.prefecture = '東京都'
+  user.city = '渋谷区'
+  user.street_address = '代々木'
+  user.phone_number = '08011111111'
+end
+puts "Contractor: created or found."
+
 lot = ParkingLot.find_or_create_by!(name: 'テスト用駐車場') do |lot|
   lot.parking_manager = manager
 

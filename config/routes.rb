@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
   devise_for :parking_managers, controllers: {
@@ -7,9 +8,12 @@ Rails.application.routes.draw do
   }
 
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
+
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
   resources :parking_spaces, only: %i[ new create index show edit update destroy ]
   end
+
+  resources :contractors, only: %i[ new create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
