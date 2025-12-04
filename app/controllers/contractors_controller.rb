@@ -25,7 +25,7 @@ class ContractorsController < ApplicationController
       :buildint, :phone_number, :contact_number
     )
   end
-  
+
   def set_contractors
     @contractors = current_parking_manager.contractor.all
   end
