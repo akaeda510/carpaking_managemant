@@ -27,6 +27,6 @@ class ContractorsController < ApplicationController
   end
   
   def set_contractors
-    @contractors = current_parking_manager.contractors.all
+    @contractors = current_parking_manager.contractor.all
   end
 end
