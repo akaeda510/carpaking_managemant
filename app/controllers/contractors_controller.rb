@@ -1,5 +1,6 @@
 class ContractorsController < ApplicationController
   before_action :authenticate_parking_manager!
+  before_action :set_contractors, only: %i[index]
 
   def new
     @contractor = Contractor.new
@@ -14,6 +15,8 @@ class ContractorsController < ApplicationController
     end
   end
 
+  def index; end
+
   private
 
   def contractor_params
@@ -21,5 +24,9 @@ class ContractorsController < ApplicationController
       :first_name, :last_name, :prefecture, :city, :street_address,
       :buildint, :phone_number, :contact_number
     )
+  end
+  
+  def set_contractors
+    @contractors = current_parking_manager.contractors.all
   end
 end
