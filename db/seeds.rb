@@ -22,7 +22,7 @@ puts "ParkingManager: created or found."
 
 Contractor.find_or_create_by!(first_name: '坂本') do |user|
   user.parking_manager = manager
-  
+
   user.last_name = '龍馬'
   user.prefecture = '東京都'
   user.city = '渋谷区'

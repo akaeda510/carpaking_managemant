@@ -21,4 +21,5 @@ class ContractorsController < ApplicationController
       :first_name, :last_name, :prefecture, :city, :street_address,
       :buildint, :phone_number, :contact_number
     )
+  end
 end
