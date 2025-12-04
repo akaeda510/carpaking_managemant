@@ -1,0 +1,64 @@
+<%# 契約者一覧ページ (Contractors#index) %>
+
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-extrabold text-gray-900">
+      👤 契約者一覧
+    </h1>
+
+    <%# 新規登録ボタン (今回は詳細のみのため、将来的なボタンとして残しています) %>
+    <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      ➕ 新しい契約者を登録
+    </a>
+  </div>
+
+  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+    <% if @contractors.any? %>
+
+      <%# テーブルヘッダー (PCビューのみ表示) %>
+      <div class="hidden sm:block">
+        <%# grid-cols-6 のレイアウトを継承 %>
+        <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
+          <div class="col-span-2">氏名 / 連絡先</div>
+          <div class="col-span-1 text-right">アクション</div>
+        </div>
+      </div>
+
+      <%# 契約者リスト %>
+      <ul role="list" class="divide-y divide-gray-200">
+        <% @contractors.each do |contractor| %>
+          <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
+            <%# PCビューでは6カラム、スマホビューでは項目が縦に並ぶ %>
+            <div class="grid grid-cols-6 gap-4 items-center">
+              
+              <%# 1. 氏名 / 連絡先 (全画面で表示) %>
+              <div class="col-span-6 sm:col-span-2">
+                <div class="text-sm font-medium text-gray-900 truncate">
+                  <span class="sm:hidden text-gray-500 font-semibold mr-2">氏名:</span>
+                  <%= contractor.first_name %><%= contractor.last_name %>
+                </div>
+                <div class="text-xs text-gray-500 truncate mt-1">
+                  <%= contractor.phone_number %>
+                </div>
+              </div>
+            
+              <%# 4. アクションボタン (詳細) %>
+              <div class="col-span-6 sm:col-span-1 flex justify-start sm:justify-end mt-2 sm:mt-0">
+                <%# 💡 link_to のパスは '#' に設定 %>
+                <%= link_to '詳細', '#', 
+                  class: 'text-sm font-medium text-indigo-600 hover:text-indigo-500' %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+
+    <% else %>
+      <%# 契約者が登録されていない場合 %>
+      <div class="p-8 text-center text-gray-500">
+        <p class="text-lg mb-2">まだ契約者が登録されていません。</p>
+        <a href="#" class="text-indigo-600 hover:text-indigo-700 font-medium">最初の契約者を登録する</a>
+      </div>
+    <% end %>
+  </div>
+</div>
