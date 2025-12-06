@@ -43,7 +43,7 @@
               <%# 4. アクションボタン (詳細) %>
 <div class="text-right flex justify-end space-x-2">
                 <%# 💡 link_to のパスは '#' に設定 %>
-                <%= link_to '詳細', '#', 
+                <%= link_to '詳細', contractor_path(contractor), 
                   class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
                 <%= link_to '編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
                 <%= link_to '削除', contractor_path(contractor),
