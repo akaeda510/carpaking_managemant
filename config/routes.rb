@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :parking_spaces, only: %i[ new create index show edit update destroy ]
   end
 
-  resources :contractors, only: %i[ new create index edit update destroy ]
+  resources :contractors, only: %i[ new create show index edit update destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

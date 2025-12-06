@@ -13,6 +13,7 @@ class Contractor < ApplicationRecord
   validates :contact_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
   validates :notes, length: { maximum: 150 }
   validates :contract_start_date, presence: true
+  validates :contract_end_date, presence: true
 
   belongs_to :parking_manager
 end
