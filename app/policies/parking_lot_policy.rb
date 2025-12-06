@@ -25,9 +25,8 @@ class ParkingLotPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      scope.where(parking_manager.id: @parking_manager.id)
+    end
   end
 end
