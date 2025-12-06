@@ -1,1 +1,116 @@
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-12 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8">
 
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      契約者作成
+    </h2>
+    <%= form_with(model: @contractor, class: "space-y-6" ) do |f| %>
+
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+            <%# 氏名 (姓) %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :first_name, '氏名 (姓)' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :first_name, cautofocus: true, class: "fmt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "山田" %>
+              </dd>
+            </div>
+
+          <%# 氏名 (名) %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :last_name, '氏名 (名)' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :last_name, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "太郎" %>
+              </dd>
+            </div>
+
+            <%# 都道府県 %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :prefecture, '都道府県' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :prefecture, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "東京都" %>
+              </dd>
+            </div>
+
+            <%# 市区町村 %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :city, '市区町村' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :city, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "渋谷区" %>
+              </dd>
+            </div>
+
+            <%# 番地 %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :street_address, '丁目番地号' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :street_address, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "神宮前1-2-3" %>
+              </dd>
+            </div>
+
+            <%# 建物名 %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :building, '建物名・部屋番号 (任意)' %></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :building, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "〇〇マンション 101号室" %>
+              </dd>
+            </div>
+
+            <%# 電話番号 %>
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :phone_number, '携帯電話番号' %> <span class="text-red-500">*</span></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :phone_number, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "09012345678" %>
+              </dd>
+            </div>
+
+            <div class="col-span-1 sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500"><%= f.label :contact_number, '電話番号 (任意)' %></dt>
+              <dd class="sm:col-span-2">
+                <%= f.text_field :contact_number, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm form-control", placeholder: "0398765432" %>
+              </dd>
+            </div>
+
+            </dl>
+      </section>
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">🗓 契約情報</h2>
+        <dl class="space-y-4">
+
+          <%# 契約開始日 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg items-center">
+            <dt class="text-sm font-medium text-gray-500"><%= f.label :contract_start_date, '契約開始日' %> <span class="text-red-500">*</span></dt>
+            <dd class="sm:col-span-2">
+              <%= f.date_field :contract_start_date, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm form-control" %>
+            </dd>
+          </div>
+
+        </dl>
+      </section>
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">✍️ 備考</h2>
+        <dl class="space-y-4">
+          <div class="grid grid-cols-1 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500 mb-2"><%= f.label :notes, '特記事項・その他 (任意)' %></dt>
+            <dd>
+              <%= f.text_area :notes, rows: 4, class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm form-control" %>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="actions pt-4">
+        <%= f.submit "契約者作成",
+          class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <%= link_to "契約者一覧に戻る", contractors_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+    </div>
+  </div>
+</div>
