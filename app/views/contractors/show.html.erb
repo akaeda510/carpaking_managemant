@@ -1,0 +1,106 @@
+<main class="py-10 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-6 sm:p-8">
+
+    <header class="pb-6 border-b border-gray-200">
+      <h1 class="text-3xl font-extrabold text-gray-900 flex items-center">
+        👤 契約者詳細情報
+      </h1>
+      <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認できます。</p>
+    </header>
+
+    <div class="mt-8 divide-y divide-gray-200">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">基本情報</h2>
+        <dl class="space-y-4">
+
+          <%# 氏名 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">氏名</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @contractor.first_name %> <%= @contractor.last_name %>
+            </dd>
+          </div>
+
+          <%# 連絡先電話番号 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">携帯電話番号 </dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @contractor.phone_number.to_s.gsub(/(\d{3})(\d{4})(\d{4})/, '\1-\2-\3') %>
+            </dd>
+          </div>
+
+          <%# 自宅住所 (任意) %>
+          <% if @contractor.contact_number.present? %>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
+              <dt class="text-sm font-medium text-gray-500">電話番号 (任意)</dt>
+              <dd class="text-sm text-gray-900 sm:col-span-2">
+                <%= @contractor.contact_number.present? ? @contractor.contact_number.to_s.gsub(/(\d{2,5})(\d{1,4})(\d{4})/, '\1-\2-\3') : "未登録" %>
+              </dd>
+            </div>
+          <% end %>
+
+        </dl>
+      </section>
+
+      <hr class="my-6">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">🏠 住所情報</h2>
+        <dl class="space-y-4">
+
+          <%# 住所 %>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">住所</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @contractor.prefecture %>
+              <%= @contractor.city %>
+              <%= @contractor.street_address %>
+            </dd>
+          </div>
+
+          <%# 建物名 (任意) %>
+          <% if @contractor.building.present? %>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
+              <dt class="text-sm font-medium text-gray-500">建物名・部屋番号</dt>
+              <dd class="text-sm text-gray-900 sm:col-span-2"><%= @contractor.building %></dd>
+            </div>
+          <% end %>
+
+        </dl>
+      </section>
+
+      <hr class="my-6">
+
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">アカウントステータス</h2>
+        <dl class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">契約開始日</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @contractor.contract_start_date.strftime("%Y年%m月%d日") %>
+            </dd>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500">契約終了日</dt>
+            <dd class="text-sm text-gray-900 sm:col-span-2">
+              <%= @contractor.contract_end_date.strftime("%Y年%m月%d日") %>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      <div class="mt-10 pt-6 flex justify-center space-x-4">
+
+      <%= link_to contractors_path,
+        class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+        <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+        </svg>
+        契約者一覧に戻る
+      <% end %>
+      </div>
+    </div>
+  </div>
+</main>
