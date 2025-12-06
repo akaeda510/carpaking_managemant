@@ -7,7 +7,7 @@ class ContractorsController < ApplicationController
   end
 
   def create
-    @contractor = current.parking_manager.contractor.build(contractor_params)
+    @contractor = current_parking_manager.contractor.build(contractor_params)
     if @contractor.save
       redirect_to contractors_path
     else
