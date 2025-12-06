@@ -18,9 +18,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_04_114202) do
     t.string "building"
     t.string "city", null: false
     t.string "contact_number"
+    t.date "contract_end_date", default: "2999-12-31", null: false
+    t.date "contract_start_date", default: "1999-12-31", null: false
     t.datetime "created_at", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.text "notes"
     t.bigint "parking_manager_id", null: false
     t.string "phone_number", null: false
     t.string "prefecture", null: false
