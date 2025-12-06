@@ -37,8 +37,8 @@ class ApplicationPolicy
   end
 
   class Scope
-    def initialize(user, scope)
-      @user = user
+    def initialize(parking_manager, scope)
+      @parking_manager = parking_manager
       @scope = scope
     end
 
@@ -48,6 +48,6 @@ class ApplicationPolicy
 
     private
 
-    attr_reader :user, :scope
+    attr_reader :parking_manager, :scope
   end
 end
