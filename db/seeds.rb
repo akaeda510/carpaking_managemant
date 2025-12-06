@@ -28,6 +28,8 @@ Contractor.find_or_create_by!(first_name: '坂本') do |user|
   user.city = '渋谷区'
   user.street_address = '代々木'
   user.phone_number = '08011111111'
+  user.contract_start_date = '2025-01-01'
+  user.contract_end_date = '2999-12-31'
 end
 puts "Contractor: created or found."
 
