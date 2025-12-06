@@ -7,9 +7,7 @@
     </h1>
 
     <%# 新規登録ボタン (今回は詳細のみのため、将来的なボタンとして残しています) %>
-    <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-      ➕ 新しい契約者を登録
-    </a>
+    <%= link_to '➕ 新しい契約者を登録', new_contractor_path, class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
 
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">

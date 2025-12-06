@@ -9,6 +9,12 @@ class CreateContractors < ActiveRecord::Migration[8.1]
       t.string :building
       t.string :phone_number,        null: false
       t.string :contact_number
+      t.string :notes
+
+      t.date :contract_start_date, null: false,
+                                       default: "1999-12-31"
+      t.date :contract_end_date,   null: false,
+                                       default: "2999-12-31"
 
       t.references :parking_manager, null: false, foreign_key: true
 
