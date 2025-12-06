@@ -1,7 +1,7 @@
 class ContractorsController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_contractors, only: %i[index]
-  before_action :set_contractor, only: %i[edit update]
+  before_action :set_contractor, only: %i[edit update destroy]
 
   def new
     @contractor = Contractor.new
@@ -26,6 +26,11 @@ class ContractorsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @contractor.destroy!
+      redirect_to contractors_path, status: :see_other
   end
 
   private
