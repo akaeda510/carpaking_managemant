@@ -54,6 +54,9 @@ group :development, :test do
   gem "better_errors"
 
   gem "binding_of_caller"
+
+  # アカウント認可
+  gem "pundit"
 end
 
 group :development do
