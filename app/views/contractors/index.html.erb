@@ -41,10 +41,11 @@
               </div>
             
               <%# 4. アクションボタン (詳細) %>
-              <div class="col-span-6 sm:col-span-1 flex justify-start sm:justify-end mt-2 sm:mt-0">
+<div class="text-right flex justify-end space-x-2">
                 <%# 💡 link_to のパスは '#' に設定 %>
                 <%= link_to '詳細', '#', 
-                  class: 'text-sm font-medium text-indigo-600 hover:text-indigo-500' %>
+                  class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
+                <%= link_to '編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
               </div>
             </div>
           </li>
