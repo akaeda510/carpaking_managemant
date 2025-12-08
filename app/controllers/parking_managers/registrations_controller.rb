@@ -3,6 +3,7 @@
 class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [ :create ]
   before_action :configure_account_update_params, only: [ :update ]
+  before_action :authorize_registration, only: %i[edit update destroy]
 
    # GET /resource/sign_up
    # def new
@@ -73,6 +74,10 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
       :first_name, :last_name, :prefecture, :city, :street_address,
       :building, :phone_number, :contact_number
     ])
+  end
+
+  def authorize_registration
+    authorize(@registration)
   end
 
   # The path used after sign up.
