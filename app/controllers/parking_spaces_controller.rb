@@ -2,6 +2,7 @@ class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
   before_action :set_parking_space, only: %i[show edit update destroy]
+  before_action :authorize, only: %i[show edit update destroy]
 
   def new
     @parking_space = @parking_lot.parking_spaces.build
@@ -10,6 +11,8 @@ class ParkingSpacesController < ApplicationController
   def create
     @parking_space = @parking_lot.parking_spaces.build(parking_space_params)
     @parking_space.parking_manager_id = current_parking_manager.id
+
+    authorize @parking_space
 
     if @parking_space.save
       redirect_to parking_lot_parking_spaces_path
@@ -51,5 +54,9 @@ class ParkingSpacesController < ApplicationController
 
   def set_parking_lot
     @parking_lot = ParkingLot.find(params[:parking_lot_id])
+  end
+
+  def authorize_parking_space
+    authorize(@parking_space)
   end
 end
