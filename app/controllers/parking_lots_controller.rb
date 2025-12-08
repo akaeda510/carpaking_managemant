@@ -53,6 +53,6 @@ class ParkingLotsController < ApplicationController
   end
 
   def authorize_parking_lot
-    authorize(parking_lot)
+    authorize(@parking_lot)
   end
 end
