@@ -1,5 +1,9 @@
 class RegistrationPolicy < ApplicationPolicy
 
+  def create?
+    true
+  end
+
   def edit?
     @parking_manager.id == @record.parking_manager_id
   end
