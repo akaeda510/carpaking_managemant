@@ -2,7 +2,7 @@ class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
   before_action :set_parking_space, only: %i[show edit update destroy]
-  before_action :authorize, only: %i[show edit update destroy]
+  before_action :authorize_parking_space, only: %i[show edit update destroy]
 
   def new
     @parking_space = @parking_lot.parking_spaces.build

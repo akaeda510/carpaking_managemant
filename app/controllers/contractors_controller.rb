@@ -2,7 +2,7 @@ class ContractorsController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_contractors, only: %i[index]
   before_action :set_contractor, only: %i[show edit update destroy]
-  before_action :authorize, only: %i[show edit update destroy]
+  before_action :authorize_contract, only: %i[show edit update destroy]
 
   def new
     @contractor = Contractor.new
