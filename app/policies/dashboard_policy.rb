@@ -1,5 +1,4 @@
 class DashboardPolicy < ApplicationPolicy
-
   def show?
     @parking_manager.present?
   end

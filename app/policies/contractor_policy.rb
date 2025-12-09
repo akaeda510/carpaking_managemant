@@ -1,5 +1,4 @@
 class ContractorPolicy < ApplicationPolicy
-
   def create?
     @parking_manager.present?
   end

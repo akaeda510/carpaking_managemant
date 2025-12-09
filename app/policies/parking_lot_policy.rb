@@ -1,5 +1,4 @@
 class ParkingLotPolicy < ApplicationPolicy
-
   def create?
     @parking_manager.present?
    end

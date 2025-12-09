@@ -1,5 +1,4 @@
 class ParkingSpacePolicy < ApplicationPolicy
-
   def create?
     parking_manager.present?
   end
