@@ -2,6 +2,7 @@ class ContractorsController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_contractors, only: %i[index]
   before_action :set_contractor, only: %i[show edit update destroy]
+  before_action :authorize_contract, only: %i[show edit update destroy]
 
   def new
     @contractor = Contractor.new
@@ -9,6 +10,8 @@ class ContractorsController < ApplicationController
 
   def create
     @contractor = current_parking_manager.contractor.build(contractor_params)
+    authorize @contractor
+
     if @contractor.save
       redirect_to contractors_path
     else
@@ -51,5 +54,9 @@ class ContractorsController < ApplicationController
 
   def set_contractors
     @contractors = current_parking_manager.contractor.all
+  end
+
+  def authorize_contract
+    authorize(@contractor)
   end
 end
