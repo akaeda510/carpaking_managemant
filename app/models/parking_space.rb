@@ -4,6 +4,8 @@ class ParkingSpace < ApplicationRecord
   validates :width, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
 
+  has_many :contract_parking_spaces, dependent: :destroy
+
   belongs_to :parking_lot
   belongs_to :parking_manager
 end
