@@ -44,8 +44,7 @@ class ContractorsController < ApplicationController
     params.require(:contractor).permit(
       :first_name, :last_name, :prefecture, :city, :street_address,
       :buildint, :phone_number, :contact_number, :notes,
-      :contract_start_date, :contract_end_date
-    )
+      )
   end
 
   def set_contractor
