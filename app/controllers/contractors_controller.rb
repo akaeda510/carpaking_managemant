@@ -90,7 +90,7 @@ class ContractorsController < ApplicationController
   end
 
   def available_spaces
-    @available_spaces = ParkingSpace.available
+    @available_spaces = ParkingSpace.available.includes(:parking_lot)
   end
 
   def authorize_contract
