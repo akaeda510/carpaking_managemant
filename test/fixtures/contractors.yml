@@ -4,7 +4,7 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
+owner_one:
   first_name: '田中'
   last_name: '太郎'
   prefecture: '東京都'
@@ -14,7 +14,7 @@ one:
 
   parking_manager: manager_one
 
-two:
+owner_two:
   first_name: '山本'
   last_name: '大介'
   prefecture: '東京都'
