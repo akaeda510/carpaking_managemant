@@ -14,6 +14,8 @@ class Contractor < ApplicationRecord
   validates :notes, length: { maximum: 150 }
 
   has_many :contract_parking_spaces, dependent: :destroy
+  has_many :active_cotractor_parking_space, -> { where('end_date >= ?', Date.current) }, class_name: 'ContractorParkingSpace'
+  has_many :parking_spaces, through: :active_contractor_parking_spaces
 
   belongs_to :parking_manager
 end
