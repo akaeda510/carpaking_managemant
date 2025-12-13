@@ -3,6 +3,7 @@ class ContractorsController < ApplicationController
   before_action :set_contractors, only: %i[index]
   before_action :set_contractor, only: %i[show edit update destroy]
   before_action :authorize_contract, only: %i[show edit update destroy]
+  before_action :available_spaces, only: %i[new edit]
 
   def new
     @contractor = Contractor.new
@@ -26,37 +27,49 @@ class ContractorsController < ApplicationController
   def edit; end
 
   def update
-    new_parking_space_id = contractor_params[:parking_space_id]
-    new_start_date = contractor_params[:start_date]
+    update_params = contractor_params.except(:parking_space_id, :start_date, :should_end_all_contracts)
+    new_parking_space_id = contractor_params[:parking_space_id].presence
+    new_start_date = contractor_params[:start_date].presence
+    should_end_contract = contractor_params[:should_end_all_contracts].present?
 
-    ActiveRecord::Base.transaction do
- 
-      if @contractor.update(contractor_params.except(:parking_space_id, :start_date))
-        # 既存の契約を終了する場合
-        if should_end_contract || end_date_input.present?
-          # 契約者が持つすべての有効な契約を取得
-          @contractor.active_contractor_parking_space.each do |contract|
-            contract_to_end.update!(end_date: Date.current)
+    begin
+
+      ActiveRecord::Base.transaction do
+
+        if @contractor.update!(update_params)
+          # 既存の契約を終了する場合
+          if should_end_contract
+            # 契約者が持つすべての有効な契約を取得
+            @contractor.active_contract_parking_spaces.each do |contract|
+              contract.update!(end_date: Date.current)
+            end
+          end
+          # 新しい契約を作成
+          if new_parking_space_id.present?
+            ContractParkingSpace.create!(
+              parking_space_id: new_parking_space_id,
+              contractor_id: @contractor.id,
+              start_date: new_start_date,
+              end_date: ACTIVE_CONTRACT_END_DATE
+            )
           end
         end
-        # 新しい契約を作成
-        if new_parking_space_id.present?
-          ContractParkingSpace.create!(
-            parking_space_id = new_parking_space.id,
-            contractor_id = @contractor.id
-            start_date = new_start_date,
-            end_date = ACTIVE_CONTRACT_END_DATE
-          )
-        end
-      redirect_to contractors_path
-    else
-      render :edit, status: :unprocessable_entity
+
+        redirect_to @contractor
+
+      rescue ActiviRecord::RecordInvalid => e
+        @contractor.errors.merge!(e.record.errors) unless @contractor.errors.present?
+        render :edit, status: :unprocessable_entity
+      rescue StandardError => e
+        # flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました: #{e.message}"
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
   def destroy
     @contractor.destroy!
-      redirect_to contractors_path, status: :see_other
+    redirect_to contractors_path, status: :see_other
   end
 
   private
@@ -65,7 +78,7 @@ class ContractorsController < ApplicationController
     params.require(:contractor).permit(
       :first_name, :last_name, :prefecture, :city, :street_address,
       :buildint, :phone_number, :contact_number, :notes,
-      )
+    )
   end
 
   def set_contractor
@@ -76,7 +89,12 @@ class ContractorsController < ApplicationController
     @contractors = current_parking_manager.contractor.all
   end
 
+  def available_spaces
+    @available_spaces = ParkingSpace.available
+  end
+
   def authorize_contract
     authorize(@contractor)
   end
 end
+
