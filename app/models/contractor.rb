@@ -18,4 +18,8 @@ class Contractor < ApplicationRecord
   has_many :parking_spaces, through: :active_contractor_parking_spaces
 
   belongs_to :parking_manager
+
+  def current_contractor_id
+    current_contractors_space&.contractor_id
+  end
 end
