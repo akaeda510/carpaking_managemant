@@ -10,4 +10,8 @@ class ParkingSpace < ApplicationRecord
 
   belongs_to :parking_lot
   belongs_to :parking_manager
+
+  def current_contractor_id
+    current_contractors_space&.contractor_id
+  end
 end
