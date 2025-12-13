@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_12_11_133214) do
+ActiveRecord::Schema[8.1].define(version: 2025_12_13_111552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,10 +18,12 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_11_133214) do
     t.bigint "contractor_id", null: false
     t.datetime "created_at", null: false
     t.date "end_date", default: "2999-12-31", null: false
+    t.bigint "parking_manager_id", null: false
     t.bigint "parking_space_id", null: false
     t.date "start_date", default: "1999-12-31", null: false
     t.datetime "updated_at", null: false
     t.index ["contractor_id"], name: "index_contract_parking_spaces_on_contractor_id"
+    t.index ["parking_manager_id"], name: "index_contract_parking_spaces_on_parking_manager_id"
     t.index ["parking_space_id"], name: "index_contract_parking_spaces_on_parking_space_id"
   end
 
@@ -89,6 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_12_11_133214) do
   end
 
   add_foreign_key "contract_parking_spaces", "contractors"
+  add_foreign_key "contract_parking_spaces", "parking_managers"
   add_foreign_key "contract_parking_spaces", "parking_spaces"
   add_foreign_key "contractors", "parking_managers"
   add_foreign_key "parking_lots", "parking_managers"
