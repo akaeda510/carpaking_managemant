@@ -26,7 +26,28 @@ class ContractorsController < ApplicationController
   def edit; end
 
   def update
-    if @contractor.update(contractor_params)
+    new_parking_space_id = contractor_params[:parking_space_id]
+    new_start_date = contractor_params[:start_date]
+
+    ActiveRecord::Base.transaction do
+ 
+      if @contractor.update(contractor_params.except(:parking_space_id, :start_date))
+        # 既存の契約を終了する場合
+        if should_end_contract || end_date_input.present?
+          # 契約者が持つすべての有効な契約を取得
+          @contractor.active_contractor_parking_space.each do |contract|
+            contract_to_end.update!(end_date: Date.current)
+          end
+        end
+        # 新しい契約を作成
+        if new_parking_space_id.present?
+          ContractParkingSpace.create!(
+            parking_space_id = new_parking_space.id,
+            contractor_id = @contractor.id
+            start_date = new_start_date,
+            end_date = ACTIVE_CONTRACT_END_DATE
+          )
+        end
       redirect_to contractors_path
     else
       render :edit, status: :unprocessable_entity
