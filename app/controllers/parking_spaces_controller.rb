@@ -49,9 +49,10 @@ class ParkingSpacesController < ApplicationController
           )
         end
 
-       redirect_to [ @parking_lot, @parking_space ]
-     else
-       render :edit, status: :unprocessable_entity
+        redirect_to [ @parking_lot, @parking_space ]
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 
