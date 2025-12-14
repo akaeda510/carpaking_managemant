@@ -67,7 +67,7 @@ class ContractorsController < ApplicationController
         end
       end
 
-      redirect_to @contractor, success: '契約者編集・駐車場登録が完了しました'
+      redirect_to @contractor, success: "契約者編集・駐車場登録が完了しました"
 
     rescue ActiveRecord::RecordInvalid => e
       available_spaces
