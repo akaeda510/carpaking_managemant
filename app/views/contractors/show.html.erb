@@ -9,12 +9,11 @@
         <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認できます。</p>
       </div>
 
-      <%# 🌟 修正点 1: 編集・削除ボタンの追加 🌟 %>
+      <%# 編集・削除ボタン %>
       <div class="flex space-x-3 mt-2 sm:mt-0">
         <%= link_to '📝 編集', edit_contractor_path(@contractor),
           class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-        
-        <%# 🌟 削除ボタン: モバイル/PC両方で詳細ページから実行可能に 🌟 %>
+          
         <%= link_to '🗑️ 削除', contractor_path(@contractor),
           data: { turbo_method: :delete,
                   turbo_confirm: "契約者: #{@contractor.first_name} #{@contractor.last_name} を本当に削除しますか？\nこの操作は元に戻せません。"},
@@ -24,7 +23,7 @@
 
     <div class="mt-8 divide-y divide-gray-200">
 
-      <%# ... (基本情報セクションは変更なし) ... %>
+      <%# 基本情報セクション %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">基本情報</h2>
         <dl class="space-y-4">
@@ -36,7 +35,7 @@
             </dd>
           </div>
 
-          <%# 連絡先電話番号 %>
+          <%# 携帯電話番号 %>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">携帯電話番号 </dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
@@ -44,7 +43,7 @@
             </dd>
           </div>
 
-          <%# 自宅住所 (任意) %>
+          <%# 連絡先電話番号 (任意) %>
           <% if @contractor.contact_number.present? %>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
               <dt class="text-sm font-medium text-gray-500">電話番号 (任意)</dt>
@@ -59,6 +58,7 @@
 
       <hr class="my-6">
 
+      <%# 住所情報セクション %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">🏠 住所情報</h2>
         <dl class="space-y-4">
@@ -81,13 +81,25 @@
           <% end %>
         </dl>
       </section>
-
+      
+      <section class="py-4">
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">✍️ 備考</h2>
+        <dl>
+          <%# 備考は長いテキストを想定し、1列表示かつ改行を保持 (whitespace-pre-wrap) %>
+          <div class="py-3 px-4 bg-gray-50 rounded-lg">
+            <dt class="text-sm font-medium text-gray-500 mb-2">特記事項・その他 (任意)</dt>
+            <dd class="text-sm text-gray-900 whitespace-pre-wrap">
+              <%= @contractor.notes.present? ? @contractor.notes : '---' %>
+            </dd>
+          </div>
+        </dl>
+      </section>
       <hr class="my-6">
 
-      <%# 🌟 修正点 2: 契約スペース情報の追加 🌟 %>
+      <%# 契約スペース情報の追加 %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">🅿️ 契約駐車スペース</h2>
-        
+          
         <% if @contractor.active_contract_parking_spaces.any? %>
           <ul class="divide-y divide-gray-100 border border-gray-200 rounded-lg">
             <% @contractor.active_contract_parking_spaces.each do |contract| %>
@@ -123,7 +135,7 @@
         <% end %>
       </section>
 
-      <%# 🌟 修正点 3: 戻るボタンをページ下部に配置 (変更なし) 🌟 %>
+      <%# 戻るボタンをページ下部に配置 %>
       <div class="mt-10 pt-6 flex justify-center space-x-4">
         <%= link_to contractors_path,
           class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
