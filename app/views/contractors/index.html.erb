@@ -10,15 +10,15 @@
     <%= link_to '➕ 新しい契約者を登録', new_contractor_path, class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
 
-  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+<div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <% if @contractors.any? %>
 
-      <%# テーブルヘッダー (PCビューのみ表示) %>
+      <%# テーブルヘッダー (PCビューのみ表示) - 修正済みの col-span-1 / col-span-3 を使用 %>
       <div class="hidden sm:block">
-        <%# grid-cols-6 のレイアウトを継承 %>
         <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
           <div class="col-span-2">氏名 / 連絡先</div>
           <div class="col-span-1 text-right">アクション</div>
+          <div class="col-span-3 text-right">契約者編集・駐車場登録</div>
         </div>
       </div>
 
@@ -26,31 +26,61 @@
       <ul role="list" class="divide-y divide-gray-200">
         <% @contractors.each do |contractor| %>
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
-            <%# PCビューでは6カラム、スマホビューでは項目が縦に並ぶ %>
-            <div class="grid grid-cols-6 gap-4 items-center">
-              
-              <%# 1. 氏名 / 連絡先 (全画面で表示) %>
-              <div class="col-span-6 sm:col-span-2">
-                <div class="text-sm font-medium text-gray-900 truncate">
-                  <span class="sm:hidden text-gray-500 font-semibold mr-2">氏名:</span>
-                  <%= contractor.first_name %><%= contractor.last_name %>
-                </div>
-                <div class="text-xs text-gray-500 truncate mt-1">
-                  <%= contractor.phone_number %>
-                </div>
-              </div>
             
-              <%# 4. アクションボタン (詳細) %>
-<div class="text-right flex justify-end space-x-2">
-                <%# 💡 link_to のパスは '#' に設定 %>
+            <%# 🌟 修正点 1: モバイル表示を考慮したFlexコンテナ 🌟 %>
+            <div class="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center">
+              
+              <%# 1. 氏名 / 連絡先と契約中スペースをまとめる (PC: col-span-2, スマホ: 全幅) %>
+              <div class="sm:col-span-2">
+                <div class="flex justify-between items-start sm:block">
+                  <div class="flex-shrink-0">
+                    <div class="text-sm font-medium text-gray-900 truncate">
+                      <span class="sm:hidden text-gray-500 font-semibold mr-2">氏名:</span>
+                      <%= contractor.first_name %><%= contractor.last_name %>
+                    </div>
+                    <div class="text-xs text-gray-500 truncate mt-1">
+                      <%= contractor.phone_number %>
+                    </div>
+                  </div>
+                  
+                  <%# 🌟 修正点 2: スマホ表示用のコンパクトなアクションボタンをここに配置 🌟 %>
+                  <div class="flex sm:hidden space-x-2 text-sm text-right flex-shrink-0">
+                    <%= link_to '詳細', contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900' %>
+                    <%= link_to '編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900' %>
+                  </div>
+                </div>
+
+                <%# 🌟 追加: 契約している駐車スペースの表示 🌟 %>
+                <% if contractor.active_contract_parking_spaces.any? %>
+                  <div class="mt-2 text-xs text-green-700 bg-green-50 p-2 rounded-md">
+                    <span class="font-medium">契約スペース:</span>
+                    <% contractor.active_contract_parking_spaces.each_with_index do |contract, i| %>
+                      <%= contract.parking_space.name %><%# スペース名を表示 %>
+                      <%= "(#{contract.parking_space.parking_lot.address})" %><%# 駐車場の住所を表示 %>
+                      <%= ', ' if i < contractor.active_contract_parking_spaces.size - 1 %>
+                    <% end %>
+                  </div>
+                <% else %>
+                  <div class="mt-2 text-xs text-gray-500">契約スペースなし</div>
+                <% end %>
+
+              </div>
+              
+              <%# 2. PCビュー用アクション (詳細/削除) - col-span-1 %>
+              <div class="hidden sm:block sm:col-span-1 text-right flex justify-end space-x-2">
                 <%= link_to '詳細', contractor_path(contractor), 
                   class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
-                <%= link_to '編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
                 <%= link_to '削除', contractor_path(contractor),
-                data: { turbo_method: :delete,
-                turbo_confirm: "本当にこの契約者を削除しますか？"},
-                class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
+                  data: { turbo_method: :delete,
+                  turbo_confirm: "本当にこの契約者を削除しますか？"},
+                  class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
               </div>
+
+              <%# 3. PCビュー用契約編集・駐車場登録 - col-span-3 %>
+              <div class="hidden sm:block sm:col-span-3 text-right flex justify-end">
+                <%= link_to '登録・編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
+              </div>
+              
             </div>
           </li>
         <% end %>
