@@ -1,0 +1,7 @@
+<% flash.each do |message_type, message| %>
+  <% classes = tailwind_flash_classes(message_type.to_sym) %>
+
+  <div class="<%= classes %>" role="alert">
+    <%= message %>
+  </div>
+<% end %>
