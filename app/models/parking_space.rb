@@ -10,6 +10,14 @@ class ParkingSpace < ApplicationRecord
 
   belongs_to :parking_lot
   belongs_to :parking_manager
+  
+  # 駐車スペースの取得（すでに契約されているスペースは排除）
+  scope :available, -> {
+    # 現在有効な契約(契約済み) ParkingSpace のIDをサブクエリで取得
+    occupied_ids = ContractParkingSpace.where('end_date >= ?', Date.current).select(:parking_space_id)
+    # 上記の以外のID(契約していない) ParkingSpace のレコードを取得
+    where.not(id: occupied_ids)
+  }
 
   def current_contractor_id
     current_contractors_space&.contractor_id
