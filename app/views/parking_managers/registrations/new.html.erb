@@ -1,1 +1,127 @@
+<div class="flex justify-center min-h-screen bg-gray-100 py-12 sm:px-6 lg:px-8">
+  <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8 h-fit">
+    
+    <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
+      管理者アカウントの作成
+    </h2>
 
+    <%= form_with model: resource, scope: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" } do |f| %>
+      
+      <%= render "parking_managers/shared/error_messages", resource: resource %>
+      
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報・認証情報</h3>
+          
+        <div class="grid grid-cols-1 gap-6">
+            
+          <div>
+            <%= f.label :first_name, '氏名(姓)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :first_name, 
+                autofocus: true, 
+                autocomplete: "given-name", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div>
+            <%= f.label :last_name, '氏名(名)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :last_name, 
+                autocomplete: "family-name", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div class="field mt-4 pt-4 border-t border-gray-200">
+            <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
+            <%= f.email_field :email, 
+                autocomplete: "email", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
+            <%= f.password_field :password, 
+                autocomplete: "new-password", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+            <% if @minimum_password_length %>
+              <p class="text-xs text-gray-500 mt-1">
+                <%= @minimum_password_length %>文字以上
+              </p>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :password_confirmation, 'パスワード（確認用）', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.password_field :password_confirmation, 
+                autocomplete: "new-password", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+          <div class="field mt-4 pt-4 border-t border-gray-200">
+            <%= f.label :phone_number, '携帯電話番号 (記号 -なし 必須)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :phone_number, 
+                autocomplete: "tel-national", 
+                maxlength: 11, 
+                placeholder: "09012345678",
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+            
+          <div class="field">
+            <%= f.label :contact_number, '連絡先電話番号 (記号 -なし 任意)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :contact_number, 
+                autocomplete: "tel-other", 
+                maxlength: 11, 
+                placeholder: "0312345678",
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="border border-gray-200 p-6 rounded-lg bg-white">
+        <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">住所情報</h3>
+
+        <div class="grid grid-cols-1 gap-6">
+
+          <div>
+            <%= f.label :prefecture, '都道府県', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :prefecture, 
+                autocomplete: "address-level1", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+            
+          <div>
+            <%= f.label :city, '市区町村', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :city, 
+                autocomplete: "address-level2", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div>
+            <%= f.label :street_address, '丁目番地号', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :street_address, 
+                autocomplete: "address-line1", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+          <div>
+            <%= f.label :building, '建物名・部屋番号等 (任意)', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.text_field :building, 
+                autocomplete: "address-line2", 
+                class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="actions pt-4">
+        <%= f.submit "アカウントを作成", 
+            class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <div class="mt-6 text-sm">
+      <div class="flex flex-col items-end space-y-2"> 
+        <%= render "parking_managers/shared/links" %>
+      </div>
+    </div>
+    
+  </div>
+</div>
