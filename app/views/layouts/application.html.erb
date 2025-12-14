@@ -29,12 +29,14 @@
       <div class="flex min-h-[calc(100vh-4rem)]" id="wrapper">
         <%= render 'shared/sidebar_dashboard' %>
         <main class="flex-grow">
+          <%= render 'shared/flash_messages' %>
           <%= yield %>
         </main>
       </div>
     <% else %>
       <%= render 'shared/header_public' %>
       <main class="min-h-screen">
+        <%= render 'shared/flash_messages' %>
         <%= yield %>
       </main>
     <% end %>
