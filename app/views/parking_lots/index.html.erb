@@ -6,18 +6,18 @@
     
     <%# 新規作成ボタン %>
     <%= link_to '➕ 新しい駐車場を登録', new_parking_lot_path, 
-                class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+          class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
   
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <% if @parking_lots.any? %>
       
-      <%# テーブルヘッダー %>
+      <%# テーブルヘッダー - 5列に戻し、説明の列を削除 %>
       <div class="hidden sm:block">
-        <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
-          <div class="col-span-2">駐車場名</div>
+        <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4 border-b border-gray-200">
+          <div class="col-span-1">駐車場名</div>
+          <div class="col-span-2">住所</div>
           <div>総スペース数</div>
-          <div class="col-span-2">説明</div>
           <div class="text-right">アクション</div>
         </div>
       </div>
@@ -26,11 +26,17 @@
       <ul role="list" class="divide-y divide-gray-200">
         <% @parking_lots.each do |parking_lot| %>
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
-            <div class="grid grid-cols-6 gap-4 items-center">
+            
+            <div class="grid grid-cols-5 gap-4 items-start">
               
-              <%# 駐車場名から駐車スペース一覧へ (col-span-2) %>
-              <div class="col-span-2 text-sm font-medium text-indigo-600 truncate">
+              <%# 駐車場名 (col-span-1) %>
+              <div class="col-span-1 text-sm font-medium text-indigo-600">
                 <%= link_to parking_lot.name, parking_lot_parking_spaces_path(parking_lot), class: "hover:underline" %>
+              </div>
+              
+              <%# 住所の表示 (col-span-2) %>
+              <div class="col-span-2 text-sm text-gray-900">
+                <%= "#{parking_lot.prefecture}#{parking_lot.city}#{parking_lot.street_address}" %>
               </div>
               
               <%# 総スペース数 %>
@@ -38,30 +44,30 @@
                 <%= parking_lot.total_spaces %> 台
               </div>
 
-              <%# 説明 (col-span-2) %>
-              <div class="col-span-2 text-sm text-gray-500 truncate">
-                <%# description がない場合は '---' を表示 %>
-                <%= parking_lot.description.present? ? parking_lot.description : '---' %>
-              </div>
-              
-              <%# アクションボタン (text-right) %>
+              <%# アクションボタン %>
               <div class="text-right flex justify-end space-x-2">
-                <%= link_to '詳細', parking_lot_path(parking_lot), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
                 <%= link_to '編集', edit_parking_lot_path(parking_lot), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
                 
-                <%# 削除リンク - 確認ダイアログは後で実装します %>
                 <%= link_to '削除', parking_lot_path(parking_lot), 
-                data: { turbo_method: :delete,
-                turbo_confirm: "本当にこの駐車場区画を削除しますか？"},
-                            class: 'text-red-600 hover:text-red-900 text-sm' %>
+                  data: { turbo_method: :delete,
+                          turbo_confirm: "本当にこの駐車場区画を削除しますか？"},
+                          class: 'text-red-600 hover:text-red-900 text-sm' %>
               </div>
             </div>
+            
+            <% if parking_lot.description.present? %>
+              <div class="mt-2 pt-2 border-t border-gray-100 text-sm text-gray-600">
+                <span class="font-semibold text-gray-800 mr-2">説明:</span>
+                <%= parking_lot.description %>
+              </div>
+            <% end %>
+            
           </li>
         <% end %>
       </ul>
       
     <% else %>
-      <%# 駐車場が登録されていない場合 %>
+      <%# 駐車場が登録されていない場合 (変更なし) %>
       <div class="p-8 text-center text-gray-500">
         <p class="text-lg mb-2">まだ駐車場が登録されていません。</p>
         <p>すぐに新しい駐車場を登録して管理を開始しましょう！</p>
