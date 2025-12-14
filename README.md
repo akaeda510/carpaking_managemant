@@ -94,10 +94,14 @@
 ## 使用するgem 一覧
 - gem 'rails-i18n' 日本語翻訳
 - gem 'Devise' 認証機能
-- gem 'bcrypt' パスワードハッシュ化
-- gem 'enum_help', '0.0.19'- enumのi18n化
+- gem 'pundit'
+- gem "better_errors"
+- gem "binding_of_caller"
+- gem "rails_live_reload"
 
 ## 本リリースの拡張機能
+- gem 'enum_help', '0.0.19'- enumのi18n化
+- gem 'rails-i18n' 日本語翻訳
 - gem 'draper', '4.0.2' ビュー用データ整形
 - gem 'turbo-rails' 高速化・インタラクティブ化
 - gem 'carrierwave' ファイルアップロード（管理者のみ）
