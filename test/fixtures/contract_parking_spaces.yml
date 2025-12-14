@@ -6,14 +6,14 @@
 #
 one:
   parking_manager: manager_one
-  parking_space: lot_one
+  parking_space: parking_space_one
   contractor: owner_one
 
   start_date: 2025-01-01
   end_date: 2999-12-31
 two:
   parking_manager: manager_one
-  parking_space: lot_two
+  parking_space: parking_space_two
   contractor: owner_one
 
   start_date: 2025-01-01
