@@ -34,7 +34,6 @@ class ParkingSpacesController < ApplicationController
     new_start_date = parking_space_params[:start_date]
 
     ActiveRecord::Base.transaction do
-
       if @parking_space.update(parking_space_params.except(:contractor_id, :start_date))
         # 契約者が変更、または新しく設定された場合
         if new_contractor_id.present? && new_contractor_id.to_i != @parking_space.current_contractor_id

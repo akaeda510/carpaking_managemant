@@ -19,7 +19,7 @@ class ContractorsController < ApplicationController
     end
   end
 
-  def show 
+  def show
     @contractor = Contractor.includes(
       active_contract_parking_spaces: {
         parking_space: :parking_lot
@@ -46,7 +46,6 @@ class ContractorsController < ApplicationController
     begin
 
       ActiveRecord::Base.transaction do
-
         if @contractor.update!(update_params)
           # 既存の契約を終了する場合
           if should_end_contract
@@ -72,7 +71,7 @@ class ContractorsController < ApplicationController
       redirect_to @contractor
 
     rescue ActiveRecord::RecordInvalid => e
-      puts 'ここまで処理をされています'
+      puts "ここまで処理をされています"
       Rails.logger.error "StandardError Catch: #{e.class}: #{e.message}"
       available_spaces
 
@@ -115,4 +114,3 @@ class ContractorsController < ApplicationController
     authorize(@contractor)
   end
 end
-

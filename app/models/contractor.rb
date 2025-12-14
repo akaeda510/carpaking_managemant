@@ -15,8 +15,8 @@ class Contractor < ApplicationRecord
 
   has_many :contract_parking_spaces, dependent: :destroy
   has_many :active_contract_parking_spaces, -> {
-    where('end_date >= ?', Date.current)
-  }, class_name: 'ContractParkingSpace'
+    where("end_date >= ?", Date.current)
+  }, class_name: "ContractParkingSpace"
   has_many :parking_spaces, through: :active_contract_parking_spaces
 
   belongs_to :parking_manager

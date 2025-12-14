@@ -28,9 +28,9 @@ class ContractParkingSpacesController < ApplicationController
   def destroy
     contractor_id = @contract_parking_space.contractor_id
     if @contract_parking_space.destroy
-      redirect_to contractor_path(contractor_id), notice: '契約を削除されました'
+      redirect_to contractor_path(contractor_id), notice: "契約を削除されました"
     else
-      redirect_to contractor_path(contractor_id), notice: '契約の削除に失敗しました'
+      redirect_to contractor_path(contractor_id), notice: "契約の削除に失敗しました"
     end
   end
 
