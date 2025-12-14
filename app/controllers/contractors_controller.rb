@@ -13,7 +13,7 @@ class ContractorsController < ApplicationController
     authorize @contractor
 
     if @contractor.save
-      redirect_to contractors_path, success: "契約者 #{@contractor.first_name} #{@contractor.last_name}の登録が完了しました"
+      redirect_to contractors_path, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の登録が完了しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -67,7 +67,7 @@ class ContractorsController < ApplicationController
         end
       end
 
-      redirect_to @contractor, success: "契約者編集・駐車場登録が完了しました"
+      redirect_to @contractor, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の情報・駐車場登録が完了しました"
 
     rescue ActiveRecord::RecordInvalid => e
       available_spaces
@@ -89,12 +89,12 @@ class ContractorsController < ApplicationController
     begin
 
       @contractor.destroy!
-      flash[:success] = "登録された契約者 #{@contractor.first_name} #{@contractor.last_name}が削除されました"
+      flash[:success] = "登録された契約者 #{@contractor.first_name} #{@contractor.last_name} が削除されました"
       redirect_to contractors_path, status: :see_other
 
     rescue ActiveRecord::DeleteRestrictionError => e
       # 関連レコードが存在するため削除できない場合の処理
-      flash[:alert] = "契約者 #{@contractor.first_name} #{@contractor.last_name}は、関連する契約が存在するため削除できません。"
+      flash[:alert] = "契約者は、関連する契約が存在するため削除できません。"
       redirect_to @contractor, status: :see_other # 契約者の詳細ページに戻す
 
     rescue StandardError => e
