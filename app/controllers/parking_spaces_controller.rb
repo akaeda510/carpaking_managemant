@@ -48,7 +48,7 @@ class ParkingSpacesController < ApplicationController
           )
         end
 
-        flash[:success] = "駐車スペース #{@parking_space.name} が編集されました"
+        flash[:success] = "駐車スペース #{@parking_space.name} が更新されました"
         redirect_to [ @parking_lot, @parking_space ]
       else
         render :edit, status: :unprocessable_entity
