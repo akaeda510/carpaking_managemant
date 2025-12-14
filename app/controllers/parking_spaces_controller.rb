@@ -30,10 +30,28 @@ class ParkingSpacesController < ApplicationController
   def edit; end
 
   def update
-    if @parking_space.update(parking_space_params)
-      redirect_to [ @parking_lot, @parking_space ]
-    else
-      render :edit, status: :unprocessable_entity
+    new_contractor_id = parking_space_params[:contractor_id]
+    new_start_date = parking_space_params[:start_date]
+
+    ActiveRecord::Base.transaction do
+      if @parking_space.update(parking_space_params.except(:contractor_id, :start_date))
+        # 契約者が変更、または新しく設定された場合
+        if new_contractor_id.present? && new_contractor_id.to_i != @parking_space.current_contractor_id
+          # 既存の有効な契約を終了させる
+          @parking_space.current_contractors_space&.update(end_date: Date.yestarday)
+          # 新たに中間テーブルのレコードを作成
+          ContractorParkingSpace.create!(
+            parking_space_id: @parking_space.id,
+            contractor_id: new_contractor_id,
+            start_date: new_start_date,
+            end_date: ACTIVE_CONTRACT_END_DATE
+          )
+        end
+
+        redirect_to [ @parking_lot, @parking_space ]
+      else
+        render :edit, status: :unprocessable_entity
+      end
     end
   end
 

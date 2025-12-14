@@ -4,22 +4,17 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-owner_one:
-  first_name: '田中'
-  last_name: '太郎'
-  prefecture: '東京都'
-  city: '渋谷区'
-  street_address: '代々木'
-  phone_number: '09029292929'
-
+one:
   parking_manager: manager_one
+  parking_space: parking_space_one
+  contractor: owner_one
 
-owner_two:
-  first_name: '山本'
-  last_name: '大介'
-  prefecture: '東京都'
-  city: '渋谷区'
-  street_address: '代々木'
-  phone_number: '09011291129'
-
+  start_date: 2025-01-01
+  end_date: 2999-12-31
+two:
   parking_manager: manager_one
+  parking_space: parking_space_two
+  contractor: owner_one
+
+  start_date: 2025-01-01
+  end_date: 2999-12-31

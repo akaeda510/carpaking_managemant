@@ -1,19 +1,33 @@
 <main class="py-10 sm:px-6 lg:px-8 bg-gray-50 flex flex-col items-center">
   <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-6 sm:p-8">
 
-    <header class="pb-6 border-b border-gray-200">
-      <h1 class="text-3xl font-extrabold text-gray-900 flex items-center">
-        👤 契約者詳細情報
-      </h1>
-      <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認できます。</p>
+    <header class="pb-6 border-b border-gray-200 flex justify-between items-center">
+      <div>
+        <h1 class="text-3xl font-extrabold text-gray-900 flex items-center">
+          👤 契約者詳細情報
+        </h1>
+        <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認できます。</p>
+      </div>
+
+      <%# 🌟 修正点 1: 編集・削除ボタンの追加 🌟 %>
+      <div class="flex space-x-3 mt-2 sm:mt-0">
+        <%= link_to '📝 編集', edit_contractor_path(@contractor),
+          class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+        
+        <%# 🌟 削除ボタン: モバイル/PC両方で詳細ページから実行可能に 🌟 %>
+        <%= link_to '🗑️ 削除', contractor_path(@contractor),
+          data: { turbo_method: :delete,
+                  turbo_confirm: "#{@contractor.first_name} #{@contractor.last_name} 契約者を本当に削除しますか？\nこの操作は元に戻せません。"},
+          class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+      </div>
     </header>
 
     <div class="mt-8 divide-y divide-gray-200">
 
+      <%# ... (基本情報セクションは変更なし) ... %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">基本情報</h2>
         <dl class="space-y-4">
-
           <%# 氏名 %>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">氏名</dt>
@@ -48,7 +62,6 @@
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">🏠 住所情報</h2>
         <dl class="space-y-4">
-
           <%# 住所 %>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">住所</dt>
@@ -66,40 +79,59 @@
               <dd class="text-sm text-gray-900 sm:col-span-2"><%= @contractor.building %></dd>
             </div>
           <% end %>
-
         </dl>
       </section>
 
       <hr class="my-6">
 
+      <%# 🌟 修正点 2: 契約スペース情報の追加 🌟 %>
       <section class="py-4">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">アカウントステータス</h2>
-        <dl class="space-y-4">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
-            <dt class="text-sm font-medium text-gray-500">契約開始日</dt>
-            <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @contractor.contract_start_date.strftime("%Y年%m月%d日") %>
-            </dd>
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">🅿️ 契約駐車スペース</h2>
+        
+        <% if @contractor.active_contract_parking_spaces.any? %>
+          <ul class="divide-y divide-gray-100 border border-gray-200 rounded-lg">
+            <% @contractor.active_contract_parking_spaces.each do |contract| %>
+              <li class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 hover:bg-gray-50">
+                <%# スペース情報 %>
+                <div class="sm:col-span-2">
+                  <p class="text-base font-medium text-indigo-600">
+                    <%= contract.parking_space.name %>
+                    (<%= contract.parking_space.parking_lot.name %>)
+                  </p>
+                  <p class="mt-1 text-sm text-gray-500">
+                    <%= contract.parking_space.parking_lot.address %>
+                  </p>
+                </div>
+                
+                <%# 契約情報 %>
+                <div class="text-sm text-gray-700 sm:text-right">
+                  <p>契約期間:</p>
+                  <p class="font-semibold">
+                    <%= contract.start_date.strftime('%Y/%m/%d') %>
+                    〜 
+                    <%= contract.end_date.strftime('%Y/%m/%d') %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">
+            <p>現在、有効な契約駐車スペースはありません。</p>
+            <%= link_to '新規契約の登録・編集はこちら', edit_contractor_path(@contractor), class: "mt-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
           </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
-            <dt class="text-sm font-medium text-gray-500">契約終了日</dt>
-            <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @contractor.contract_end_date.strftime("%Y年%m月%d日") %>
-            </dd>
-          </div>
-        </dl>
+        <% end %>
       </section>
 
+      <%# 🌟 修正点 3: 戻るボタンをページ下部に配置 (変更なし) 🌟 %>
       <div class="mt-10 pt-6 flex justify-center space-x-4">
-
-      <%= link_to contractors_path,
-        class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-        <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
-        </svg>
-        契約者一覧に戻る
-      <% end %>
+        <%= link_to contractors_path,
+          class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+          <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
+          </svg>
+          契約者一覧に戻る
+        <% end %>
       </div>
     </div>
   </div>
