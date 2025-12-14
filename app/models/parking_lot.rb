@@ -9,4 +9,8 @@ class ParkingLot < ApplicationRecord
   belongs_to :parking_manager
 
   has_many :parking_spaces, dependent: :destroy
+
+  def address
+    "#{prefecture} #{city} #{street_address}"
+  end
 end
