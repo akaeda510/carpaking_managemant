@@ -9,12 +9,12 @@ one:
   parking_space: lot_one
   contractor: owner_one
 
-  contract_start_date: 2025-01-01
-  contract_end_date: 2999-12-31
+  start_date: 2025-01-01
+  end_date: 2999-12-31
 two:
   parking_manager: one_manager
   parking_space: lot_two
   contractor: owner_one
 
-  contract_start_date: 2025-01-01
-  contract_end_date: 2999-12-31
+  start_date: 2025-01-01
+  end_date: 2999-12-31
