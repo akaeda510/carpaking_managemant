@@ -72,7 +72,7 @@
                   class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
                 <%= link_to '削除', contractor_path(contractor),
                   data: { turbo_method: :delete,
-                  turbo_confirm: "本当にこの契約者を削除しますか？"},
+                          turbo_confirm: "契約者: #{contractor.first_name} #{contractor.last_name} を本当に削除しますか？\nこの操作は元に戻せません。"},
                   class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
               </div>
 

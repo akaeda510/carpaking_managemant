@@ -17,7 +17,7 @@
         <%# 🌟 削除ボタン: モバイル/PC両方で詳細ページから実行可能に 🌟 %>
         <%= link_to '🗑️ 削除', contractor_path(@contractor),
           data: { turbo_method: :delete,
-                  turbo_confirm: "#{@contractor.first_name} #{@contractor.last_name} 契約者を本当に削除しますか？\nこの操作は元に戻せません。"},
+                  turbo_confirm: "契約者: #{@contractor.first_name} #{@contractor.last_name} を本当に削除しますか？\nこの操作は元に戻せません。"},
           class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
       </div>
     </header>

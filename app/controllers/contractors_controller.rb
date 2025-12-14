@@ -13,7 +13,7 @@ class ContractorsController < ApplicationController
     authorize @contractor
 
     if @contractor.save
-      redirect_to contractors_path
+      redirect_to contractors_path, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の登録が完了しました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -63,33 +63,45 @@ class ContractorsController < ApplicationController
               start_date: new_start_date,
               end_date: ::ACTIVE_CONTRACT_END_DATE
             )
-            Rails.logger.info "New ContractParkingSpace created successfully for contractor #{@contractor.id}"
           end
         end
       end
 
-      redirect_to @contractor
+      redirect_to @contractor, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の情報・駐車場登録が完了しました"
 
     rescue ActiveRecord::RecordInvalid => e
-      puts "ここまで処理をされています"
-      Rails.logger.error "StandardError Catch: #{e.class}: #{e.message}"
       available_spaces
 
       @contractor.errors.merge!(e.record.errors) unless @contractor.errors.present?
+      flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました
+: #{e.message}"
       render :edit, status: :unprocessable_entity
     rescue StandardError => e
-      Rails.logger.error "StandardError catch: #{e.class}: #{e.message}"
       available_spaces
 
-      # flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました: #{e.message}"
+      flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました: #{e.message}"
       render :edit, status: :unprocessable_entity
     end
   end
 
 
   def destroy
-    @contractor.destroy!
-    redirect_to contractors_path, status: :see_other
+    begin
+
+      @contractor.destroy!
+      flash[:success] = "登録された契約者 #{@contractor.first_name} #{@contractor.last_name} が削除されました"
+      redirect_to contractors_path, status: :see_other
+
+    rescue ActiveRecord::DeleteRestrictionError => e
+      # 関連レコードが存在するため削除できない場合の処理
+      flash[:alert] = "契約者は、関連する契約が存在するため削除できません。"
+      redirect_to @contractor, status: :see_other # 契約者の詳細ページに戻す
+
+    rescue StandardError => e
+      # その他の予期せぬシステムエラーの処理
+      flash[:alert] = "契約者の削除中に予期せぬエラーが発生しました: #{e.message}"
+      redirect_to @contractor, status: :see_other
+    end
   end
 
   private

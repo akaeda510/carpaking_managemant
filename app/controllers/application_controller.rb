@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   include Pundit
 
+  add_flash_types :success, :danger, :alert
+
   protected
 
   def current_user
