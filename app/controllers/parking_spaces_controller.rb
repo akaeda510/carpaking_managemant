@@ -48,7 +48,7 @@ class ParkingSpacesController < ApplicationController
           )
         end
 
-        flash[:success] = "駐車スペース #{@parking_space.name} が更新されました"
+        flash[:success] = "#{@parking_space.name} が更新されました"
         redirect_to [ @parking_lot, @parking_space ]
       else
         render :edit, status: :unprocessable_entity
@@ -58,7 +58,7 @@ class ParkingSpacesController < ApplicationController
 
   def destroy
     @parking_space.destroy!
-    flash[:success] = "駐車スペース #{@parking_space.name} が削除されました"
+    flash[:success] = "#{@parking_space.name} が削除されました"
     redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
   end
 
