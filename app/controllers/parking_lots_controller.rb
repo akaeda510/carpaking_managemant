@@ -13,7 +13,7 @@ class ParkingLotsController < ApplicationController
     authorize @parking_lot
 
     if @parking_lot.save
-      redirect_to parking_lots_path
+      redirect_to parking_lots_path, seccess: "駐車エリア #{@parking_lot.mane} が作成されました"
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ParkingLotsController < ApplicationController
 
   def update
     if @parking_lot.update(parking_lot_params)
-      redirect_to parking_lots_path
+      redirect_to parking_lots_path, seccess: "駐車エリア#{@parking_lot.mane} が更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -35,6 +35,7 @@ class ParkingLotsController < ApplicationController
 
   def destroy
     @parking_lot.destroy!
+    flash[:seccess] = "駐車エリア #{@parking_lot.mane} が削除されました"
     redirect_to parking_lot_path, status: :see_other
   end
 
