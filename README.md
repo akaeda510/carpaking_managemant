@@ -92,7 +92,6 @@
 - Render
 
 ## 使用するgem 一覧
-- gem 'rails-i18n' 日本語翻訳
 - gem 'Devise' 認証機能
 - gem 'pundit'
 - gem "better_errors"
@@ -100,6 +99,7 @@
 - gem "rails_live_reload"
 
 ## 本リリースの拡張機能
+- gem 'rails-i18n' 日本語翻訳
 - gem 'enum_help', '0.0.19'- enumのi18n化
 - gem 'rails-i18n' 日本語翻訳
 - gem 'draper', '4.0.2' ビュー用データ整形
