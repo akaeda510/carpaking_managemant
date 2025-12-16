@@ -3,7 +3,6 @@
 class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [ :create ]
   before_action :configure_account_update_params, only: [ :update ]
-  before_action :authorize_registration, only: %i[edit update destroy]
 
    # GET /resource/sign_up
    # def new
