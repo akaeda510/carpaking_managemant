@@ -28,11 +28,11 @@ class ContractorsController < ApplicationController
   end
 
   def index
-    @contractors = Contractor.all.includes(
+    @contractors = current_parking_manager.contractor.includes(
       active_contract_parking_spaces: {
         parking_space: :parking_lot
       }
-    )
+    ).order(created_at: :desc)
   end
 
   def edit; end
