@@ -41,7 +41,7 @@ class ContractorsController < ApplicationController
     update_params = contractor_params.except(:parking_space_id, :start_date, :should_end_all_contracts)
     new_parking_space_id = contractor_params[:parking_space_id].presence
     new_start_date = contractor_params[:start_date].presence
-    should_end_contract = contractor_params[:should_end_all_contracts].present?
+    should_end_contract = ActiveModel::Type::Boolean.new.cast(contractor_params[:should_end_all_contracts])
 
     begin
 
@@ -49,9 +49,10 @@ class ContractorsController < ApplicationController
         if @contractor.update!(update_params)
           # 既存の契約を終了する場合
           if should_end_contract
+            puts "ここまで処理されています"
             # 契約者が持つすべての有効な契約を取得
             @contractor.active_contract_parking_spaces.each do |contract|
-              contract.update!(end_date: Date.current)
+              contract.update!(end_date: Date.yesterday)
             end
           end
           # 新しい契約を作成
@@ -67,7 +68,7 @@ class ContractorsController < ApplicationController
         end
       end
 
-      redirect_to @contractor, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の情報・駐車場登録が完了しました"
+      redirect_to @contractor, success: "契約者 #{@contractor.first_name} #{@contractor.last_name} の情報・駐車場登録・更新が完了しました"
 
     rescue ActiveRecord::RecordInvalid => e
       available_spaces

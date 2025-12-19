@@ -43,7 +43,7 @@ class ContractParkingSpacesController < ApplicationController
   end
 
   def set_contract_parking_spece
-    @contract_parking_space = ContractParkingSpace.fing(params[:id])
+    @contract_parking_space = current_parking_manager.contract_parking_space.fing(params[:id])
   end
 
   def authorize_contract_parking_space
