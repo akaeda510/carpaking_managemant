@@ -64,7 +64,7 @@ class ParkingSpacesController < ApplicationController
 
     rescue ActiveRecord::DeleteRestrictionError
       flash[:alert] = "この駐車場は契約状態のため、削除することができません"
-      redirect_to [@parking_lot, @parking_space], status: :see_other
+      redirect_to [ @parking_lot, @parking_space ], status: :see_other
 
     rescue => e
       logger.error "駐車スペース削除エラー: #{e.message}"
