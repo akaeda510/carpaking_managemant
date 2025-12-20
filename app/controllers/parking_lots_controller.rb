@@ -44,7 +44,8 @@ class ParkingLotsController < ApplicationController
       redirect_to parking_lot_path(@parking_lot), status: :see_other
 
     rescue => e
-      flash[:alert] = "削除中に予期せぬエラーが発生しました: #{e.message}"
+      logger.error "駐車場削除エラー: #{e.message}"
+      flash[:alert] = "システムエラーが発生したため削除できませんでした"
       redirect_to parking_lot_path(@parking_lot), status: :see_other
     end
   end
