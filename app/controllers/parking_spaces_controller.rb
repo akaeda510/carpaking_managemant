@@ -57,9 +57,21 @@ class ParkingSpacesController < ApplicationController
   end
 
   def destroy
+    begin
     @parking_space.destroy!
     flash[:success] = "#{@parking_space.name} が削除されました"
     redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
+
+    rescue ActiveRecord::DeleteRestrictionError
+      flash[:alert] = "この駐車場は契約状態のため、削除することができません"
+      redirect_to [ @parking_lot, @parking_space ], status: :see_other
+
+    rescue => e
+      logger.error "駐車スペース削除エラー: #{e.message}"
+      flash[:alert] = "システムエラーが発生したため削除できませんでし
+た"
+      redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
+    end
   end
 
   private

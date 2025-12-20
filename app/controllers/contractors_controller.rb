@@ -73,12 +73,13 @@ class ContractorsController < ApplicationController
 
       @contractor.errors.merge!(e.record.errors) unless @contractor.errors.present?
       flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました
-: #{e.message}"
+"
       render :edit, status: :unprocessable_entity
     rescue StandardError => e
       available_spaces
 
-      flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました: #{e.message}"
+      logger.error "契約者更新エラー:#{e.message}"
+      flash.now[:alert] = "契約の更新中に予期せぬエラーが発生しました"
       render :edit, status: :unprocessable_entity
     end
   end
@@ -98,7 +99,8 @@ class ContractorsController < ApplicationController
 
     rescue StandardError => e
       # その他の予期せぬシステムエラーの処理
-      flash[:alert] = "契約者の削除中に予期せぬエラーが発生しました: #{e.message}"
+      logger.error "契約者削除エラー:#{e.message}"
+      flash[:alert] = "契約者の削除中に予期せぬエラーが発生しました"
       redirect_to @contractor, status: :see_other
     end
   end
