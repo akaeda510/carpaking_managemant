@@ -6,7 +6,7 @@ class ParkingSpace < ApplicationRecord
   validates :parking_lot, presence: true
   validates :parking_manager, presence: true
 
-  has_many :contract_parking_spaces, dependent: :destroy
+  has_many :contract_parking_spaces
   has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractorParkingSpace"
   has_many :contractor, through: :active_contractor_parking_spaces
 
