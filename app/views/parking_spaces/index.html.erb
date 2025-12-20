@@ -18,6 +18,7 @@
           <div class="col-span-2">駐車場スペース名</div>
           <div class="col-span-1">横幅 (m)</div>
           <div class="col-span-1">長さ (m)</div>
+          <div class="col-span-2">契約者</div>
         </div>
       </div>
 
@@ -26,7 +27,7 @@
         <% @parking_spaces.each do |parking_space| %>
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
             <div class="grid grid-cols-6 gap-4 items-center"> 
-              
+
               <%# 1. 駐車場スペース名 (全画面で表示) %>
               <div class="col-span-6 sm:col-span-2 text-sm font-medium text-indigo-600 truncate">
                 <span class="sm:hidden text-gray-500 font-semibold mr-2">名前:</span>
@@ -44,6 +45,21 @@
                 <span class="sm:hidden text-gray-500 font-semibold mr-2">長さ:</span>
                 <%= parking_space.length.present? ? "#{parking_space.length} m" : '---' %>
               </div> 
+              <%# 4. 契約者名を表示するカラム (PCではcol-span-2) %>
+              <div class="col-span-6 sm:col-span-2 text-sm text-gray-500">
+                <span class="sm:hidden text-gray-500 font-semibold mr-2">契約者:</span>
+
+                <%# 現在有効な契約を取得（終了日が未来、または設定されていないもの） %>
+                <% active_contract = parking_space.contract_parking_spaces.find_by(end_date: ::ACTIVE_CONTRACT_END_DATE) %>
+
+                <% if active_contract %>
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    👤 <%= active_contract.contractor.first_name %><%= active_contract.contractor.last_name %>
+                  </span>
+                <% else %>
+                  <span class="text-gray-400 italic">空き</span>
+                <% end %>
+              </div>
             </div>
           </li>
         <% end %>
@@ -54,7 +70,7 @@
       <div class="p-8 text-center text-gray-500">
         <p class="text-lg mb-2">まだ駐車場スペースが登録されていません。</p>
         <%= link_to '最初のスペースを登録する', new_parking_lot_parking_space_path(@parking_lot),
-        class: 'text-indigo-600 hover:text-indigo-700 font-medium' %>
+          class: 'text-indigo-600 hover:text-indigo-700 font-medium' %>
       </div>
     <% end %>
   </div>
