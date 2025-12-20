@@ -5,6 +5,18 @@
       契約者編集・駐車場契約登録
     </h2>
     
+    <% if @contractor.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
+        <p class="font-bold"><%= @contractor.errors.count %>件のエ
+ラーがあります:</p>
+        <ul>
+          <% @contractor.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
     <%# 注意: form_with のモデルは @contractor で正しい %>
     <%= form_with(model: @contractor, class: "space-y-6" ) do |f| %>
 
