@@ -40,7 +40,7 @@ class ParkingLotsController < ApplicationController
     redirect_to parking_lot_path, status: :see_other
 
     rescue ActiveRecord::DeleteRestrictionError
-      flash[:alert] = "この駐車場には契約中のの駐車スペースがあるため、削除することができません"
+      flash[:alert] = "この駐車場には契約中の駐車スペースがあるため、削除することができません"
       redirect_to parking_lot_path(@parking_lot), status: :see_other
 
     rescue => e
