@@ -11,7 +11,7 @@
     <%# ---------------------------------------------------- %>
     <% if @parking_space.errors.any? %>
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
-        <p class="font-bold"><%= parking_space.errors.count %>件のエラーがあります:</p>
+        <p class="font-bold"><%= @parking_space.errors.count %>件のエラーがあります:</p>
         <ul>
           <% @parking_space.errors.full_messages.each do |message| %>
             <li><%= message %></li>
@@ -30,7 +30,7 @@
         <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
         <div class="grid grid-cols-1 gap-6">
           <div class="col-span-1">
-            <%= f.label :name, '駐車場スペース名', class: "block text-sm font-medium text-gray-700" %>
+            <%= f.label :name, '駐車場スペース名、または番号', class: "block text-sm font-medium text-gray-700" %>
             <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
         </div>
