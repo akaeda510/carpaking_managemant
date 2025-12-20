@@ -1,5 +1,5 @@
 class ParkingSpace < ApplicationRecord
-  after_initialize :set_default_values, if: new_record?
+  after_initialize :set_default_values
 
   validates :name, presence: true, uniqueness: { scope: :parking_lot_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
   validates :description, length: { maximum: 150 }
