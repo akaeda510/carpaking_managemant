@@ -9,7 +9,7 @@ class ContractorsController < ApplicationController
   end
 
   def create
-    @contractor = current_parking_manager.contractor.build(contractor_params)
+    @contractor = current_parking_manager.contractors.build(contractor_params)
     authorize @contractor
 
     if @contractor.save
