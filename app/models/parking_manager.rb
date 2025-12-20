@@ -21,7 +21,7 @@ class ParkingManager < ApplicationRecord
   # 駐車場区画
   has_many :parking_lots, dependent: :destroy
   # 駐車スペース
-  has_many :parking_spaces, dependent: :destroy
+  has_many :parking_spaces, dependent: :destroy, through: :parking_lots
   # 契約者
   has_many :contractor, dependent: :destroy
   # 契約者の駐車スペース
