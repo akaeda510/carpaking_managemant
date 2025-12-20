@@ -22,11 +22,11 @@ class ParkingManager < ApplicationRecord
   has_many :parking_lots, dependent: :destroy
   # 駐車スペース
   has_many :parking_spaces, through: :parking_lots
+  has_many :contract_parking_spaces, through: :parking_lots
   # 契約者
-  has_many :contractors, -> { distinct }, through: :contract_parking_spaces
+  has_many :contractors, -> { distinct }
   has_many :active_contract_parking_spaces,
            -> { where("end_date >= ?", Date.current) },
+           through: :parking_spaces,
            source: :contract_parking_spaces
-  # 契約者の契約している駐車スペース
-  has_many :contract_parking_spaces
 end
