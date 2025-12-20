@@ -30,7 +30,9 @@ class ParkingSpace < ApplicationRecord
   private
 
   def set_default_values
-    self.width ||= 0.0
-    self.length ||= 0.0
+    if new_record?
+      self.width ||= 0.0
+      self.length ||= 0.0
+    end
   end
 end
