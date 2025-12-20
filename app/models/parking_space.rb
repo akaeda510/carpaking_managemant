@@ -1,5 +1,5 @@
 class ParkingSpace < ApplicationRecord
-  validates :name, presence: true, uniqueness: true, length: { maximum: 10 }
+  validates :name, presence: true, uniqueness: { scope: :parking_lot_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
   validates :description, length: { maximum: 150 }
   validates :width, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
