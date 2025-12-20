@@ -13,11 +13,11 @@
       <div class="flex space-x-3 mt-2 sm:mt-0">
         <%= link_to '📝 編集', edit_contractor_path(@contractor),
           class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-          
+
         <%= link_to '🗑️ 削除', contractor_path(@contractor),
           data: { turbo_method: :delete,
                   turbo_confirm: "契約者: #{@contractor.first_name} #{@contractor.last_name} を本当に削除しますか？\nこの操作は元に戻せません。"},
-          class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
+        class: "inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" %>
       </div>
     </header>
 
@@ -81,7 +81,7 @@
           <% end %>
         </dl>
       </section>
-      
+
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">✍️ 備考</h2>
         <dl>
@@ -99,29 +99,38 @@
       <%# 契約スペース情報の追加 %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">🅿️ 契約駐車スペース</h2>
-          
+
         <% if @contractor.active_contract_parking_spaces.any? %>
           <ul class="divide-y divide-gray-100 border border-gray-200 rounded-lg">
             <% @contractor.active_contract_parking_spaces.each do |contract| %>
               <li class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 hover:bg-gray-50">
                 <%# スペース情報 %>
                 <div class="sm:col-span-2">
-                  <p class="text-base font-medium text-indigo-600">
-                    <%= contract.parking_space.name %>
-                    (<%= contract.parking_space.parking_lot.name %>)
+                  <p class="text-base font-medium">
+                  <%# 駐車スペース名をクリックすると、その詳細ページへ飛ぶリンクを追加 %>
+                  <%= link_to [contract.parking_space.parking_lot, contract.parking_space],
+                  class: "text-indigo-600 hover:text-indigo-800 hover:underline flex items-center" do %>
+                  <span><%= contract.parking_space.name %></span>
+                  <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                <% end %>
+                <span class="text-sm text-gray-500 font-normal">
+                  (<%= contract.parking_space.parking_lot.name %>)
+                </span>
                   </p>
                   <p class="mt-1 text-sm text-gray-500">
-                    <%= contract.parking_space.parking_lot.address %>
+                  <%= contract.parking_space.parking_lot.address %>
                   </p>
                 </div>
-                
+
                 <%# 契約情報 %>
                 <div class="text-sm text-gray-700 sm:text-right">
                   <p>契約期間:</p>
                   <p class="font-semibold">
-                    <%= contract.start_date.strftime('%Y/%m/%d') %>
-                    〜 
-                    <%= contract.end_date.strftime('%Y/%m/%d') %>
+                  <%= contract.start_date.strftime('%Y/%m/%d') %>
+                  〜 
+                  <%= contract.end_date.strftime('%Y/%m/%d') %>
                   </p>
                 </div>
               </li>
