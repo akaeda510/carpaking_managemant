@@ -1,5 +1,7 @@
 class ParkingSpace < ApplicationRecord
-  validates :name, presence: true, uniqueness: true, length: { maximum: 10 }
+  after_initialize :set_default_values
+
+  validates :name, presence: true, uniqueness: { scope: :parking_lot_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
   validates :description, length: { maximum: 150 }
   validates :width, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
@@ -23,5 +25,14 @@ class ParkingSpace < ApplicationRecord
 
   def current_contractor_id
     current_contractors_space&.contractor_id
+  end
+
+  private
+
+  def set_default_values
+    if new_record?
+      self.width ||= 0.0
+      self.length ||= 0.0
+    end
   end
 end
