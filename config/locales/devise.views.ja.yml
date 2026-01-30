@@ -33,8 +33,7 @@ ja:
         phone_number: 携帯電話番号
 
     models:
-      parking_manager:
-        other: ユーザー
+      parking_manager: 駐車場管理者
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
