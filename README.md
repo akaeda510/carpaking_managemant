@@ -103,7 +103,6 @@
 - gem 'rails-i18n' 日本語翻訳
 - gem 'draper', '4.0.2' ビュー用データ整形
 - gem 'turbo-rails' 高速化・インタラクティブ化
-- gem 'carrierwave' ファイルアップロード（管理者のみ）
 - gem 'ransack' 検索機能
 - QR code API
 
