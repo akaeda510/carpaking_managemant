@@ -25,5 +25,7 @@ module Myapp
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
+
+    config.i18n.default_locale = :ja
   end
 end
