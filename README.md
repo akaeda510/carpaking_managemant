@@ -103,7 +103,6 @@
 - gem 'rails-i18n' 日本語翻訳
 - gem 'draper', '4.0.2' ビュー用データ整形
 - gem 'turbo-rails' 高速化・インタラクティブ化
-- gem 'carrierwave' ファイルアップロード（管理者のみ）
 - gem 'ransack' 検索機能
 - QR code API
 
@@ -112,3 +111,4 @@ https://www.figma.com/design/BGppLhsjRgnQAr1qyjnxSh/my-app-%E7%94%BB%E9%9D%A2%E9
 
 # ER図
 https://gyazo.com/8a74862ee2f0726d6c92cca5099609d3
+
