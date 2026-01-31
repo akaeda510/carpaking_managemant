@@ -18,7 +18,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">氏名</dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @parking_manager.first_name %> <%= @parking_manager.last_name %>
+              <%= @parking_manager.full_name %>
             </dd>
           </div>
 
@@ -32,7 +32,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">携帯電話番号 </dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @parking_manager.phone_number.to_s.gsub(/(\d{3})(\d{4})(\d{4})/, '\1-\2-\3') %>
+              <%= @parking_manager.phone_number %>
             </dd>
           </div>
 
@@ -41,7 +41,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
               <dt class="text-sm font-medium text-gray-500">電話番号 (任意)</dt>
               <dd class="text-sm text-gray-900 sm:col-span-2">
-                <%= @parking_manager.contact_number.present? ? @parking_manager.contact_number.to_s.gsub(/(\d{2,5})(\d{1,4})(\d{4})/, '\1-\2-\3') : "未登録" %>
+                <%= @parking_manager.contact_number.present? ? @parking_manager.contact_number : "未登録" %>
               </dd>
             </div>
           <% end %>
@@ -59,9 +59,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">住所</dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @parking_manager.prefecture %>
-              <%= @parking_manager.city %>
-              <%= @parking_manager.street_address %>
+              <%= @parking_manager.address %>
             </dd>
           </div>
 
@@ -84,7 +82,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">登録日</dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
-              <%= @parking_manager.created_at.strftime("%Y年%m月%d日") %>
+              <%= @parking_manager.formatted_created_at %>
             </dd>
           </div>
         </dl>

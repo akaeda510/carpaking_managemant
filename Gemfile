@@ -11,6 +11,8 @@ gem "devise"
 # 日本語化
 gem "rails-i18n"
 gem "devise-i18n"
+# デコレーター
+gem "draper"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
