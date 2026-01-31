@@ -21,7 +21,9 @@ class ParkingLotsController < ApplicationController
 
   def show; end
 
-  def index;  end
+  def index
+    @parking_lot = parking_lot.decorate
+  end
 
   def edit; end
 
