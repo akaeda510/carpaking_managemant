@@ -24,7 +24,7 @@ class ContractorsController < ApplicationController
       active_contract_parking_spaces: {
         parking_space: :parking_lot
       }
-    ).find(@contractor.id)
+    ).find(@contractor.id).decorate
   end
 
   def index
