@@ -8,7 +8,8 @@ class ParkingSpace < ApplicationRecord
   validates :parking_lot, presence: true
   validates :parking_manager, presence: true
 
-  # 駐車スペースの契約状態　スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
+  enum :parking_type, { asphalt: 0, gravel: 1, garage: 2 }
+  # 駐車スペースの契約状態スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
   has_many :contract_parking_spaces, dependent: :restrict_with_exception
   has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractorParkingSpace"
   has_many :contractor, through: :active_contractor_parking_spaces
