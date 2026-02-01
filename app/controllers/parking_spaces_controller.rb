@@ -6,6 +6,7 @@ class ParkingSpacesController < ApplicationController
 
   def new
     @parking_space = @parking_lot.parking_spaces.build
+    @parking_space.build_garage_detail
   end
 
   def create
@@ -27,7 +28,9 @@ class ParkingSpacesController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    @parking_space.build_garage_detail unless @parking_space.garage_detail
+  end
 
   def update
     new_contractor_id = parking_space_params[:contractor_id]
@@ -77,7 +80,7 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_type)
+    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_typei, garage_detail_attributes: [:id, height, :_destroy])
   end
 
   def set_parking_space
