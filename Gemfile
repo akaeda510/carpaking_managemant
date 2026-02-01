@@ -11,7 +11,6 @@ gem "devise"
 # 日本語化
 gem "rails-i18n"
 gem "devise-i18n"
-gem "enum_help"
 # デコレーター
 gem "draper"
 # Use the Puma web server [https://github.com/puma/puma]
