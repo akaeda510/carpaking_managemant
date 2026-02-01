@@ -22,7 +22,7 @@ class ParkingLotsController < ApplicationController
   def show; end
 
   def index
-    @parking_lot = parking_lot.decorate
+    @parking_lot = @parking_lots.decorate
   end
 
   def edit; end

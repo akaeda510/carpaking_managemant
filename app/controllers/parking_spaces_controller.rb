@@ -77,7 +77,7 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :width, :length, :description)
+    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_type)
   end
 
   def set_parking_space

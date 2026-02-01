@@ -1,0 +1,7 @@
+ja:
+  enums:
+    parking_space:
+      parking_type:
+        asphalt: アスファルト
+        gravel: 砂利
+        garage: ガレージ
