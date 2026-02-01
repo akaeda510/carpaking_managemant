@@ -34,7 +34,19 @@
             <%# 💡 修正点: 入力欄の幅を親コンテナの幅いっぱいに広げるため w-full に変更 %>
             <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
           </div>
-          
+          <div class="col-span-1">
+            <span class="block text-sm font-medium text-gray-700 mb-2">駐車タイプ</span>
+            <div class="flex flex-wrap gap-4">
+              <% ParkingSpace.parking_types_i18n.each do |key, label| %>
+                <label class="flex items-center cursor-pointer group">
+                  <%= f.radio_button :parking_type, key, class: "h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" %>
+                  <span class="ml-2 text-sm text-gray-700 group-hover:text-indigo-600 transition-colors">
+                    <%= label %>
+                  </span>
+                </label>
+              <% end %>
+            </div>
+          </div>          
         </div>
       </section>
 
