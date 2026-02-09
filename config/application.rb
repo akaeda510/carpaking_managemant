@@ -30,5 +30,9 @@ module Myapp
     config.assets.paths << Rails.root.join("app", "javascript")
     # バリデーションエラー時のレイアウト崩れの防止
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag.html_safe }
+
+    config.generators do |g|
+      g.test_framework nil
+    end
   end
 end
