@@ -1,24 +1,24 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-	static targets = ["garageFields"]
+  static targets = ["garageFields"]
 
-	connect() {
-		console.log("ParkingSpaceForm controller connected!");
-	}
+  connect() {
+    this.toggle()
+  }
 
-	toggle() {
-		console.log("Radio button changed!");
-		const radio = this.element.querySelector('input[type="radio"]:checked')
+  toggle() {
+    if (!this.hasGarageFieldsTarget) return
 
-		if (!radio) return
+    const radio = document.querySelector('input[name="parking_space[parking_type]"]:checked')
+    const selectedType = radio ? radio.value : null
 
-		const.log("Selected Type:", radio.value)
-
-		if (radio.value === 'garage') {
-			this.garageFieldsTarget.classList.remove('hidden')
-		} else {
-			this.garageFieldsTarget.classList.add('hidden')
-		}
-	}
+    if (selectedType === 'garage') {
+      this.garageFieldsTarget.style.display = "block"
+      this.garageFieldsTarget.classList.remove('hidden')
+    } else {
+      this.garageFieldsTarget.style.display = "none"
+      this.garageFieldsTarget.classList.add('hidden')
+    }
+  }
 }
