@@ -1,6 +1,6 @@
 <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
   <h1 class="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">
-    駐車スペース詳細: <%= @parking_space.name %>
+    駐車場所:詳細情報
   </h1>
 
   <div class="space-y-4">
@@ -28,6 +28,14 @@
       <p class="text-gray-900"><%= @parking_space.length %> m</p>
     </div>
 
+    <% if @parking_space.parking_type == 'garage' && @parking_space.garage_detail.present? %>
+  <div class="flex items-center">
+    <p class="w-32 font-semibold text-gray-600">高さ:</p>
+    <p class="text-gray-600">
+      <%= @parking_space.garage_detail.height %> m
+    </p>
+  </div>
+<% end %>
     <%# --- ここから契約者情報の追加 --- %>
     <div class="flex items-start border-t pt-4 mt-4">
       <p class="w-32 font-semibold text-gray-600">現在の契約状況:</p>

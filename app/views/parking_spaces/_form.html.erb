@@ -1,0 +1,78 @@
+<%= form_with(model: [parking_lot, parking_space], class: "space-y-6") do |f| %>
+
+  <section class="border border-gray-200 p-6 rounded-lg bg-white">
+    <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">基本情報</h3>
+    <div class="grid grid-cols-1 gap-6">
+      <div class="col-span-1">
+        <%= f.label :name, '駐車場スペース名、または番号', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+      </div>
+
+      <div class="col-span-1">
+        <span class="block text-sm font-medium text-gray-700 mb-2">駐車タイプ</span>
+        <div class="flex flex-wrap gap-4">
+          <% ParkingSpace.parking_types_i18n.each do |key, label| %>
+            <label class="flex items-center cursor-pointer group">
+              <%= f.radio_button :parking_type, key,
+                checked: (f.object.parking_type == key),
+                class: "h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500",
+                data: { action: "change->parking-space-form#toggle" } %>
+              <span class="ml-2 text-sm text-gray-700 group-hover:text-indigo-600 transition-colors">
+                <%= label %>
+              </span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border border-gray-200 p-6 rounded-lg bg-white">
+    <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">駐車スペースのサイズ</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <%= f.label :width, '横幅 (m)', class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <%= f.number_field :width, step: '0.1', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <span class="text-gray-500 sm:text-sm">m</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :length, '長さ (m)', class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <%= f.number_field :length, step: '0.1', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <span class="text-gray-500 sm:text-sm">m</span>
+          </div>
+        </div>
+      </div>
+
+      <div data-parking-space-form-target="garageFields"
+           class="<%= 'hidden' unless parking_space.parking_type == 'garage' %>">
+        <%= f.fields_for :garage_detail do |g| %>
+          <%= g.label :height, "高さ (m)", class: "block text-sm font-medium text-gray-700" %>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <%= g.number_field :height, step: "0.1", min: 0, placeholder: "例: 2.1",
+                class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <span class="text-gray-500 sm:text-sm">m</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <section class="border border-gray-200 p-6 rounded-lg bg-white">
+    <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">説明 概要</h3>
+    <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </section>
+
+  <div class="actions pt-4">
+    <%= f.submit (parking_space.new_record? ? "駐車場スペース作成" : "更新する"), 
+        class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer" %>
+  </div>
+<% end %>

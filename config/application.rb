@@ -27,5 +27,8 @@ module Myapp
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
 
     config.i18n.default_locale = :ja
+    config.assets.paths << Rails.root.join("app", "javascript")
+    # バリデーションエラー時のレイアウト崩れの防止
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag.html_safe }
   end
 end
