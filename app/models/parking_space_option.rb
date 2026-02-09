@@ -1,0 +1,2 @@
+class ParkingSpaceOption < ApplicationRecord
+end
