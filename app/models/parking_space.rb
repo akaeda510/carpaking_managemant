@@ -33,7 +33,7 @@ class ParkingSpace < ApplicationRecord
 
   # ガレージを選択したか確認
   def not_a_garage?(attributes)
-    parking_type != 'garage'
+    parking_type != "garage"
   end
 
   private
