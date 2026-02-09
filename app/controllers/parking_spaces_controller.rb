@@ -2,7 +2,7 @@ class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
   before_action :set_parking_space, only: %i[show edit update destroy]
-  before_action :authorize_parking_space, only: %i[show edit update destroy]
+  before_action :authorize_parking_space, only: %i[show update destroy]
 
   def new
     @parking_space = @parking_lot.parking_spaces.build
@@ -16,8 +16,11 @@ class ParkingSpacesController < ApplicationController
     authorize @parking_space
 
     if @parking_space.save
-      redirect_to parking_lot_parking_spaces_path, success: "駐車スペース #{@parking_space.name} が作成されました"
+      redirect_to parking_lot_parking_spaces_path, success: "駐車場所: #{@parking_space.name} が作成されました"
     else
+      if @parking_space.parking_type == "garage"
+        @parking_space.garage_detail ||= @parking_space.build_garage_detail
+      end
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,32 +33,16 @@ class ParkingSpacesController < ApplicationController
 
   def edit
     @parking_space.build_garage_detail unless @parking_space.garage_detail
+    authorize @parking_space
   end
 
   def update
-    new_contractor_id = parking_space_params[:contractor_id]
-    new_start_date = parking_space_params[:start_date]
-
-    ActiveRecord::Base.transaction do
-      if @parking_space.update(parking_space_params.except(:contractor_id, :start_date))
-        # 契約者が変更、または新しく設定された場合
-        if new_contractor_id.present? && new_contractor_id.to_i != @parking_space.current_contractor_id
-          # 既存の有効な契約を終了させる
-          @parking_space.current_contractors_space&.update(end_date: Date.yestarday)
-          # 新たに中間テーブルのレコードを作成
-          ContractorParkingSpace.create!(
-            parking_space_id: @parking_space.id,
-            contractor_id: new_contractor_id,
-            start_date: new_start_date,
-            end_date: ACTIVE_CONTRACT_END_DATE
-          )
-        end
-
-        flash[:success] = "#{@parking_space.name} が更新されました"
+    if @parking_space.update(parking_space_params)
+        flash[:success] = "駐車場所: #{@parking_space.name} が更新されました"
         redirect_to [ @parking_lot, @parking_space ]
       else
+        @parking_space.build_garage_etail unless @parking_space.garage_detail
         render :edit, status: :unprocessable_entity
-      end
     end
   end
 
@@ -80,7 +67,7 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_typei, garage_detail_attributes: [:id, :height, :_destroy])
+    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_type, garage_detail_attributes: [:id, :height, :_destroy])
   end
 
   def set_parking_space
