@@ -13,8 +13,9 @@ class ParkingSpace < ApplicationRecord
   has_many :contract_parking_spaces, dependent: :restrict_with_exception
   has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractorParkingSpace"
   has_many :contractor, through: :active_contractor_parking_spaces
-  has_many :parking_space_option, through: :parking_space_option_assignments
+
   has_many :parking_space_option_assignments, dependent: :destroy
+  has_many :parking_space_options, through: :parking_space_option_assignments
 
   has_one :garage_detail, dependent: :destroy
   accepts_nested_attributes_for :garage_detail, reject_if: :not_a_garage?, allow_destroy: :true
