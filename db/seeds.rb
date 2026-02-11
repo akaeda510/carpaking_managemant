@@ -50,3 +50,9 @@ ParkingSpace.find_or_create_by!(name: 'テスト1') do |space|
   space.description = 'テストとして作成'
 end
 puts "ParkingSpace: created or found."
+
+ParkingSpaceOption.create([
+  { name: '軽自動車専用' },
+  { name: '屋根あり' },
+  { name: '駐車時、難あり' }
+])
