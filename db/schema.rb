@@ -96,10 +96,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_09_145739) do
   create_table "parking_space_options", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "name", null: false
-    t.bigint "parking_space_id", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_parking_space_options_on_name"
-    t.index ["parking_space_id"], name: "index_parking_space_options_on_parking_space_id"
   end
 
   create_table "parking_spaces", force: :cascade do |t|
@@ -125,7 +123,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_09_145739) do
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_space_option_assignments", "parking_space_options"
   add_foreign_key "parking_space_option_assignments", "parking_spaces"
-  add_foreign_key "parking_space_options", "parking_spaces"
   add_foreign_key "parking_spaces", "parking_lots"
   add_foreign_key "parking_spaces", "parking_managers"
 end
