@@ -1,72 +1,77 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-extrabold text-gray-900">
-      🅿️ 駐車場スペース一覧
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900">
+      <%= @parking_lot.name %> 
     </h1>
 
-    <%# 新規作成ボタン %>
-    <%= link_to '➕ 新しい駐車場スペースを登録', new_parking_lot_parking_space_path(@parking_lot),
-    class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+    <%= link_to '➕ 駐車場スペースを登録', new_parking_lot_parking_space_path(@parking_lot),
+      class: 'w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
 
-  <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+  <div class="bg-white shadow overflow-hidden rounded-lg">
     <% if @parking_spaces.any? %>
 
-      <%# テーブルヘッダー (PCビューのみ表示) %>
+      <%# テーブルヘッダー (PCビューのみ表示) - grid-cols-7 に変更 %>
       <div class="hidden sm:block">
-        <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
+        <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-7 gap-4 border-b border-gray-200 bg-gray-50">
           <div class="col-span-2">駐車場スペース名</div>
-          <div class="col-span-1">横幅 (m)</div>
-          <div class="col-span-1">長さ (m)</div>
-          <div class="col-span-2">契約者</div>
+          <div class="col-span-2">駐車タイプ</div>
+          <div class="col-span-1">契約者</div>
+          <div class="col-span-2 text-right">アクション</div>
         </div>
       </div>
 
       <%# 駐車場リスト %>
-      <ul role="list" class="divide-y divide-gray-200">
+<ul role="list" class="divide-y divide-gray-200">
         <% @parking_spaces.each do |parking_space| %>
-          <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
-            <div class="grid grid-cols-6 gap-4 items-center"> 
+          <li class="p-4 sm:px-6 hover:bg-gray-50 transition">
+            <%# grid-cols-7 でアクションに余裕を持たせる %>
+            <div class="flex flex-col sm:grid sm:grid-cols-7 gap-2 sm:gap-4 items-start sm:items-center"> 
 
-              <%# 1. 駐車場スペース名 (全画面で表示) %>
-              <div class="col-span-6 sm:col-span-2 text-sm font-medium text-indigo-600 truncate">
-                <span class="sm:hidden text-gray-500 font-semibold mr-2">名前:</span>
-                <%= link_to parking_space.name, [@parking_lot, parking_space] %> 
+              <%# 1. 駐車場スペース名 (2) %>
+              <div class="flex sm:block sm:col-span-2 text-sm">
+                <span class="sm:hidden w-32 flex-shrink-0 text-gray-500 font-semibold">駐車スペース名:</span>
+                <span class="font-bold text-gray-900"><%= parking_space.name %></span>
               </div>
 
-              <%# 2. 横幅 (PCではcol-span-1, スマホでは新しい行のcol-span-3) %>
-              <div class="col-span-3 sm:col-span-1 text-sm text-gray-500 truncate">
-                <span class="sm:hidden text-gray-500 font-semibold mr-2">横幅:</span>
-                <%= parking_space.width.present? ? "#{parking_space.width} m" : '---' %>
+              <%# 2. 駐車タイプ (2) %>
+              <div class="flex sm:block sm:col-span-2 text-sm">
+                <span class="sm:hidden w-32 flex-shrink-0 text-gray-500 font-semibold">駐車タイプ:</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">
+                  <%= parking_space.parking_type_i18n %>
+                </span>
               </div>
 
-              <%# 3. 長さ (PCではcol-span-1, スマホでは新しい行のcol-span-3) %>
-              <div class="col-span-3 sm:col-span-1 text-sm text-gray-500 truncate">
-                <span class="sm:hidden text-gray-500 font-semibold mr-2">長さ:</span>
-                <%= parking_space.length.present? ? "#{parking_space.length} m" : '---' %>
-              </div> 
-              <%# 4. 契約者名を表示するカラム (PCではcol-span-2) %>
-              <div class="col-span-6 sm:col-span-2 text-sm text-gray-500">
-                <span class="sm:hidden text-gray-500 font-semibold mr-2">契約者:</span>
-
-                <%# 現在有効な契約を取得（終了日が未来、または設定されていないもの） %>
+              <%# 3. 契約者 (1) %>
+              <div class="flex sm:block sm:col-span-1 text-sm">
+                <span class="sm:hidden w-32 flex-shrink-0 text-gray-500 font-semibold">契約者:</span>
                 <% active_contract = parking_space.contract_parking_spaces.find_by(end_date: ::ACTIVE_CONTRACT_END_DATE) %>
-
                 <% if active_contract %>
-                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    👤 <%= active_contract.contractor.first_name %><%= active_contract.contractor.last_name %>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    👤 <%= active_contract.contractor.first_name %>
                   </span>
                 <% else %>
-                  <span class="text-gray-400 italic">空き</span>
+                  <span class="text-gray-400 italic text-xs">空き</span>
                 <% end %>
               </div>
+
+              <%# 4. アクション (2) : ここを col-span-2 に広げて折り返しを防止 %>
+              <div class="flex sm:block sm:col-span-2 text-sm sm:text-right w-full mt-2 sm:mt-0 border-t sm:border-none pt-2 sm:pt-0">
+                <span class="sm:hidden w-32 flex-shrink-0 text-gray-500 font-semibold">アクション:</span>
+                <div class="flex space-x-4 sm:justify-end">
+                  <%= link_to '詳細', [@parking_lot, parking_space], class: "text-indigo-600 hover:text-indigo-900 font-medium whitespace-nowrap" %>
+                  
+                  <%= link_to '削除', [@parking_lot, parking_space], 
+                      data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, 
+                      class: "text-red-600 hover:text-red-900 font-medium whitespace-nowrap" %>
+                </div>
+              </div>
+              
             </div>
           </li>
         <% end %>
       </ul>
-
     <% else %>
-      <%# 駐車場スペースが登録されていない場合 %>
       <div class="p-8 text-center text-gray-500">
         <p class="text-lg mb-2">まだ駐車場スペースが登録されていません。</p>
         <%= link_to '最初のスペースを登録する', new_parking_lot_parking_space_path(@parking_lot),
