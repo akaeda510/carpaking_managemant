@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_09_145739) do
+ActiveRecord::Schema[8.1].define(version: 2026_02_12_132449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -108,6 +108,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_09_145739) do
     t.bigint "parking_lot_id", null: false
     t.bigint "parking_manager_id", null: false
     t.integer "parking_type", default: 0
+    t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
     t.index ["name"], name: "index_parking_spaces_on_name"
