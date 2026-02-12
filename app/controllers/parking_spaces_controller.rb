@@ -26,7 +26,7 @@ class ParkingSpacesController < ApplicationController
   end
 
   def index
-    @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC)
+    @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC).decorate
   end
 
   def show; end
