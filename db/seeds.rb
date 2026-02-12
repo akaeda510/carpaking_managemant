@@ -51,7 +51,7 @@ ParkingSpace.find_or_create_by!(name: 'テスト1') do |space|
 end
 puts "ParkingSpace: created or found."
 
-options = ["軽自動車専用", "屋根あり", "駐車時、難あり", "置物として使用禁止", "契約対象車以外駐車禁止"]
+options = [ "軽自動車専用", "屋根あり", "駐車時、難あり", "置物として使用禁止", "契約対象車以外駐車禁止" ]
 
 options.each do |name|
   ParkingSpaceOption.find_or_create_by!(name: name)
