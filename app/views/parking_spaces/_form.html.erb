@@ -24,16 +24,35 @@
           <% end %>
         </div>
       </div>
+      <div class="mt-4 border-t border-gray-100 pt-4">
 
-      <div class="mt-4">
-        <span class="text-gray-700 font-bold">オプション</span>
-        <div class="mt-2 grid grid-cols-2 gap-2">
-          <%= f.collection_check_boxes :parking_space_option_ids, ParkingSpaceOption.all, :id, :name do |b| %>
-            <label class="inline-flex items-center cursor-pointer">
-              <%= b.check_box(class: "rounded border-gray-300 text-indigo-600 focus:ring-indigo-500") %>
-              <span class="ml-2 text-sm text-gray-600"><%= b.text %></span>
-            </label>
-          <% end %>
+        <div class="sm:hidden">
+          <details class="group border border-gray-200 rounded-lg bg-gray-50">
+            <summary class="flex items-center justify-between cursor-pointer list-none p-4">
+              <span class="text-gray-700 font-bold flex items-center">
+                <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                オプション設定
+              </span>
+              <span class="transition group-open:rotate-180 text-gray-400">
+                <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+              </span>
+            </summary>
+            <div class="px-4 pb-4 border-t border-gray-200 bg-white rounded-b-lg">
+              <div class="pt-4">
+                <%= render 'options_fields', f: f %>
+              </div>
+            </div>
+          </details>
+        </div>
+
+        <div class="hidden sm:block">
+          <div class="flex items-center mb-3">
+            <svg class="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+            <span class="text-gray-700 font-bold">オプション設定</span>
+          </div>
+          <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+            <%= render 'options_fields', f: f %>
+          </div>
         </div>
       </div>
     </div>
