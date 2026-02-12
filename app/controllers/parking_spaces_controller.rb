@@ -26,7 +26,7 @@ class ParkingSpacesController < ApplicationController
   end
 
   def index
-    @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC)
+    @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC).decorate
   end
 
   def show; end
@@ -67,7 +67,7 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :width, :length, :description, :parking_type, garage_detail_attributes: [ :id, :height, :_destroy ], parking_space_option_ids: [])
+    params.require(:parking_space).permit(:name, :width, :length, :description, :status, :parking_type, garage_detail_attributes: [ :id, :height, :_destroy ], parking_space_option_ids: [])
   end
 
   def set_parking_space
