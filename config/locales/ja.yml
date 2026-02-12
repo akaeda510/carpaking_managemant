@@ -1,0 +1,8 @@
+ja:
+  enums:
+    parking_space:
+      status:
+        available: "空き"
+        contracted: "契約中"
+        pending: "契約予定"
+        prohibited: "使用禁止"
