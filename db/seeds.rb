@@ -54,5 +54,7 @@ puts "ParkingSpace: created or found."
 ParkingSpaceOption.create([
   { name: '軽自動車専用' },
   { name: '屋根あり' },
-  { name: '駐車時、難あり' }
+  { name: '駐車時、難あり' },
+  { name: '物置として使用禁止' },
+  { name: '契約対象車以外駐車禁止' }
 ])
