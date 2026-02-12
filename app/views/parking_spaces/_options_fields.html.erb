@@ -1,0 +1,8 @@
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-2">
+  <%= f.collection_check_boxes :parking_space_option_ids, ParkingSpaceOption.all, :id, :name do |b| %>
+    <label class="inline-flex items-center cursor-pointer p-2 hover:bg-indigo-50 rounded-md transition-colors border border-transparent hover:border-indigo-100">
+      <%= b.check_box(class: "rounded border-gray-300 text-indigo-600 focus:ring-indigo-500") %>
+      <span class="ml-2 text-sm text-gray-600"><%= b.text %></span>
+    </label>
+  <% end %>
+</div>
