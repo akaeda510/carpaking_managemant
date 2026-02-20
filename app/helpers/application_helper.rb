@@ -19,4 +19,13 @@ module ApplicationHelper
 
     "#{base_classed} #{colot_classes}"
   end
+
+  def back_link_to(label, path, **options)
+    classes = "btn-secondary #{options[:class]}"
+
+    link_to path, options.merge(class: classes) do
+      concat tag.i(class: "fa-solid fa-arrow-left mr-2") if defined?(FontAwesome)
+      concat label
+    end
+  end
 end
