@@ -137,7 +137,7 @@
         <% else %>
           <div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">
             <p>現在、有効な契約駐車スペースはありません。</p>
-            <%= link_to '新規契約の登録・編集はこちら', "#", class: "mt-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
+            <%= link_to '新規駐車場契約はこちら', contractor_contract_parking_spaces_path(@contractor), class: "mt-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
           </div>
         <% end %>
       </section>
