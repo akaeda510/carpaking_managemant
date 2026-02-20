@@ -7,5 +7,4 @@ class ContractParkingSpace < ApplicationRecord
 
   belongs_to :contractor
   belongs_to :parking_space
-  belongs_to :parking_manager
 end
