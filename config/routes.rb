@@ -10,10 +10,12 @@ Rails.application.routes.draw do
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
 
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
-  resources :parking_spaces, only: %i[ new create index show edit update destroy ]
+    resources :parking_spaces, only: %i[ new create index show edit update destroy ]
   end
 
-  resources :contractors, only: %i[ new create show index edit update destroy ]
+  resources :contractors, only: %i[ new create show index edit update destroy ] do
+    resources :contract_parking_spaces, only: %i[ new create index edit update destroy ]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
