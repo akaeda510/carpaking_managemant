@@ -8,7 +8,7 @@ class ParkingLotPolicy < ApplicationPolicy
   end
 
   def index?
-    show?
+    create?
   end
 
   def edit?

@@ -2,7 +2,7 @@ class ParkingLotsController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot, only: %i[show edit update destroy]
   before_action :set_parking_lots, only: %i[index]
-  before_action :authorize_parking_lot, only: %i[show edit update destroy]
+  before_action :authorize_parking_lot, only: %i[show index edit update destroy]
 
   def new
     @parking_lot = ParkingLot.new
@@ -67,6 +67,6 @@ class ParkingLotsController < ApplicationController
   end
 
   def authorize_parking_lot
-    authorize(@parking_lot)
+    authorize @parking_lot || ParkingLot
   end
 end
