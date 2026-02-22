@@ -18,6 +18,6 @@ class ParkingLot < ApplicationRecord
 
   # 指定したIDを検索
   def self.find_by_id_or_first(id)
-    id.present? ? find_by(id: :id) : first
+    id.present? ? find_by(id: id) : first
   end
 end
