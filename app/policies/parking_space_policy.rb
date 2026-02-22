@@ -1,6 +1,10 @@
 class ParkingSpacePolicy < ApplicationPolicy
+  def new?
+    @parking_manager.present?
+  end
+
   def create?
-    @parking_manager.present? && parking_manager.id == record.pa    rking_manager_id
+    @parking_manager.present? && parking_manager.id == record.parking_manager_id
   end
 
   def show?

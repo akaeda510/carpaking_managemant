@@ -1,14 +1,18 @@
 class ParkingLotPolicy < ApplicationPolicy
+  def new?
+    @parking_manager.present?
+  end
+
   def create?
-     @parking_manager.present? && parking_manager.id == record.parking_manager_id 
+    @parking_manager.present? && parking_manager.id == record.parking_manager_id
   end
 
   def show?
-    creata?
+    create?
   end
 
   def index?
-    create?
+    new?
   end
 
   def edit?
