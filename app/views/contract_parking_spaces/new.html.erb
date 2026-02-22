@@ -1,0 +1,66 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-overlay">
+    <div class="modal-content animate-in fade-in zoom-in duration-200">
+
+      <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+        <h3 class="text-lg font-bold text-gray-900">
+          <i class="fa-solid fa-file-contract mr-2 text-blue-600"></i>
+          新規契約作成：<%= @contractor.full_name %> 様
+        </h3>
+        <%= link_to contractor_path(@contractor), data: { turbo_frame: "_top" }, class: "text-gray-400 hover:text-gray-600" do %>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        <% end %>
+      </div>
+
+      <div class="p-6 space-y-6">
+        <%= form_with url: new_contractor_contract_parking_space_path(@contractor), 
+                      method: :get, 
+                      data: { turbo_frame: "modal" } do |f| %>
+          <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+            <%= f.label :parking_lot_id, "ステップ1：駐車場を選択してください", class: "block text-sm font-bold text-blue-900 mb-2" %>
+            <%= f.collection_select :parking_lot_id, @parking_lots, :id, :name, 
+                { selected: @parking_lot.id }, 
+                { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500", 
+                  onchange: "this.form.requestSubmit()" } %>
+          </div>
+        <% end %>
+
+        <hr class="border-gray-100">
+
+        <div id="parking_form_area">
+          <%= form_with(model: [@contractor, @contract_parking_space], class: "space-y-6") do |f| %>
+            <%= hidden_field_tag :parking_lot_id, @parking_lot.id %>
+
+            <div>
+              <%= f.label :parking_space_id, "ステップ2：駐車区画を選択してください", class: "block text-sm font-medium text-gray-700 mb-1" %>
+              <%= f.collection_select :parking_space_id, @parking_lot.parking_spaces.available, :id, :name, 
+                  { prompt: "区画を選択..." }, 
+                  { class: "block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500", required: true } %>
+
+              <% if @parking_lot.parking_spaces.available.empty? %>
+                <p class="mt-2 text-sm text-red-500"><i class="fa-solid fa-triangle-exclamation mr-1"></i> この駐車場に空き区画はありません。</p>
+              <% end %>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 pt-2">
+              <div>
+                <%= f.label :started_at, "契約開始日", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.date_field :started_at, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+              </div>
+              <div>
+                <%= f.label :finished_at, "契約終了日", class: "block text-sm font-medium text-gray-700" %>
+                <%= f.date_field :finished_at, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500" %>
+              </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-100 flex justify-end space-x-3">
+              <%= link_to "閉じる", contractor_path(@contractor), data: { turbo_frame: "_top" }, class: "px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50" %>
+              <%= f.submit "契約を確定する", class: "px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+            </div>
+          <% end %>       
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>
