@@ -1,26 +1,26 @@
 class ContractorPolicy < ApplicationPolicy
   def create?
-    @parking_manager.present?
+    @parking_manager.present? && parking_manager.id == record.parking_manager_id
   end
 
   def show?
-    @parking_manager.id == @record.parking_manager_id
+    create?
   end
 
   def index?
-    show?
+    create?
   end
 
   def edit?
-    show?
+    create?
   end
 
   def update?
-    show?
+    create?
   end
 
   def destroy?
-    show?
+    create?
   end
 
   class Scope < ApplicationPolicy::Scope

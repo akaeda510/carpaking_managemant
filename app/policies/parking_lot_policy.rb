@@ -1,10 +1,10 @@
 class ParkingLotPolicy < ApplicationPolicy
   def create?
-    @parking_manager.present?
-   end
+     @parking_manager.present? && parking_manager.id == record.parking_manager_id 
+  end
 
   def show?
-    @parking_manager.id == @record.parking_manager_id
+    creata?
   end
 
   def index?
@@ -12,15 +12,15 @@ class ParkingLotPolicy < ApplicationPolicy
   end
 
   def edit?
-    show?
+    create?
   end
 
   def update?
-    show?
+    create?
   end
 
   def destroy?
-    show?
+    create?
   end
 
   class Scope < ApplicationPolicy::Scope
