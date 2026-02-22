@@ -2,9 +2,9 @@ class ParkingLotsController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot, only: %i[show edit update destroy]
   before_action :set_parking_lots, only: %i[index]
-  before_action :authorize_parking_lot, only: %i[show index edit update destroy]
 
   def new
+    authorize ParkingLot
     @parking_lot = ParkingLot.new
   end
 
@@ -19,15 +19,22 @@ class ParkingLotsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    authorize @parking_lot
+  end
 
   def index
+    authorize ParkingLot
+    @parking_lots = policy_scope(ParkingLot)
     @parking_lot = @parking_lots.decorate
   end
 
-  def edit; end
+  def edit
+    authorize @parking_lot
+  end
 
   def update
+    authorize @parking_lot
     if @parking_lot.update(parking_lot_params)
       redirect_to parking_lots_path, success: "#{@parking_lot.name} が更新されました"
     else
@@ -36,6 +43,7 @@ class ParkingLotsController < ApplicationController
   end
 
   def destroy
+    authorize @parking_lot
     begin
     @parking_lot.destroy!
     flash[:success] = "#{@parking_lot.name} が削除されました"
@@ -64,9 +72,5 @@ class ParkingLotsController < ApplicationController
 
   def set_parking_lots
     @parking_lots = current_parking_manager.parking_lots.all.order(name: :DESC)
-  end
-
-  def authorize_parking_lot
-    authorize @parking_lot || ParkingLot
   end
 end

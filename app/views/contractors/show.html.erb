@@ -9,7 +9,6 @@
         <p class="mt-2 text-sm text-gray-500">ご登録の情報を確認できます。</p>
       </div>
 
-      <%# 編集・削除ボタン %>
       <div class="flex space-x-3 mt-2 sm:mt-0">
         <%= link_to '📝 編集', edit_contractor_path(@contractor),
           class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
@@ -23,7 +22,6 @@
 
     <div class="mt-8 divide-y divide-gray-200">
 
-      <%# 基本情報セクション %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">基本情報</h2>
         <dl class="space-y-4">
@@ -35,7 +33,6 @@
             </dd>
           </div>
 
-          <%# 携帯電話番号 %>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500">携帯電話番号 </dt>
             <dd class="text-sm text-gray-900 sm:col-span-2">
@@ -43,7 +40,6 @@
             </dd>
           </div>
 
-          <%# 連絡先電話番号 (任意) %>
           <% if @contractor.contact_number.present? %>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
               <dt class="text-sm font-medium text-gray-500">電話番号 (任意)</dt>
@@ -58,7 +54,6 @@
 
       <hr class="my-6">
 
-      <%# 住所情報セクション %>
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">🏠 住所情報</h2>
         <dl class="space-y-4">
@@ -70,7 +65,6 @@
             </dd>
           </div>
 
-          <%# 建物名 (任意) %>
           <% if @contractor.building.present? %>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 py-3 px-4 bg-white rounded-lg">
               <dt class="text-sm font-medium text-gray-500">建物名・部屋番号</dt>
@@ -83,7 +77,6 @@
       <section class="py-4">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">✍️ 備考</h2>
         <dl>
-          <%# 備考は長いテキストを想定し、1列表示かつ改行を保持 (whitespace-pre-wrap) %>
           <div class="py-3 px-4 bg-gray-50 rounded-lg">
             <dt class="text-sm font-medium text-gray-500 mb-2">特記事項・その他 (任意)</dt>
             <dd class="text-sm text-gray-900 whitespace-pre-wrap">
@@ -94,64 +87,9 @@
       </section>
       <hr class="my-6">
 
-      <%# 契約スペース情報の追加 %>
-      <section class="py-4">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">🅿️ 契約駐車スペース</h2>
-
-        <% if @contractor.active_contract_parking_spaces.any? %>
-          <ul class="divide-y divide-gray-100 border border-gray-200 rounded-lg">
-            <% @contractor.active_contract_parking_spaces.each do |contract| %>
-              <li class="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 hover:bg-gray-50">
-                <%# スペース情報 %>
-                <div class="sm:col-span-2">
-                  <p class="text-base font-medium">
-                  <%# 駐車スペース名をクリックすると、その詳細ページへ飛ぶリンクを追加 %>
-                  <%= link_to [contract.parking_space.parking_lot, contract.parking_space],
-                  class: "text-indigo-600 hover:text-indigo-800 hover:underline flex items-center" do %>
-                  <span><%= contract.parking_space.name %></span>
-                  <svg class="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                <% end %>
-                <span class="text-sm text-gray-500 font-normal">
-                  (<%= contract.parking_space.parking_lot.name %>)
-                </span>
-                  </p>
-                  <p class="mt-1 text-sm text-gray-500">
-                  <%= contract.parking_space.parking_lot.address %>
-                  </p>
-                </div>
-
-                <%# 契約情報 %>
-                <div class="text-sm text-gray-700 sm:text-right">
-                  <p>契約期間:</p>
-                  <p class="font-semibold">
-                  <%= contract.start_date.strftime('%Y/%m/%d') %>
-                  〜 
-                  <%= contract.end_date.strftime('%Y/%m/%d') %>
-                  </p>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <div class="p-4 text-center text-gray-500 bg-gray-50 rounded-lg">
-            <p>現在、有効な契約駐車スペースはありません。</p>
-            <%= link_to '新規駐車場契約はこちら', contractor_contract_parking_spaces_path(@contractor), class: "mt-1 text-sm text-indigo-600 hover:text-indigo-700 font-medium" %>
-          </div>
-        <% end %>
-      </section>
-
-      <%# 戻るボタンをページ下部に配置 %>
+      <%= render 'active_contracts', contractor: @contractor %>
       <div class="mt-10 pt-6 flex justify-center space-x-4">
-        <%= link_to contractors_path,
-          class: "inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
-          <svg class="-ml-1 mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
-          </svg>
-          契約者一覧に戻る
-        <% end %>
+        <%= back_link_button "契約者一覧に戻る", contractors_path %>
       </div>
     </div>
-  </div>
 </main>
