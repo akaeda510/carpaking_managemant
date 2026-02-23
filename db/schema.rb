@@ -108,7 +108,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_070326) do
     t.bigint "parking_lot_id", null: false
     t.bigint "parking_manager_id", null: false
     t.integer "parking_type", default: 0
-    t.integer "price"
+    t.integer "price", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
