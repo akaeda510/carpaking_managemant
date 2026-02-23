@@ -4,7 +4,7 @@
       <%= @parking_lot.name %> 
     </h1>
 
-    <%= link_to '➕ 駐車場スペースを登録', new_parking_lot_parking_space_path(@parking_lot),
+    <%= link_to '➕ 駐車場を登録', new_parking_lot_parking_space_path(@parking_lot),
       class: 'w-full sm:w-auto inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700' %>
   </div>
 
@@ -13,7 +13,7 @@
 
       <div class="hidden sm:block">
         <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-8 gap-2 border-b border-gray-200 bg-gray-50">
-          <div class="col-span-2">駐車場スペース名</div>
+          <div class="col-span-2">駐車番号</div>
           <div class="col-span-2 text-center">駐車タイプ</div>
           <div class="col-span-1 text-center">ステータス</div>
           <div class="col-span-1 text-center">契約者</div>
