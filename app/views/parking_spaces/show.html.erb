@@ -10,6 +10,13 @@
     </div>
 
     <div class="flex items-center">
+      <p class="w-32 font-semibold text-gray-600">月額賃料:</p>
+      <p class="text-gray-900 font-bold">
+        ¥ <%= number_with_delimiter(@parking_space.price) %> <span class="text-sm font-normal text-gray-500">(税込)</span>
+      </p>
+    </div>
+
+    <div class="flex items-center">
       <p class="w-32 font-semibold text-gray-600">駐車タイプ:</p>
       <div class="text-gray-900">
         <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-slate-100 text-slate-700 border border-slate-200">
