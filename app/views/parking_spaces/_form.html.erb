@@ -6,10 +6,25 @@
       <div class="col-span-1">
         <%= f.label :name, '駐車番号', class: "block text-sm font-medium text-gray-700" %>
         <% has_history = parking_space.contract_parking_spaces.exists? %>
-        <%= f.text_field :name, autofocus: true, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <%= f.text_field :name, 
+              autofocus: !has_history, 
+              readonly: has_history,
+              class: "block w-full border rounded-md py-2 px-3 sm:text-sm transition-colors
+                #{has_history ? 'bg-gray-50 border-gray-200 text-gray-500 cursor-not-allowed focus:ring-0 focus:border-gray-200' : 'border-gray-300 focus:ring-indigo-500 focus:border-indigo-500'}" %>
+          
+          <% if has_history %>
+            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+              <i class="fa-solid fa-lock text-gray-400"></i>
+            </div>
+          <% end %>
+        </div>
+
         <% if has_history %>
-          <p class="mt-2 text-sm text-red-500 italic">
-          <i class="fa-solid fa-lock mr-1"></i>契約実績があるため駐車番号は変更できません。
+          <p class="mt-2 text-xs text-amber-600 font-medium flex items-center">
+            <i class="fa-solid fa-circle-info mr-1"></i>
+            契約実績があるため駐車番号は変更できません。
           </p>
         <% end %>
       </div>
@@ -30,8 +45,8 @@
           <% end %>
         </div>
       </div>
+      
       <div class="mt-4 border-t border-gray-100 pt-4">
-
         <div class="sm:hidden">
           <details class="group border border-gray-200 rounded-lg bg-gray-50">
             <summary class="flex items-center justify-between cursor-pointer list-none p-4">
