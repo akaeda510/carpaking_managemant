@@ -8,6 +8,8 @@ class ParkingSpace < ApplicationRecord
   validates :parking_lot, presence: true
   validates :parking_manager, presence: true
 
+  validate :name_id_immutable_if_contracted, on: :update
+
   enum :parking_type, { asphalt: 0, gravel: 1, garage: 2 }
   enum :status, { available: 0, contracted: 1, pending: 2, prohibited: 3 }
   # 駐車スペースの契約状態スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
@@ -52,6 +54,12 @@ class ParkingSpace < ApplicationRecord
     if new_record?
       self.width ||= 0.0
       self.length ||= 0.0
+    end
+  end
+
+  def name_id_immutable_if_contracted
+    if name_changed? && contract_parking_spaces.exists?
+      errors.add(:name, "は契約実績があるため変更できません。")
     end
   end
 end

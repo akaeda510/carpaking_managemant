@@ -45,7 +45,7 @@ class ParkingSpacesController < ApplicationController
         flash[:success] = "駐車場所: #{@parking_space.name} が更新されました"
         redirect_to [ @parking_lot, @parking_space ]
     else
-        @parking_space.build_garage_etail unless @parking_space.garage_detail
+        @parking_space.build_garage_detail unless @parking_space.garage_detail
         render :edit, status: :unprocessable_entity
     end
   end
