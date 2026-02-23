@@ -6,6 +6,17 @@
 #
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
+site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
+  admin.password = 'password'
+  admin.password_confirmation = 'password'
+
+  admin.first_name = '井口'
+  admin.last_name = '拓人'
+  admin.phone_number = '09066666666'
+  admin.role = :site_owner
+  admin.active = true
+end
+puts "Admin_id, '井口拓人': created or found."
 
 owner_one = ParkingManager.find_or_create_by!(email: 'test@example.com') do |manager|
   manager.password = 'password'
