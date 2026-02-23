@@ -4,7 +4,7 @@
     <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
       駐車場スペース編集
     </h2>
-
+    <%= render "edit_alert", parking_space: @parking_space %>
     <%= render "shared/error_messages", object: @parking_space %>
     <%= render "form", parking_lot: @parking_lot, parking_space: @parking_space %>
 
