@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :contractors, only: %i[ new create show index edit update destroy ] do
-    resources :contract_parking_spaces, only: %i[ new create index edit update destroy ]
+    resources :contract_parking_spaces, only: %i[ new create index edit update ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
