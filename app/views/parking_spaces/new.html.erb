@@ -5,17 +5,7 @@
       駐車場スペース作成
     </h2>
 
-    <% if @parking_space.errors.any? %>
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
-        <p class="font-bold"><%= @parking_space.errors.count %>件のエラーがあります:</p>
-        <ul>
-          <% @parking_space.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
+    <%= render "shared/error_messages", object: @parking_space %>
     <%= render "form", parking_lot: @parking_lot, parking_space: @parking_space %>
 
     <div class="mt-6 text-center">

@@ -41,6 +41,11 @@ class ParkingSpace < ApplicationRecord
     parking_type != "garage"
   end
 
+  # 契約終了日が今日以降、または無期限の契約か確認
+  def currently_contracted?
+    contract_parking_spaces.where("end_date >= ?", Date.today).exists?
+  end
+
   private
 
   def set_default_values
