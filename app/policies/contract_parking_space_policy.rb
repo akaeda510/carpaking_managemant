@@ -22,7 +22,7 @@ class ContractParkingSpacePolicy < ApplicationPolicy
 
   def destroy
    create?
-  end 
+  end
 
   class Scope < ApplicationPolicy::Scope
     def resolva

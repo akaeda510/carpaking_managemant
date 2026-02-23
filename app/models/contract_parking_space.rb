@@ -11,7 +11,7 @@ class ContractParkingSpace < ApplicationRecord
 
   # 終了日が今日以降、かつ30日以内か
   def expiring_soon?
-    return false if end_date.blank? || end_date.to_s == '2999-12-31'
+    return false if end_date.blank? || end_date.to_s == "2999-12-31"
     end_date.between?(Date.today, Date.today + 30.days)
   end
 
