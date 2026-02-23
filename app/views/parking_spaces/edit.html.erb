@@ -4,11 +4,12 @@
     <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
       駐車場スペース編集
     </h2>
+
     <%= render "shared/error_messages", object: @parking_space %>
     <%= render "form", parking_lot: @parking_lot, parking_space: @parking_space %>
 
     <div class="mt-6 text-center">
-      <%= link_to "戻る", [@parking_lot, @parking_space], class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      <%= back_link_to "戻る", [@parking_lot, @parking_space], class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
     </div>
   </div>
 </div>
