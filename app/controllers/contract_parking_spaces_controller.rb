@@ -46,7 +46,7 @@ class ContractParkingSpacesController < ApplicationController
   def index
     authorize ContractParkingSpace
     @contractor = @contractor.decorate
-    @contract_parking_spaces = @contractor.contract_parking_spaces.includes(:parking_space).decorate
+    @contract_parking_spaces = @contractor.contract_parking_spaces.active.includes(:parking_space).decorate
   end
 
   private

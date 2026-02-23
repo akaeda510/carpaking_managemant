@@ -9,6 +9,16 @@ class ContractParkingSpace < ApplicationRecord
   belongs_to :parking_space
   belongs_to :parking_manager
 
+  # 有効な契約
+  scope :active, -> {
+    where("end_date >= ?", Date.today)
+  }
+
+  # 終了した契約
+  scope :terminated, -> {
+    where("end_date < ?", Date.today)
+  }
+
   # 終了日が今日以降、かつ30日以内か
   def expiring_soon?
     return false if end_date.blank? || end_date.to_s == "2999-12-31"
