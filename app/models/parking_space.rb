@@ -59,7 +59,7 @@ class ParkingSpace < ApplicationRecord
 
   def name_id_immutable_if_contracted
     if name_changed? && contract_parking_spaces.exists?
-      error.add(:name, "は契約実績があるため変更できません。")
+      errors.add(:name, "は契約実績があるため変更できません。")
     end
   end
 end
