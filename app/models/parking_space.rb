@@ -7,6 +7,8 @@ class ParkingSpace < ApplicationRecord
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :parking_lot, presence: true
   validates :parking_manager, presence: true
+  
+  validate :name_id_immutable_if_contracted, on: :update
 
   enum :parking_type, { asphalt: 0, gravel: 1, garage: 2 }
   enum :status, { available: 0, contracted: 1, pending: 2, prohibited: 3 }
