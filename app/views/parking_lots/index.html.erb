@@ -22,29 +22,24 @@
         </div>
       </div>
       
-      <%# 駐車場リスト %>
       <ul role="list" class="divide-y divide-gray-200">
         <% @parking_lots.each do |parking_lot| %>
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
             
             <div class="grid grid-cols-5 gap-4 items-start">
               
-              <%# 駐車場名 (col-span-1) %>
               <div class="col-span-1 text-sm font-medium text-indigo-600">
                 <%= link_to parking_lot.name, parking_lot_parking_spaces_path(parking_lot), class: "hover:underline" %>
               </div>
               
-              <%# 住所の表示 (col-span-2) %>
               <div class="col-span-2 text-sm text-gray-900">
                 <%= parking_lot.address %>
               </div>
               
-              <%# 総スペース数 %>
               <div class="text-sm text-gray-900">
                 <%= parking_lot.total_spaces %> 台
               </div>
 
-              <%# アクションボタン %>
               <div class="text-right flex justify-end space-x-2">
                 <%= link_to '編集', edit_parking_lot_path(parking_lot), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
                 
@@ -67,7 +62,6 @@
       </ul>
       
     <% else %>
-      <%# 駐車場が登録されていない場合 (変更なし) %>
       <div class="p-8 text-center text-gray-500">
         <p class="text-lg mb-2">まだ駐車場が登録されていません。</p>
         <p>すぐに新しい駐車場を登録して管理を開始しましょう！</p>
