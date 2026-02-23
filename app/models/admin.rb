@@ -8,7 +8,7 @@ class Admin < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
-  validates :role, presentce: true
+  validates :role, presence: true
 
   enum :role, { staff: 0, site_owner: 1 }, default: :staff
 
