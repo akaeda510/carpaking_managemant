@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
@@ -37,4 +38,8 @@ Rails.application.routes.draw do
   unauthenticated :parking_manager do
     root to: redirect("/parking_managers/sign_in"), as: :unauthenticated_root
   end
- end
+
+  unauthenticated :admin do
+    root to redirect("/admin/sign_in"), as: :unauthenticated_root
+  end
+end
