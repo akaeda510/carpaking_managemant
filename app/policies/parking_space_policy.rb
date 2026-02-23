@@ -12,7 +12,7 @@ class ParkingSpacePolicy < ApplicationPolicy
   end
 
   def index?
-    create?
+    new?
   end
 
   def edit?

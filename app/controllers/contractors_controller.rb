@@ -5,6 +5,7 @@ class ContractorsController < ApplicationController
   before_action :set_available_spaces, only: %i[new edit]
 
   def new
+    authorize Contractor
     @contractor = Contractor.new
   end
 
@@ -20,6 +21,7 @@ class ContractorsController < ApplicationController
   end
 
   def show
+    authorize @contractor
     @contractor = current_parking_manager.contractors.includes(
       active_contract_parking_spaces: {
         parking_space: :parking_lot
@@ -28,6 +30,7 @@ class ContractorsController < ApplicationController
   end
 
   def index
+    authorize Contractor
     @contractors = current_parking_manager.contractors.includes(
       active_contract_parking_spaces: {
         parking_space: :parking_lot
@@ -35,9 +38,12 @@ class ContractorsController < ApplicationController
     ).order(created_at: :desc)
   end
 
-  def edit; end
+  def edit
+    authorize @contractor
+  end
 
   def update
+    authorize @contractor
     update_params = contractor_params
     requested_parking_space_id = update_params[:new_parking_space_id]
     new_start_date = update_params[:start_date].presence || Date.current
@@ -86,6 +92,7 @@ class ContractorsController < ApplicationController
 
 
   def destroy
+    authorize @contractor
     begin
 
       @contractor.destroy!

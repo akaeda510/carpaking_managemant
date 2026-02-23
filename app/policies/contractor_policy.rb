@@ -1,4 +1,8 @@
 class ContractorPolicy < ApplicationPolicy
+  def new?
+    @parking_manager.present?
+  end
+
   def create?
     @parking_manager.present? && parking_manager.id == record.parking_manager_id
   end
@@ -8,7 +12,7 @@ class ContractorPolicy < ApplicationPolicy
   end
 
   def index?
-    create?
+    new?
   end
 
   def edit?

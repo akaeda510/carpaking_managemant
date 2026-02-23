@@ -1,0 +1,72 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="modal-overlay">
+    <div class="modal-content animate-in fade-in zoom-in duration-200">
+      
+      <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+        <h3 class="text-lg font-bold text-gray-900">
+          ⚙️ 契約内容の変更・管理
+        </h3>
+        <%= link_to contractor_contract_parking_spaces_path(@contractor), data: { turbo_frame: "_top" }, class: "text-gray-400 hover:text-gray-600" do %>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        <% end %>
+      </div>
+
+      <div class="p-6">
+        <div class="mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-100 flex items-center justify-between">
+          <div>
+            <p class="text-xs text-indigo-600 font-bold uppercase tracking-wider">現在の契約区画</p>
+            <p class="text-lg font-bold text-indigo-900"><%= @contract_parking_space.parking_space.name %></p>
+            <p class="text-sm text-indigo-700"><%= @contract_parking_space.parking_space.parking_lot.name %></p>
+          </div>
+          <span class="px-3 py-1 bg-white text-indigo-600 rounded-full text-sm font-bold shadow-sm">
+            契約中
+          </span>
+        </div>
+
+        <%= form_with(model: [@contractor, @contract_parking_space], method: :patch, data: { turbo: false }, class: "space-y-6") do |f| %>
+          
+          <%# 開始日：契約がすでに始まっているか判定 %>
+          <% is_started = @contract_parking_space.start_date <= Date.today %>
+          
+          <div>
+            <%= f.label :start_date, "契約開始日", class: "block text-sm font-medium text-gray-700" %>
+            <%= f.date_field :start_date, 
+                readonly: is_started,
+                class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 #{is_started ? 'bg-gray-100 cursor-not-allowed' : ''}" %>
+            <% if is_started %>
+              <p class="mt-1.5 text-xs text-amber-600 flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/></svg>
+                既に契約期間内のため、開始日は変更できません。
+              </p>
+            <% end %>
+          </div>
+
+          <div>
+            <%= f.label :end_date, "契約終了日", class: "block text-sm font-medium text-gray-700" %>
+            <%= f.date_field :end_date, id: "end_date_field",
+                class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+          </div>
+
+          <%# 即時解約オプション %>
+          <div class="relative flex items-start p-4 bg-red-50 rounded-lg border border-red-100 mt-8">
+            <div class="flex items-center h-5">
+              <%= check_box_tag :immediate_termination, "1", false, 
+                  class: "focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded",
+                  onchange: "if(this.checked) { document.getElementById('end_date_field').value = '#{Date.today}' }" %>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="immediate_termination" class="font-bold text-red-800">即時解約する</label>
+              <p class="text-red-600 text-xs">チェックを入れると、終了日が「今日」に設定されます。</p>
+            </div>
+          </div>
+
+          <div class="pt-6 border-t border-gray-100 flex justify-end space-x-3">
+            <%= link_to "キャンセル", contractor_contract_parking_spaces_path(@contractor), class: "px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50" %>
+            <%= f.submit "変更を保存する", class: "px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+<% end %>
