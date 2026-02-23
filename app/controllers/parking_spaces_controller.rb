@@ -26,6 +26,7 @@ class ParkingSpacesController < ApplicationController
   end
 
   def index
+    authorize ParkingSpace
     @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC).decorate
   end
 
