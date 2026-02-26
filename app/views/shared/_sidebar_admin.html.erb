@@ -1,0 +1,16 @@
+<div class="w-64 bg-gray-900 text-white min-h-screen p-4">
+  <h2 class="text-xl font-bold mb-8 text-blue-400">管理者パネル</h2>
+  <nav>
+    <ul class="space-y-4">
+      <li>
+        <%= link_to "ダッシュボード", admin_root_path, class: "hover:text-blue-300 transition" %>
+      </li>
+      <li>
+        <%= link_to "駐車場管理者一覧", admin_parking_managers_path, class: "hover:text-blue-300 transition" %>
+      </li>
+      <li class="pt-4 border-t border-gray-700">
+        <%= button_to "ログアウト", destroy_admin_session_path, method: :delete, class: "text-red-400 hover:text-red-300 text-sm" %>
+      </li>
+    </ul>
+  </nav>
+</div>
