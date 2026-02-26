@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "dashboards#show"
     resources :parking_managers, only: %i[ index show ]
-    resources :contractors, only: %i[ index show ]
+    resources :contractors, only: %i[ index show ] do
+      member do
+        get :contractors
+      end
+    end
   end
 
   get "contractors/new"
