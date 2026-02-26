@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: "dashboards#show", as: :root
+    root to: "dashboards#show"
+    resources :parking_managers, only: %i[ index show ]
   end
 
   get "contractors/new"
