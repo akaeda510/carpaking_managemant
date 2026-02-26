@@ -1,0 +1,28 @@
+<%# 管理者ダッシュボードのメインコンテンツ %>
+
+<div class="admin-dashboard-header" style="margin-bottom: 2rem;">
+  <h2 style="font-size: 1.5rem; color: #333;">ダッシュボード概要</h2>
+  <p style="color: #666;">システムの稼働状況と最新の通知を確認できます。</p>
+</div>
+
+<div class="admin-stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
+  <div style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <h3 style="font-size: 0.9rem; color: #888; margin-top: 0;">ログインセッション</h3>
+    <p style="font-size: 1.2rem; font-weight: bold; margin: 0.5rem 0;">ID: <%= @current_admin_id %></p>
+    <span style="font-size: 0.8rem; background: #e6f4ea; color: #1e8e3e; padding: 2px 8px; border-radius: 12px;">Active</span>
+  </div>
+
+  <div style="background: #fff; padding: 1.5rem; border-radius: 8px; border: 1px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+    <h3 style="font-size: 0.9rem; color: #888; margin-top: 0;">駐車場管理</h3>
+    <p style="font-size: 1.2rem; font-weight: bold; margin: 0.5rem 0;">準備中</p>
+    <%= back_link_to "一覧を見る →", "#", style: "font-size: 0.8rem; color: #007bff; text-decoration: none;" %>
+  </div>
+</div>
+
+
+<section style="background: #fff; padding: 2rem; border-radius: 8px; border: 1px solid #ddd;">
+  <h3 style="margin-top: 0; border-bottom: 2px solid #f0f0f0; padding-bottom: 0.5rem;">最新の通知</h3>
+  <div style="padding: 2rem; text-align: center; color: #999;">
+    <p>現在、新しい通知（ユーザーからの問い合わせなど）はありません。</p>
+  </div>
+</section>
