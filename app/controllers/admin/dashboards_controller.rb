@@ -1,7 +1,4 @@
-class Admin::DashboardsController < ApplicationController
-  before_action :authenticate_admin!
-  layout "admin"
-
+class Admin::DashboardsController < Admin::BaseController
   def show
     @current_admin_id = current_admin.id
   end
