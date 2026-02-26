@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  layout :layout_by_resource 
+
   include Pundit
 
   add_flash_types :success, :danger, :alert
@@ -37,5 +39,21 @@ class ApplicationController < ActionController::Base
       :phone_number,
       :contact_number
     ])
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :admin
+      new_admin_session_path
+    else
+      root_path
+    end
+  end
+
+  def layout_by_resource
+    if devise_controller? && resource_name == :admin
+      "admin"
+    else
+      "application"
+    end
   end
 end

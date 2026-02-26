@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :admins, path: "admin", path_names: { sign_in: "login" }
-
-  get "/admin", to: redirect("/admin/login")
+  devise_for :admin, path: "admin", path_names: { sign_in: "login" }, controllers: {
+    sessions: "admin/devise/sessions"
+  }
 
   namespace :admin do
-    authenticated :admin do
-      root to: "dashboards#show", as: :root
-    end
-    unauthenticated :admin do
-      root to: redirect("/admin/login"), as: :admin_login_root
-    end
+    root to: "dashboards#show", as: :root
   end
 
   get "contractors/new"
