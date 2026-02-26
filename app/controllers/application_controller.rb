@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  include Pundit
+  include Pundit::Authorization
 
   add_flash_types :success, :danger, :alert
 
