@@ -21,4 +21,8 @@ class Admin < ApplicationRecord
   def inactive_message
     active? ? super : :account_inactive
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end
