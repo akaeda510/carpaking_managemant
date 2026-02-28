@@ -5,10 +5,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "dashboards#show"
-    resources :parking_managers, only: %i[ index show ]
-    resources :contractors, only: %i[ index show ] do
+    resources :parking_managers, only: %i[ index show ] do
       member do
-        get :contractors
+        get :contractors, to: "parking_manager_contractors#index", as: :contractors
       end
     end
   end
@@ -30,18 +29,9 @@ Rails.application.routes.draw do
   resources :contractors, only: %i[ new create show index edit update destroy ] do
     resources :contract_parking_spaces, only: %i[ new create index edit update ]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  # root "posts#index"
   devise_scope :parking_manager do
     authenticated :parking_manager do
       root to: "dashboards#show", as: :my_dashboard_root
