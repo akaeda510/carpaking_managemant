@@ -8,6 +8,8 @@ gem "propshaft"
 gem "pg", "~> 1.6"
 # アカウント認証システム
 gem "devise"
+# Admin用パスワードのハッシュ化
+gem "bcrypt", "~> 3.1.7"
 # 日本語化
 gem "rails-i18n"
 gem "devise-i18n"
