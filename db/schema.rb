@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_23_145331) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -18,17 +18,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_23_145331) do
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
+    t.string "password_digest", default: "", null: false
     t.string "phone_number", null: false
-    t.datetime "remember_created_at"
-    t.datetime "reset_password_sent_at"
-    t.string "reset_password_token"
     t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
   create_table "contract_parking_spaces", force: :cascade do |t|

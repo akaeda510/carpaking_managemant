@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
   admin.password = 'password'
-  admin.password_confirmation = 'password'
+  admin.password_digest = 'password'
 
   admin.first_name = '井口'
   admin.last_name = '拓人'

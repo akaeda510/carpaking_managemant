@@ -8,6 +8,8 @@ gem "propshaft"
 gem "pg", "~> 1.6"
 # アカウント認証システム
 gem "devise"
+# Admin用パスワードのハッシュ化
+gem "bcrypt", "~> 3.1.7"
 # 日本語化
 gem "rails-i18n"
 gem "devise-i18n"
@@ -44,6 +46,9 @@ gem "thruster", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
+# アカウント認可
+gem "pundit"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: false
@@ -60,9 +65,6 @@ group :development, :test do
   gem "better_errors"
 
   gem "binding_of_caller"
-
-  # アカウント認可
-  gem "pundit"
 end
 
 group :development do

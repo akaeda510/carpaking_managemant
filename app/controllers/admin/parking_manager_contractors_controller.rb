@@ -1,4 +1,4 @@
-class Admin::ParkingManagersController < Admin::BaseController
+class Admin::ParkingManagerContractorsController < Admin::BaseController
   def contractors
     @parking_manager = ParkingManager.find(params[:id])
     @contractors = ParkingManager

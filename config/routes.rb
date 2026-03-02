@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :admin, path: "admin", path_names: { sign_in: "login" }, controllers: {
-    sessions: "admin/devise/sessions"
-  }
-
   namespace :admin do
+    get "login", to: "sessions#new"
+    post "login", to: "sessions#create"
+    delete "logout", to: "sessions#destroy"
+
     root to: "dashboards#show"
     resources :parking_managers, only: %i[ index show ]
     resources :contractors, only: %i[ index show ] do

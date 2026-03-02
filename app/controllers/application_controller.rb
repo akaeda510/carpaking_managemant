@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :danger, :alert
 
+  def pundit_user
+    current_admin || current_parking_manager
+  end
+
   protected
 
   def current_user
