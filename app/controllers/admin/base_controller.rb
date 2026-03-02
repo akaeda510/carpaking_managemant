@@ -1,7 +1,8 @@
 class Admin::BaseController < ApplicationController
   before_action :authenticate_admin!
   layout "admin"
-  pundit_user :pundit_admin
+
+  include Pundit::Authorization
 
   def pundit_admin
     current_admin
