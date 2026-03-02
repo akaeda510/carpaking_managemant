@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     post "login", to: "sessions#create"
     delete "logout", to: "sessions#destroy"
 
-    root to: "admin/dashboards#index"
+    root to: "dashboards#index"
     resources :parking_managers, only: %i[ index show ]
     resources :contractors, only: %i[ index show ] do
       member do
