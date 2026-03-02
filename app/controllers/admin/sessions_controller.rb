@@ -1,5 +1,6 @@
 class Admin::SessionsController < Admin::BaseController
   skip_before_action :authenticate_admin!, only: %i[new create], raise: false
+  skip_authorization_only :new, :create, :destroy
 
   def new; end
 
