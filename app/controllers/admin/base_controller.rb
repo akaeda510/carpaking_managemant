@@ -1,6 +1,11 @@
 class Admin::BaseController < ApplicationController
   before_action :authenticate_admin!
   layout "admin"
+  pundit_user :pundit_admin
+
+  def pundit_admin
+    current_admin
+  end
 
   def current_admin
     @current_admin ||= ::Admin.find_by(id: session[:admin_id]) if session[:admin_id]
