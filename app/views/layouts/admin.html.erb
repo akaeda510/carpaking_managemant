@@ -11,12 +11,12 @@
 
   <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <div class="flex flex-col md:flex-row">
-      <% current_admin %>
+      <% if current_admin %>
       <%= render 'shared/sidebar_admin' %>
     <% end %>
 
     <main class="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
-      <% current_admin %>
+      <% if current_admin %>
       <div class="bg-white shadow p-4 mb-4">
         <span class="text-gray-600">管理者: <%= current_admin&.full_name %></span>
       </div>
