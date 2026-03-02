@@ -7,6 +7,7 @@ class Admin::ParkingManagersController < Admin::BaseController
   def show
     @parking_manager = ParkingManager.find(params[:id])
     authorize [ :admin, ParkingManager ]
-    @parking_lots = @parking_manager.parking_lots.includes(:contract_parking_spaces).decorate
+    @parking_lots = @parking_manager.parking_lots.includes(:contract_parking_spaces)
+    @parking_manager = @parking_manager.decorate
   end
 end
