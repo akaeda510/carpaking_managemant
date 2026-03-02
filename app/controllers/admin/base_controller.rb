@@ -17,7 +17,7 @@ class Admin::BaseController < ApplicationController
 
   def authenticate_admin!
     if current_admin.nil?
-      redirect_to admin_login_path, alert: "管理者のログインが必要です"
+      redirect_to admin_login_path, success: "管理者のログインが必要です"
     end
   end
 end
