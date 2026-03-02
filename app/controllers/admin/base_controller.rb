@@ -4,7 +4,7 @@ class Admin::BaseController < ApplicationController
 
   include Pundit::Authorization
 
-  def pundit_admin
+  def pundit_user
     current_admin
   end
 
