@@ -5,11 +5,8 @@ Rails.application.routes.draw do
     delete "logout", to: "sessions#destroy"
 
     root to: "dashboards#index"
-    resources :parking_managers, only: %i[ index show ]
-    resources :contractors, only: %i[ index show ] do
-      member do
-        get :contractors
-      end
+    resources :parking_managers, only: %i[ index show ] do
+      resources :contractors, only: %i[ index show ]
     end
   end
 
