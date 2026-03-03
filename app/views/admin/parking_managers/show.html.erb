@@ -1,0 +1,31 @@
+<div class="container mx-auto px-4 py-6">
+  <div class="mb-4">
+    <%= link_to admin_parking_managers_path, class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors group" do %>
+      <svg class="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      一覧へ戻る
+    <% end %>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">
+      <%= @parking_manager.last_name %> <%= @parking_manager.first_name %> <span class="text-lg font-normal text-gray-500">詳細</span>
+    </h1>
+    <div class="mt-4 md:mt-0">
+      <span class="px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800 border border-green-200">
+        駐車場管理者
+      </span>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-1">
+        <%= render "parking_manager_profile", parking_manager: @parking_manager %>
+    </div>
+
+    <div class="lg:col-span-2">
+      <%= render "parking_lot_list", parking_lots: @parking_lots %>
+    </div>
+  </div>
+</div>
