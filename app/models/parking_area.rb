@@ -8,5 +8,4 @@ class ParkingArea < ApplicationRecord
   belongs_to :parking_lot
 
   has_many :parking_spaces, dependent: :destroy
-
 end
