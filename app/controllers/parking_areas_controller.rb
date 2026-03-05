@@ -1,7 +1,7 @@
 class ParkingAreasController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
-  before_action :set_parking_area, only: %i[ edit update ]
+  before_action :set_parking_area, only: %i[ edit update destroy ]
 
   def new
     @parking_area = @parking_lot.parking_areas.build(
@@ -32,6 +32,13 @@ class ParkingAreasController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @parking_area.destroy
+    redirect_to parking_lot_parking_areas_path(@parking_lot),
+      success: "エリアを削除しました。",
+      status: :see_other
   end
 
   private
