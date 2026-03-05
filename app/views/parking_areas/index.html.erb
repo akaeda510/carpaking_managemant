@@ -58,7 +58,7 @@
               </div>
 
               <div class="col-span-1 text-right flex justify-end space-x-3">
-                <%= link_to '編集', "#", class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
+                <%= link_to '編集', edit_parking_lot_parking_area_path(@parking_lot, area), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
                 
                 <%= link_to '削除', "#", 
                       data: { turbo_method: :delete,
