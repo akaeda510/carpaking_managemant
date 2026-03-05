@@ -9,7 +9,8 @@ class ParkingLot < ApplicationRecord
 
   belongs_to :parking_manager
 
-  has_many :parking_spaces, dependent: :destroy
+  has_many :parking_areas, dependent: :destroy
+  has_many :parking_spaces, through: :parking_areas
   has_many :contract_parking_spaces, through: :parking_spaces
 
   def address

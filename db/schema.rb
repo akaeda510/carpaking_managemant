@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_033056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -62,6 +62,17 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
     t.bigint "parking_space_id", null: false
     t.datetime "updated_at", null: false
     t.index ["parking_space_id"], name: "index_garage_details_on_parking_space_id"
+  end
+
+  create_table "parking_areas", force: :cascade do |t|
+    t.integer "category", default: 0
+    t.datetime "created_at", null: false
+    t.integer "default_price", default: 0
+    t.string "name", null: false
+    t.bigint "parking_lot_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_lot_id", "name"], name: "index_parking_areas_on_parking_lot_id_and_name", unique: true
+    t.index ["parking_lot_id"], name: "index_parking_areas_on_parking_lot_id"
   end
 
   create_table "parking_lots", force: :cascade do |t|
@@ -118,16 +129,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
     t.string "description"
     t.decimal "length", precision: 2, scale: 1, default: "0.0"
     t.string "name", null: false
-    t.bigint "parking_lot_id", null: false
-    t.bigint "parking_manager_id", null: false
-    t.integer "parking_type", default: 0
+    t.bigint "parking_area_id", null: false
     t.integer "price", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
     t.index ["name"], name: "index_parking_spaces_on_name"
-    t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
-    t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
+    t.index ["parking_area_id"], name: "index_parking_spaces_on_parking_area_id"
   end
 
   add_foreign_key "contract_parking_spaces", "contractors"
@@ -135,9 +143,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
   add_foreign_key "contract_parking_spaces", "parking_spaces"
   add_foreign_key "contractors", "parking_managers"
   add_foreign_key "garage_details", "parking_spaces"
+  add_foreign_key "parking_areas", "parking_lots"
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_space_option_assignments", "parking_space_options"
   add_foreign_key "parking_space_option_assignments", "parking_spaces"
-  add_foreign_key "parking_spaces", "parking_lots"
-  add_foreign_key "parking_spaces", "parking_managers"
+  add_foreign_key "parking_spaces", "parking_areas"
 end

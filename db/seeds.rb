@@ -40,7 +40,7 @@ Contractor.find_or_create_by!(first_name: '坂本') do |user|
   user.street_address = '代々木'
   user.phone_number = '08011111111'
 end
-puts "Contractor: created or found."
+puts "テスト管理者: created or found."
 
 lot = ParkingLot.find_or_create_by!(name: 'テスト用駐車場') do |lot|
   lot.parking_manager = owner_one
@@ -50,19 +50,15 @@ lot = ParkingLot.find_or_create_by!(name: 'テスト用駐車場') do |lot|
   lot.street_address = '西品川'
   lot.total_spaces = 10
 end
-puts "ParkingLot: created or found."
+puts "テスト駐車場: created or found."
 
-ParkingSpace.find_or_create_by!(name: 'テスト1') do |space|
-  space.parking_manager = owner_one
-  space.parking_lot = lot
-
-  space.width = 2.5
-  space.length = 5
-  space.description = 'テストとして作成'
+area = ParkingArea.find_or_create_by!(name: 'アスファルト', parking_lot: lot) do |area|
+  area.default_price = 5000
+  area.category = :asphalt
 end
-puts "ParkingSpace: created or found."
+puts "テスト駐車エリア: created or found."
 
-options = [ "軽自動車専用", "屋根あり", "駐車時、難あり", "置物として使用禁止", "契約対象車以外駐車禁止" ]
+options = [ "軽自動車専用", "屋根あり", "駐車時、難あり", "置物として使用禁止", "契約対象車以外駐車禁止", "防犯カメラあり" ]
 
 options.each do |name|
   ParkingSpaceOption.find_or_create_by!(name: name)

@@ -1,0 +1,30 @@
+<%= turbo_frame_tag "modal" do %>
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl shadow-2xl sm:max-w-lg sm:w-full overflow-hidden border border-white/20">
+      
+      <div class="px-6 py-5 border-b border-gray-100 bg-indigo-50/80">
+        <div class="flex items-center space-x-3">
+          <div class="p-2 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-200">
+            <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-indigo-900">エリアを編集</h3>
+        </div>
+      </div>
+
+      <div class="px-8 py-6">
+        <div class="mt-2">
+          <%= render "form", parking_area: @parking_area %>
+        </div>
+      </div>
+
+      <div class="px-6 py-5 bg-gray-50/80 border-t border-gray-100 flex justify-center">
+        <%= link_to "一覧に戻る", 
+                    parking_lot_parking_areas_path(@parking_lot), 
+                    data: { turbo_frame: "_top" }, 
+                    class: "px-12 py-2.5 bg-white border border-gray-300 rounded-xl text-gray-700 font-bold hover:bg-gray-50 shadow-sm" %>
+      </div>
+    </div>
+  </div>
+<% end %>
