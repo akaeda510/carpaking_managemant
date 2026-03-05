@@ -21,11 +21,11 @@ class ParkingSpace < ApplicationRecord
   has_many :parking_space_option_assignments, dependent: :destroy
   has_many :parking_space_options, through: :parking_space_option_assignments
 
+  has_one :parking_lot, through: :parking_area
   has_one :garage_detail, dependent: :destroy
   accepts_nested_attributes_for :garage_detail, reject_if: :not_a_garage?, allow_destroy: :true
 
   belongs_to :parking_area
-  belongs_to :parking_manager
   #駐車エリアからカテゴリーを取得
   delegate :category, to: :parking_area, allow_nil: true
 
@@ -49,6 +49,11 @@ class ParkingSpace < ApplicationRecord
   # 契約終了日が今日以降、または無期限の契約か確認
   def currently_contracted?
     contract_parking_spaces.where("end_date >= ?", Date.today).exists?
+  end
+
+  # 料金設定：個別設定がなければエリアの基本料金
+  def current_price
+    price.presence || parking_area.def.default_price
   end
 
   private
