@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     root to: "dashboards#index"
     resources :parking_managers, only: %i[ index show ] do
-      resources :contractors, only: %i[ index show ]
+      resources :contractors, only: %i[ index show ], shallow: true
     end
   end
 
