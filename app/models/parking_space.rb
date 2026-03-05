@@ -26,6 +26,8 @@ class ParkingSpace < ApplicationRecord
 
   belongs_to :parking_area
   belongs_to :parking_manager
+  #駐車エリアからカテゴリーを取得
+  delegate :category, to: :parking_area, allow_nil: true
 
   # 駐車スペースの取得（すでに契約されているスペースは排除）
   scope :available, -> {
