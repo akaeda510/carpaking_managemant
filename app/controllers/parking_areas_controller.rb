@@ -2,6 +2,23 @@ class ParkingAreasController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
 
+  def new
+    @parking_area = @parking_lot.parking_areas.build(
+      category: :asphalt,
+      name: "アスファルトエリア",
+      default_price: 5000
+    )
+  end
+
+  def create
+    @parking_area = @parking_lot.parking_areas.build(parking_area_params)
+    if @parking_area.save
+      redirect_to parking_lot_parking_areas_path(@parking_lot), seccess: "エリアを作成しました。", status: :see_other
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def index
     @parking_areas = @parking_lot.parking_areas.order(:created_at)
   end
