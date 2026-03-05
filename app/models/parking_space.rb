@@ -22,11 +22,12 @@ class ParkingSpace < ApplicationRecord
   has_many :parking_space_options, through: :parking_space_option_assignments
 
   has_one :parking_lot, through: :parking_area
+  has_one :parking_manager, through: :parking_lot
   has_one :garage_detail, dependent: :destroy
   accepts_nested_attributes_for :garage_detail, reject_if: :not_a_garage?, allow_destroy: :true
 
   belongs_to :parking_area
-  #駐車エリアからカテゴリーを取得
+  # 駐車エリアからカテゴリーを取得
   delegate :category, to: :parking_area, allow_nil: true
 
   # 駐車スペースの取得（すでに契約されているスペースは排除）
