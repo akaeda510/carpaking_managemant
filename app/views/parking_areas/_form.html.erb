@@ -3,16 +3,16 @@
   <div>
     <%= f.label :category, "カテゴリー", class: "block text-sm font-medium text-gray-700" %>
     <%= f.select :category, ParkingArea.categories_i18n.invert, {},
-        id: "category_select",
-        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      id: "category_select",
+      class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
   </div>
 
   <div>
     <%= f.label :name, "エリア名", class: "block text-sm font-medium text-gray-700" %>
     <%= f.text_field :name,
-        id: "area_name_input",
-        placeholder: "例：アスファルトエリア",
-        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+      id: "area_name_input",
+      placeholder: "例：アスファルトエリア",
+      class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
   </div>
 
   <div>
@@ -32,17 +32,20 @@
 
       if (!categorySelect || !nameInput) return;
 
-      const updateName = () => {
-        const selectedText = categorySelect.options[categorySelect.selectedIndex].text;
-        if (selectedText === "その他") {
-          nameInput.value = "";
-          nameInput.placeholder = "例：臨時駐車スペース";
-        } else {
-          nameInput.value = selectedText + "エリア";
-        }
-      };
+      let lastAutoValue = nameInput.value;
 
-      categorySelect.addEventListener("change", updateName);
+      categorySelect.addEventListener("change", () => {
+        const selectedText = categorySelect.options[categorySelect.selectedIndex].text;
+
+        if (nameInput.value === "" || nameInput.value === lastAutoValue) {
+          if (selectedText === "その他") {
+            nameInput.value = "";
+          } else {
+            const newValue = selectedText + "エリア";
+            nameInput.value = newValue;
+            lastAutoValue = newValue;          }
+        }
+      });
     };
 
     setupAreaNameLink();
