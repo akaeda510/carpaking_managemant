@@ -8,7 +8,7 @@ class CreateParkingAreas < ActiveRecord::Migration[8.1]
 
       t.timestamps
 
-      t.index [:parking_lot_id, :name], unique: true
+      t.index [ :parking_lot_id, :name ], unique: true
     end
   end
 end
