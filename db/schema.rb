@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_033056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,14 +28,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
   end
 
   create_table "contract_parking_spaces", force: :cascade do |t|
-    t.integer "applied_price"
-    t.integer "area_category_at_contract"
     t.bigint "contractor_id", null: false
     t.datetime "created_at", null: false
     t.date "end_date", default: "2999-12-31", null: false
     t.bigint "parking_manager_id", null: false
     t.bigint "parking_space_id", null: false
-    t.string "space_name_at_contract"
     t.date "start_date", default: "1999-12-31", null: false
     t.datetime "updated_at", null: false
     t.index ["contractor_id"], name: "index_contract_parking_spaces_on_contractor_id"
@@ -132,14 +129,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
     t.decimal "length", precision: 2, scale: 1, default: "0.0"
     t.string "name", null: false
     t.bigint "parking_area_id", null: false
-    t.bigint "parking_manager_id", null: false
     t.integer "price", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
     t.index ["name"], name: "index_parking_spaces_on_name"
     t.index ["parking_area_id"], name: "index_parking_spaces_on_parking_area_id"
-    t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
   end
 
   add_foreign_key "contract_parking_spaces", "contractors"
@@ -152,5 +147,4 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
   add_foreign_key "parking_space_option_assignments", "parking_space_options"
   add_foreign_key "parking_space_option_assignments", "parking_spaces"
   add_foreign_key "parking_spaces", "parking_areas"
-  add_foreign_key "parking_spaces", "parking_managers"
 end
