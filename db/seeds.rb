@@ -52,20 +52,11 @@ lot = ParkingLot.find_or_create_by!(name: 'テスト用駐車場') do |lot|
 end
 puts "テスト駐車場: created or found."
 
-area = ParkingArea.find_or_create_by!(name: 'アスファルト') do |area|
-  area.parking_manager = owner_one
-  area.parking_lot = lot
+area = ParkingArea.find_or_create_by!(name: 'アスファルト', parking_lot: lot) do |area|
+  area.default_price = 5000
+  area.category = :asphalt
 end
-
-ParkingSpace.find_or_create_by!(name: 'テスト1') do |space|
-  space.parking_manager = owner_one
-  space.parking_area = area
-
-  space.width = 2.5
-  space.length = 5
-  space.description = 'テストとして作成'
-end
-puts "テスト駐車車庫: created or found."
+puts "テスト駐車エリア: created or found."
 
 options = [ "軽自動車専用", "屋根あり", "駐車時、難あり", "置物として使用禁止", "契約対象車以外駐車禁止", "防犯カメラあり" ]
 
