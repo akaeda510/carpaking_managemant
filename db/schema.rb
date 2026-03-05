@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_030107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -62,6 +62,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
     t.bigint "parking_space_id", null: false
     t.datetime "updated_at", null: false
     t.index ["parking_space_id"], name: "index_garage_details_on_parking_space_id"
+  end
+
+  create_table "parking_areas", force: :cascade do |t|
+    t.integer "category"
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.bigint "parking_lot_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_lot_id"], name: "index_parking_areas_on_parking_lot_id"
   end
 
   create_table "parking_lots", force: :cascade do |t|
@@ -135,6 +144,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_01_105333) do
   add_foreign_key "contract_parking_spaces", "parking_spaces"
   add_foreign_key "contractors", "parking_managers"
   add_foreign_key "garage_details", "parking_spaces"
+  add_foreign_key "parking_areas", "parking_lots"
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_space_option_assignments", "parking_space_options"
   add_foreign_key "parking_space_option_assignments", "parking_spaces"
