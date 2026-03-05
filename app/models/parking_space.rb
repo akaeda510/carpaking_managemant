@@ -5,8 +5,7 @@ class ParkingSpace < ApplicationRecord
   validates :description, length: { maximum: 150 }
   validates :width, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
-  validates :parking_lot, presence: true
-  validates :parking_manager, presence: true
+  validates :parking_area, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   validate :name_id_immutable_if_contracted, on: :update
@@ -54,7 +53,7 @@ class ParkingSpace < ApplicationRecord
 
   # 料金設定：個別設定がなければエリアの基本料金
   def current_price
-    price.presence || parking_area.def.default_price
+    price > 0 ? price: parking_area.default_price
   end
 
   private
