@@ -28,11 +28,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
   end
 
   create_table "contract_parking_spaces", force: :cascade do |t|
+    t.integer "applied_price"
+    t.integer "area_category_at_contract"
     t.bigint "contractor_id", null: false
     t.datetime "created_at", null: false
     t.date "end_date", default: "2999-12-31", null: false
     t.bigint "parking_manager_id", null: false
     t.bigint "parking_space_id", null: false
+    t.string "space_name_at_contract"
     t.date "start_date", default: "1999-12-31", null: false
     t.datetime "updated_at", null: false
     t.index ["contractor_id"], name: "index_contract_parking_spaces_on_contractor_id"
@@ -65,11 +68,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
   end
 
   create_table "parking_areas", force: :cascade do |t|
-    t.integer "category"
+    t.integer "category", default: 0
     t.datetime "created_at", null: false
-    t.string "name"
+    t.integer "default_price", default: 0
+    t.string "name", null: false
     t.bigint "parking_lot_id", null: false
-    t.integer "price", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["parking_lot_id"], name: "index_parking_areas_on_parking_lot_id"
   end
