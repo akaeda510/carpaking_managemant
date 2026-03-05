@@ -1,0 +1,52 @@
+<%= form_with(model: [@parking_lot, parking_area], local: true, data: { turbo_frame: "_top" }, class: "space-y-6") do |f| %>
+  <%= render "shared/error_messages", object: @parking_area %>
+  <div>
+    <%= f.label :category, "カテゴリー", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.select :category, ParkingArea.categories_i18n.invert, {},
+        id: "category_select",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :name, "エリア名", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.text_field :name,
+        id: "area_name_input",
+        placeholder: "例：アスファルトエリア",
+        class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= f.label :default_price, "基本料金 (¥)", class: "block text-sm font-medium text-gray-700" %>
+    <%= f.number_field :default_price, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div class="pt-5">
+    <%= f.submit "保存する", class: "w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+  </div>
+
+  <script>
+  (() => {
+    const setupAreaNameLink = () => {
+      const categorySelect = document.getElementById("category_select");
+      const nameInput = document.getElementById("area_name_input");
+
+      if (!categorySelect || !nameInput) return;
+
+      const updateName = () => {
+        const selectedText = categorySelect.options[categorySelect.selectedIndex].text;
+        if (selectedText === "その他") {
+          nameInput.value = "";
+          nameInput.placeholder = "例：臨時駐車スペース";
+        } else {
+          nameInput.value = selectedText + "エリア";
+        }
+      };
+
+      categorySelect.addEventListener("change", updateName);
+    };
+
+    setupAreaNameLink();
+    document.addEventListener("turbo:render", setupAreaNameLink);
+  })();
+</script>
+<% end %>
