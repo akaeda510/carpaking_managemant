@@ -1,0 +1,26 @@
+<div class="container mx-auto px-4 py-6">
+  <div class="mb-4">
+    <%= link_to [:admin, @contractor.parking_manager, :contractors], class: "inline-flex items-center text-sm font-medium text-gray-500 hover:text-blue-600 transition-colors group" do %>
+      <svg class="w-5 h-5 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      契約者一覧へ戻る
+    <% end %>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-900">
+      <%= @contractor.full_name %><span class="text-lg font-normal text-gray-500">様</span>
+    </h1>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div class="lg:col-span-1">
+      <%= render 'contractor_profile', contractor: @contractor %>
+    </div>
+
+    <div class="lg:col-span-2">
+      <%= render 'contract_details', contractors: @contractors %>
+    </div>
+  </div>
+</div>

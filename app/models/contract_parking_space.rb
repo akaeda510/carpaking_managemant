@@ -9,6 +9,8 @@ class ContractParkingSpace < ApplicationRecord
   belongs_to :parking_space
   belongs_to :parking_manager
 
+  has_one :parking_lot, through: :parking_space
+
   # 有効な契約
   scope :active, -> {
     where("end_date >= ?", Date.today)

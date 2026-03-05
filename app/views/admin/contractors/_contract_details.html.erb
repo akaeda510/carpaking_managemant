@@ -1,0 +1,43 @@
+<div class="bg-white shadow rounded-lg overflow-hidden">
+  <div class="px-6 py-4 border-b border-gray-100 bg-gray-50">
+    <h2 class="font-semibold text-gray-800">現在の契約内容</h2>
+  </div>
+
+  <div class="divide-y divide-gray-100">
+    <% if @contract_details.any? %>
+      <% @contract_details.each do |detail| %>
+        <div class="p-6 hover:bg-gray-50 transition-colors">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-blue-700">
+                <%= detail.parking_space.parking_lot.name %>
+              </h3>
+              <p class="text-sm text-gray-500 mt-1">
+              <%= detail.parking_space.parking_lot.address %>
+              </p>
+              <div class="mt-4 flex items-center space-x-4">
+                <div class="bg-gray-100 px-3 py-1 rounded">
+                  <span class="text-xs text-gray-500 block">駐車番号</span>
+                  <span class="font-mono font-bold text-gray-800 text-lg"><%= detail.parking_space.name %></span>
+                </div>
+                <div class="bg-gray-100 px-3 py-1 rounded">
+                  <span class="text-xs text-gray-500 block">契約日</span>
+                  <span class="font-bold text-gray-800"><%= l detail.created_at.to_date, format: :long %></span>
+                </div>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="px-3 py-1 text-xs font-bold rounded-full bg-blue-100 text-blue-800">
+                契約中
+              </span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="p-12 text-center text-gray-400 italic">
+        現在、有効な契約はありません。
+      </div>
+    <% end %>
+  </div>
+</div>

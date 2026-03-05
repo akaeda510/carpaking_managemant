@@ -18,6 +18,7 @@ class Contractor < ApplicationRecord
   has_many :active_contract_parking_spaces, -> {
     where("end_date >= ?", Date.current)
   }, class_name: "ContractParkingSpace"
+  has_many :parking_lots, through: :contract_parking_spaces
   has_many :parking_spaces, through: :contract_parking_spaces
 
   belongs_to :parking_manager
