@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_030107) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_05_041507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_030107) do
     t.datetime "created_at", null: false
     t.string "name"
     t.bigint "parking_lot_id", null: false
+    t.integer "price", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["parking_lot_id"], name: "index_parking_areas_on_parking_lot_id"
   end
@@ -127,15 +128,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_030107) do
     t.string "description"
     t.decimal "length", precision: 2, scale: 1, default: "0.0"
     t.string "name", null: false
-    t.bigint "parking_lot_id", null: false
+    t.bigint "parking_area_id", null: false
     t.bigint "parking_manager_id", null: false
-    t.integer "parking_type", default: 0
     t.integer "price", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.decimal "width", precision: 2, scale: 1, default: "0.0"
     t.index ["name"], name: "index_parking_spaces_on_name"
-    t.index ["parking_lot_id"], name: "index_parking_spaces_on_parking_lot_id"
+    t.index ["parking_area_id"], name: "index_parking_spaces_on_parking_area_id"
     t.index ["parking_manager_id"], name: "index_parking_spaces_on_parking_manager_id"
   end
 
@@ -148,6 +148,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_030107) do
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_space_option_assignments", "parking_space_options"
   add_foreign_key "parking_space_option_assignments", "parking_spaces"
-  add_foreign_key "parking_spaces", "parking_lots"
+  add_foreign_key "parking_spaces", "parking_areas"
   add_foreign_key "parking_spaces", "parking_managers"
 end
