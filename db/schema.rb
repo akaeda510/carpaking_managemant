@@ -71,6 +71,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_033056) do
     t.string "name", null: false
     t.bigint "parking_lot_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["parking_lot_id", "name"], name: "index_parking_areas_on_parking_lot_id_and_name", unique: true
     t.index ["parking_lot_id"], name: "index_parking_areas_on_parking_lot_id"
   end
 

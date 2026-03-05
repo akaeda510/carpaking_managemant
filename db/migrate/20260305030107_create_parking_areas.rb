@@ -7,6 +7,8 @@ class CreateParkingAreas < ActiveRecord::Migration[8.1]
       t.integer :default_price,  default: 0
 
       t.timestamps
+
+      t.index [:parking_lot_id, :name], unique: true
     end
   end
 end
