@@ -18,7 +18,7 @@ class ParkingSpacesController < ApplicationController
 
     if @batch_form.save
 
-      redirect_to [@parking_lot, @parking_area, @parking_space], success: "駐車場所: #{@parking_space.name} が作成されました"
+      redirect_to [ @parking_lot, @parking_area, @parking_space ], success: "駐車場所: #{@parking_space.name} が作成されました"
 
     else
 
@@ -76,7 +76,7 @@ class ParkingSpacesController < ApplicationController
       logger.error "駐車スペース削除エラー: #{e.message}"
       flash[:alert] = "システムエラーが発生したため削除できませんでし
 た"
-      redirect_to [@parking_lot, @parking_area, @parking_space], status: :see_other
+      redirect_to [ @parking_lot, @parking_area, @parking_space ], status: :see_other
     end
   end
 
@@ -85,7 +85,7 @@ class ParkingSpacesController < ApplicationController
   def parking_space_params
     params.require(:parking_space).permit(
       :name, :price, :width, :length, :description,
-      :parking_area_id, :status, 
+      :parking_area_id, :status,
       garage_detail_attributes: [ :id, :height, :_destroy ],      parking_space_option_ids: [])
   end
 
@@ -107,7 +107,7 @@ class ParkingSpacesController < ApplicationController
 
   def batch_params
     batch_params = params.require(:parking_space).permit(
-      :name, :price, :width, :length, :description, :status).merge( 
+      :name, :price, :width, :length, :description, :status).merge(
       parking_area_id: @parking_area.id,
       batch_count:     params[:batch_count],
     )

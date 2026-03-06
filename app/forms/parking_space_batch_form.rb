@@ -18,7 +18,7 @@ class ParkingSpaceBatchForm
   def garage_detail_attributes=(attribures)
     extracted_height = attributes[:height] || attributes.dig("0", :heigth)
     if extracted_height.present?
-      self.height = extracted_height 
+      self.height = extracted_height
     end
   end
 
@@ -34,7 +34,7 @@ class ParkingSpaceBatchForm
       batch_count.times do |i|
         if base_number > 0
           current_number = base_number + i
-          current_name = current_number.to_s.rjust(original_length, '0')
+          current_name = current_number.to_s.rjust(original_length, "0")
         else
           current_name = base_namber > 1 ? "#{name}-#{i + 1}" : name
         end
