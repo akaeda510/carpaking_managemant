@@ -1,0 +1,38 @@
+<% if @parking_space.new_record? %>
+  <details class="group mb-8 border border-gray-100 rounded-3xl overflow-hidden transition-all duration-300 open:shadow-md">
+    <%# ヘッダー部分（クリックで開閉） %>
+    <summary class="flex items-center justify-between p-5 bg-gray-50 cursor-pointer list-none hover:bg-gray-100 transition-colors">
+      <div class="flex items-center gap-3">
+        <div class="w-1.5 h-5 bg-indigo-600 rounded-full"></div>
+        <span class="font-bold text-gray-700">複数の区画を一括で作成する</span>
+        <span class="px-2 py-0.5 bg-indigo-100 text-indigo-600 text-[10px] rounded font-black uppercase tracking-wider">Option</span>
+      </div>
+      <%# 矢印アイコン（開閉に合わせて回転） %>
+      <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300 group-open:rotate-180"></i>
+    </summary>
+
+    <%# コンテンツ部分 %>
+    <div class="p-8 bg-white border-t border-gray-100">
+      <div class="flex items-center gap-8">
+        <div class="relative group/input">
+          <%= number_field_tag :batch_count, 1, min: 1, max: 100,
+              class: "block w-32 rounded-2xl border-gray-200 bg-gray-50 py-4 text-center text-3xl font-black text-indigo-600 transition-all focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 shadow-sm",
+              id: "batch_count" %>
+          <span class="absolute -bottom-6 left-0 right-0 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest opacity-60">
+            Quantity
+          </span>
+        </div>
+
+        <div class="flex-1">
+          <p class="text-gray-900 font-bold text-lg mb-1">
+            連続した番号で登録
+          </p>
+          <p class="text-xs text-gray-400 leading-relaxed">
+            <i class="fa-solid fa-wand-magic-sparkles mr-1 text-indigo-400"></i>
+            「<%= @parking_space.name.presence || "01" %>」から始まる連番を自動で生成します
+          </p>
+        </div>
+      </div>
+    </div>
+  </details>
+<% end %>
