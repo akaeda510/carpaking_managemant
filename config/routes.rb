@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :parking_managers, only: %i[ index show ] do
       resources :contractors, only: %i[ index show ], shallow: true
     end
+    resources :parking_lots, only: %i[ index show ], shallow: true
   end
 
   get "contractors/new"
