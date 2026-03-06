@@ -1,7 +1,7 @@
 class ParkingSpace < ApplicationRecord
   after_initialize :set_default_values
 
-  validates :name, presence: true, uniqueness: { scope: :parking_lot_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
+  validates :name, presence: true, uniqueness: { scope: :parking_area_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
   validates :description, length: { maximum: 150 }
   validates :width, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
   validates :length, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 9.9 }
@@ -10,7 +10,7 @@ class ParkingSpace < ApplicationRecord
 
   validate :name_id_immutable_if_contracted, on: :update
 
-  enum :status, { available: 0, contracted: 1, pending: 2, prohibited: 3 }
+  enum :status, { available: 0, contracted: 1, pending: 2, prohibited: 3 }, prefix: true, default: :available
 
   # 駐車スペースの契約状態スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
   has_many :contract_parking_spaces, dependent: :restrict_with_exception
@@ -26,8 +26,11 @@ class ParkingSpace < ApplicationRecord
   accepts_nested_attributes_for :garage_detail, reject_if: :not_a_garage?, allow_destroy: :true
 
   belongs_to :parking_area
+  delegate :parking_lot, to: :parking_area
   # 駐車エリアからカテゴリーを取得
   delegate :category, to: :parking_area, allow_nil: true
+
+  before_validation :set_default_price, on: :create
 
   # 駐車スペースの取得（すでに契約されているスペースは排除）
   scope :available, -> {
@@ -43,7 +46,7 @@ class ParkingSpace < ApplicationRecord
 
   # ガレージを選択したか確認
   def not_a_garage?(attributes)
-    parking_type != "garage"
+    parking_area&.category != "garage"
   end
 
   # 契約終了日が今日以降、または無期限の契約か確認
@@ -68,6 +71,13 @@ class ParkingSpace < ApplicationRecord
   def name_id_immutable_if_contracted
     if name_changed? && contract_parking_spaces.exists?
       errors.add(:name, "は契約実績があるため変更できません。")
+    end
+  end
+
+  # 価格設定していない場合、エリアの価格をコピー
+  def set_default_price
+    if price.to_i == 0 && parking_area.present?
+      self.price = parking_area&.default_price
     end
   end
 end
