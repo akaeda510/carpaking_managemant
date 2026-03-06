@@ -13,7 +13,7 @@ export default class extends Controller {
     const radio = document.querySelector('input[name="parking_space[parking_type]"]:checked')
     const selectedType = radio ? radio.value : null
 
-    if (selectedType === 'garage') {
+    if (category === 'garage') {
       this.garageFieldsTarget.style.display = "block"
       this.garageFieldsTarget.classList.remove('hidden')
     } else {

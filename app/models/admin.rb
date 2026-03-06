@@ -7,7 +7,7 @@ class Admin < ApplicationRecord
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
   validates :role, presence: true
 
-  enum :role, { staff: 0, site_owner: 1 }, default: :staff
+  enum :role, { staff: 0, site_owner: 1 }, default: :staff, prefix: true
 
   # 有効なアカウントのみログイン許可
   def active_for_authentication?

@@ -1,0 +1,10 @@
+<div class="inline-flex flex-col sm:items-center">
+  <% if parking_space.price.to_i > 0 %>
+    <span class="text-gray-900 font-semibold">
+      <%= number_to_currency(parking_space.price, unit: "¥", precision: 0) %>
+      <span class="text-[10px] text-gray-500 font-normal">/月</span>
+    </span>
+  <% else %>
+    <span class="text-red-400 text-xs italic">未設定</span>
+  <% end %>
+</div>

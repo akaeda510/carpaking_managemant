@@ -1,27 +1,67 @@
-<%= form_with(model: [@parking_lot, parking_area], local: true, data: { turbo_frame: "_top" }, class: "space-y-6") do |f| %>
-  <%= render "shared/error_messages", object: @parking_area %>
-  <div>
-    <%= f.label :category, "カテゴリー", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.select :category, ParkingArea.categories_i18n.invert, {},
-      id: "category_select",
-      class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
+<%= form_with(model: [@parking_lot, parking_area], local: true, class: "space-y-6") do |f| %>
+  <%= render "shared/error_messages", object: parking_area %>
 
-  <div>
-    <%= f.label :name, "エリア名", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.text_field :name,
-      id: "area_name_input",
-      placeholder: "例：アスファルトエリア",
-      class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
+  <%# 基本設定セクション %>
+  <section class="border border-gray-200 p-6 rounded-lg bg-white shadow-sm">
+    <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2 flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+      </svg>
+      エリア設定
+    </h3>
 
-  <div>
-    <%= f.label :default_price, "基本料金 (¥)", class: "block text-sm font-medium text-gray-700" %>
-    <%= f.number_field :default_price, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" %>
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8">
 
-  <div class="pt-5">
-    <%= f.submit "保存する", class: "w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+      <%# カテゴリー選択 %>
+      <div class="col-span-1">
+        <%= f.label :category, "カテゴリー", class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1">
+          <%= f.select :category, ParkingArea.categories_i18n.invert, {},
+            id: "category_select",
+            class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors" %>
+        </div>
+      </div>
+
+      <%# エエリア名入力 %>
+      <div class="col-span-1">
+        <%= f.label :name, "エリア名", class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1 relative rounded-md shadow-sm">
+          <%= f.text_field :name,
+            id: "area_name_input",
+            placeholder: "例：アスファルトエリア",
+            class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        </div>
+        <p class="mt-1.5 text-[11px] text-gray-500">
+          ※カテゴリーを選択すると自動入力されますが、手動で変更も可能です。
+        </p>
+      </div>
+
+      <%# 基本料金設定 %>
+      <div class="col-span-1">
+        <%= f.label :default_price, "このエリアの標準料金", class: "block text-sm font-medium text-gray-700" %>
+        <div class="mt-1 relative rounded-md shadow-sm max-w-[220px]">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="text-gray-400 sm:text-sm">¥</span>
+          </div>
+          <%= f.number_field :default_price,
+            class: "block w-full border border-gray-300 rounded-md py-2 pl-7 pr-12 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm",
+            placeholder: "0" %>
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none border-l border-gray-200 ml-2 pl-2">
+            <span class="text-gray-400 text-[10px]">/ 月</span>
+          </div>
+        </div>
+        <p class="mt-1.5 text-[11px] text-gray-500">
+          このエリアに作成される区画の初期値として使用されます。
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <%# 保存ボタン %>
+  <div class="pt-4">
+    <%= f.submit (parking_area.new_record? ? "エリアを作成" : "更新する"),
+      class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer transition-all active:scale-[0.98]" %>
   </div>
 
   <script>
@@ -51,5 +91,5 @@
     setupAreaNameLink();
     document.addEventListener("turbo:render", setupAreaNameLink);
   })();
-</script>
+  </script>
 <% end %>

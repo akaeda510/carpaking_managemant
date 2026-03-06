@@ -2,14 +2,13 @@
   <div class="max-w-4xl w-full bg-white shadow-xl rounded-lg p-8" data-controller="parking-space-form">
 
     <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-8">
-      駐車場スペース作成
+      駐車区画作成
     </h2>
 
-    <%= render "shared/error_messages", object: @parking_space %>
     <%= render "form", parking_lot: @parking_lot, parking_space: @parking_space %>
 
     <div class="mt-6 text-center">
-      <%= back_link_to "駐車場スペース一覧に戻る", parking_lot_parking_spaces_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
+      <%= back_link_to "駐車場スペース一覧に戻る", parking_lot_parking_area_parking_spaces_path, class: "text-sm font-medium text-indigo-600 hover:text-indigo-500" %>
     </div>
   </div>
 </div>
