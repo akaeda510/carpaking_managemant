@@ -13,7 +13,6 @@
       </h1>
     </div>
     
-    <%# 新規エリア作成ボタン %>
     <%= link_to '➕ 新しいエリアを登録', new_parking_lot_parking_area_path, 
           class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
@@ -21,7 +20,6 @@
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <% if @parking_areas.any? %>
       
-      <%# テーブルヘッダー - デザインを統一 %>
       <div class="hidden sm:block">
         <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
           <div class="col-span-2">エリア名</div>
@@ -39,11 +37,10 @@
             <div class="grid grid-cols-6 gap-4 items-center">
               
               <div class="col-span-2 text-sm font-medium text-indigo-600">
-                <%= link_to area.name, "#", class: "hover:underline" %>
+                <%= link_to area.name, [@parking_lot, area, :parking_spaces], class: "hover:underline" %>
               </div>
               
               <div class="col-span-1 text-sm text-gray-900">
-                <%# i18nが未設定の場合は area.category.capitalize など %>
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                   <%= area.category_i18n %>
                 </span>
@@ -78,4 +75,3 @@
     <% end %>
   </div>
 </div>
-<%= turbo_frame_tag "model" %>
