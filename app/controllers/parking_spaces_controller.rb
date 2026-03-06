@@ -12,16 +12,26 @@ class ParkingSpacesController < ApplicationController
   end
 
   def create
-    @parking_space = @parking_area.parking_spaces.build(parking_space_params)
-
+    @parking_space = @parking_area.parking_spaces.build
     authorize @parking_space
+    @batch_form = ParkingSpaceBatchForm.new(batch_params)
 
-    if @parking_space.save
-      redirect_to [@parking_lot, @parking_area, :parking_spaces], success: "駐車場所: #{@parking_space.name} が作成されました"
+    if @batch_form.save
+
+      redirect_to [@parking_lot, @parking_area, @parking_space], success: "駐車場所: #{@parking_space.name} が作成されました"
+
     else
+
+      @parking_space.assign_attributes(parking_space_params)
+
       if @parking_area.category == "garage"
         @parking_space.garage_detail ||= @parking_space.build_garage_detail
       end
+
+      @batch_form.errors.each do |error|
+        @parking_space.errors.add(error.attribute, error.message)
+      end
+
       render :new, status: :unprocessable_entity
     end
   end
@@ -73,7 +83,10 @@ class ParkingSpacesController < ApplicationController
   private
 
   def parking_space_params
-    params.require(:parking_space).permit(:name, :price, :width, :length, :description, :parking_area_id, :status, garage_detail_attributes: [ :id, :height, :_destroy ], parking_space_option_ids: [])
+    params.require(:parking_space).permit(
+      :name, :price, :width, :length, :description,
+      :parking_area_id, :status, 
+      garage_detail_attributes: [ :id, :height, :_destroy ],      parking_space_option_ids: [])
   end
 
   def set_parking_space
@@ -90,5 +103,13 @@ class ParkingSpacesController < ApplicationController
 
   def parking_space_build_garage_detail
     @parking_space.build_garage_detail unless @parking_space.garage_detail
+  end
+
+  def batch_params
+    batch_params = params.require(:parking_space).permit(
+      :name, :price, :width, :length, :description, :status).merge( 
+      parking_area_id: @parking_area.id,
+      batch_count:     params[:batch_count],
+    )
   end
 end
