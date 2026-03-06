@@ -9,6 +9,8 @@ class Admin < ApplicationRecord
 
   enum :role, { staff: 0, site_owner: 1 }, default: :staff, prefix: true
 
+  has_many :parking_lots, foreign_key: :parking_manager_id
+
   # 有効なアカウントのみログイン許可
   def active_for_authentication?
     super && active?
