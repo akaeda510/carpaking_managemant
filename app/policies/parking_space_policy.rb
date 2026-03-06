@@ -4,7 +4,7 @@ class ParkingSpacePolicy < ApplicationPolicy
   end
 
   def create?
-    @parking_manager.present? && parking_manager.id == record.parking_manager_id
+    @parking_manager.present? && parking_manager.id == record.parking_lot.parking_manager_id
   end
 
   def show?
@@ -29,7 +29,7 @@ class ParkingSpacePolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      scope.where(parking_manager_id: parking_manager.id)
+      scope.where(parking_manager_id: parking_lot.parking_manager.id)
     end
   end
 end
