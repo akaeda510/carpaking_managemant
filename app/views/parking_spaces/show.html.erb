@@ -1,110 +1,114 @@
-<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-10">
-  <h1 class="text-3xl font-bold text-gray-800 border-b pb-4 mb-6">
-    駐車場所: 詳細情報
-  </h1>
+<div class="container mx-auto px-4 py-8 max-w-3xl">
+  <nav class="flex text-sm text-gray-500 mb-4">
+    <ol class="flex flex-wrap items-center text-sm text-    gray-500 gap-y-1">
+    <li><%= link_to "区画一覧", parking_lot_parking_area_parking_spaces_path(@parking_lot, @parking_area), class: "hover:text-indigo-600 transition-colors" %></li>
+    <li class="flex items-center"><span class="mx-2 text-gray-300">/</span></li>
+    <li class="font-bold text-gray-900 truncate max-w-    [200px] sm:max-w-[400px]" title="<%= @parking_space.name %>">
 
-  <div class="space-y-4">
-    <div class="flex items-center">
-      <p class="w-32 font-semibold text-gray-600">名前:</p>
-      <p class="text-gray-900"><%= @parking_space.name %></p>
-    </div>
+      No.<%= @parking_space.name %></li>
+    </ol>
+  </nav>
 
-    <div class="flex items-center">
-      <p class="w-32 font-semibold text-gray-600">月額賃料:</p>
-      <p class="text-gray-900 font-bold">
-        ¥ <%= number_with_delimiter(@parking_space.price) %> <span class="text-sm font-normal text-gray-500">(税込)</span>
-      </p>
-    </div>
-
-    <div class="flex items-center">
-      <p class="w-32 font-semibold text-gray-600">駐車タイプ:</p>
-      <div class="text-gray-900">
-        <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-slate-100 text-slate-700 border border-slate-200">
-          <%= @parking_space.parking_type_i18n %>
-        </span>
-      </div>
-    </div>
-
-    <div class="flex items-center">
-      <p class="w-32 font-semibold text-gray-600">横幅:</p>
-      <p class="text-gray-900"><%= @parking_space.width %> m</p>
-    </div>
-
-    <div class="flex items-center">
-      <p class="w-32 font-semibold text-gray-600">長さ:</p>
-      <p class="text-gray-900"><%= @parking_space.length %> m</p>
-    </div>
-
-    <% if @parking_space.parking_type == 'garage' && @parking_space.garage_detail.present? %>
-      <div class="flex items-center">
-        <p class="w-32 font-semibold text-gray-600">高さ:</p>
-        <p class="text-gray-600">
-        <%= @parking_space.garage_detail.height %> m
-        </p>
-      </div>
-    <% end %>
-
-    <div class="flex items-start">
-      <p class="w-32 font-semibold text-gray-600">オプション:</p>
-      <div class="flex flex-wrap gap-2 flex-1">
-        <% if @parking_space.parking_space_options.any? %>
-          <% @parking_space.parking_space_options.each do |option| %>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800 border border-indigo-200">
-              <svg class="-ml-0.5 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                <circle cx="4" cy="4" r="3" />
-              </svg>
-              <%= option.name %>
-            </span>
-          <% end %>
-        <% else %>
-          <p class="text-gray-400 italic text-sm">特になし</p>
-        <% end %>
-      </div>
-    </div>
-
-    <%# --- ここから契約者情報の追加 --- %>
-    <div class="flex items-start border-t pt-4 mt-4">
-      <p class="w-32 font-semibold text-gray-600">現在の契約状況:</p>
-      <div class="flex-1">
-        <%# 現在有効な契約を取得 %>
-        <% active_contract = @parking_space.contract_parking_spaces.find_by(end_date: ::ACTIVE_CONTRACT_END_DATE) %>
-
-        <% if active_contract %>
-          <div class="bg-green-50 border border-green-200 rounded-md p-3">
-            <p class="text-green-800 font-bold">
-            👤 契約中: <%= link_to active_contract.contractor.first_name, contractor_path(active_contract.contractor), class: "underline" %>
-            </p>
-            <p class="text-sm text-green-700">契約開始日: <%= active_contract.start_date.strftime("%Y/%m/%d") %></p>
-          </div>
-        <% else %>
-          <div class="bg-gray-50 border border-gray-200 rounded-md p-3 text-gray-500">
-            <p>現在空き（契約なし）</p>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <%# 5. 説明 (description) %>
-    <div class="border-t pt-4 mt-6">
-      <p class="font-semibold text-gray-600 mb-2">説明:</p>
-      <p class="text-gray-900 whitespace-pre-wrap"><%= @parking_space.description %></p>
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-6 mb-8 gap-4">
+    <h1 class="text-3xl font-bold text-gray-900">駐車区画: No. <%= @parking_space.name %></h1>
+    <div class="flex space-x-3">
+      <%= link_to '編集', edit_parking_lot_parking_area_parking_space_path(@parking_lot, @parking_area, @parking_space), 
+          class: "px-5 py-2 bg-white border border-gray-300 rounded-lg font-bold text-gray-700 hover:bg-gray-50" %>
+      <%= link_to '削除', [@parking_lot, @parking_area, @parking_space], 
+          data: { turbo_method: :delete, turbo_confirm: "削除しますか？" },
+          class: "px-5 py-2 bg-red-50 border border-red-200 rounded-lg font-bold text-red-600 hover:bg-red-100" %>
     </div>
   </div>
 
-  <%# 💡 ボタンセクション %>
-  <div class="mt-8 pt-6 border-t flex space-x-4">
-    <%# 編集ボタン %>
-    <%= link_to '編集', edit_parking_lot_parking_space_path, class: "px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition duration-150" %>
+  <div class="space-y-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="p-6 bg-indigo-50 rounded-2xl border border-indigo-100">
+        <p class="text-xs font-bold text-indigo-600 uppercase mb-2">月額賃料</p>
+        <%= render 'price_display', parking_space: @parking_space, parking_area: @parking_area %>
+      </div>
+      <div class="p-6 bg-gray-50 rounded-2xl border border-gray-200">
+        <p class="text-xs font-bold text-gray-500 uppercase mb-2">現在の状態</p>
+        <div class="flex items-center space-x-2">
+          <span class="text-xl font-bold text-gray-900"><%= @parking_space.status_i18n %></span>
+        </div>
+      </div>
+    </div>
 
-    <%# 削除ボタン %>
-    <%= link_to '削除', parking_lot_parking_space_path(@parking_lot, @parking_space), 
-    data: { 
-      turbo_method: :delete, 
-      turbo_confirm: "本当にこの駐車スペースを削除しますか？" 
-    },
-    class: "px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition duration-150" %>
+    <%# 4. 詳細スペック表 %>
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+        <h2 class="font-bold text-gray-800">区画スペック</h2>
+      </div>
+      <dl class="divide-y divide-gray-200">
+        <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">駐車タイプ</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 font-bold"><%= @parking_area.category_i18n %></dd>
+        </div>
+        <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">サイズ（幅 × 長さ）</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <span class="font-bold"><%= @parking_space.width %>m</span> × <span class="font-bold"><%= @parking_space.length %>m</span>
+          </dd>
+        </div>
+        <% if @parking_area&.category == 'garage' && @parking_space.garage_detail.present? %>
+          <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+            <dt class="text-sm font-medium text-gray-500 text-indigo-600">高さ制限</dt>
+            <dd class="mt-1 text-sm text-indigo-700 sm:mt-0 sm:col-span-2 font-bold"><%= @parking_space.garage_detail.height %>m</dd>
+          </div>
+        <% end %>
+        <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
+          <dt class="text-sm font-medium text-gray-500">オプション</dt>
+          <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <% if @parking_space.parking_space_options.any? %>
+              <div class="flex flex-wrap gap-2">
+                <% @parking_space.parking_space_options.each do |opt| %>
+                  <span class="bg-gray-100 text-gray-700 px-2 py-0.5 rounded text-xs border border-gray-200"><%= opt.name %></span>
+                <% end %>
+              </div>
+            <% else %>
+              <span class="text-gray-400">なし</span>
+            <% end %>
+          </dd>
+        </div>
+      </dl>
+    </div>
 
-  <%# 戻るボタン (親の ParkingLot の index に戻ることを想定) %>
-  <%= link_to '一覧に戻る', parking_lot_parking_spaces_path, class: "px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition duration-150" %>
+    <%# 5. 契約者情報 %>
+    <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+      <div class="px-6 py-4 bg-gray-50 border-b border-gray-200 flex justify-between">
+        <h2 class="font-bold text-gray-800">契約情報</h2>
+      </div>
+      <div class="p-6">
+        <% active_contract = @parking_space.contract_parking_spaces.find_by(end_date: ::ACTIVE_CONTRACT_END_DATE) %>
+        <% if active_contract %>
+          <div class="flex items-center space-x-4">
+            <div class="flex-1">
+              <p class="text-sm text-gray-500">契約者</p>
+              <p class="text-lg font-bold text-indigo-600">
+                <%= link_to active_contract.contractor.full_name, contractor_path(active_contract.contractor), class: "hover:underline" %>
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-sm text-gray-500">契約開始日</p>
+              <p class="font-bold"><%= active_contract.start_date.strftime("%Y/%m/%d") %></p>
+            </div>
+          </div>
+        <% else %>
+          <p class="text-center text-gray-500 py-4 italic">現在、この区画は空き状態です</p>
+        <% end %>
+      </div>
+    </div>
+
+    <%# 6. 説明文 %>
+    <% if @parking_space.description.present? %>
+      <div class="p-6 bg-white border border-gray-200 rounded-2xl">
+        <h2 class="text-sm font-bold text-gray-500 uppercase mb-3">備考・説明</h2>
+        <p class="text-gray-700 whitespace-pre-wrap text-sm leading-relaxed"><%= @parking_space.description %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-10 text-center">
+    <%= back_link_to '一覧に戻る', parking_lot_parking_area_parking_spaces_path, class: "text-gray-500 hover:text-gray-800 font-medium" %>
   </div>
 </div>
