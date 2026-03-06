@@ -15,20 +15,7 @@
 
     <div class="flex sm:block sm:col-span-2 text-sm sm:text-center">
       <span class="sm:hidden w-24 flex-shrink-0 text-gray-400 font-medium">賃料:</span>
-      <span class="text-gray-900 font-semibold">
-        <% display_price = parking_space.price.to_i > 0 ? parking_space.price : @parking_area.default_price %>
-
-        <% if display_price.to_i > 0 %>
-          <%= number_to_currency(display_price, unit: "¥", precision: 0) %>
-          <span class="text-[10px] text-gray-500 font-normal">/月</span>
-
-          <% if parking_space.price.to_i == 0 %>
-            <span class="block text-[9px] text-indigo-400 font-normal">（エリア標準）</span>
-          <% end %>
-        <% else %>
-          <span class="text-red-400 text-xs italic">未設定</span>
-        <% end %>
-      </span>
+      <%= render 'price_display', parking_space: parking_space, parking_area: parking_area %>
     </div>
 
     <div class="flex sm:block sm:col-span-2 text-sm sm:text-center">
