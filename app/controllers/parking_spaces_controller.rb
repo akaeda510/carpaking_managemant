@@ -1,24 +1,25 @@
 class ParkingSpacesController < ApplicationController
   before_action :authenticate_parking_manager!
   before_action :set_parking_lot
+  before_action :set_parking_area
   before_action :set_parking_space, only: %i[show edit update destroy]
 
   def new
     authorize ParkingSpace
-    @parking_space = @parking_lot.parking_spaces.build
+    @parking_space = @parking_area.parking_spaces.build
     @parking_space.build_garage_detail
+    @parking_space.price = @parking_area.default_price
   end
 
   def create
-    @parking_space = @parking_lot.parking_spaces.build(parking_space_params)
-    @parking_space.parking_manager_id = current_parking_manager.id
+    @parking_space = @parking_area.parking_spaces.build(parking_space_params)
 
     authorize @parking_space
 
     if @parking_space.save
-      redirect_to parking_lot_parking_spaces_path, success: "駐車場所: #{@parking_space.name} が作成されました"
+      redirect_to [@parking_lot, @parking_area, :parking_spaces], success: "駐車場所: #{@parking_space.name} が作成されました"
     else
-      if @parking_space.parking_type == "garage"
+      if @parking_area.category == "garage"
         @parking_space.garage_detail ||= @parking_space.build_garage_detail
       end
       render :new, status: :unprocessable_entity
@@ -27,7 +28,7 @@ class ParkingSpacesController < ApplicationController
 
   def index
     authorize ParkingSpace
-    @parking_spaces = @parking_lot.parking_spaces.all.order(id: :DESC).decorate
+    @parking_spaces = @parking_area.parking_spaces.decorate
   end
 
   def show
@@ -35,37 +36,37 @@ class ParkingSpacesController < ApplicationController
   end
 
   def edit
-    @parking_space.build_garage_detail unless @parking_space.garage_detail
+    parking_space_build_garage_detail
     authorize @parking_space
   end
 
   def update
     authorize @parking_space
     if @parking_space.update(parking_space_params)
-        flash[:success] = "駐車場所: #{@parking_space.name} が更新されました"
-        redirect_to [ @parking_lot, @parking_space ]
+      flash[:success] = "駐車場所: #{@parking_space.name} が更新されました"
+      redirect_to [ @parking_lot, @parking_area, @parking_space ]
     else
-        @parking_space.build_garage_detail unless @parking_space.garage_detail
-        render :edit, status: :unprocessable_entity
+      parking_space_build_garage_detail
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     authorize @parking_space
     begin
-    @parking_space.destroy!
-    flash[:success] = "#{@parking_space.name} が削除されました"
-    redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
+      @parking_space.destroy!
+      flash[:success] = "#{@parking_space.name} が削除されました"
+      redirect_to parking_lot_parking_area_parking_spaces_path(@parking_lot), status: :see_other
 
     rescue ActiveRecord::DeleteRestrictionError
       flash[:alert] = "この駐車場は契約状態のため、削除することができません"
-      redirect_to [ @parking_lot, @parking_space ], status: :see_other
+      redirect_to [ @parking_lot, @parking_area, @parking_space ], status: :see_other
 
     rescue => e
       logger.error "駐車スペース削除エラー: #{e.message}"
       flash[:alert] = "システムエラーが発生したため削除できませんでし
 た"
-      redirect_to parking_lot_parking_spaces_path(@parking_lot), status: :see_other
+      redirect_to [@parking_lot, @parking_area, @parking_space], status: :see_other
     end
   end
 
@@ -80,6 +81,14 @@ class ParkingSpacesController < ApplicationController
   end
 
   def set_parking_lot
-    @parking_lot = ParkingLot.find(params[:parking_lot_id])
+    @parking_lot = current_parking_manager.parking_lots.find(params[:parking_lot_id])
+  end
+
+  def set_parking_area
+    @parking_area = @parking_lot.parking_areas.find(params[:parking_area_id])
+  end
+
+  def parking_space_build_garage_detail
+    @parking_space.build_garage_detail unless @parking_space.garage_detail
   end
 end
