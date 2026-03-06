@@ -131,41 +131,10 @@
     <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", placeholder: "車室に関する特記事項があれば入力してください" %>
   </section>
 
-<% if @parking_space.new_record? %>
-  <div class="py-6 border-b border-gray-100 mb-8">
-    <div class="flex items-center gap-3 mb-4">
-      <div class="w-1.5 h-6 bg-indigo-600 rounded-full"></div>
-      <label for="batch_count" class="text-lg font-black text-gray-800 tracking-tight">
-        作成個数 <span class="text-sm font-medium text-gray-400 ml-2"></span>
-      </label>
-    </div>
-
-    <div class="flex items-center gap-6">
-      <div class="relative group">
-        <%= number_field_tag :batch_count, 1, min: 1, max: 50,
-            class: "block w-32 rounded-2xl border-gray-200 bg-gray-50 py-4 text-center text-3xl font-black text-indigo-600 transition-all focus:bg-white focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 shadow-sm",
-            id: "batch_count" %>
-        <span class="absolute -bottom-6 left-0 right-0 text-center text-[10px] font-bold text-gray-400 uppercase tracking-widest opacity-0 group-focus-within:opacity-100 transition-opacity">
-          Quantity
-        </span>
-      </div>
-
-      <div class="flex-1">
-        <p class="text-gray-900 font-bold text-lg mb-1 flex items-center">
-          個の区画を連続して登録する
-          <span class="ml-3 px-2 py-0.5 bg-indigo-50 text-indigo-600 text-[10px] rounded uppercase border border-indigo-100">Option</span>
-        </p>
-        <p class="text-xs text-gray-400 leading-relaxed">
-          <i class="fa-solid fa-wand-magic-sparkles mr-1 text-indigo-400"></i>
-          「<%= @parking_space.name.presence || "No.1" %>」から始まる連番（-1, -2...）を自動生成します
-        </p>
-      </div>
-    </div>
-  </div>
-<% end %>
+  <%= render 'batch_registration_option', parking_sapce: @parking_space %>
 
   <div class="actions pt-4">
-    <%= f.submit (parking_space.new_record? ? "駐車場を作成" : "更新する"), 
+    <%= f.submit (parking_space.new_record? ? "作成" : "更新する"), 
       class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer transition-all active:scale-[0.98]" %>
   </div>
 
