@@ -10,16 +10,17 @@ site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
   admin.password = 'password'
 
   admin.first_name = 'テスト'
-  admin.last_name = '管理者'
+  admin.last_name = 'アプリ管理者'
   admin.phone_number = '09066666666'
   admin.role = :site_owner
   admin.active = true
 end
-puts "Admin_id, '井口拓人': created or found."
+puts "Admin_id, 'テストアプリ管理者': created or found."
 
 admin = Admin.find_by(email: 'admin@example.com')
 if admin
   admin.update!(password: 'password')
+  puts 'Admin updated: Password has been re-hashed'
 end
 
 owner_one = ParkingManager.find_or_create_by!(email: 'test@example.com') do |manager|
