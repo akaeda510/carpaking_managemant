@@ -17,6 +17,11 @@ site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
 end
 puts "Admin_id, '井口拓人': created or found."
 
+admin = Admin.find_by(email: 'admin@example.com')
+if admin
+  admin.update!(password: 'password')
+end
+
 owner_one = ParkingManager.find_or_create_by!(email: 'test@example.com') do |manager|
   manager.password = 'password'
   manager.password_confirmation = 'password'
