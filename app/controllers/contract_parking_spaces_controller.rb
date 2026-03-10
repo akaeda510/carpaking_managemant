@@ -6,6 +6,7 @@ class ContractParkingSpacesController < ApplicationController
 
   def new
     authorize ContractParkingSpace
+
     if @parking_lot.nil?
       redirect_to parking_lots_path, alert: "先に駐車場を登録してください" and return
     end
@@ -54,6 +55,7 @@ class ContractParkingSpacesController < ApplicationController
   def set_parking_lot
     @parking_lots = current_parking_manager.parking_lots
     @parking_lot = @parking_lots.find_by_id_or_first(params[:parking_lot_id])
+    @parking_area = @parking_lot&.parking_areas&.find_by(id: params[:parking_area_id])
   end
 
   def set_contractor
