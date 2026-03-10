@@ -11,6 +11,9 @@ class ContractParkingSpace < ApplicationRecord
 
   has_one :parking_lot, through: :parking_space
 
+  delegate :parking_area, to: :parking_space
+  delegate :parking_lot, to: :parking_area
+
   # 有効な契約
   scope :active, -> {
     where("end_date >= ?", Date.today)
@@ -30,5 +33,9 @@ class ContractParkingSpace < ApplicationRecord
   # 契約がすでに期間切れを確認
   def expired?
     end_date.present? && end_date < Date.today
+  end
+
+  def parking_area
+    parking_space&.parking_area
   end
 end

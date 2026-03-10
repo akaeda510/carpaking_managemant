@@ -3,6 +3,7 @@
     <div>
       <nav class="flex mb-2" aria-label="Breadcrumb">
         <ol class="flex items-center space-x-2 text-sm text-gray-500">
+          <%# routes.rb 26行目に基づき修正 %>
           <li><%= link_to "駐車場一覧", parking_lots_path, class: "hover:text-indigo-600" %></li>
           <li><span class="mx-2">/</span></li>
           <li class="font-bold text-gray-900"><%= @parking_lot.name %></li>
@@ -13,7 +14,8 @@
       </h1>
     </div>
     
-    <%= link_to '➕ 新しいエリアを登録', new_parking_lot_parking_area_path, 
+    <%# routes.rb 27行目に基づき修正 %>
+    <%= link_to '➕ 新しいエリアを登録', new_parking_lot_parking_area_path(@parking_lot), 
           class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
   </div>
   
@@ -22,7 +24,7 @@
       
       <div class="hidden sm:block">
         <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
-          <div class="col-span-2">エリア名</div>
+          <div class="col-span-2">エリア名 / 説明</div>
           <div class="col-span-1">カテゴリー</div>
           <div class="col-span-1">基本料金</div>
           <div class="col-span-1">区画数</div>
@@ -35,9 +37,21 @@
           <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
             
             <div class="grid grid-cols-6 gap-4 items-center">
-              
-              <div class="col-span-2 text-sm font-medium text-indigo-600">
-                <%= link_to area.name, [@parking_lot, area, :parking_spaces], class: "hover:underline" %>
+              <div class="col-span-2">
+                <div class="text-sm mb-0.5">
+                  <%= link_to parking_lot_parking_area_parking_spaces_path(@parking_lot, area), class: "text-indigo-600 hover:text-indigo-800 font-bold flex items-center gap-1 group" do %>
+                    <%= area.name %>
+                    <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                  <% end %>
+                </div>
+
+                <% if area.description.present? %>
+                  <p class="text-xs text-gray-500 line-clamp-1" title="<%= area.description %>">
+                    <%= area.description %>
+                  </p>
+                <% else %>
+                  <p class="text-xs text-gray-300 italic">説明なし</p>
+                <% end %>
               </div>
               
               <div class="col-span-1 text-sm text-gray-900">
@@ -51,16 +65,18 @@
               </div>
 
               <div class="col-span-1 text-sm text-gray-900">
-                <%= area.parking_spaces.count %> 区画
+                <%= area.parking_spaces.count %> <span class="text-xs text-gray-500">区画</span>
               </div>
 
               <div class="col-span-1 text-right flex justify-end space-x-3">
-                <%= link_to '編集', edit_parking_lot_parking_area_path(@parking_lot, area), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
+                <%# routes.rb 27行目：エリア編集 %>
+                <%= link_to '編集', edit_parking_lot_parking_area_path(@parking_lot, area), class: 'text-yellow-600 hover:text-yellow-900 text-sm font-medium' %>
                 
+                <%# routes.rb 27行目：エリア削除 %>
                 <%= link_to '削除', parking_lot_parking_area_path(@parking_lot, area), 
                       data: { turbo_method: :delete,
                               turbo_confirm: "エリアを削除すると、所属する全ての区画も削除されます。本当によろしいですか？"},
-                              class: 'text-red-600 hover:text-red-900 text-sm' %>
+                              class: 'text-red-600 hover:text-red-900 text-sm font-medium' %>
               </div>
             </div>
           </li>
@@ -68,9 +84,8 @@
       </ul>
       
     <% else %>
-      <div class="p-8 text-center text-gray-500">
+      <div class="p-12 text-center text-gray-500">
         <p class="text-lg mb-2">まだエリアが登録されていません。</p>
-        <p>「ガレージ」「砂利エリア」など、駐車場内の区分を作成しましょう。</p>
       </div>
     <% end %>
   </div>

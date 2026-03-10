@@ -50,7 +50,7 @@
 
     <% if @parking_areas.any? %>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <% @parking_areas.each do |area| %>
+        <% @parking_lot.parking_areas.each do |area| %>
           <div class="group bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-indigo-100 transition-all duration-300 p-8">
             <div class="flex justify-between items-start mb-6">
               <div>
@@ -70,7 +70,7 @@
             </div>
 
             <div class="mt-8 pt-6 border-t border-gray-50">
-              <%= link_to '#', class: "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gray-50 text-sm font-bold text-gray-600 hover:bg-indigo-600 hover:text-white transition-all duration-300" do %>
+              <%= link_to admin_parking_area_path(area), class: "w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-gray-50 text-sm font-bold text-gray-600 hover:bg-indigo-600 hover:text-white transition-all duration-300" do %>
                 区画詳細・管理
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
               <% end %>

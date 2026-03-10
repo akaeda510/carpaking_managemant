@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_05_033056) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_09_022115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -68,6 +68,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_05_033056) do
     t.integer "category", default: 0
     t.datetime "created_at", null: false
     t.integer "default_price", default: 0
+    t.string "description"
     t.string "name", null: false
     t.bigint "parking_lot_id", null: false
     t.datetime "updated_at", null: false
