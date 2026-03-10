@@ -14,7 +14,7 @@ class ParkingSpace < ApplicationRecord
 
   # 駐車スペースの契約状態スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
   has_many :contract_parking_spaces, dependent: :restrict_with_exception
-  has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractorParkingSpace"
+  has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractParkingSpace"
   has_many :contractor, through: :contractor_parking_spaces
 
   has_many :parking_space_option_assignments, dependent: :destroy
@@ -25,6 +25,12 @@ class ParkingSpace < ApplicationRecord
   has_one :parking_lot, through: :parking_area
   has_one :parking_manager, through: :parking_lot
   has_one :garage_detail, dependent: :destroy
+
+  # 現在の契約者情報を取得
+  has_one :current_contract, -> {
+    where("start_date <= ? AND end_date >= ?", Date.current, Date.current).order(start_date: :desc)
+  }, class_name: "ContractParkingSpace"
+
   accepts_nested_attributes_for :garage_detail, reject_if: :not_a_garage?, allow_destroy: :true
 
   delegate :parking_lot, to: :parking_area
