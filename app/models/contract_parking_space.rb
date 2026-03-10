@@ -34,7 +34,7 @@ class ContractParkingSpace < ApplicationRecord
   def expired?
     end_date.present? && end_date < Date.today
   end
-  
+
   def parking_area
     parking_space&.parking_area
   end

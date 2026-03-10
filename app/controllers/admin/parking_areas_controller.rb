@@ -8,7 +8,7 @@ class Admin::ParkingAreasController < Admin::BaseController
   end
 
   private
-  
+
   def set_parking_lot
     @parking_lot = @parking_area.parking_lot
   end
