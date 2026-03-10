@@ -11,6 +11,7 @@ class Admin < ApplicationRecord
 
   has_many :parking_lots, foreign_key: :parking_manager_id
   has_many :parking_areas, through: :parking_lots
+  has_many :parking_spaces, through: :parking_areas
 
   # 有効なアカウントのみログイン許可
   def active_for_authentication?
