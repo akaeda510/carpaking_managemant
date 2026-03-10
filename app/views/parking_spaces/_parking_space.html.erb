@@ -24,7 +24,7 @@
       <% if active_contract %>
         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
           <svg class="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
-          <%= active_contract.contractor.full_name %>
+          <%= active_contract.contractor.decorate.full_name %>
         </span>
       <% else %>
         <span class="text-gray-400 italic text-xs">未契約</span>
