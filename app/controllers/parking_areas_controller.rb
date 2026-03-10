@@ -44,7 +44,7 @@ class ParkingAreasController < ApplicationController
   private
 
   def parking_area_params
-    params.require(:parking_area).permit(:name, :default_price, :category)
+    params.require(:parking_area).permit(:name, :default_price, :category, :description)
   end
 
   def set_parking_lot
