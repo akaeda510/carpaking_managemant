@@ -4,7 +4,8 @@ class Admin::ParkingAreasController < Admin::BaseController
 
 
   def show
-    @parking_spaces = @parking_area.parking_spaces.order(:name)
+    @available_count = @parking_area.parking_spaces.available.count
+    @parking_spaces = ParkingSpaceDecorator.decorate_collection(@parking_area.parking_spaces.sort_by_natural_name)
   end
 
   private
