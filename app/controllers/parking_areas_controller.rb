@@ -21,7 +21,7 @@ class ParkingAreasController < ApplicationController
   end
 
   def index
-    @parking_areas = @parking_lot.parking_areas.order(:created_at)
+    @parking_areas = @parking_lot.parking_areas.order(:name)
   end
 
   def edit; end

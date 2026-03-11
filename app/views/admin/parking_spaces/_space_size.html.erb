@@ -1,0 +1,16 @@
+<div class="grid grid-cols-3 gap-4 bg-blue-50 p-4 rounded-lg border border-blue-100 text-center">
+  <div>
+    <p class="text-[10px] text-blue-500 font-bold uppercase">幅 (W)</p>
+    <p class="text-lg font-black text-blue-900"><%= parking_space.width.presence || "-" %><span class="text-xs ml-0.5">m</span></p>
+  </div>
+  <div>
+    <p class="text-[10px] text-blue-500 font-bold uppercase">奥行 (L)</p>
+    <p class="text-lg font-black text-blue-900"><%= parking_space.length.presence || "-" %><span class="text-xs ml-0.5">m</span></p>
+  </div>
+  <% if parking_area.category == "garage" || garage_detail&.height.present? %>
+    <div>
+      <p class="text-[10px] text-blue-500 font-bold uppercase">高さ (H)</p>
+      <p class="text-lg font-black text-blue-900"><%= garage_detail&.height.presence || "-" %><span class="text-xs ml-0.5">m</span></p>
+    </div>
+  <% end %>
+</div>

@@ -38,7 +38,7 @@ class ParkingSpacesController < ApplicationController
 
   def index
     authorize ParkingSpace
-    @parking_spaces = @parking_area.parking_spaces.decorate
+    @parking_spaces = ParkingSpaceDecorator.decorate_collection(@parking_area.parking_spaces.sort_by_natural_name)
   end
 
   def show
@@ -107,7 +107,10 @@ class ParkingSpacesController < ApplicationController
 
   def batch_params
     batch_params = params.require(:parking_space).permit(
-      :name, :price, :width, :length, :description, :status).merge(
+      :name, :price, :width, :length, :description, :status,
+      garage_detail_attributes: [ :id, :height, :_destroy ],
+      parking_space_option_ids: []
+    ).merge(
       parking_area_id: @parking_area.id,
       batch_count:     params[:batch_count],
     )
