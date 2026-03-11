@@ -47,6 +47,12 @@ class ParkingSpace < ApplicationRecord
     where.not(id: occupied_ids)
   }
 
+  def self.sort_by_natural_name
+    all.to_a.sort_by do |record|
+      record.name.scan(/\d+|\D+/).map { |s| s =~ /\d+/ ? s.to_i : s }
+    end
+  end
+
   def current_contractor_id
     current_contractors_space&.contractor_id
   end
