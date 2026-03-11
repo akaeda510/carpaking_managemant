@@ -7,8 +7,7 @@
     区画 <%= @parking_space.name %>：契約履歴一覧
   </h1>
 
-  <%# ここでテーブルを表示 %>
   <div class="bg-white shadow rounded-lg overflow-hidden">
-    <%= render 'admin/parking_spaces/space_contract_history', contract_histories: @contracts %>
+    <%= render 'space_contract_history', contract_histories: @contracts %>
   </div>
 </div>
