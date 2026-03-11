@@ -107,7 +107,10 @@ class ParkingSpacesController < ApplicationController
 
   def batch_params
     batch_params = params.require(:parking_space).permit(
-      :name, :price, :width, :length, :description, :status).merge(
+      :name, :price, :width, :length, :description, :status,
+      garage_detail_attributes: [ :id, :height, :_destroy ],
+      parking_space_option_ids: []
+    ).merge(
       parking_area_id: @parking_area.id,
       batch_count:     params[:batch_count],
     )
