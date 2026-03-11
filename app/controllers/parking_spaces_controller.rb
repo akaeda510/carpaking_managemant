@@ -38,7 +38,7 @@ class ParkingSpacesController < ApplicationController
 
   def index
     authorize ParkingSpace
-    @parking_spaces = @parking_area.parking_spaces.decorate
+    @parking_spaces = ParkingSpaceDecorator.decorate_collection(@parking_area.parking_spaces.sort_by_natural_name)
   end
 
   def show
