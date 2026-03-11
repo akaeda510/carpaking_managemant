@@ -7,9 +7,15 @@
 
   <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
     <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-      <h1 class="text-2xl font-bold text-gray-800">
-        区画番号: <%= @parking_space.name %>
-      </h1>
+      <div class="flex items-center gap-4">
+        <h1 class="text-2xl font-bold text-gray-800">
+          区画番号: <%= @parking_space.name %>
+        </h1>
+        <%# エリア種別を表示 %>
+        <span class="px-2 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded border border-blue-100">
+          <%= @parking_area.category_i18n %>
+        </span>
+      </div>
       <span class="px-3 py-1 rounded-full text-xs font-semibold <%= @parking_space.current_contract ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' %>">
         <%= @parking_space.current_contract ? '契約中' : '空き' %>
       </span>
@@ -22,10 +28,19 @@
         </h2>
 
         <div class="space-y-6">
+          <%# 賃料セクションを追加 %>
+          <div class="pb-4 border-b border-gray-100">
+            <label class="block text-xs font-bold text-gray-400 mb-1 uppercase">月額賃料</label>
+            <p class="text-2xl font-extrabold text-gray-900">
+              <%= number_to_currency(@parking_space.price, unit: "¥", precision: 0) %>
+              <span class="text-sm font-normal text-gray-500 ml-1">(税込)</span>
+            </p>
+          </div>
+
           <%= render 'space_size', parking_space: @parking_space, parking_area: @parking_area, garage_detail: @garage_detail %>
 
           <div>
-            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">付帯設備・制限</label>
+            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">駐車場オプション・制限</label>
             <%= render 'options', parking_space: @parking_space, options: @parking_space_options %>
           </div>
 
@@ -41,7 +56,6 @@
           <i class="fa-solid fa-file-contract mr-1"></i> 現在の契約
         </h2>
 
-        <%# --- 1. 契約情報の表示分岐 --- %>
         <% if @current_contract %>
           <%= render 'contract_info', parking_space: @parking_space, contract: @current_contract %>
         <% else %>
@@ -50,7 +64,6 @@
           </div>
         <% end %>
 
-        <%# --- 2. 履歴ボタン（ifの外に出したので常に表示される） --- %>
         <div class="mt-6 pt-6 border-t border-gray-200">
           <%= link_to admin_parking_space_contracts_path(@parking_space),
             class: "flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-semibold text-gray-700 hover:bg-gray-50 transition shadow-sm" do %>
