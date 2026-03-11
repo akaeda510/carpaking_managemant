@@ -1,0 +1,21 @@
+<div class="space-y-4">
+  <% if contract %>
+    <div>
+      <p class="text-xs text-gray-500">契約者氏名</p>
+      <p class="text-xl font-bold text-gray-800">
+        <%= contract.contractor.decorate.full_name %> 様
+      </p>
+    </div>
+    <div>
+      <p class="text-xs text-gray-500">契約期間</p>
+      <p class="text-sm text-gray-700 font-medium mt-1">
+        <%= contract.start_date.strftime("%Y/%m/%d") %> 〜
+        <%= contract.end_date&.strftime("%Y/%m/%d") || "（無期限）" %>
+      </p>
+    </div>
+  <% else %>
+    <div class="text-center py-8">
+      <p class="text-sm text-gray-400 italic">現在、空き区画です</p>
+    </div>
+  <% end %>
+</div>
