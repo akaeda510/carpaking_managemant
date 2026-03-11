@@ -1,0 +1,68 @@
+<div class="max-w-4xl mx-auto p-6">
+  <nav class="mb-6 text-sm text-gray-500">
+    <%= link_to @parking_lot.name, admin_parking_lot_path(@parking_lot), class: "hover:underline" %> &gt;
+    <%= link_to @parking_area.name, admin_parking_area_path(@parking_area), class: "hover:underline" %> &gt;
+    <span class="font-bold text-gray-800"><%= @parking_space.name %>番</span>
+  </nav>
+
+  <div class="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
+    <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+      <h1 class="text-2xl font-bold text-gray-800">
+        区画番号: <%= @parking_space.name %>
+      </h1>
+      <span class="px-3 py-1 rounded-full text-xs font-semibold <%= @parking_space.current_contract ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' %>">
+        <%= @parking_space.current_contract ? '契約中' : '空き' %>
+      </span>
+    </div>
+
+    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section>
+        <h2 class="text-sm font-bold text-blue-600 uppercase mb-4">
+          <i class="fa-solid fa-ruler-combined mr-1"></i> 区画スペック
+        </h2>
+
+        <div class="space-y-6">
+          <%= render 'space_size', parking_space: @parking_space, parking_area: @parking_area, garage_detail: @garage_detail %>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-400 mb-2 uppercase">付帯設備・制限</label>
+            <%= render 'options', parking_space: @parking_space, options: @parking_space_options %>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-400 mb-1 uppercase">備考</label>
+            <p class="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap"><%= @parking_space.description.presence || "説明はありません。" %></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-gray-50 p-6 rounded-xl border border-gray-100 self-start">
+        <h2 class="text-sm font-bold text-gray-400 uppercase mb-4">
+          <i class="fa-solid fa-file-contract mr-1"></i> 現在の契約
+        </h2>
+
+        <%# --- 1. 契約情報の表示分岐 --- %>
+        <% if @current_contract %>
+          <%= render 'contract_info', parking_space: @parking_space, contract: @current_contract %>
+        <% else %>
+          <div class="text-center py-8">
+            <p class="text-sm text-gray-400 italic">現在、空き区画です</p>
+          </div>
+        <% end %>
+
+        <%# --- 2. 履歴ボタン（ifの外に出したので常に表示される） --- %>
+        <div class="mt-6 pt-6 border-t border-gray-200">
+          <%= link_to admin_parking_space_contracts_path(@parking_space),
+            class: "flex items-center justify-center w-full px-4 py-2 bg-white border border-gray-300 rounded-md text-sm font-semibold text-gray-700 hover:bg-gray-50 transition shadow-sm" do %>
+            <i class="fa-solid fa-clock-rotate-left mr-2 text-gray-400"></i>
+            過去の契約一覧を確認
+          <% end %>
+        </div>
+      </section>
+    </div>
+
+    <div class="p-6 bg-white border-t border-gray-100">
+      <%= back_link_to "エリア詳細に戻る", admin_parking_area_path(@parking_area) %>
+    </div>
+  </div>
+</div>
