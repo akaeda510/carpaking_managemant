@@ -1,4 +1,18 @@
 class ParkingSpace < ApplicationRecord
+
+  include PgSearch::Model
+
+  pg_seach_scope :seach_full_text,
+    against: { name: 'A', description: 'B' },
+    using: {
+      testarch: { 
+        prefix: true,
+        dictionary: "simple",
+        any_word: true
+      },
+      trigram: {}
+    }
+
   after_initialize :set_default_values
 
   validates :name, presence: true, uniqueness: { scope: :parking_area_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
