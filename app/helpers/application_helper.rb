@@ -47,4 +47,23 @@ module ApplicationHelper
       concat label
     end
   end
+
+  def action_button(type, url, options ={})
+    config = case type
+             when :show
+               { label: "詳細", icon: "fa-eye", base_class: "bg-white border-gray-200 text-gray-600 hover:bg-gray-50" }
+             when :edit
+               { label: "編集", icon: "fa-pen-to-square", base_class: "bg-indigo-50 text-indigo-600 hover:bg-indigo-100" }
+             when :delete
+               { label: "削除", icon: "fa-trash-can", base_class: "bg-red-50 text-red-600 hover:bg-red-100",
+                 data: { turbo_method: :delete, turbo_confirm: options[:confirm] || "本当に削除しますか？" } }
+             end
+
+    common_class = "flex-1 lg:flex-none text-center px-3 py-1.5 rounded-lg text-xs font-bold transition shadow-sm active:scale-95"
+
+    link_to url, class: "#{common_class} #{config[:base_class]}", data: config[:data] do
+      concat content_tag(:i, "", class: "fa-solid #{config[:icon]} mr-1.5") if options[:with_icon]
+      concat config[:label]
+    end
+  end
 end
