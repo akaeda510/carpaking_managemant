@@ -30,10 +30,13 @@
   </div>
 
   <div class="bg-white shadow-xl border border-gray-100 overflow-hidden rounded-2xl">
+
+    <%= render 'space_search' %>
+
     <% if @parking_spaces.any? %>
       <div class="hidden sm:block">
         <div class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest grid grid-cols-8 gap-2 border-b border-gray-100 bg-gray-50/50">
-          <div class="col-span-1">駐車番号</div>
+          <div class="col-span-1">区画名</div>
           <div class="col-span-1 text-center">契約状態</div>
           <div class="col-span-2 text-center">月額賃料</div>
           <div class="col-span-2 text-center">契約者</div>
@@ -46,10 +49,25 @@
       </ul>
     <% else %>
 
-      <div class="p-8 text-center text-gray-500">
-        <p class="text-lg mb-2">まだ駐車場スペースが登録されていません。</p>
-        <%= link_to '最初のスペースを登録する', [:new, @parking_lot, @parking_area, :parking_space],
-          class: 'text-indigo-600 hover:text-indigo-700 font-medium' %>
+      <div class="p-12 text-center">
+        <% if params[:query].present? %>
+          <div class="mb-4">
+            <i class="fa-solid fa-magnifying-glass text-4xl text-gray-200"></i>
+          </div>
+          <p class="text-gray-600 font-bold text-lg">「<%= params[:query] %>」に一致する区画は見つかりませんでした。</p>
+          <p class="text-gray-400 text-sm mt-2 mb-6">検索ワードを変えるか、フィルターを解除してください。</p>
+          <%= link_to "すべての区画を表示する", [@parking_lot, @parking_area, :parking_spaces],
+            class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition" %>
+        <% else %>
+          <div class="mb-4">
+            <i class="fa-solid fa-parking text-4xl text-gray-200"></i>
+          </div>
+          <p class="text-lg text-gray-500 mb-4">このエリアに登録されている区画データはありません。</p>
+          <%= link_to [:new, @parking_lot, @parking_area, :parking_space],
+            class: 'inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-xl shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition' do %>
+            最初のスペースを登録する
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   </div>
