@@ -1,4 +1,23 @@
 class ParkingSpace < ApplicationRecord
+  include PgSearch::Model
+
+  pg_search_scope :search_full_text,
+    against: {
+      name: "A",
+      description: "B"
+    },
+    associated_against: {
+      contractors: [ :first_name, :last_name ]
+    },
+    using: {
+      tsearch: {
+        prefix: true,
+        dictionary: "simple",
+        any_word: true
+      },
+      trigram: {}
+    }
+
   after_initialize :set_default_values
 
   validates :name, presence: true, uniqueness: { scope: :parking_area_id, message: "はこの駐車場内ですでに使用されています" }, length: { maximum: 10 }
@@ -15,8 +34,7 @@ class ParkingSpace < ApplicationRecord
   # 駐車スペースの契約状態スペースを消そうとする時に、契約データがあった場合、エラーで処理を阻止
   has_many :contract_parking_spaces, dependent: :restrict_with_exception
   has_many :active_contractor_parking_spaces, -> { where("end_date >= ?", Date.current) }, class_name: "ContractParkingSpace"
-  has_many :contractor, through: :contractor_parking_spaces
-
+  has_many :contractors, through: :contract_parking_spaces
   has_many :parking_space_option_assignments, dependent: :destroy
   has_many :parking_space_options, through: :parking_space_option_assignments
 
