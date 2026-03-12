@@ -31,11 +31,19 @@ class ContractorsController < ApplicationController
 
   def index
     authorize Contractor
-    @contractors = current_parking_manager.contractors.includes(
+    contractors = current_parking_manager.contractors
+
+    if params[:query].present?
+      contractors = contractors.search_full_text(params[:query]).reorder(created_at: :desc)
+    else
+      contractors = contractors.order(created_at: :desc)
+    end
+
+    @contractors = contractors.includes(
       active_contract_parking_spaces: {
         parking_space: :parking_lot
       }
-    ).order(created_at: :desc)
+    ).decorate
   end
 
   def edit
