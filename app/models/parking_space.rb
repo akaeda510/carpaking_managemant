@@ -1,17 +1,16 @@
 class ParkingSpace < ApplicationRecord
-
   include PgSearch::Model
 
   pg_search_scope :search_full_text,
-    against: { 
-      name: 'A',
-      description: 'B'
+    against: {
+      name: "A",
+      description: "B"
     },
     associated_against: {
-      contractors: [:first_name, :last_name]
+      contractors: [ :first_name, :last_name ]
     },
     using: {
-      tsearch: { 
+      tsearch: {
         prefix: true,
         dictionary: "simple",
         any_word: true
