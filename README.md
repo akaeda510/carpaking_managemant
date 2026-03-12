@@ -103,7 +103,7 @@
 - gem 'rails-i18n' 日本語翻訳
 - gem 'draper', '4.0.2' ビュー用データ整形
 - gem 'turbo-rails' 高速化・インタラクティブ化
-- gem 'ransack' 検索機能
+- gem 'pg_search' PostgreSQL検索機能
 - gem 'bcrypt' パスワードハッシュ化(admin)
 - gem 'jsbundling-rails' yrun_javascript
 - QR code API
