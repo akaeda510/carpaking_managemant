@@ -5,7 +5,6 @@ class Admin::ParkingAreasController < Admin::BaseController
   def show
     spaces = @parking_area.parking_spaces
     if params[:query].present?
-      puts "検索"
       spaces = spaces.search_full_text(params[:query])
     end
 
