@@ -12,7 +12,6 @@
   <div class="bg-white shadow overflow-hidden sm:rounded-lg">
     <% if @parking_lots.any? %>
       
-      <%# テーブルヘッダー - 5列に戻し、説明の列を削除 %>
       <div class="hidden sm:block">
         <div class="px-4 py-3 sm:px-6 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-5 gap-4 border-b border-gray-200">
           <div class="col-span-1">駐車場名</div>
@@ -40,13 +39,11 @@
                 <%= parking_lot.total_spaces %> 台
               </div>
 
-              <div class="text-right flex justify-end space-x-2">
-                <%= link_to '編集', edit_parking_lot_path(parking_lot), class: 'text-yellow-600 hover:text-yellow-900 text-sm' %>
+              <div class="lg:col-span-3 flex items-center justify-start lg:justify-end gap-2 mt-2 lg:mt-0 pt-3 lg:pt-0 border-t border-gray-50 lg:border-0">
+                <%= action_button :edit, edit_parking_lot_path(parking_lot) %>
                 
-                <%= link_to '削除', parking_lot_path(parking_lot), 
-                  data: { turbo_method: :delete,
-                          turbo_confirm: "本当にこの駐車場区画を削除しますか？"},
-                          class: 'text-red-600 hover:text-red-900 text-sm' %>
+                <%= action_button :delete, parking_lot_path(parking_lot), 
+                  confirm: "本当にこの駐車場区画を削除しますか？" %>
               </div>
             </div>
             
