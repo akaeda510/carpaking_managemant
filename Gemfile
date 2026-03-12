@@ -6,6 +6,8 @@ gem "rails", "~> 8.1"
 gem "propshaft"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.6"
+# postgreSQL専用検索機能
+gem "pg_search"
 # アカウント認証システム
 gem "devise"
 # Admin用パスワードのハッシュ化
