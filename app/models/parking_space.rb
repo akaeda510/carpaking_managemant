@@ -2,7 +2,7 @@ class ParkingSpace < ApplicationRecord
 
   include PgSearch::Model
 
-  pg_seach_scope :seach_full_text,
+  pg_search_scope :seach_full_text,
     against: { name: 'A', description: 'B' },
     using: {
       testarch: { 
