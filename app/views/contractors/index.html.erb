@@ -1,96 +1,49 @@
-<%# 契約者一覧ページ (Contractors#index) %>
-
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-extrabold text-gray-900">
-      👤 契約者一覧
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center">
+      <span class="mr-3">👤</span> 契約者一覧
     </h1>
 
-    <%# 新規登録ボタン (今回は詳細のみのため、将来的なボタンとして残しています) %>
-    <%= link_to '➕ 新しい契約者を登録', new_contractor_path, class: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500' %>
+    <%= link_to new_contractor_path, class: 'w-full sm:w-auto inline-flex justify-center items-center px-5 py-2.5 border border-transparent text-sm font-bold rounded-xl shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition-all active:scale-[0.98]' do %>
+      <i class="fa-solid fa-user-plus mr-2"></i> 新しい契約者を登録
+    <% end %>
   </div>
 
-<div class="bg-white shadow overflow-hidden sm:rounded-lg">
-    <% if @contractors.any? %>
+  <%= render 'contractor_search' %>
 
-      <%# テーブルヘッダー (PCビューのみ表示) - 修正済みの col-span-1 / col-span-3 を使用 %>
+  <div class="bg-white shadow-xl border border-gray-100 overflow-hidden rounded-2xl">
+    <% if @contractors.any? %>
       <div class="hidden sm:block">
-        <div class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider grid grid-cols-6 gap-4 border-b border-gray-200">
-          <div class="col-span-2">氏名 / 連絡先</div>
-          <div class="col-span-1 text-right">アクション</div>
-          <div class="col-span-3 text-right">契約者編集・駐車場登録</div>
+        <div class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest grid grid-cols-12 gap-4 border-b border-gray-100 bg-gray-50/50">
+          <div class="col-span-4">氏名 / 住所</div>
+          <div class="col-span-5">契約状況</div>
+          <div class="col-span-3 text-right">操作</div>
         </div>
       </div>
 
-      <%# 契約者リスト %>
-      <ul role="list" class="divide-y divide-gray-200">
+      <ul role="list" class="divide-y divide-gray-100">
         <% @contractors.each do |contractor| %>
-          <li class="p-4 sm:px-6 hover:bg-gray-50 transition duration-150 ease-in-out">
-            
-            <%# 🌟 修正点 1: モバイル表示を考慮したFlexコンテナ 🌟 %>
-            <div class="sm:grid sm:grid-cols-6 sm:gap-4 sm:items-center">
-              
-              <%# 1. 氏名 / 連絡先と契約中スペースをまとめる (PC: col-span-2, スマホ: 全幅) %>
-              <div class="sm:col-span-2">
-                <div class="flex justify-between items-start sm:block">
-                  <div class="flex-shrink-0">
-                    <div class="text-sm font-medium text-gray-900 truncate">
-                      <span class="sm:hidden text-gray-500 font-semibold mr-2">氏名:</span>
-                      <%= contractor.first_name %><%= contractor.last_name %>
-                    </div>
-                    <div class="text-xs text-gray-500 truncate mt-1">
-                      <%= contractor.phone_number %>
-                    </div>
-                  </div>
-                  
-                  <%# 🌟 修正点 2: スマホ表示用のコンパクトなアクションボタンをここに配置 🌟 %>
-                  <div class="flex sm:hidden space-x-2 text-sm text-right flex-shrink-0">
-                    <%= link_to '詳細', contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900' %>
-                    <%= link_to '編集', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900' %>
-                  </div>
-                </div>
-
-                <%# 🌟 追加: 契約している駐車スペースの表示 🌟 %>
-                <% if contractor.active_contract_parking_spaces.any? %>
-                  <div class="mt-2 text-xs text-green-700 bg-green-50 p-2 rounded-md">
-                    <span class="font-medium">契約スペース:</span>
-                    <% contractor.active_contract_parking_spaces.each_with_index do |contract, i| %>
-                      <%= contract.parking_space.name %><%# スペース名を表示 %>
-                      <%= "(#{contract.parking_space.parking_lot.address})" %><%# 駐車場の住所を表示 %>
-                      <%= ', ' if i < contractor.active_contract_parking_spaces.size - 1 %>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <div class="mt-2 text-xs text-gray-500">契約スペースなし</div>
-                <% end %>
-
-              </div>
-              
-              <%# 2. PCビュー用アクション (詳細/削除) - col-span-1 %>
-              <div class="hidden sm:block sm:col-span-1 text-right flex justify-end space-x-2">
-                <%= link_to '詳細', contractor_path(contractor), 
-                  class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
-                <%= link_to '削除', contractor_path(contractor),
-                  data: { turbo_method: :delete,
-                          turbo_confirm: "契約者: #{contractor.first_name} #{contractor.last_name} を本当に削除しますか？\nこの操作は元に戻せません。"},
-                  class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
-              </div>
-
-              <%# 3. PCビュー用契約編集・駐車場登録 - col-span-3 %>
-              <div class="hidden sm:block sm:col-span-3 text-right flex justify-end">
-                <%= link_to '編集・登録', edit_contractor_path(contractor), class: 'text-indigo-600 hover:text-indigo-900 text-sm' %>
-              </div>
-              
-            </div>
-          </li>
+          <%= render 'contractor', contractor: contractor %>
         <% end %>
       </ul>
-
     <% else %>
-      <%# 契約者が登録されていない場合 %>
-      <div class="p-8 text-center text-gray-500">
-        <p class="text-lg mb-2">まだ契約者が登録されていません。</p>
-        <%= link_to '最初の契約者を登録する', new_contractor_path, class: "text-indigo-600 hover:text-indigo-700 font-medium" %>
+      <div class="p-16 text-center">
+        <% if params[:query].present? %>
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+            <i class="fa-solid fa-magnifying-glass text-2xl text-gray-400"></i>
+          </div>
+          <p class="text-gray-600 font-bold text-lg">「<%= params[:query] %>」に一致する契約者は見つかりません</p>
+          <p class="text-gray-400 text-sm mt-2 mb-8">名前、電話番号、住所の一部などで再検索してください。</p>
+          <%= link_to "検索をリセット", contractors_path, class: "text-indigo-600 font-bold hover:underline" %>
+        <% else %>
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-50 rounded-full mb-4">
+            <i class="fa-solid fa-users text-2xl text-indigo-200"></i>
+          </div>
+          <p class="text-lg text-gray-500 mb-6">まだ契約者が登録されていません。</p>
+          <%= link_to new_contractor_path, class: 'inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-bold rounded-xl shadow-md hover:bg-indigo-700 transition' do %>
+            最初の契約者を登録する
+          <% end %>
+        <% end %>
       </div>
     <% end %>
   </div>
