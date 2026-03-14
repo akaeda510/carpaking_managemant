@@ -3,12 +3,12 @@ class Contractor < ApplicationRecord
 
   pg_search_scope :search_full_text,
     against: {
-      first_name: 'A',
-      last_name: 'A',
-      phone_number: 'B',
-      prefecture: 'C',
-      city: 'C',
-      street_address: 'C',
+      first_name: "A",
+      last_name: "A",
+      phone_number: "B",
+      prefecture: "C",
+      city: "C",
+      street_address: "C"
     },
     using: {
       tsearch: {
