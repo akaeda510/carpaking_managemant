@@ -46,7 +46,7 @@
       <span class="w-1.5 h-6 bg-blue-600 rounded-full mr-3"></span>
       区画別ステータス確認
     </h2>
-    <%= render 'space_search' %>
+    <%= render 'shared/search_form', search_url: admin_parking_area_path(@parking_area), placeholder_text: "区画名・備考・契約者名で検索..." %>
   </div>
 
   <% if @parking_spaces.any? %>
