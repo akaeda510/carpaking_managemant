@@ -9,7 +9,7 @@
     <% end %>
   </div>
 
-  <%= render 'contractor_search' %>
+  <%= render 'shared/search_form', search_url: contractors_path, placeholder_text: "名前・電話・住所..." %>
 
   <div class="bg-white shadow-xl border border-gray-100 overflow-hidden rounded-2xl">
     <% if @contractors.any? %>
