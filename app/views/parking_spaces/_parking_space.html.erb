@@ -34,10 +34,8 @@
     <%# アクション (col-2) %>
     <div class="flex sm:block sm:col-span-2 text-sm sm:text-right w-full mt-2 sm:mt-0 border-t sm:border-none pt-2 sm:pt-0">
       <div class="flex space-x-4 sm:justify-end">
-        <%= link_to '詳細', [parking_lot, parking_area, parking_space], class: "text-indigo-600 hover:text-indigo-900 font-bold" %>
-        <%= link_to '削除', [parking_lot, parking_area, parking_space],
-          data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' },
-          class: "text-red-500 hover:text-red-700 font-bold" %>
+        <%= action_button :show, [parking_lot, parking_area, parking_space] %>
+        <%= action_button :delete, [parking_lot, parking_area, parking_space] %>
       </div>
     </div>
 

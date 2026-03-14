@@ -8,5 +8,6 @@
     <% end %>
   </div>
   <h1 class="text-2xl font-bold mb-6 text-gray-800">契約者一覧</h1>
-  <%= render "contractor_list", contractors: @contractors %>
+  <%= render 'shared/search_form', search_url: [:admin, :contractors], placeholder_text: "名前・電話・住所で検索..." %>
+  <%= render 'contractor_list', contractors: @contractors %>
 </div>
