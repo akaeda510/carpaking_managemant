@@ -8,5 +8,6 @@
     <% end %>
   </div>
   <h1 class="text-2xl font-bold mb-6 text-gray-800">契約者一覧</h1>
-  <%= render "contractor_list", contractors: @contractors %>
+  <%= render 'contractor_search' %>
+  <%= render 'contractor_list', contractors: @contractors %>
 </div>
