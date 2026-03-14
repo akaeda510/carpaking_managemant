@@ -6,6 +6,7 @@ class ParkingManager < ApplicationRecord
       first_name: "A",
       last_name: "A",
       phone_number: "B",
+      contact_number: "B",
       prefecture: "C",
       city: "C",
       street_address: "C"
