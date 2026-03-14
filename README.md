@@ -106,6 +106,7 @@
 - gem 'pg_search' PostgreSQL検索機能
 - gem 'bcrypt' パスワードハッシュ化(admin)
 - gem 'jsbundling-rails' yrun_javascript
+- gem 'letter_opener_web' '3.0' ローカル：メール確認
 - QR code API
 CI
 - gem 'brakeman'
