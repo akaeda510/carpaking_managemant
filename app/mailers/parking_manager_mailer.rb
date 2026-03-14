@@ -1,6 +1,6 @@
 class ParkingManagerMailer < ApplicationMailer
   def login_notification(parking_manager, remote_ip)
-    @parking_manager = parking_manager
+    @parking_manager = parking_manager.decorate
     @remote_ip = remote_ip
     @login_time = Time.current
 
