@@ -74,6 +74,9 @@ group :development do
   gem "web-console"
 
   gem "rails_live_reload"
+
+  # メール通知確認
+  gem "letter_opener_web", "~> 3.0"
 end
 
 group :test do

@@ -48,4 +48,8 @@ Rails.application.routes.draw do
       root to: redirect("/parking_managers/sign_in"), as: :parking_manager_login_root
     end
   end
+
+  Rails.application.routes.draw do
+    mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  end
 end

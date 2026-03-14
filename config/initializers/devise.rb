@@ -310,4 +310,13 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+
+  # ログイン通知メール設定
+  Warden::Manager.after_set_user do |user, auth, opts|
+    Rails.logger.debug "---warden Callback Fired: #{opts[:event]} ---"
+    if opts[:event] == :authentication && user.is_a?(ParkingManager)
+      Rails.logger.debug "--- Sending Login Notification Mail to #{user.email} ---"
+      ParkingManagerMailer.login_notification(user, auth.request.remote_ip).deliver_now
+    end
+  end
 end
