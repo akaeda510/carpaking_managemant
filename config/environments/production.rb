@@ -65,14 +65,14 @@ Rails.application.configure do
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   config.action_mailer.smtp_settings = {
-    address: 'smtp.engn.jp', 
-    port: 587, 
-    domain: 'engn.jp',
-    user_name: 'be68659af',
-    password: ENV['BLASTENGINE_API_KEY'],
+    address: "smtp.engn.jp",
+    port: 587,
+    domain: "engn.jp",
+    user_name: "be68659af",
+    password: ENV["BLASTENGINE_API_KEY"],
     authentication: :plain,
     enable_starttls_auto: true
-  } 
+  }
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
