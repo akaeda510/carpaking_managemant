@@ -108,7 +108,7 @@
 - gem 'jsbundling-rails' yrun_javascript
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
 - QR code API
-- SendGrid API メールアドレス取得
+- BlastEngine API メールアドレス取得
 CI
 - gem 'brakeman'
 - gem 'rubocop-rails-omakase'
