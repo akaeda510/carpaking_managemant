@@ -71,6 +71,7 @@ Rails.application.configure do
     user_name: "be68659af",
     password: ENV["BLASTENGINE_API_KEY"],
     authentication: :plain,
+    tls: true,
     enable_starttls_auto: true
   }
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
