@@ -27,8 +27,7 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
-        env_file:
-          - .env
+      BLASTENGINE_API_KEY: ${BLASTENGINE_API_KEY}
     ports:
       - "3004:3004"
     depends_on:
