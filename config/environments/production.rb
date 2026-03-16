@@ -63,13 +63,13 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
 
-  # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
+   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
    config.action_mailer.smtp_settings = {
-     user_name: 'apikey'
-     password: ENV['SENDGRID_API_KEY'],
+     user_name: "apikey",
+     password: ENV["SENDGRID_API_KEY"],
      address: "smtp.sendgrid.net",
      port: 587,
-     domain: 'carpaking-managemant.onrender.com'
+     domain: "carpaking-managemant.onrender.com",
      authentication: :plain
    }
 
