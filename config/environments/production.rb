@@ -65,10 +65,10 @@ Rails.application.configure do
 
    # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
    config.action_mailer.smtp_settings = {
-     user_name: "apikey",
-     password: ENV["SENDGRID_API_KEY"],
-     address: "smtp.sendgrid.net",
-     port: 2525,
+     user_name: "be68659af",
+     password: ENV["BLASTENGINE_API_KEY"],
+     address: "smtp.blastengine.jp",
+     port: 587,
      domain: "carpaking-managemant.onrender.com",
      authentication: :plain,
      enable_starttls_auto: true
