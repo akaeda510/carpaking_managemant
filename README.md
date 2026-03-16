@@ -91,6 +91,7 @@
 - neon
 - Render
 - blastengine メールアドレス: SMTP
+- cloudflare 独自ドメイン
 
 ## 使用するgem 一覧
 - gem 'Devise' 認証機能

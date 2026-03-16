@@ -66,8 +66,8 @@ Rails.application.configure do
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
   config.action_mailer.smtp_settings = {
     address: "smtp.engn.jp",
-    port: 2525,
-    domain: "engn.jp",
+    port: 587,
+    domain: "tukigime-parking.com",
     user_name: "be68659af",
     password: ENV["BLASTENGINE_API_KEY"],
     authentication: :plain,
