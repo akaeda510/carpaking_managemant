@@ -69,7 +69,7 @@ Rails.application.configure do
      password: ENV["BLASTENGINE_API_KEY"],
      address: "smtp.blastengine.jp",
      port: 587,
-     domain: "carpaking-managemant.onrender.com",
+     domain: "blastrngin.jp",
      authentication: :plain,
      enable_starttls_auto: true
    }
