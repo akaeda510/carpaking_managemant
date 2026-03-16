@@ -90,6 +90,7 @@
 - ruby 3.4.7
 - neon
 - Render
+- blastengine メールアドレス: SMTP
 
 ## 使用するgem 一覧
 - gem 'Devise' 認証機能
@@ -108,7 +109,6 @@
 - gem 'jsbundling-rails' yrun_javascript
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
 - QR code API
-- BlastEngine API メールアドレス取得
 CI
 - gem 'brakeman'
 - gem 'rubocop-rails-omakase'
