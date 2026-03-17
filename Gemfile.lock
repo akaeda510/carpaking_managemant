@@ -92,6 +92,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
+    blastengine (0.6.2)
     bootsnap (1.19.0)
       msgpack (~> 1.2)
     brakeman (8.0.4)
@@ -116,6 +117,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.5)
     date (3.5.1)
     debug (1.11.0)
       irb (~> 1.10)
@@ -142,6 +144,14 @@ GEM
       activesupport (>= 3.0.0)
     erb (6.0.1)
     erubi (1.13.1)
+    faraday (2.14.1)
+      faraday-net_http (>= 2.0, < 3.5)
+      json
+      logger
+    faraday-multipart (1.2.0)
+      multipart-post (~> 2.0)
+    faraday-net_http (3.4.2)
+      net-http (~> 0.5)
     ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-aarch64-linux-musl)
     ffi (1.17.2-arm-linux-gnu)
@@ -202,6 +212,9 @@ GEM
     minitest (6.0.1)
       prism (~> 1.5)
     msgpack (1.8.0)
+    multipart-post (2.4.1)
+    net-http (0.9.1)
+      uri (>= 0.11.1)
     net-imap (0.5.12)
       date
       net-protocol
@@ -418,16 +431,20 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
+  blastengine
   bootsnap
   brakeman
   bundler-audit
   capybara
   cssbundling-rails
+  csv
   debug
   devise
   devise-i18n
   draper
   enum_help
+  faraday
+  faraday-multipart
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
