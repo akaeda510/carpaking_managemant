@@ -1,4 +1,4 @@
 Blastengine.configure do |config|
-  config.api_user = "be68659af"
-  config.api_key = ENV["BLASTENGINE_API_KEY"]
+  blastengine.api_user = "be68659af"
+  blastengine.api_key = ENV["BLASTENGINE_API_KEY"]
 end
