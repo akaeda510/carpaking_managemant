@@ -147,6 +147,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.5)
       json
       logger
+    faraday-multipart (1.2.0)
+      multipart-post (~> 2.0)
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -209,6 +211,7 @@ GEM
     minitest (6.0.1)
       prism (~> 1.5)
     msgpack (1.8.0)
+    multipart-post (2.4.1)
     net-http (0.9.1)
       uri (>= 0.11.1)
     net-imap (0.5.12)
@@ -439,6 +442,7 @@ DEPENDENCIES
   draper
   enum_help
   faraday
+  faraday-multipart
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails

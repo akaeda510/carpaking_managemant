@@ -56,6 +56,7 @@ gem "blastengine"
 
 # 外部サーバーと通信
 gem "faraday"
+gem "faraday-multipart"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

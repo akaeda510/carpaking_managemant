@@ -110,6 +110,7 @@
 - gem 'jsbundling-rails' yrun_javascript
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
 - gem 'faraday' 外部サーバーと通信を管理
+- gem 'faraday-multipart' 画像ファイルなどのWeb API通信の拡張機能
 - QR code API
 - blastengine API
 CI
