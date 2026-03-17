@@ -1,2 +1,1 @@
-Blastengine.api_user = "be68659af"
-Blastengine.api_key = ENV["BLASTENGINE_API_KEY"]
+BLASTENGINE = Blastengine::Client.new(ENV["BLASTENGINE_API_KEY"], 'be68659af')
