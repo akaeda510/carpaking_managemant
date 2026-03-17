@@ -109,6 +109,7 @@
 - gem 'bcrypt' パスワードハッシュ化(admin)
 - gem 'jsbundling-rails' yrun_javascript
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
+- gem 'faraday' 外部サーバーと通信を管理
 - QR code API
 - blastengine API
 CI
