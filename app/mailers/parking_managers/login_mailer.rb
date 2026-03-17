@@ -3,8 +3,8 @@ class ParkingManagers::LoginMailer < ApplicationMailer
     @parking_manager = parking_manager.decorate
 
     transaction = Blastengine::Transaction.new
-    transaction.from("info@tukigime-parking.com")
-    transaction.to(@parking_manager.email)
+    transaction.from(email: "info@tukigime-parking.com")
+    transaction.to(email: @parking_manager.email)
     transaction.subject("【重要】ログイン通知")
 
     transaction.text_part(render_to_string(template: "notification_mailer/login_notification"))
