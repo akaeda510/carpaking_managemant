@@ -1,5 +1,5 @@
 class ParkingManagers::LoginMailer < ApplicationMailer
-  def login_notification(parking_manager)
+  def login_notification(parking_managera, ip_address)
     @parking_manager = parking_manager.decorate
 
     transaction = BLASTENGINE::Transaction
