@@ -1,4 +1,4 @@
-class NotificationMailer < ApplicationMailer
+class ParkingManagers::LoginMailer < ApplicationMailer
   def login_notification(parking_manager)
     @parking_manager = parking_manager.decorate
 
