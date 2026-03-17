@@ -2,8 +2,8 @@ class ParkingManagers::LoginMailer < ApplicationMailer
   def login_notification(parking_manager, ip_address)
     @parking_manager = parking_manager.decorate
 
-    transaction = BLASTENGINE::Transaction
-    transaction.form = "info@tukigime-parking.com"
+    transaction = BLASTENGINE::Transaction.new(BLASTENGINE)
+    transaction.from = "info@tukigime-parking.com"
     transaction.to = @parking_manager.email
     transaction.subject = "【重要】ログイン通知"
 
