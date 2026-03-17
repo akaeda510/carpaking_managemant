@@ -316,7 +316,8 @@ Devise.setup do |config|
     Rails.logger.debug "---warden Callback Fired: #{opts[:event]} ---"
     if opts[:event] == :authentication && user.is_a?(ParkingManager)
       Rails.logger.debug "--- Sending Login Notification Mail to #{user.email} ---"
-      ParkingManagerMailer.login_notification(user, auth.request.remote_ip).deliver_now
+
+      ParkingManagers::LoginMailer.login_notification(user, auth.request.remote_ip).deliver_now
     end
   end
 end
