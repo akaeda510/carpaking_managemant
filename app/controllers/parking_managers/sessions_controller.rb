@@ -9,9 +9,17 @@ class ParkingManagers::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+   def create
+     super do |resource|
+       if resource.persisted?
+         begin
+           NOtificationMailer.login_notification(resource).deliver
+         rescue = e
+           Rails.logger.error "メール送信エラー: #{e,message}"
+         end
+       end
+     end
+   end
 
   # DELETE /resource/sign_out
   # def destroy
