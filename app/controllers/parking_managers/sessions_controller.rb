@@ -13,9 +13,9 @@ class ParkingManagers::SessionsController < Devise::SessionsController
      super do |resource|
        if resource.persisted?
          begin
-           NOtificationMailer.login_notification(resource).deliver
-         rescue = e
-           Rails.logger.error "メール送信エラー: #{e,message}"
+           NotificationMailer.login_notification(resource).deliver
+           rescue => e
+             Rails.logger.error "メール送信エラー: #{e.message}"
          end
        end
      end
