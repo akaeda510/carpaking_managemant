@@ -56,7 +56,11 @@ gem "blastengine"
 
 # 外部サーバーと通信
 gem "faraday"
+# 画像ファイルなどの通信
 gem "faraday-multipart"
+
+# データ処理
+gem "csv"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
