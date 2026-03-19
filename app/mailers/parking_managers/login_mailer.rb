@@ -9,9 +9,14 @@ class ParkingManagers::LoginMailer < ApplicationMailer
     transaction.to = @parking_manager.email
     transaction.subject = "【重要】ログイン通知"
 
-    transaction.text_part = render_to_string(template: "parking_managers/mailer/login_notification")
+    transaction.html_part = render_to_string(
+      template: "parking_managers/mailer/login_notification",
+      formats: [ :html ]
+    )
 
-    delivery_id = transaction.send
+    transaction.text_part = "駐車場管理システムにログインがありました。日時: #{@login_time}"
+
+    delivery_id = transaction.__send__(:send)
 
     Rails.logger.info "--- Blastengine Email Sent! ID: #{delivery_id} ---"
   end

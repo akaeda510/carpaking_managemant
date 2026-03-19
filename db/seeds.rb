@@ -23,12 +23,12 @@ if admin
   puts 'Admin updated: Password has been re-hashed'
 end
 
-owner_one = ParkingManager.find_or_create_by!(email: 'test@example.com') do |manager|
-  manager.password = 'password'
-  manager.password_confirmation = 'password'
+owner_one = ParkingManager.find_or_create_by!(email: 'akaeda510@gmail.com') do |manager|
+  manager.password = ENV["password"]
+  manager.password_confirmation = ENV["password"]
 
-  manager.first_name = '田中'
-  manager.last_name = '太郎'
+  manager.first_name = 'テスト'
+  manager.last_name = '確認'
   manager.prefecture = '東京都'
   manager.city = '品川区'
   manager.street_address = '西品川'
