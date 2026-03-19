@@ -11,7 +11,7 @@ class ParkingManagers::LoginMailer < ApplicationMailer
 
     transaction.html_part = render_to_string(
       template: "parking_managers/mailer/login_notification",
-      formats: [:html]
+      formats: [ :html ]
     )
 
     transaction.text_part = "駐車場管理システムにログインがありました。日時: #{@login_time}"
