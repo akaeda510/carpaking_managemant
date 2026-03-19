@@ -90,7 +90,7 @@
 - ruby 3.4.7
 - neon
 - Render
-- blastengine メールアドレス: SMTP
+- blastengine メールアドレス: API
 - cloudflare 独自ドメイン
 
 ## 使用するgem 一覧
