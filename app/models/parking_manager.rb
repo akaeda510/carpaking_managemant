@@ -48,4 +48,5 @@ class ParkingManager < ApplicationRecord
            -> { where("end_date >= ?", Date.current) },
            through: :parking_spaces,
            source: :contract_parking_spaces
+  has_many :devices, dependent: :destroy
 end
