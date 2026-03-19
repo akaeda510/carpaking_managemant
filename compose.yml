@@ -28,6 +28,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       BLASTENGINE_API_KEY: "${BLASTENGINE_API_KEY}"
+      BLASTENGINE_USER_ID: "${BLASTENGINE_USER_ID}"
     ports:
       - "3004:3004"
     depends_on:
