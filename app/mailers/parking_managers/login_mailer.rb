@@ -1,8 +1,7 @@
 class ParkingManagers::LoginMailer < ApplicationMailer
-  def login_notification(parking_manager, ip_address)
+  def login_notification(parking_manager)
     @parking_manager = parking_manager.decorate
     @login_time = Time.current
-    @@remote_ip = ip_address
 
     transaction = Blastengine::Transaction.new
     transaction.from email: "info@tukigime-parking.com", name: "管理者"
