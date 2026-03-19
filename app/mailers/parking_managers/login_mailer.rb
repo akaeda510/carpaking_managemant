@@ -7,7 +7,7 @@ class ParkingManagers::LoginMailer < ApplicationMailer
     transaction.to = @parking_manager.email
     transaction.subject = "【重要】ログイン通知"
 
-    transaction.text_part = render_to_string(template: "notification_mailer/login_notification")
+    transaction.text_part = render_to_string(template: "login_mailer/login_notification")
 
     delivery_id = transaction.send
 
