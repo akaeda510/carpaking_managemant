@@ -9,7 +9,7 @@ class ParkingManagers::LoginMailer < ApplicationMailer
 
     transaction.text_part = render_to_string(template: "notification_mailer/login_notification")
 
-    delibery_id = transaction.send
+    delivery_id = transaction.send
 
     Rails.logger.info "--- Blastengine Email Sent! ID: #{delivery_id} ---"
   end
