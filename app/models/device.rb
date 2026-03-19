@@ -5,6 +5,19 @@ class Device < ApplicationRecord
 
   belongs_to :parking_manager
 
+  DEVICE_TYPES = {
+    /iPhone/i    => 'iPhone',
+    /iPad/i      => 'iPad',
+    /Android/i   => 'Android端末',
+    /Windows/i   => 'Windows PC',
+    /Macintosh/i => 'Mac'
+  }.freeze
+
+  def self.set_name_by_user_agent(user_agent)
+    user_agent_string = user_agent.to_s
+    DEVICE_TYPES.find { |pattern, name| user_agent_string.match?(pattern) }&.last || '不明な端末'
+  end
+
   # 期間内かつ承認済みかどうかを確認
   def active_and_verified?
     expires_at > Time.current && is_verified?
@@ -19,4 +32,6 @@ class Device < ApplicationRecord
   def selt.generate_token
     SecureRandom.uuid
   end
+
+  def 
 end
