@@ -6,8 +6,8 @@ class CreateDevices < ActiveRecord::Migration[8.1]
       t.string :name
       t.string :user_agent,          null: false
       t.datetime :last_login_at
-      t.datetime :expires_at
-      t.boolean :is_verified
+      t.datetime :expires_at,        null: false
+      t.boolean :is_verified,        default: false
 
       t.timestamps
     end

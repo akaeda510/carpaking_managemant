@@ -60,8 +60,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_045019) do
   create_table "devices", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "device_token", null: false
-    t.datetime "expires_at"
-    t.boolean "is_verified"
+    t.datetime "expires_at", null: false
+    t.boolean "is_verified", default: false
     t.datetime "last_login_at"
     t.string "name"
     t.bigint "parking_manager_id", null: false
