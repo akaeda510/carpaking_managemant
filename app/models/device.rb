@@ -5,9 +5,9 @@ class Device < ApplicationRecord
 
   belongs_to :parking_manager
 
-  # 期間内かどうかを確認
-  def active?
-    expires_at > Time.current
+  # 期間内かつ承認済みかどうかを確認
+  def active_and_verified?
+    expires_at > Time.current && is_verified?
   end
 
   # 期限を1ヶ月延長
