@@ -3,20 +3,17 @@ class ParkingManagers::LoginMailer < ApplicationMailer
     @parking_manager = parking_manager.decorate
     @login_time = Time.current
 
-    transaction = Blastengine::Transaction.new
-    transaction.from email: "info@tukigime-parking.com", name: "管理者"
-    transaction.to = @parking_manager.email
-    transaction.subject = "【重要】ログイン通知"
+    deliver_via_api(
+      to = @parking_manager.email,
+      subject = "【重要】ログイン通知"
+    )
 
-    transaction.html_part = render_to_string(
+    html_part = render_to_string(
       template: "parking_managers/mailer/login_notification",
       formats: [ :html ]
     )
 
-    transaction.text_part = "駐車場管理システムにログインがありました。日時: #{@login_time}"
+    text_part = "駐車場管理システムにログインがありました。日時: #{@login_time}"
 
-    delivery_id = transaction.__send__(:send)
-
-    Rails.logger.info "--- Blastengine Email Sent! ID: #{delivery_id} ---"
   end
 end
