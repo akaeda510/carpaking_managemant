@@ -1,12 +1,12 @@
 Warden::Manager.after_set_user do |user, auth, opts, scope|
   if opts[:event] == :authentication && user.is_a?(ParkingManager)
     
-    token = auth.cookies.permanent[:device_token]
+    user_agent = auth.request.user_agent
+    token = auth.cookies.[:device_token]
     device = user.devices.find_by(device_token: token)
-    device.user_agent = auth.request.user_agent
-    device.save!
 
     if device&.active_and_verified?
+      device.update!(user_agent: user_agent)
       # 既知のデバイスなら通知を送って期間延長
       ParkingManagers::LoginMailer.login_notification(user, device).deliver_later
       device.extend_expiration!
@@ -23,7 +23,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
       )
 
       # クッキーに新しいトークンを保存
-      auth.cookies.permanent[:device_token] = new_device.device_token
+      auth.cookies[:device_token] = { value: new_token, expires: 1.month.from_now }
 
       # セッションに保留中のデバイスIDを保存（SessionsControllerで使用）
       auth.request.session[:pending_device_id] = new_device.id
@@ -31,6 +31,17 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
 
       # メールの送信（API経由）
       ParkingManagers::DeviceMailer.warning_new_device_login(user, new_device).deliver_later
+    end
+
+  elsif auth.request.session[:needs_verification]
+    token = auth.cookies[:device_token]
+    device = user.devices.find_by(device_token: token)
+
+    if device&.active_and_verified?
+      auth.request.session.delete(:needs_verification)
+      auth.request.session.delete(:pending_device__id)
+      device.extend_expiration!
+    else
     end
   end
 end
