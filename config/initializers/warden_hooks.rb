@@ -3,6 +3,8 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
     
     token = auth.cookies.permanent[:device_token]
     device = user.devices.find_by(device_token: token)
+    device.user_agent = auth.request.user_agent
+    device.save!
 
     if device&.active_and_verified?
       # 既知のデバイスなら通知を送って期間延長
@@ -13,8 +15,8 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
       new_token = Device.generate_token
       new_device = user.devices.create!(
         device_token: new_token,
-        name: "新しい端末", 
-        user_agent: auth.env['HTTP_USER_AGENT'],
+        name: Device.set_name_by_user_agent(user_agent), 
+        user_agent: auth.request.user_agent,
         last_login_at: Time.current,
         expires_at: 1.month.from_now,
         is_verified: false
