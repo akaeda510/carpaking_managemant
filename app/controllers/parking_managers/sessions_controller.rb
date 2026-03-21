@@ -20,7 +20,7 @@ class ParkingManagers::SessionsController < Devise::SessionsController
       flash[:alert] = "新しい端末を感知しました。メールを確認してください。"
       respond_with resource, location: wait_verification_path
     else
-      set_flash_messge!(:seccess: :signed_in)
+      set_flash_messge!(:seccess, :signed_in)
       yield resource if block_given?
       respond_with resource, location: after_sign_in_path_for(resource)
     end
