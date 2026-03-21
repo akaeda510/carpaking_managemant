@@ -1,7 +1,8 @@
 class ParkingManagers::LoginMailer < BlastengineBaseMailer
-  def login_notification(parking_manager)
+  def login_notification(parking_manager, device)
     @parking_manager = parking_manager.decorate
     @login_time = Time.current
+    @device = device.decorate
 
     html_content = render_to_string(
       template: "parking_managers/mailer/login_notification",
