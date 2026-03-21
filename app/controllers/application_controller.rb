@@ -25,59 +25,58 @@ class ApplicationController < ActionController::Base
         destroy_parking_manager_session_path
       ]
       unless allowed_paths.any? { |path| request.path.include?(path) }
-        redirect_to root_path, alert: "この端末にはまだ承認されていません。メールを確認して承認を完了してください。"
+        redirect_to wait_verification_path, alert: "この端末にはまだ承認されていません。メールを確認して承認を完了してください。"
       end
     end
   end
 
-    protected
+  protected
 
-    def current_user
-      current_parking_manager
+  def current_user
+    current_parking_manager
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [
+      :first_name,
+      :last_name,
+      :prefecture,
+      :city,
+      :street_address,
+      :building,
+      :phone_number,
+      :contact_number
+    ])
+
+    devise_parameter_sanitizer.permit(:account_update, keys: [
+      :first_name,
+      :last_name,
+      :prefecture,
+      :city,
+      :street_address,
+      :building,
+      :phone_number,
+      :contact_number
+    ])
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :admin
+      new_admin_session_path
+    else
+      new_parking_manager_session_path
     end
+  end
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [
-        :first_name,
-        :last_name,
-        :prefecture,
-        :city,
-        :street_address,
-        :building,
-        :phone_number,
-        :contact_number
-      ])
-
-      devise_parameter_sanitizer.permit(:account_update, keys: [
-        :first_name,
-        :last_name,
-        :prefecture,
-        :city,
-        :street_address,
-        :building,
-        :phone_number,
-        :contact_number
-      ])
+  def layout_by_resource
+    if devise_controller? && resource_name == :admin
+      "admin"
+    else
+      "application"
     end
+  end
 
-    def after_sign_out_path_for(resource_or_scope)
-      if resource_or_scope == :admin
-        new_admin_session_path
-      else
-        new_parking_manager_session_path
-      end
-    end
-
-    def layout_by_resource
-      if devise_controller? && resource_name == :admin
-        "admin"
-      else
-        "application"
-      end
-    end
-
-    def user_not_authorized
-      render file: Rails.public_path.join("403.html"), status: :forbidden, layout: false
-    end
+  def user_not_authorized
+    render file: Rails.public_path.join("403.html"), status: :forbidden, layout: false
   end
 end
