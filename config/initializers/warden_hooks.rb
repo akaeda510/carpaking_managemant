@@ -1,6 +1,6 @@
 Warden::Manager.after_set_user do |user, auth, opts, scope|
   if opts[:event] == :authentication && user.is_a?(ParkingManager)
-    
+
     user_agent = auth.request.user_agent
     token = auth.cookies[:device_token]
     device = user.devices.find_by(device_token: token)
@@ -15,7 +15,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
       new_token = Device.generate_token
       new_device = user.devices.create!(
         device_token: new_token,
-        name: Device.set_name_by_user_agent(user_agent), 
+        name: Device.set_name_by_user_agent(user_agent),
         user_agent: auth.request.user_agent,
         last_login_at: Time.current,
         expires_at: 1.month.from_now,
