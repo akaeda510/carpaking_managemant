@@ -10,13 +10,12 @@ class ParkingManagers::DevicesController < ApplicationController
     end
 
     if @device.verify!
-      sign_in(:parking_manager, @device.parking_manager)
-
       # ブラウザに1ヶ月有効トークンを保存
       cookies[:device_token] = {
         value: @device.device_token,
         expires: 1.month.from_now,
-        httponly: true
+        httponly: true,
+        path: '/'
       }
 
       render :verified_success
