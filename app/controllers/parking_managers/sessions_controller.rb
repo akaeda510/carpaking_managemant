@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ParkingManagers::SessionsController < Devise::SessionsController
-  skip_before_action :require_no_authentication, only: [:wait_verification]
-  skip_before_action :authenticate_parking_manager!, only: [:wait_verification], raise: false
+  skip_before_action :require_no_authentication, only: [ :wait_verification ]
+  skip_before_action :authenticate_parking_manager!, only: [ :wait_verification ], raise: false
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

@@ -12,7 +12,7 @@ class BlastengineBaseMailer < ApplicationMailer
       transaction.from email: "info@tukigime-parking.com", name: "駐車場管理事務所"
     else
       transaction.from email: "system@tukigime-parking.com", name: "駐車場管理システム"
-    end 
+    end
 
     transaction.to = to
     transaction.subject = subject

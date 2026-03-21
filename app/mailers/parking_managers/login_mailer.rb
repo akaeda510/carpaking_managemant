@@ -18,6 +18,5 @@ class ParkingManagers::LoginMailer < BlastengineBaseMailer
       html_part: html_content,
       text_part: text_content
     )
-
   end
 end

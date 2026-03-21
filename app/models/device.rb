@@ -8,16 +8,16 @@ class Device < ApplicationRecord
   before_validation :set_device_name, if: :will_save_change_to_user_agent?
 
   DEVICE_TYPES = {
-    /iPhone/i    => 'iPhone',
-    /iPad/i      => 'iPad',
-    /Android/i   => 'Android端末',
-    /Windows/i   => 'Windows PC',
-    /Macintosh/i => 'Mac'
+    /iPhone/i    => "iPhone",
+    /iPad/i      => "iPad",
+    /Android/i   => "Android端末",
+    /Windows/i   => "Windows PC",
+    /Macintosh/i => "Mac"
   }.freeze
 
   def self.set_name_by_user_agent(user_agent)
     user_agent_string = user_agent.to_s
-    DEVICE_TYPES.find { |pattern, _name| user_agent_string.match?(pattern) }&.last || '不明な端末'
+    DEVICE_TYPES.find { |pattern, _name| user_agent_string.match?(pattern) }&.last || "不明な端末"
   end
 
   # 期間内かつ承認済みかどうかを確認
@@ -33,7 +33,7 @@ class Device < ApplicationRecord
   # 新しいトークンを生成
   def self.generate_token
     SecureRandom.uuid
-  end 
+  end
 
   def verify!
     update(is_verified: true)

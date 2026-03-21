@@ -29,16 +29,16 @@ Rails.application.routes.draw do
 
   resources :devices, only: [] do
     collection do
-      get 'verify/:device_token', to: 'parking_managers/devices#verify', as: :verify
+      get "verify/:device_token", to: "parking_managers/devices#verify", as: :verify
     end
 
     member do
-      post 'resend_email', to: 'parking_managers/devices#resend_email', as: :resend_email_parking_managers
+      post "resend_email", to: "parking_managers/devices#resend_email", as: :resend_email_parking_managers
     end
   end
 
   devise_scope :parking_manager do
-    get 'parking_managers/sessions/wait_verification', to: 'parking_managers/sessions#wait_verification', as: :wait_verification
+    get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
   end
 
   resources :parking_lots, only: %i[ new create index update edit destroy ] do

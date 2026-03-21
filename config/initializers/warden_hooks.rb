@@ -2,7 +2,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
   if opts[:event] == :authentication && user.is_a?(ParkingManager)
     
     user_agent = auth.request.user_agent
-    token = auth.cookies.[:device_token]
+    token = auth.cookies[:device_token]
     device = user.devices.find_by(device_token: token)
 
     if device&.active_and_verified?

@@ -1,5 +1,5 @@
 class ParkingManagers::DevicesController < ApplicationController
-  skip_before_action :authenticate_parking_manager!, only: [:verify, :resend_email], raise: false
+  skip_before_action :authenticate_parking_manager!, only: [ :verify, :resend_email ], raise: false
 
   def verify
     @device = Device.find_by!(device_token: params[:device_token])
@@ -15,7 +15,7 @@ class ParkingManagers::DevicesController < ApplicationController
         value: @device.device_token,
         expires: 1.month.from_now,
         httponly: true,
-        path: '/'
+        path: "/"
       }
 
       render :verified_success
