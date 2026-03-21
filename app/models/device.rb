@@ -5,6 +5,8 @@ class Device < ApplicationRecord
 
   belongs_to :parking_manager
 
+  before_validation :set_device_name, if: :will_save_change_to_user_agent?
+
   DEVICE_TYPES = {
     /iPhone/i    => 'iPhone',
     /iPad/i      => 'iPad',
@@ -15,7 +17,7 @@ class Device < ApplicationRecord
 
   def self.set_name_by_user_agent(user_agent)
     user_agent_string = user_agent.to_s
-    DEVICE_TYPES.find { |pattern, name| user_agent_string.match?(pattern) }&.last || '不明な端末'
+    DEVICE_TYPES.find { |pattern, _name| user_agent_string.match?(pattern) }&.last || '不明な端末'
   end
 
   # 期間内かつ承認済みかどうかを確認
@@ -29,9 +31,17 @@ class Device < ApplicationRecord
   end
 
   # 新しいトークンを生成
-  def selt.generate_token
+  def self.generate_token
     SecureRandom.uuid
+  end 
+
+  def verify!
+    update(is_verified: true)
   end
 
-  def 
+  private
+
+  def set_device_name
+    self.name = self.class.set_name_by_user_agent(user_agent)
+  end
 end
