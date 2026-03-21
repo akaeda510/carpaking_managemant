@@ -1,5 +1,6 @@
 class ParkingAreasController < ApplicationController
   before_action :authenticate_parking_manager!
+  before_action :confirm_device_verified!
   before_action :set_parking_lot
   before_action :set_parking_area, only: %i[ edit update destroy ]
 

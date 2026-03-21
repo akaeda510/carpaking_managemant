@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
     root to: "dashboards#index"
     resources :parking_managers, only: %i[ index show ]
+
     resources :contractors, only: %i[ index show ]
     resources :parking_lots, only: %i[ index show ], shallow: true do
       resources :parking_areas, only: %i[ show ], shallow: true do
@@ -25,6 +26,20 @@ Rails.application.routes.draw do
   }
 
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
+
+  resources :devices, only: [] do
+    collection do
+      get "verify/:device_token", to: "parking_managers/devices#verify", as: :verify
+    end
+
+    member do
+      post "resend_email", to: "parking_managers/devices#resend_email", as: :resend_email_parking_managers
+    end
+  end
+
+  devise_scope :parking_manager do
+    get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
+  end
 
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
     resources :parking_areas, only: %i[ new create index edit update destroy ] do

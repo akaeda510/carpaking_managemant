@@ -1,0 +1,20 @@
+<p><%= @parking_manager.full_name %> 様</p>
+
+<p>駐車場管理システムへ未登録の端末からログインがありました。</p>
+
+<div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
+  <p>■ ログイン情報</p>
+  <ul>
+    <li>アクセス検知時刻: <%= l @device.last_login_at, format: :long %></li>
+    <li>端末: <%= @device.name %></li>
+  </ul>
+</div>
+
+<p><strong>このログインに心当たりはありますか？</strong></p>
+
+<p>いつもご利用がとうございます。この度登録されていない端末からログインがありました。新たに端末を登録される方は下の「端末を登録する」ボタンをクリックしてください。</p>
+
+<p><%= link_to '端末を登録する', @verify_url, class: "button" %></p>
+
+<hr>
+<p><small>※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。</small></p>

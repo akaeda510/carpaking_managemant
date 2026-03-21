@@ -1,6 +1,7 @@
 class ContractParkingSpacesController < ApplicationController
   before_action :set_contractor
   before_action :authenticate_parking_manager!
+  before_action :confirm_device_verified!
   before_action :set_parking_lot, only: %i[new create]
   before_action :set_contract_parking_space, only: %i[edit update]
 

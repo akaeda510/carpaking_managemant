@@ -1,74 +1,57 @@
-<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="flex flex-col lg:flex-row justify-between items-start mb-6 gap-6">
-    <div class="min-w-0 flex-1">
-      <nav class="flex mb-3" aria-label="Breadcrumb">
-        <ol class="flex flex-wrap items-center text-sm text-gray-500 gap-y-1">
-          <li><%= link_to "駐車場一覧", parking_lots_path, class: "hover:text-indigo-600 transition-colors" %></li>
-          <li class="flex items-center"><span class="mx-2 text-gray-300">/</span></li>
-          <li><%= link_to "エリア一覧", parking_lot_parking_areas_path, class: "hover:text-indigo-600 transition-colors" %></li>
-          <li class="flex items-center"><span class="mx-2 text-gray-300">/</span></li>
-          <li class="font-bold text-gray-900 truncate max-w-[200px] sm:max-w-[400px]" title="<%= @parking_area.name %>">
-            <%= @parking_area.name %>
-          </li>
-        </ol>
-      </nav>
+<div class="min-h-screen bg-gray-50/50 py-8">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
+      <div class="space-y-2">
+        <nav class="flex items-center text-sm font-medium text-gray-500" aria-label="Breadcrumb">
+          <%= link_to "駐車場一覧", parking_lots_path, class: "hover:text-indigo-600 transition-colors" %>
+          <svg class="flex-shrink-0 mx-2 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" /></svg>
+          <%= link_to "エリア一覧", parking_lot_parking_areas_path, class: "hover:text-indigo-600 transition-colors" %>
+          <svg class="flex-shrink-0 mx-2 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" /></svg>
+          <span class="text-gray-900 font-bold truncate max-w-[150px]"><%= @parking_area.name %></span>
+        </nav>
 
-      <h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 leading-tight">
-        <span class="text-indigo-600"><%= @parking_lot.name %></span>
-        <span class="text-gray-400 font-light mx-2">:</span>
-        <span class="break-words"><%= @parking_area.name %></span>
-      </h1>
-    </div>
+        <h1 class="text-3xl font-black text-gray-900 tracking-tight">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600"><%= @parking_lot.name %></span>
+          <span class="text-gray-300 font-light mx-2">/</span>
+          <span class="text-gray-800"><%= @parking_area.name %></span>
+        </h1>
+      </div>
 
-    <div class="w-full lg:w-auto flex-shrink-0">
       <%= link_to [:new, @parking_lot, @parking_area, :parking_space],
-        class: 'w-full lg:w-auto inline-flex justify-center items-center px-6 py-3 border border-transparent text-sm font-bold rounded-xl shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition-all hover:shadow-lg active:scale-[0.98]' do %>
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-        区画を登録
+        class: 'inline-flex items-center px-6 py-3 border border-transparent text-base font-bold rounded-2xl shadow-lg shadow-indigo-200 text-white bg-indigo-600 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all active:scale-95' do %>
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+        区画を新規登録
       <% end %>
     </div>
-  </div>
 
-  <div class="bg-white shadow-xl border border-gray-100 overflow-hidden rounded-2xl">
+    <div class="bg-white rounded-3xl shadow-sm border border-gray-200 overflow-hidden">
+      
+      <div class="p-4 border-b border-gray-100 bg-gray-50/30">
+        <%= render 'shared/search_form', search_url: [@parking_lot, @parking_area, :parking_spaces], placeholder_text: "区画名・契約者名で検索..." %>
+      </div>
 
-    <%= render 'shared/search_form', search_url: [@parking_lot, @parking_area, :parking_spaces], placeholder_text: "区画名・備考・契約者名で検索..." %>
-
-    <% if @parking_spaces.any? %>
-      <div class="hidden sm:block">
-        <div class="px-6 py-4 text-xs font-bold text-gray-500 uppercase tracking-widest grid grid-cols-8 gap-2 border-b border-gray-100 bg-gray-50/50">
-          <div class="col-span-1">区画名</div>
-          <div class="col-span-1 text-center">契約状態</div>
-          <div class="col-span-2 text-center">月額賃料</div>
-          <div class="col-span-2 text-center">契約者</div>
-          <div class="col-span-2 text-right">アクション</div>
+      <% if @parking_spaces.any? %>
+        <div class="hidden sm:grid grid-cols-12 gap-4 px-8 py-4 bg-gray-50 text-xs font-bold text-gray-400 uppercase tracking-wider">
+          <div class="col-span-3">区画名</div>
+          <div class="col-span-2 text-center">状態</div>
+          <div class="col-span-2 text-right">月額賃料</div>
+          <div class="col-span-3 text-center">契約者</div>
+          <div class="col-span-2 text-right">管理</div>
         </div>
-      </div>
 
-      <ul class="divide-y divide-gray-100">
-        <%= render @parking_spaces, parking_lot: @parking_lot,  parking_area: @parking_area %>
-      </ul>
-    <% else %>
-
-      <div class="p-12 text-center">
-        <% if params[:query].present? %>
-          <div class="mb-4">
-            <i class="fa-solid fa-magnifying-glass text-4xl text-gray-200"></i>
+        <ul class="divide-y divide-gray-100">
+          <%= render @parking_spaces, parking_lot: @parking_lot, parking_area: @parking_area %>
+        </ul>
+      <% else %>
+        <div class="py-20 text-center">
+          <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-50 text-indigo-200 mb-6">
+            <i class="fa-solid fa-parking text-4xl"></i>
           </div>
-          <p class="text-gray-600 font-bold text-lg">「<%= params[:query] %>」に一致する区画は見つかりませんでした。</p>
-          <p class="text-gray-400 text-sm mt-2 mb-6">検索ワードを変えるか、フィルターを解除してください。</p>
-          <%= link_to "すべての区画を表示する", [@parking_lot, @parking_area, :parking_spaces],
-            class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition" %>
-        <% else %>
-          <div class="mb-4">
-            <i class="fa-solid fa-parking text-4xl text-gray-200"></i>
-          </div>
-          <p class="text-lg text-gray-500 mb-4">このエリアに登録されている区画データはありません。</p>
-          <%= link_to [:new, @parking_lot, @parking_area, :parking_space],
-            class: 'inline-flex items-center px-6 py-3 border border-transparent text-sm font-bold rounded-xl shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition' do %>
-            最初のスペースを登録する
-          <% end %>
-        <% end %>
-      </div>
-    <% end %>
+          <p class="text-xl text-gray-900 font-bold mb-2">データが見つかりません</p>
+          <p class="text-gray-500 mb-8 max-w-sm mx-auto">登録されている区画がないか、検索条件に一致する結果がありません。</p>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

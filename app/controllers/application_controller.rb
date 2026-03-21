@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_autorized
-
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   layout :layout_by_resource
 
   include Pundit::Authorization
@@ -14,6 +13,21 @@ class ApplicationController < ActionController::Base
 
   def pundit_user
     current_parking_manager
+  end
+
+  def confirm_device_verified!
+    return if devise_controller? || !parking_manager_signed_in?
+
+    if session[:needs_verification]
+      allowed_paths = [
+        wait_verification_path,
+        "/parking_managers/devices/verify",
+        destroy_parking_manager_session_path
+      ]
+      unless allowed_paths.any? { |path| request.path.include?(path) }
+        redirect_to wait_verification_path, alert: "この端末にはまだ承認されていません。メールを確認して承認を完了してください。"
+      end
+    end
   end
 
   protected
@@ -35,9 +49,9 @@ class ApplicationController < ActionController::Base
     ])
 
     devise_parameter_sanitizer.permit(:account_update, keys: [
-     :first_name,
-     :last_name,
-     :prefecture,
+      :first_name,
+      :last_name,
+      :prefecture,
       :city,
       :street_address,
       :building,
@@ -63,6 +77,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render file: Rails.public_path.join("403.htmkl"), status: :forbidden, layout: false
+    render file: Rails.public_path.join("403.html"), status: :forbidden, layout: false
   end
 end

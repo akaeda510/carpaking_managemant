@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_12_023729) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_19_045019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -55,6 +55,21 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_12_023729) do
     t.string "street_address", null: false
     t.datetime "updated_at", null: false
     t.index ["parking_manager_id"], name: "index_contractors_on_parking_manager_id"
+  end
+
+  create_table "devices", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "device_token", null: false
+    t.datetime "expires_at", null: false
+    t.boolean "is_verified", default: false
+    t.datetime "last_login_at"
+    t.string "name"
+    t.bigint "parking_manager_id", null: false
+    t.datetime "updated_at", null: false
+    t.string "user_agent", null: false
+    t.index ["device_token"], name: "index_devices_on_device_token"
+    t.index ["expires_at"], name: "index_devices_on_expires_at"
+    t.index ["parking_manager_id"], name: "index_devices_on_parking_manager_id"
   end
 
   create_table "garage_details", force: :cascade do |t|
@@ -144,6 +159,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_12_023729) do
   add_foreign_key "contract_parking_spaces", "parking_managers"
   add_foreign_key "contract_parking_spaces", "parking_spaces"
   add_foreign_key "contractors", "parking_managers"
+  add_foreign_key "devices", "parking_managers"
   add_foreign_key "garage_details", "parking_spaces"
   add_foreign_key "parking_areas", "parking_lots"
   add_foreign_key "parking_lots", "parking_managers"
