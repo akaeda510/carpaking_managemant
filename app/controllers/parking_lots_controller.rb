@@ -1,5 +1,6 @@
 class ParkingLotsController < ApplicationController
   before_action :authenticate_parking_manager!
+  before_action :confirm_device_verified!
   before_action :set_parking_lot, only: %i[show edit update destroy]
   before_action :set_parking_lots, only: %i[index]
 
