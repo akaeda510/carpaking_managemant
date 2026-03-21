@@ -4,7 +4,7 @@
 
 <div style="background-color: #f3f4f6; padding: 15px; border-radius: 8px;">
   <p style="margin: 0;"><strong>ログイン日時:</strong> <%= l @login_time, format: :long %></p>
-  <p style="margin: 0;"><strong>IPアドレス:</strong> <%= @remote_ip %></p>
+  <p style="margin: 0;"><strong>端末:</strong> <%= @device.name %></p>
 </div>
 
 <p>※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。</p>
