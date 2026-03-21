@@ -5,13 +5,13 @@ class BlastengineBaseMailer < ApplicationMailer
 
   protected
 
-  def deliver_via_api(to:, subject:, text_part:, html_part: nil)
+  def deliver_via_api(to:, subject:, text_part:, html_part: nil, from_type: :system)
     transaction = Blastengine::Transaction.new
 
     if from_type == :info
       transaction.from email: "info@tukigime-parking.com", name: "駐車場管理事務所"
     else
-      transaction.from email: "system@tukigime-parking.com", name: "システム"
+      transaction.from email: "system@tukigime-parking.com", name: "駐車場管理システム"
     end 
 
     transaction.to = to
