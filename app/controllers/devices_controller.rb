@@ -15,4 +15,11 @@ class DevicesController < ApplicationController
       redirect_to new_parking_manager_session_path, alert: "登録に失敗しました。"
     end
   end
+
+  def resend_email
+    @device = Device.find(params[:id])
+    ParkingMangers::DeviceMailer.warning_new_device_login(current_parking_manager, @device).deliver_later
+
+    redurect_to wait_verification_path, seccess: "端末登録メールを再送しました"
+  end
 end
