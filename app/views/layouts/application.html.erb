@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <% if parking_manager_signed_in? %>
+    <% if parking_manager_signed_in? && !session[:needs_verification] %>
       <%= render 'shared/header_signed_in' %>
       <div class="flex min-h-[calc(100vh-4rem)]" id="wrapper">
         <%= render 'shared/sidebar_dashboard' %>
