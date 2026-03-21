@@ -9,11 +9,19 @@
     </div>
     <h2 class="text-2xl font-bold text-gray-900 mb-2">メールをご確認ください</h2>
     <p class="text-gray-600 mb-8">
-      新しい端末（<%= @device.name %>）を検知しました。<br>
-      送信されたメールのボタンを押して、ログインを完了させてください。
+    新しい端末（<%= @device.name %>）を検知しました。<br>
+    送信されたメールのボタンを押して、ログインを完了させてください。
     </p>
-    
+
     <%= button_to "メールを再送する", resend_email_parking_managers_device_path(@device), 
-        class: "w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition" %>
+      class: "w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition" %>
+
+    <div class="mt-8 pt-6 border-t border-gray-100">
+      <p class="text-sm text-gray-500 mb-4">
+      メールが届かない、またはリンクが無効になった場合は、下のボタンからログイン画面へ戻り、再度お試しください。
+      </p>
+      <%= back_link_to "ログイン画面へ戻る", new_parking_manager_session_path,
+        class: "text-blue-600 hover:text-blue-800 font-medium text-sm transition" %>
+    </div>
   </div>
 </div>
