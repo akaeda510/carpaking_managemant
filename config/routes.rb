@@ -33,7 +33,8 @@ Rails.application.routes.draw do
     end
 
     member do
-      post 'resend_email' to: 'parking_managers/devices#resend_email', as: resend_email_parking_managers
+      post 'resend_email', to: 'parking_managers/devices#resend_email', as: :resend_email_parking_managers
+    end
   end
 
   devise_scope :parking_manager do
