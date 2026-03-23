@@ -6,11 +6,6 @@ class DeviceDecorator < Draper::Decorator
   end
 
   def friendly_name(remote_ip)
-    location = Geocoder.search(remote_ip).first
-    city_info = location&.city.present? ? "#{location.city}付近の" : "不明な場所の"
-
-    device_label = Device.set_name_by_user_agent(device.user_agent, nil)
-
-    "#{city_info}#{device_label}"
+    Device.generate_friendly_name(object.user_agent, remote_ip)
   end
 end
