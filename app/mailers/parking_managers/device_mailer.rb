@@ -1,10 +1,11 @@
-class ParkingManagers::DeviceMailer < BlastengineBaseMailer
+class ParkingManagers::DeviceMailer < BaseMailer
   include Rails.application.routes.url_helpers
 
-  def warning_new_device_login(parking_manager, device)
+  def warning_new_device_login(parking_manager, device, remote_ip)
     @parking_manager = parking_manager.decorate
     @device = device.decorate
     @verify_url = verify_devices_url(device_token: @device.device_token)
+    @friendly_device_name = device.decorate.friendly_name(remote_ip)
 
     login_time = @device.login_timestamp
 
@@ -18,7 +19,7 @@ class ParkingManagers::DeviceMailer < BlastengineBaseMailer
 
       駐車場管理システムに未登録の端末からログインがありました。
       時刻: #{login_time}
-      端末: #{@device.name}
+      端末: #{@friendly_device_name}
 
       心当たりがある場合は、以下のURLから端末を登録してください。
       #{@verify_url}
@@ -28,7 +29,7 @@ class ParkingManagers::DeviceMailer < BlastengineBaseMailer
     deliver_via_api(
       from_type: :system,
       to: @parking_manager.email,
-      subject: "【重要】新しい端末からのログインを検知しました",
+      subject: "【重要】#{@city_info}新しい端末のログインを検知しました",
       html_part: html_content,
       text_part: text_content
     )
