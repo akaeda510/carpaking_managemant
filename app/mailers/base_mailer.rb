@@ -35,7 +35,7 @@ class BaseMailer < ApplicationMailer
     }
 
     begin
-      response = Resend::Eemails.send(params)
+      response = Resend::Emails.send(params)
       Rails.logger.info "--- [Resend] Sent successfully. ID: #{response} ---"
       response
     rescue => e
