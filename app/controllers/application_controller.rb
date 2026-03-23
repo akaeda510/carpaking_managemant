@@ -79,4 +79,19 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     render file: Rails.public_path.join("403.html"), status: :forbidden, layout: false
   end
+
+  private
+
+  def set_device_cookie(device)
+    return unless device
+    device.update(last_login_at: Time.current)
+
+    cookies[:device_token] = {
+      value: device.device_token,
+      expires: 1.month.from_now,
+      httponly: true,
+      path: '/',
+      secure: Rails.env.production?
+    }
+  end
 end
