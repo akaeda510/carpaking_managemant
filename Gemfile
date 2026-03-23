@@ -51,7 +51,11 @@ gem "image_processing", "~> 1.2"
 # アカウント認可
 gem "pundit"
 
+# 大まかな位置情報
 gem "geocoder"
+
+# メールサーバー設定
+gem "resend"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

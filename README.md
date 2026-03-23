@@ -110,11 +110,8 @@
 - gem 'bcrypt' パスワードハッシュ化(admin)
 - gem 'jsbundling-rails' yrun_javascript
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
-- gem 'faraday' 外部サーバーと通信を管理
-- gem 'faraday-multipart' 画像ファイルなどのWeb API通信の拡張機能
-- gem 'csv' データ処理
-- gem 'rubyzip' ファイルの.zip形式の認証
 - gem 'geocoder' 位置情報を取得
+- gem 'resend' メール機能
 
 - QR code API
 - Resend API
