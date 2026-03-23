@@ -49,4 +49,17 @@ class ParkingManager < ApplicationRecord
            through: :parking_spaces,
            source: :contract_parking_spaces
   has_many :devices, dependent: :destroy
+
+  def set_initial_device(user_agent)
+    devices.create!(
+      device_token: Device.generate_token,
+      user_agent: user_agent,
+      name: "初期登録デバイス",
+      expires_at: 1.month.from_now,
+      is_verified: true
+    )
+  rescue => e
+    Rails.logger.error "Device creation failed: #{e.message}"
+    raise e
+  end
 end
