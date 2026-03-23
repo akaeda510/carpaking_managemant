@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
       value: device.device_token,
       expires: 1.month.from_now,
       httponly: true,
-      path: '/',
+      path: "/",
       secure: Rails.env.production?
     }
   end
