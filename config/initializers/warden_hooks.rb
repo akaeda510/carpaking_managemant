@@ -8,7 +8,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
     if device&.active_and_verified?
       device.update!(user_agent: user_agent)
       # 既知のデバイスなら通知を送って期間延長
-      ParkingManagers::LoginMailer.login_notification(user, device).deliver_later
+      ParkingManagers::LoginMailer.login_notification(user, device, auth.request.remote_ip).deliver_later
       device.extend_expiration!
     else
 
