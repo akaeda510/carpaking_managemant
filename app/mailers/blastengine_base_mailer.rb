@@ -6,6 +6,22 @@ class BlastengineBaseMailer < ApplicationMailer
   protected
 
   def deliver_via_api(to:, subject:, text_part:, html_part: nil, from_type: :system)
+
+    # 開発環境
+    if Rails.env.development?
+      from_email = (from_type == :info) ? "info@tukigime-parking.com" : "system@tukigime-parking.com"
+      from_name = (from_type == :info) ? "駐車場管理事務所" : "駐車場管理システム"
+
+      return mail(
+        to: to,
+        subject: subject,
+        from: "#{from_name} <#{from_email}"
+      ) do |format|
+        format.text { render plain: text_part }
+        format.html { render html: html_part.html_safe } if html_part.present?
+      end
+    end
+
     transaction = Blastengine::Transaction.new
 
     if from_type == :info
