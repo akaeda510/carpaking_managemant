@@ -8,11 +8,11 @@ class Device < ApplicationRecord
   before_validation :set_device_name, if: :will_save_change_to_user_agent?
 
   DEVICE_TYPES = {
-    /iPhone/i    => "iPhone",
-    /iPad/i      => "iPad",
-    /Android/i   => "Android端末",
-    /Windows/i   => "Windows PC",
-    /Macintosh/i => "Mac"
+    /iPhone/i    => "お使いのiPhone(アイフォン)",
+    /iPad/i      => "お使いのiPad(タブレット)",
+    /Android/i   => "お使いのAndroid端末(スマートフォン)",
+    /Windows/i   => "お使いのWindows(パソコン)",
+    /Macintosh/i => "お使いのMac(パソコン)"
   }.freeze
 
   def self.set_name_by_user_agent(user_agent)
