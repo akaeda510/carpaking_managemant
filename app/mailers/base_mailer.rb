@@ -2,7 +2,7 @@ require "resend"
 
 class BaseMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
-  TESEND_CLIENT = Resend::Client.new(ENV["RESEND_API_KEY"])
+  RESEND_CLIENT = Resend::Client.new(ENV["RESEND_API_KEY"])
 
   abstract_class = true
 
@@ -34,7 +34,7 @@ class BaseMailer < ApplicationMailer
     }
 
     begin
-      response = RESEND_CLIENT.emali.send(params)
+      response = RESEND_CLIENT.emails.send(params)
       Rails.logger.info "--- [Resend] Sent successfully. ID: #{response} ---"
       response
     rescue => e
