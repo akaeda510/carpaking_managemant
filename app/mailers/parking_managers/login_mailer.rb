@@ -1,14 +1,8 @@
-class ParkingManagers::LoginMailer < BlastengineBaseMailer
+class ParkingManagers::LoginMailer < BaseMailer
   def login_notification(parking_manager, device, remote_ip)
     @parking_manager = parking_manager.decorate
     @login_time = Time.current
-
-    location = Geocoder.search(remote_ip).first
-    city_info = location&.city.present? ? "#{location.city}付近の" : "不明な場所の"
-
-    device_label = Device.set_name_by_user_agent(device.user_agent, nil)
-
-    @friendly_device_name = "#{city_info}#{device_label}"
+    @friendly_device_name = device.decorate.friendly_name(remote_ip)
 
     html_content = render_to_string(
       template: "parking_managers/mailer/login_notification",
