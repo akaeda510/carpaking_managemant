@@ -6,7 +6,6 @@ class BlastengineBaseMailer < ApplicationMailer
   protected
 
   def deliver_via_api(to:, subject:, text_part:, html_part: nil, from_type: :system)
-
     # 開発環境
     if Rails.env.development?
       from_email = (from_type == :info) ? "info@tukigime-parking.com" : "system@tukigime-parking.com"
