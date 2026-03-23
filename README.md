@@ -88,6 +88,7 @@
 - Rails 8
 - TailwindCSS
 - ruby 3.4.7
+- javascript
 - neon
 - Render
 - blastengine メールアドレス: API
@@ -113,6 +114,7 @@
 - gem 'faraday-multipart' 画像ファイルなどのWeb API通信の拡張機能
 - gem 'csv' データ処理
 - gem 'rubyzip' ファイルの.zip形式の認証
+- gem 'geocoder' 位置情報を取得
 
 - QR code API
 - blastengine API
