@@ -4,30 +4,39 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [ :create ]
   before_action :configure_account_update_params, only: [ :update ]
 
-   # GET /resource/sign_up
-   # def new
-   #   super
-   # end
+  # GET /resource/sign_up
+  # def new
+  #   super
+  # end
 
-   # POST /resource
-   def create
-     build_resource(sign_up_params)
+  # POST /resource
+  def create
+    build_resource(sign_up_params)
 
-     if resource.save
+    if resource.save
 
-       if resource.active_for_authentication?
-         set_flash_message! :notice, :signed_up
-         respond_with resource, location: after_sign_up_path_for(resource)
-       else
-         set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
-         respond_with resource, location: after_inactive_sign_up_path_for(resource)
-       end
+      # deviceテーブルを作成
+      resource.set_initial_device(request.user_agent)
+      # 新しいトークンをcookieに渡す
+      set_device_cookie(resource.devices.first)
+      # 古いトークンを削除
+      session.delete(:pending_device_id)
 
-     else
-       clean_up_passwords resource
-       respond_with resource
-     end
-   end
+      if resource.active_for_authentication?
+        set_flash_message! :success, :signed_up
+        sign_in(resource_name, resource)
+        redirect_to after_sign_up_path_for(resource) and return
+      else
+        set_flash_message! :success, :"signed_up_but_#{resource.inactive_message}"
+        expire_date_after_sign_in!
+        redirect_to new_parking_manager_session_path and return
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      render :new, status: :unprocessable_entity and return
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -53,7 +62,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   def after_update_path_for(resource)
     profile_path
@@ -73,10 +82,6 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
       :first_name, :last_name, :prefecture, :city, :street_address,
       :building, :phone_number, :contact_number
     ])
-  end
-
-  def authorize_registration
-    authorize(@registration)
   end
 
   # The path used after sign up.
