@@ -50,7 +50,7 @@ class ParkingManager < ApplicationRecord
            source: :contract_parking_spaces
   has_many :devices, dependent: :destroy
 
-  def set_initial_device(user_agent)
+  def set_initial_device(user_agent, ip_address)
     devices.create!(
       device_token: Device.generate_token,
       user_agent: user_agent,

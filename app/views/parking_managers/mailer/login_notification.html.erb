@@ -2,9 +2,13 @@
 
 <p>駐車場管理システムへのログインがありました。</p>
 
-<div style="background-color: #f3f4f6; padding: 15px; border-radius: 8px;">
-  <p style="margin: 0;"><strong>ログイン日時:</strong> <%= l @login_time, format: :long %></p>
-  <p style="margin: 0;"><strong>端末:</strong> <%= @device.name %></p>
+<div style="background-color: #f3f4f6; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb;">
+  <p style="margin: 0; margin-bottom: 8px;"><strong>ログイン日時:</strong> <%= l @login_time, format: :long %></p>
+  <p style="margin: 0;"><strong>ご利用端末:</strong><br>
+    <span style="font-size: 1.1em; color: #1f2937;"><%= @friendly_device_name %></span>
+  </p>
 </div>
 
-<p>※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。</p>
+<p style="color: #6b7280; font-size: 0.9em; margin-top: 20px;">
+  ※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。
+</p>

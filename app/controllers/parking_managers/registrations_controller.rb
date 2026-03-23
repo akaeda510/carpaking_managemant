@@ -16,7 +16,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
     if resource.save
 
       # deviceテーブルを作成
-      resource.set_initial_device(request.user_agent)
+      resource.set_initial_device(request.user_agent, request.remote_ip)
       # 新しいトークンをcookieに渡す
       set_device_cookie(resource.devices.first)
       # 古いトークンを削除
