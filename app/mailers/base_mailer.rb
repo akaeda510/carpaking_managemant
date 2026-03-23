@@ -26,7 +26,7 @@ class BaseMailer < ApplicationMailer
     end
 
     params = {
-      from: form_full,
+      from: from_full,
       to: [ to ],
       subject: subject,
       text: text_part,
