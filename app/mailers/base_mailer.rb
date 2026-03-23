@@ -1,15 +1,14 @@
-require 'resend'
+require "resend"
 
 class BaseMailer < ApplicationMailer
   include Rails.application.routes.url_helpers
-  TESEND_CLIENT = Resend::Client.new(ENV['RESEND_API_KEY'])
+  TESEND_CLIENT = Resend::Client.new(ENV["RESEND_API_KEY"])
 
   abstract_class = true
 
   protected
 
   def deliver_via_api(to:, subject:, text_part:, html_part: nil, from_type: :system)
-
     from_email = (from_type == :info) ? "info@tukigime-parking.com" : "system@tukigime-parking.com"
     from_name = (from_type == :info) ? "駐車場管理事務所" : "駐車場管理システム"
     from_full = "#{from_name}<#{from_email}>"
@@ -28,7 +27,7 @@ class BaseMailer < ApplicationMailer
 
     params = {
       from: form_full,
-      to: [to],
+      to: [ to ],
       subject: subject,
       text: text_part,
       html: html_part
