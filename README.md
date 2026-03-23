@@ -91,7 +91,7 @@
 - javascript
 - neon
 - Render
-- blastengine メールアドレス: API
+- Resend メールアドレス: API
 - cloudflare 独自ドメイン
 
 ## 使用するgem 一覧
@@ -117,7 +117,7 @@
 - gem 'geocoder' 位置情報を取得
 
 - QR code API
-- blastengine API
+- Resend API
 CI
 - gem 'brakeman'
 - gem 'rubocop-rails-omakase'
