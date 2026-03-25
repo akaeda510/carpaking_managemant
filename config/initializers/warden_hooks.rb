@@ -15,7 +15,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
       new_token = Device.generate_token
       new_device = user.devices.create!(
         device_token: new_token,
-        name: Device.set_name_by_user_agent(user_agent),
+        name: Device.get_type_by_user_agent(user_agent),
         user_agent: auth.request.user_agent,
         last_login_at: Time.current,
         expires_at: 1.month.from_now,
@@ -30,7 +30,7 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
       auth.request.session[:needs_verification] = true
 
       # メールの送信（API経由）
-      ParkingManagers::DeviceMailer.warning_new_device_login(user, new_device).deliver_later
+      ParkingManagers::DeviceMailer.warning_new_device_login(user, new_device, auth.request.remote_ip).deliver_later
     end
 
   elsif auth.request.session[:needs_verification]
