@@ -16,14 +16,17 @@
         </div>
       </div>
 
+      <%= f.hidden_field :email %>
+      <%= hidden_field_tag :token, params[:token] %>
+
       <div>
         <%= f.label :password, 'パスワード', class: "auth-label" %>
         <div class="flex items-center gap-1">
-        <%= f.password_field :password,
-        autocomplete: "new-password",
-        class: "auth-input flex-1",
-        id: "password_field" %>
-      <%= password_toggle_button("password_field") %>
+          <%= f.password_field :password,
+            autocomplete: "new-password",
+            class: "auth-input flex-1",
+            id: "password_field" %>
+          <%= password_toggle_button("password_field") %>
 
         </div>
         <div id="password_hint" class="mt-2 text-xs text-gray-500 transition-colors duration-300">
@@ -45,12 +48,21 @@
       <div class="pt-4 border-t border-gray-100">
         <label class="auth-label">携帯電話番号 (必須)</label>
         <div class="flex items-center space-x-2">
-          <input type="text" name="tel1" class="auth-input text-center w-20" maxlength="3">
-          <span class="text-gray-400">-</span>
-          <input type="text" name="tel2" class="auth-input text-center w-24" maxlength="4">
-          <span class="text-gray-400">-</span>
-          <input type="text" name="tel3" class="auth-input text-center w-24" maxlength="4">
-        </div>
+  <%= f.text_field :tel1,
+      class: "auth-input text-center w-20",
+      maxlength: 3,
+      required: true %>
+  <span class="text-gray-400">-</span>
+  <%= f.text_field :tel2,
+      class: "auth-input text-center w-24",
+      maxlength: 4,
+      required: true %>
+  <span class="text-gray-400">-</span>
+  <%= f.text_field :tel3,
+      class: "auth-input text-center w-24",
+      maxlength: 4,
+      required: true %>
+</div>
       </div>
 
       <div class="pt-4 border-t border-gray-100">
@@ -68,10 +80,10 @@
               <%= f.text_field :contact_number,
                 maxlength: 11,
                 class: "auth-input w-full md:w-1/2" %>
-          </div>
-          <p class="text-xs text-gray-500 mt-2">
-                    固定電話や予備の番号がある場合に入力してください。
-          </p>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">
+            固定電話や予備の番号がある場合に入力してください。
+            </p>
           </div>
         </details>
       </div>
@@ -88,20 +100,20 @@
           prefecture_options,
           { include_blank: "選択してください" },
           { class: "auth-input cursor-pointer" }
-                  %>
-    </div>
-    <div>
-      <%= f.label :city, '市区町村', class: "auth-label" %>
-      <%= f.text_field :city, class: "auth-input" %>
-    </div>
-    <div class="md:col-span-2">
-      <%= f.label :street_address, '丁目番地号', class: "auth-label" %>
-      <%= f.text_field :street_address, class: "auth-input" %>
-    </div>
-    <div class="md:col-span-2">
-      <%= f.label :building, '建物名・部屋番号等 (任意)', class: "auth-label" %>
-      <%= f.text_field :building, class: "auth-input" %>
-    </div>
+        %>
+      </div>
+      <div>
+        <%= f.label :city, '市区町村', class: "auth-label" %>
+        <%= f.text_field :city, class: "auth-input" %>
+      </div>
+      <div class="md:col-span-2">
+        <%= f.label :street_address, '丁目番地号', class: "auth-label" %>
+        <%= f.text_field :street_address, class: "auth-input" %>
+      </div>
+      <div class="md:col-span-2">
+        <%= f.label :building, '建物名・部屋番号等 (任意)', class: "auth-label" %>
+        <%= f.text_field :building, class: "auth-input" %>
+      </div>
     </div>
   </section>
 
