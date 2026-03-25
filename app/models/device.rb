@@ -54,6 +54,6 @@ class Device < ApplicationRecord
   private
 
   def set_device_name
-    self.name = self.class.set_name_by_user_agent(user_agent)
+    self.name = self.class.get_type_by_user_agent(user_agent)
   end
 end
