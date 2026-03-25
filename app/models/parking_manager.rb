@@ -46,8 +46,8 @@ class ParkingManager < ApplicationRecord
   # 駐車場区画
   has_many :parking_lots, dependent: :destroy
   # 駐車スペース
+  has_many :parking_areas, through: :parking_lots
   has_many :parking_spaces, through: :parking_areas
-  has_many :parking_area, through: :parking_lots
   has_many :contract_parking_spaces, through: :parking_lots
   # 契約者
   has_many :contractors, -> { distinct }
