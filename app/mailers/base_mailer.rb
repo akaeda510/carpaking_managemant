@@ -16,6 +16,14 @@ class BaseMailer < ApplicationMailer
 
     # 開発環境
     if Rails.env.development?
+      urls = text_part.scan(/https?:\/\/[\w\/:%#\$&\?\(\)~\.=\+\-]+/)
+    if urls.any?
+      Rails.logger.info "\n" + ("=" * 50)
+      Rails.logger.info "📧 [Dev Mail Log] To: #{to} | Subject: #{subject}"
+      urls.each { |url| Rails.logger.info "🔗 Registration URL: #{url}" }
+      Rails.logger.info ("=" * 50) + "\n"
+    end
+
       return mail(
         to: to,
         subject: subject,
