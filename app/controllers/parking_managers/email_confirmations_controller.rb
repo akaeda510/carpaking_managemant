@@ -8,6 +8,7 @@ class ParkingManagers::EmailConfirmationsController < ApplicationController
 
     if ParkingManager.exists?(email: email)
       Rails.logger.info "⚠️ [SKIP] Email already exists: #{email}はすでに登録済みです"
+      redirect_to new_parking_manager_session_path, success: "登録用メールが送信されました。"
     else
       Rails.logger.info "📧 [SEND] Preparing to send email to: #{email}の確認レコードを作成します"
 
