@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_19_045019) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_25_012447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -70,6 +70,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_19_045019) do
     t.index ["device_token"], name: "index_devices_on_device_token"
     t.index ["expires_at"], name: "index_devices_on_expires_at"
     t.index ["parking_manager_id"], name: "index_devices_on_parking_manager_id"
+  end
+
+  create_table "email_confirmations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.datetime "expires_at"
+    t.string "token"
+    t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_email_confirmations_on_token"
   end
 
   create_table "garage_details", force: :cascade do |t|
