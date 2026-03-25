@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
   devise_scope :parking_manager do
     get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
+    get "parking_managers/sign_up/:token", to: "parking_managers/registrations#new", as: :new_parking_manager_registration_with_token
   end
 
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
