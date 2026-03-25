@@ -74,11 +74,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_012447) do
 
   create_table "email_confirmations", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.string "email"
-    t.datetime "expires_at"
-    t.string "token"
+    t.string "email", null: false
+    t.datetime "expires_at", null: false
+    t.string "token", null: false
     t.datetime "updated_at", null: false
-    t.index ["token"], name: "index_email_confirmations_on_token"
+    t.index ["token"], name: "index_email_confirmations_on_token", unique: true
   end
 
   create_table "garage_details", force: :cascade do |t|
