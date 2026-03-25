@@ -24,7 +24,13 @@
   </head>
 
   <body>
-    <% if parking_manager_signed_in? && !session[:needs_verification] %>
+    <% if parking_manager_signed_in? &&
+        !session[:needs_verification] &&
+        controller_path != 'parking_managers/sessions' &&
+        controller_path != 'parking_managers/devices' &&
+        action_name != 'verified_success' &&
+        action_name != 'wait_verification' %>
+
       <%= render 'shared/header_signed_in' %>
       <div class="flex min-h-[calc(100vh-4rem)]" id="wrapper">
         <%= render 'shared/sidebar_dashboard' %>
