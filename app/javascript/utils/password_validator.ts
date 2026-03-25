@@ -4,7 +4,7 @@ export class PasswordValidator {
 		const hint = document.getElementById('password_hint');
 		if (!field || !hint) return;
 
-		field.addEventListener('input', () => {
+		const updateHint = () => {
 			const length = field.value.length;
 			if (length >= 6) {
 				hint.classList.replace('text-gray-500', 'text-green-600');
@@ -13,6 +13,8 @@ export class PasswordValidator {
 				hint.classList.replace('text-green-600', 'text-gray-500');
 				hint.innerText = "6文字以上記入してください";
 			}
-		});
+		};
+		field.addEventListener('input', updateHint);
+		updateHint();
 	}
-}					    
+}
