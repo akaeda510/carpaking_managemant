@@ -26,7 +26,10 @@ class ParkingManager < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 50 }
   # 都道府県
-  validates :prefecture, presence: true, length: { maximum: 10 }
+  validates :prefecture, presence: true, inclusion: {
+    in: ->(_) { I18n.t("prefectures").values },
+    message: "を正しく選択してください" },
+    allow_blank: true
   # 市区町村
   validates :city, presence: true, length: { maximum: 20 }
   # 丁目番地号
@@ -35,6 +38,10 @@ class ParkingManager < ApplicationRecord
   validates :building, length: { maximum: 55 }, allow_nil: true
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
   validates :contact_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
+
+  attr_accessor :tel1, :tel2, :tel3
+
+  before_validation :set_phone_number
 
   # 駐車場区画
   has_many :parking_lots, dependent: :destroy
@@ -61,5 +68,13 @@ class ParkingManager < ApplicationRecord
   rescue => e
     Rails.logger.error "Device creation failed: #{e.message}"
     raise e
+  end
+
+  private
+
+  def set_phone_number
+    if [ tel1, tel2, tel3 ].all?(&:present?)
+      self.phone_number = "#{tel1}#{tel2}#{tel3}"
+    end
   end
 end

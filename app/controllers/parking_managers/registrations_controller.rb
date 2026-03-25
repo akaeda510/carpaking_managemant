@@ -72,7 +72,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [
       :first_name, :last_name, :prefecture, :city, :street_address,
-      :building, :phone_number, :contact_number
+      :building, :tel1, :tel2, :tel3, :phone_number, :contact_number
     ])
   end
 
@@ -80,7 +80,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [
       :first_name, :last_name, :prefecture, :city, :street_address,
-      :building, :phone_number, :contact_number
+      :building, :tel1, :tel2, :tel3, :phone_number, :contact_number
     ])
   end
 

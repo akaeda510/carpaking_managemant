@@ -1,0 +1,25 @@
+<%= render layout: 'parking_managers/shared/auth_card', locals: { title: "新規アカウント登録" } do %>  
+
+  <p class="text-sm text-gray-600 mb-5">
+    ご入力いただいたメールアドレス宛に、本登録用のURLをお送りします。
+  </p>
+
+  <%= form_with scope: :email_confirmation, url: parking_managers_email_confirmations_path, local: true, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :email, "メールアドレス", class: "block text-sm font-medium text-gray-700" %>
+      <%= f.email_field :email, 
+          autofocus: true, 
+          autocomplete: "email", 
+          required: true, 
+          class: "auth-input" %> 
+    </div>
+
+    <div>
+      <%= f.submit "登録用メールを送信する", class: "auth-submit" %> 
+    </div>
+  <% end %>
+
+  <div class="mt-4 text-center">
+    <%= back_link_to "ログインへ戻る", new_parking_manager_session_path %>
+  </div>
+<% end %>

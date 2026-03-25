@@ -37,10 +37,6 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_scope :parking_manager do
-    get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
-  end
-
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
     resources :parking_areas, only: %i[ new create index edit update destroy ] do
       resources :parking_spaces, only: %i[ new create index show edit update destroy ]
@@ -54,14 +50,21 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_scope :parking_manager do
+    get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
+    get "parking_managers/sign_up/:token", to: "parking_managers/registrations#new", as: :new_parking_manager_registration_with_token
+
     authenticated :parking_manager do
       root to: "dashboards#show", as: :my_dashboard_root
-      resource :dashboard, only: %i[show edit update], path: "/my_dashboard"
+      resource :dashboard, only: %i[ show edit update ], path: "/my_dashboard"
     end
 
     unauthenticated :parking_manager do
       root to: redirect("/parking_managers/sign_in"), as: :parking_manager_login_root
     end
+  end
+
+  namespace :parking_managers do
+    resource :email_confirmations, only: %i[ new create ]
   end
 
   Rails.application.routes.draw do

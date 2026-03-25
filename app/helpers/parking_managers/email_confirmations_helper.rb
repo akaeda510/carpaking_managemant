@@ -1,0 +1,2 @@
+module ParkingManagers::EmailConfirmationsHelper
+end

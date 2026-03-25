@@ -1,0 +1,13 @@
+<div class="flex justify-center min-h-screen bg-gray-100 pt-16">
+  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg h-fit">
+    
+    <% if local_assigns[:title] %>
+      <h2 class="text-3xl font-extrabold text-center text-gray-900">
+        <%= title %>
+      </h2>
+    <% end %>
+
+    <%= yield %>
+
+  </div>
+</div>
