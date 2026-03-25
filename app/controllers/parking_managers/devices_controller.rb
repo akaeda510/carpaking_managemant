@@ -1,10 +1,18 @@
 class ParkingManagers::DevicesController < ApplicationController
+  skip_before_action :confirm_device_verified!, only: [ :resend_email, :verify ]
   skip_before_action :authenticate_parking_manager!, only: [ :verify, :resend_email ], raise: false
 
   def verify
-    @device = Device.find_by!(device_token: params[:device_token])
+    @device = Device.find_by(device_token: params[:device_token])
 
-    if @device.expires_at < Time.current
+    # 端末登録リンクを2回押した時
+    if @device.nil?
+      redirect_to new_parking_manager_session_path, alert: "認証リンクが無効になっています。再度ログインしてください。"
+      return
+    end
+
+    if @device.expires_at.present? && @device.expires_at < Time.current
+      @device.update(device_token: nil)
       redirect_to new_parking_manager_session_path, alert: "登録期限が切れています。再度ログインをしてください。"
       return
     end
