@@ -4,22 +4,27 @@
 
     <div class="field">
       <%= f.label :email, class: "block text-sm font-medium text-gray-700" %>
-      <div class="mt-1">
+      <div class="mt-1 flex items-center gap-1">
         <%= f.email_field :email, 
           autofocus: true, 
           autocomplete: "email",
           placeholder: "メールアドレスを入力",
-          class: "auth-input" %>
+          class: "auth-input flex-1" %>
+        <div class="w-10"></div> 
       </div>
     </div>
 
     <div class="field">
       <%= f.label :password, class: "block text-sm font-medium text-gray-700" %>
-      <div class="mt-1">
+      <div class="mt-1 flex items-center gap-1">
         <%= f.password_field :password, 
           autocomplete: "current-password",
           placeholder: "パスワードを入力",
-          class: "auth-input" %>
+          class: "auth-input flex-1",
+          id: "password_field" %>  
+        <div class="w-10 flex justify-center">
+          <%= password_toggle_button("password_field") %>
+        </div>
       </div>
     </div>
 
@@ -30,7 +35,8 @@
       </div>
     <% end %>
 
-    <div class="actions mt-6"> <%= f.submit "ログイン", class: "auth-submit" %>
+    <div class="actions mt-6"> 
+      <%= f.submit "ログイン", class: "auth-submit w-full" %>
     </div>
 
     <div class="text-sm pt-4"> 
