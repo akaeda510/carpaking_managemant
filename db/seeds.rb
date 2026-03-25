@@ -6,6 +6,17 @@
 #
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
+target_email = ENV["TEST_EMAIL"]
+manager = ParkingManager.find_by(email: target_email)
+
+if manager
+  puts "🗑️  Deleting ParkingManager: #{target_email} and its associated devices..."
+  manager.destroy
+  puts "✅  Successfully deleted."
+else
+  puts "ℹ️  ParkingManager with email #{target_email} not found. Skipping."
+end
+
 site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
   admin.password = 'password'
 

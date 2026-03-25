@@ -16,6 +16,6 @@ class ParkingManagers::EmailConfirmationsController < ApplicationController
       ParkingManagers::RegistrationMailer.confirmation_link(confirmation).deliver_later
     end
 
-    redirect_to new_parking_manager_session_path, success: "ご入力いただいたメールアドレス宛に、登録URLを送信しました（有効期間： 30分）。"
+    redirect_to new_parking_manager_session_path, success: "登録用メールが送信されました。"
   end
 end
