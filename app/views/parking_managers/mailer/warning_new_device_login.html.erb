@@ -2,19 +2,33 @@
 
 <p>駐車場管理システムへ未登録の端末からログインがありました。</p>
 
-<div style="background: #f9f9f9; padding: 15px; border-radius: 5px;">
-  <p>■ ログイン情報</p>
-  <ul>
-    <li>アクセス検知時刻: <%= l @device.last_login_at, format: :long %></li>
-    <li>端末: <%= @device.name %></li>
-  </ul>
+<div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; margin-bottom: 25px;">
+  <p style="margin: 0; margin-bottom: 12px; font-weight: bold; color: #374151; border-bottom: 1px solid #d1d5db; padding-bottom: 8px;">
+    ■ ログイン情報
+  </p>
+  <p style="margin: 0; margin-bottom: 8px;">
+    <strong>アクセス検知時刻:</strong> <%= l @device.last_login_at, format: :long %>
+  </p>
+  <p style="margin: 0;">
+    <strong>ご利用端末:</strong><br>
+    <span style="font-size: 1.1em; color: #1f2937;"><%= @friendly_device_name %></span>
+  </p>
 </div>
 
 <p><strong>このログインに心当たりはありますか？</strong></p>
 
-<p>いつもご利用がとうございます。この度登録されていない端末からログインがありました。新たに端末を登録される方は下の「端末を登録する」ボタンをクリックしてください。</p>
+<p style="line-height: 1.6;">
+  いつもご利用ありがとうございます。この度登録されていない端末からログインがありました。<br>
+  新たに端末を登録される方は、以下のボタンをクリックして認証を完了させてください。
+</p>
 
-<p><%= link_to '端末を登録する', @verify_url, class: "button" %></p>
+<div style="margin: 30px 0;">
+  <%= link_to '端末を登録する', @verify_url, 
+      style: "background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;" %>
+</div>
 
-<hr>
-<p><small>※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。</small></p>
+<hr style="border: 0; border-top: 1px solid #e5e7eb; margin-top: 30px;">
+
+<p style="color: #6b7280; font-size: 0.85em; margin-top: 20px; line-height: 1.5;">
+  ※もしこのログインに心当たりがない場合は、第三者による不正アクセスの可能性があります。至急パスワードを変更してください。
+</p>

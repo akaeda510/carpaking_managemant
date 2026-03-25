@@ -24,9 +24,11 @@ class ParkingManagers::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super do
+      flash.delete(:notice)
+    end
+  end
 
   def wait_verification
     Rails.logger.info "PENDING_ID in session: #{session[:pending_device_id]}"

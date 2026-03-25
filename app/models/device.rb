@@ -48,7 +48,7 @@ class Device < ApplicationRecord
   end
 
   def verify!
-    update(is_verified: true)
+    update(is_verified: true, device_token: SecureRandom.uuid)
   end
 
   private

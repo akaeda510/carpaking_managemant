@@ -67,7 +67,5 @@ Rails.application.routes.draw do
     resource :email_confirmations, only: %i[ new create ]
   end
 
-  Rails.application.routes.draw do
-    mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-  end
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
