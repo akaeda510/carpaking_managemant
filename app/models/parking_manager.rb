@@ -26,8 +26,8 @@ class ParkingManager < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 50 }
   # 都道府県
-  validates :prefecture, presence: true, inclusion: { 
-    in: ->(_) { I18n.t('prefectures').values },
+  validates :prefecture, presence: true, inclusion: {
+    in: ->(_) { I18n.t("prefectures").values },
     message: "を正しく選択してください" },
     allow_blank: true
   # 市区町村
@@ -73,7 +73,7 @@ class ParkingManager < ApplicationRecord
   private
 
   def set_phone_number
-    if [tel1, tel2, tel3].all?(&:present?)
+    if [ tel1, tel2, tel3 ].all?(&:present?)
       self.phone_number = "#{tel1}#{tel2}#{tel3}"
     end
   end

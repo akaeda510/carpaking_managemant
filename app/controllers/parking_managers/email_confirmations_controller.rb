@@ -1,5 +1,4 @@
 class ParkingManagers::EmailConfirmationsController < ApplicationController
-
   def new
     @email_confirmation = EmailConfirmation.new
   end
