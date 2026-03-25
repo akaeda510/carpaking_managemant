@@ -5,15 +5,25 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [ :update ]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    token = params[:token]
+    confirmation = EmailConfirmation.find_by(token: token)
+
+    if confirmation && confirmation.expires_at > Time.current
+      build_resource({ email: confirmation.email })
+      yield resource if block_given?
+      respond_with resource
+    else
+      redirect_to new_parking_manager_session_path, alert: "登録期間が無効になってます。再度メールを送信してください。"
+    end
+  end
 
   # POST /resource
   def create
     build_resource(sign_up_params)
 
     if resource.save
+      EmailConfirmation.find_by(token: params[:token])&.destroy
 
       # deviceテーブルを作成
       resource.set_initial_device(request.user_agent, request.remote_ip)
