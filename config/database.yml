@@ -81,6 +81,7 @@ production:
   queue:
     <<: *default
     url: <%= ENV.fetch("DATABASE_URL") { nil } %>
+    migrations_paths: db/queue_migrate
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
