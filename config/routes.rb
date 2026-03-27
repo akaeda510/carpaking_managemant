@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources: inquiriesm only: %i[ create ]
+  get "contact", to: "inquiries#new" 
+
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
