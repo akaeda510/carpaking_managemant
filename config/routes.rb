@@ -19,9 +19,15 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :inquiries, only: %i[ create ]
-  get "contact", to: "inquiries#new" 
+  resources :inquiries, only: %i[ new create ] do
+    collection do
+      get :thanks
+    end
+  end
 
+  get "contact", to: "inquiries#new", as: :contact
+  post "contact", to: "inquiries#create"
+  get "contact", to: "inquieries#thanks", as: :thanks_inquiry
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
