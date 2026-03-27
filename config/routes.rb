@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources: inquiriesm only: %i[ create ]
+  resources :inquiries, only: %i[ create ]
   get "contact", to: "inquiries#new" 
 
   get "contractors/new"
