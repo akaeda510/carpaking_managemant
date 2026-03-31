@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
     root to: "dashboards#index"
 
-    resources :inquiries, only: %i[ index show update destroy ]
     resources :parking_managers, only: %i[ index show ]
 
     resources :contractors, only: %i[ index show ]
@@ -19,15 +18,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :inquiries, only: %i[ new create ] do
-    collection do
-      get :thanks
-    end
+  resource :contact, only: %i[ new create ], controller: :inquiries do
+    get :thanks, on: :collection
   end
 
-  get "contact", to: "inquiries#new", as: :contact
-  post "contact", to: "inquiries#create"
-  get "contact", to: "inquieries#thanks", as: :thanks_inquiry
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
