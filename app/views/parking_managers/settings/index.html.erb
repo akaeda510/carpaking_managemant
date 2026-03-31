@@ -1,0 +1,63 @@
+<div class="container mx-auto px-4 py-10 max-w-2xl">
+  <h1 class="text-2xl font-black text-gray-900 mb-8 px-2">設定</h1>
+
+  <div class="bg-white shadow-sm border border-gray-100 rounded-3xl overflow-hidden">
+    
+    <%= link_to "#", class: "flex items-center justify-between p-5 hover:bg-gray-50 transition border-b border-gray-50" do %>
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-sky-100 text-sky-600 rounded-xl flex items-center justify-center mr-4">
+          <i class="fas fa-sliders-h"></i>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">アプリ設定</p>
+          <p class="text-xs text-gray-400">表示モードや通知の管理</p>
+        </div>
+      </div>
+      <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
+    <% end %>
+
+    <%= link_to "#", class: "flex items-center justify-between p-5 hover:bg-gray-50 transition border-b border-gray-50" do %>
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mr-4">
+          <i class="fas fa-user-cog"></i>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">アカウント設定</p>
+          <p class="text-xs text-gray-400">メールアドレス・パスワードの変更</p>
+        </div>
+      </div>
+      <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
+    <% end %>
+
+    <%= link_to privacy_path, class: "flex items-center justify-between p-5 hover:bg-gray-50 transition border-b border-gray-50" do %>
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mr-4">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">プライバシーポリシー</p>
+          <p class="text-xs text-gray-400">個人情報の取り扱いについて</p>
+        </div>
+      </div>
+      <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
+    <% end %>
+
+    <%= link_to "#", class: "flex items-center justify-between p-5 hover:bg-gray-50 transition" do %>
+      <div class="flex items-center">
+        <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center mr-4">
+          <i class="fas fa-file-contract"></i>
+        </div>
+        <div>
+          <p class="font-bold text-gray-800">利用規約</p>
+          <p class="text-xs text-gray-400">サービスの利用ルール</p>
+        </div>
+      </div>
+      <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
+    <% end %>
+
+  </div>
+
+  <p class="text-center text-gray-400 text-xs mt-10">
+    v1.0.0 &copy; 2026 tukigime-parking.com
+  </p>
+</div>
