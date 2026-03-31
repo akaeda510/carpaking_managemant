@@ -14,7 +14,7 @@ class InquiriesController < ApplicationController
 
     if @inquiry.save
       if parking_manager_signed_in?
-        redirect_to root_path, success: "お問い合わせを送信しました。"
+        redirect_to my_dashboard_root_path, success: "お問い合わせを送信しました。"
       else
         redirect_to thanks_contact_path
       end
