@@ -41,9 +41,14 @@
       </div>
     <% else %>
       <%= render 'shared/header_public' %>
-      <main class="min-h-screen">
+      <main class="min-h-screen flex flex-col">
         <%= render 'shared/flash_messages' %>
-        <%= yield %>
+        <div class="flex-grow">
+          <%= yield %>
+        </div>
+        <% unless parking_manager_signed_in? %>
+          <%= render 'shared/footer_public' %>
+        <% end %>
       </main>
     <% end %>
   </body>
