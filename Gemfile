@@ -73,6 +73,8 @@ group :development, :test do
   gem "better_errors"
 
   gem "binding_of_caller"
+
+  gem "rspec-rails", "~> 8.0.0"
 end
 
 group :development do

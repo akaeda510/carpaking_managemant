@@ -1,0 +1,15 @@
+<%= render layout: 'parking_managers/shared/auth_card', locals: { title: "お問い合わせありがとうございます" } do %>
+
+  <div class="space-y-4 text-gray-600 mb-10">
+    <p>お問い合わせ内容を受け付けました。</p>
+    <p>
+    ご入力いただいたメールアドレス宛に、内容確認の自動返信メールをお送りしております。<br>
+    （届かない場合は、迷惑メールフォルダをご確認ください）
+    </p>
+    <p>担当者が内容を確認し、順次折り返しご連絡させていただきます。</p>
+  </div>
+
+  <div class="flex flex-col sm:flex-row justify-center gap-4">
+    <%= back_link_to "ログインへ戻る", parking_manager_session_path %>
+  </div>
+<% end %>

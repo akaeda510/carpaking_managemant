@@ -74,12 +74,16 @@ test:
 # the values provided in this file. Alternatively, you can specify a connection
 # URL environment variable explicitly:
 #
-#   production:
-#     url: <%= ENV["MY_APP_DATABASE_URL"] %>
+production:
+  primary:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { nil } %>
+  queue:
+    <<: *default
+    url: <%= ENV.fetch("DATABASE_URL") { nil } %>
+    migrations_paths: db/queue_migrate
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+

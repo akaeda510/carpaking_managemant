@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     delete "logout", to: "sessions#destroy"
 
     root to: "dashboards#index"
+
     resources :parking_managers, only: %i[ index show ]
 
     resources :contractors, only: %i[ index show ]
@@ -15,6 +16,10 @@ Rails.application.routes.draw do
         end
       end
     end
+  end
+
+  resource :contact, only: %i[ new create ], controller: :inquiries do
+    get :thanks, on: :collection
   end
 
   get "contractors/new"
