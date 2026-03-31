@@ -1,0 +1,2 @@
+module ParkingManagers::SettingsHelper
+end
