@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "privacy", to: "static_pages#privacy", as: "privacy"
+  get "settings", to: "parking_managers/settings#index", as: "settings"
+  get "contractors/new"
+  get "parking_managers/show"
+  get "dashboards/show"
+
   namespace :admin do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
@@ -22,9 +28,6 @@ Rails.application.routes.draw do
     get :thanks, on: :collection
   end
 
-  get "contractors/new"
-  get "parking_managers/show"
-  get "dashboards/show"
   devise_for :parking_managers, controllers: {
     sessions: "parking_managers/sessions",
     registrations: "parking_managers/registrations"
@@ -69,6 +72,7 @@ Rails.application.routes.draw do
   end
 
   namespace :parking_managers do
+    get "settings/index"
     resource :email_confirmations, only: %i[ new create ]
   end
 

@@ -1,7 +1,5 @@
-<%# left-0 と md:left-64 でデバイスごとの開始位置を制御 %>
 <header class="fixed top-0 left-0 md:left-64 right-0 z-40 h-16 px-4 md:px-6 flex justify-between items-center bg-white/80 backdrop-blur-xl shadow-[0_4px_20px_rgba(12,49,78,0.03)] font-manrope text-slate-700">
 
-  <%# --- 左側: タイトル固定 --- %>
   <div class="flex items-center">
     <%= link_to my_dashboard_root_path, class: "text-lg font-extrabold text-sky-600 tracking-tight" do %>
       <%= controller_name == 'dashboards' ? '管理者ダッシュボード' : '管理システム' %>
@@ -16,13 +14,12 @@
              class="bg-slate-100 border-none rounded-full py-1.5 px-10 text-sm focus:ring-2 focus:ring-sky-500 w-40 xl:w-60 transition-all">
     </div>
 
-    <%# 通知ボタン %>
     <button class="p-2 text-slate-500 hover:bg-sky-50 rounded-full transition-colors relative">
       <span class="material-symbols-outlined">notifications</span>
       <span class="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
     </button>
 
-    <%= link_to profile_path, class: "p-2 text-slate-500 hover:bg-sky-50 rounded-full transition-colors" do %>
+    <%= link_to settings_path, class: "p-2 text-slate-500 hover:bg-sky-50 rounded-full transition-colors" do %>
       <span class="material-symbols-outlined">設定</span>
     <% end %>
 

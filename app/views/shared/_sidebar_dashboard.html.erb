@@ -26,17 +26,20 @@
   <div class="mt-auto pt-6 border-t border-white/10 flex flex-col gap-1">
     
     <div class="flex items-center gap-3 px-4 py-4 mb-2">
-      <div class="overflow-hidden">
-        <div class="text-white font-bold leading-none truncate"><%= current_parking_manager.email.split('@').first %></div>
-        <div class="text-sky-200 text-[10px] mt-1">管理者</div>
-      </div>
-    </div>
+  <div class="overflow-hidden">
+    <%= link_to profile_path, class: "text-white font-bold leading-none block truncate" do %>
+      <%= current_parking_manager.decorate&.full_name %>
+    <% end %>
+
+    <span class="text-xs text-sky-200 opacity-80">管理者</span>
+  </div>
+</div>
 
     <%= link_to new_contact_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1" do %>
       <span>お問い合わせ</span>
     <% end %>
 
-    <%= link_to profile_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1" do %>
+    <%= link_to settings_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1" do %>
       <span>設定・規約</span>
     <% end %>
 

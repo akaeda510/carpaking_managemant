@@ -1,4 +1,8 @@
 class ParkingManagerPolicy < ApplicationPolicy
+  def index?
+    parking_manager.present?
+  end
+
   def show?
     @parking_manager.id == @record.id
   end
