@@ -87,12 +87,14 @@
 ## 使用する技術スタック
 - Rails 8
 - TailwindCSS
-- ruby 3.4.7
-- javascript
-- neon
+- Ruby 3.4.7
+- Javascript
+- Typescript
+- Neon
+- postgreSQL
 - Render
 - Resend メールアドレス: API
-- cloudflare 独自ドメイン
+- Cloudflare 独自ドメイン
 
 ## 使用するgem 一覧
 - gem 'Devise' 認証機能
