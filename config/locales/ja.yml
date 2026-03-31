@@ -1,4 +1,7 @@
 ja:
+  site:
+    name: "tukigime-parking.com"
+    support_email: "support@tukigime-parking.com"
   activerecord:
     models:
       inquiry: "お問い合わせ"
