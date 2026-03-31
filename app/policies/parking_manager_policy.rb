@@ -1,5 +1,4 @@
 class ParkingManagerPolicy < ApplicationPolicy
-
   def index?
     parking_manager.present?
   end
