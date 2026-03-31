@@ -1,25 +1,47 @@
-<div class="flex" id="wrapper">
+<aside class="h-screen w-64 fixed left-0 top-0 z-50 bg-sky-500 flex flex-col p-6 gap-2 shadow-2xl shadow-sky-900/20 font-manrope text-sm font-medium tracking-wide hidden md:flex">
+  
+  <div class="text-white font-black text-2xl mb-8 flex items-center gap-2">
+    <span>パーキング管理</span>
+  </div>
 
-  <div class="w-64 bg-gray-900 text-white border-r border-gray-700 flex flex-col hidden md:block" id="sidebar-wrapper">
+  <nav class="flex-1 flex flex-col gap-1 overflow-y-auto">
+    <%= link_to my_dashboard_root_path, class: "bg-white/20 text-white rounded-lg backdrop-blur-md flex items-center gap-3 px-4 py-3 transition-transform duration-200 hover:translate-x-1" do %>
+      <span>ダッシュボード</span>
+    <% end %>
 
-    <div class="p-4 text-lg font-semibold border-b border-gray-700">
-      🚗 **管理システム**
+    <%= link_to parking_lots_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-3 transition-transform duration-200 hover:translate-x-1" do %>
+      <span>駐車場一覧</span>
+    <% end %>
+
+    <%= link_to contractors_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-3 transition-transform duration-200 hover:translate-x-1" do %>
+      <span>契約者管理</span>
+    <% end %>
+
+    <a class="text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-3 transition-transform duration-200 hover:translate-x-1 opacity-60 cursor-not-allowed" href="#">
+      <span class="material-symbols-outlined">description</span>
+      <span>契約明細（準備中）</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto pt-6 border-t border-white/10 flex flex-col gap-1">
+    
+    <div class="flex items-center gap-3 px-4 py-4 mb-2">
+      <div class="overflow-hidden">
+        <div class="text-white font-bold leading-none truncate"><%= current_parking_manager.email.split('@').first %></div>
+        <div class="text-sky-200 text-[10px] mt-1">管理者</div>
+      </div>
     </div>
 
-    <nav class="flex-grow overflow-y-auto">
+    <%= link_to new_contact_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1" do %>
+      <span>お問い合わせ</span>
+    <% end %>
 
-      <div class="my-1 border-t border-gray-700"></div>
+    <%= link_to profile_path, class: "text-sky-50 hover:bg-white/10 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1" do %>
+      <span>設定・規約</span>
+    <% end %>
 
-      <%# 🅿️ 駐車場管理機能 %>
-      <%= link_to '🅿️ 駐車場管理', parking_lots_path, class: "block p-4 text-lg transition duration-150 ease-in-out hover:bg-gray-700" %>
-
-      <div class="my-1 border-t border-gray-700"></div>
-
-      <%# 👤 契約者管理機能 %>
-      <%= link_to '👤 契約者管理', contractors_path, class: "block p-4 text-lg transition duration-150 ease-in-out hover:bg-gray-700" %>
-
-      <div class="my-1 border-t border-gray-700"></div>
-
-    </nav>
-  </div> 
-</div>
+    <%= button_to destroy_parking_manager_session_path, method: :delete, class: "w-full text-sky-50 hover:bg-red-500/20 hover:text-red-100 rounded-lg flex items-center gap-3 px-4 py-2 transition-transform duration-200 hover:translate-x-1", data: { turbo: false } do %>
+      <span>ログアウト</span>
+    <% end %>
+  </div>
+</aside>
