@@ -38,6 +38,8 @@ class ParkingManager < ApplicationRecord
   validates :building, length: { maximum: 55 }, allow_nil: true
   validates :phone_number, presence: true, length: { is: 11 }, numericality: { only_integer: true }, uniqueness: true
   validates :contact_number, length: { minimum: 10, maximum: 11 }, numericality: { only_integer: true }, allow_nil: true, allow_blank: true
+  # 利用規約
+  validates :terms_of_service, acceptance: { message: "に同意してください" }, on: :create
 
   attr_accessor :tel1, :tel2, :tel3
 
