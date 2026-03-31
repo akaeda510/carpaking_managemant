@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "privacy", to: "static_pages#privacy", as: "privacy"
+  get "settings", to: "static_pages#settings", as: "settings"
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
