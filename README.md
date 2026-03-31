@@ -114,6 +114,7 @@
 - gem 'letter_opener_web' '3.0' ローカル：メール確認
 - gem 'geocoder' 位置情報を取得
 - gem 'resend' メール機能
+- gem 'rspec-rails' テストコード
 
 - QR code API
 - Resend API
