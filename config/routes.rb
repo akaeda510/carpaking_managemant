@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "static_pages/privacy"
+  get "contractors/new"
+  get "parking_managers/show"
+  get "dashboards/show"
+
   namespace :admin do
     get "login", to: "sessions#new"
     post "login", to: "sessions#create"
@@ -22,9 +27,6 @@ Rails.application.routes.draw do
     get :thanks, on: :collection
   end
 
-  get "contractors/new"
-  get "parking_managers/show"
-  get "dashboards/show"
   devise_for :parking_managers, controllers: {
     sessions: "parking_managers/sessions",
     registrations: "parking_managers/registrations"
