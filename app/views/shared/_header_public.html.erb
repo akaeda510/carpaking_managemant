@@ -1,10 +1,10 @@
-<header class="bg-green-200 text-gray-800 p-4 shadow-md">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="text-2xl font-bold">
-      <a href="/" class="text-green-800 hover:text-green-600">
-        <span class="mr-2">&#127370;</span> 駐車場管理
-      </a>
-    </div>
+<header class="bg-sky-400 text-white p-4 shadow-lg font-manrope">
+  <div class="container mx-auto flex justify-between items-center px-4 md:px-0">
+    
+    <div class="text-2xl font-black tracking-tight">
+      <%= link_to new_parking_manager_session_path, class: "flex items-center hover:opacity-80 transition-opacity" do %>
+        <span class="text-white">駐車場管理</span>
+      <% end %>
+    </div>   
   </div>
 </header>
-
