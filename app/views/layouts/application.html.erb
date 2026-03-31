@@ -32,11 +32,16 @@
         action_name != 'wait_verification' %>
 
       <%= render 'shared/header_signed_in' %>
-      <div class="flex min-h-[calc(100vh-4rem)]" id="wrapper">
+      <div class="flex min-h-screen bg-sky-50 md:bg-transparent" id="wrapper">
         <%= render 'shared/sidebar_dashboard' %>
-        <main class="flex-grow">
+
+        <main class="flex-grow flex flex-col md:ml-64 mt-16 bg-sky-50 md:bg-background">
           <%= render 'shared/flash_messages' %>
-          <%= yield %>
+          <div class="p-4 md:p-8 flex-grow">
+            <div class="bg-white md:bg-transparend rounded-xl p4 md:p-0 shadow-sm md:shadow-none">
+              <%= yield %>
+            </div>
+          </div>
         </main>
       </div>
     <% else %>
