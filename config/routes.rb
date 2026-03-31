@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get "static_pages/privacy"
+  get "privacy", to: "static_pages#privacy", as: "privacy"
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
