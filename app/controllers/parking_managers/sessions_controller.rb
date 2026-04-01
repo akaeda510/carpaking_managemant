@@ -15,6 +15,9 @@ class ParkingManagers::SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
 
     if session[:needs_verification]
+      # メールに自動ログイン機能を付与
+      session[:user_remember_me] = params[:parking_manager][:remember_me] == "1"
+
       flash[:alert] = "新しい端末を感知しました。メールを確認してください。"
       respond_with resource, location: wait_verification_path
     else
