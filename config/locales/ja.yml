@@ -1,4 +1,10 @@
 ja:
+  parking_manager:
+    settings:
+      index:
+        title: "設定"
+      account:
+        title: "アカウント設定"
   site:
     name: "tukigime-parking.com"
     support_email: "support@tukigime-parking.com"
