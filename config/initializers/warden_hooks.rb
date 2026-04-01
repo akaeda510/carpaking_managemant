@@ -4,8 +4,12 @@ Warden::Manager.after_set_user do |user, auth, opts, scope|
     user_agent = auth.request.user_agent
     token = auth.cookies[:device_token]
     device = user.devices.find_by(device_token: token)
+    login_params = auth.request.params[:parking_manager]
+
+    auth.request.session[:user_remember_me] =login_params&.[](:remember_me) == "1"
 
     if device&.active_and_verified?
+      user.remember_me! if auth.request.session[:user_remember_me]
       device.update!(user_agent: user_agent)
       # 既知のデバイスなら通知を送って期間延長
       ParkingManagers::LoginMailer.login_notification(user, device, auth.request.remote_ip).deliver_later
