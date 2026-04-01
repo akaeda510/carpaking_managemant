@@ -1,0 +1,32 @@
+<%= render 'setting_item', 
+  path: "#", 
+  icon_class: "fas fa-sliders-h", 
+  bg_class: "bg-sky-100", 
+  text_class: "text-sky-600", 
+  title: "アプリ設定", 
+  description: "表示モードや通知の管理" %>
+
+<%= render 'setting_item', 
+  path: account_parking_managers_settings_path, 
+  icon_class: "fas fa-user-cog", 
+  bg_class: "bg-purple-100", 
+  text_class: "text-purple-600", 
+  title: "アカウント設定", 
+  description: "メールアドレス・パスワードの変更" %>
+
+<%= render 'setting_item',
+  path: privacy_path,
+  icon_class: "fas fa-sliders-alt",
+  bg_class: "bg-green-100",
+  text_class: "text-green-600",
+  title: "プライバシーポリシー",
+  description: "個人情報の取り扱いについて" %>
+
+<%= render 'setting_item',
+  path: terms_path,
+  icon_class: "fas fa-file-contract",
+  bg_class: "bg-orange-100",
+  text_class: "text-orange-600",
+  title: "利用規約",
+  description: "サービスの利用ルールについて" %>
+
