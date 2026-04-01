@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "privacy", to: "static_pages#privacy", as: "privacy"
   get "settings", to: "parking_managers/settings#index", as: "settings"
+  get "terms", to: "static_pages#terms", as: "terms"
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
@@ -72,7 +73,12 @@ Rails.application.routes.draw do
   end
 
   namespace :parking_managers do
-    get "settings/index"
+    resources :settings, only: %i[ index ] do
+      collection do
+        get :account
+      end
+    end
+
     resource :email_confirmations, only: %i[ new create ]
   end
 

@@ -1,0 +1,14 @@
+<%= link_to path, class: "flex items-center justify-between p-5 hover:bg-gray-50 transition border-b border-gray-50 last:border-0" do %>
+  <div class="flex items-center">
+    <div class="w-10 h-10 <%= bg_class %> <%= text_class %> rounded-xl flex items-center justify-center mr-4">
+      <i class="<%= icon_class %>"></i>
+    </div>
+    <div>
+      <p class="font-bold text-gray-800"><%= title %></p>
+      <% if local_assigns[:description] %>
+        <p class="text-xs text-gray-400"><%= description %></p>
+      <% end %>
+    </div>
+  </div>
+  <i class="fas fa-chevron-right text-gray-300 text-sm"></i>
+<% end %>

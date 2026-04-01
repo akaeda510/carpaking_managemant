@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import ParkingSpaceFormController from "./parking_space_form_controller"
 application.register("parking-space-form", ParkingSpaceFormController)
+import FormAutofocusController from "./form_autofocus_controller"
+application.register("form-autofocus", FormAutofocusController)
+
