@@ -47,21 +47,36 @@
 
       <div class="pt-4 border-t border-gray-100">
         <label class="auth-label">携帯電話番号 (必須)</label>
-        <div class="flex items-center space-x-2">
+        <div data-controller="form-autofocus" class="flex items-center space-x-2">
   <%= f.text_field :tel1,
+      type: "tel",
       class: "auth-input text-center w-20",
       maxlength: 3,
-      required: true %>
+      required: true,
+    data: {
+        form_autofocus_target: "input",
+        action: "input->form-autofocus#next keydown->form-autofocus#previous"
+      } %>
   <span class="text-gray-400">-</span>
   <%= f.text_field :tel2,
+      type: "tel",
       class: "auth-input text-center w-24",
       maxlength: 4,
-      required: true %>
+      required: true,
+    data: {
+        form_autofocus_target: "input",
+        action: "input->form-autofocus#next keydown->form-autofocus#previous"
+      } %>
   <span class="text-gray-400">-</span>
   <%= f.text_field :tel3,
+      type: "tel",
       class: "auth-input text-center w-24",
       maxlength: 4,
-      required: true %>
+      required: true,
+    data: {
+        form_autofocus_target: "input",
+        action: "input->form-autofocus#next keydown->form-autofocus#previous"
+      } %>
 </div>
       </div>
 
@@ -78,6 +93,7 @@
             <%= f.label :contact_number, '連絡先電話番号(ハイフンなし)', class: "auth-label" %>
             <div class="flex items-center">
               <%= f.text_field :contact_number,
+                type: "tel",
                 maxlength: 11,
                 class: "auth-input w-full md:w-1/2" %>
             </div>
@@ -117,7 +133,16 @@
     </div>
   </section>
 
+  <% if f.object.new_record? %>
+    <div class="flex items-center gap-2 mb-6">
+      <%= f.check_box :terms_of_service, class: "rounded border-gray-300 text-sky-600 focus:ring-sky-500", required: true %>
+      <%= f.label :terms_of_service, class: "text-sm text-gray-600" do %>
+        <%= link_to "利用規約", terms_path, target: "_blank", class: "text-sky-600 underline" %>に同意する
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="actions pt-6">
-    <%= f.submit "アカウントを作成", class: "auth-submit py-3 text-lg" %>
+    <%= f.submit (f.object.new_record? ? "アカウントを作成" : "更新する"), class: "auth-submit py-3 text-lg" %>
   </div>
 <% end %>
