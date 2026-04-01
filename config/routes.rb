@@ -73,7 +73,12 @@ Rails.application.routes.draw do
   end
 
   namespace :parking_managers do
-    get "settings/index"
+    resources :settings, only: %i[ index ] do
+      collection do
+        get :account
+      end
+    end
+
     resource :email_confirmations, only: %i[ new create ]
   end
 
