@@ -54,6 +54,12 @@ class Device < ApplicationRecord
     update(is_verified: true, device_token: SecureRandom.uuid)
   end
 
+  # デバイスの確認、または再生成
+  def self.find_or_initialize_with_token(resource, token)
+    device_token = token.presence || SecureRandom.urlsafe_base64
+    resource.devices.find_or_initialize_by(device_token: device_token)
+  end
+
   private
 
   def set_device_name
