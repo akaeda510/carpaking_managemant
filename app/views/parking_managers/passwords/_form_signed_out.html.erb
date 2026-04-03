@@ -1,0 +1,21 @@
+<%= render layout: 'parking_managers/shared/auth_card', locals: { title: "パスワードの再設定" } do %>
+  <p class="text-center text-gray-500 text-sm">
+  ご登録のメールアドレスを入力してください。
+  </p>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "mt-4" }) do |f| %>
+    <%= render "parking_managers/shared/error_messages", resource: resource %>
+
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-sm font-medium" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "auth-input" %>
+    </div>
+
+    <%= f.submit "再設定メールを送信", class: "auth-submit"%>
+  <% end %>
+
+  <div class="mt-4 text-center">
+    <%= back_link_to "ログインへ戻る", new_parking_manager_session_path %>
+  </div>
+
+<% end %>
