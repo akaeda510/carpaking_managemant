@@ -1,0 +1,29 @@
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "parking_managers/shared/error_messages", resource: resource %>
+  <%= f.hidden_field :reset_password_token %>
+
+  <div class="space-y-4">
+    <div>
+      <%= f.label :password, class: "auth-label" %>
+      <div class="flex items-center gap-1">
+        <%= f.password_field :password, autocomplete: "new-password", class: "auth-input flex-1", id: "password_field" %>
+        <%= password_toggle_button("password_field") %>
+      </div>
+      <div id="password_hint" class="mt-2 text-xs text-gray-500">
+        6文字以上記入してください
+      </div>
+    </div>
+
+    <div>
+      <%= f.label :password_confirmation, class: "auth-label" %>
+      <div class="flex items-center gap-1">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "auth-input flex-1", id: "password_confirmation_field" %>
+        <%= password_toggle_button("password_confirmation_field") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions mt-6">
+    <%= f.submit "新しいパスワードを設定", class: "auth-submit" %>
+  </div>
+<% end %>
