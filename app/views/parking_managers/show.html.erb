@@ -90,9 +90,13 @@
 
     </div>
 
-    <div class="mt-10 flex justify-end">
+    <div class="mt-10 text-center">
       <%= link_to 'アカウント情報を編集', edit_parking_manager_registration_path, 
         class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
+    </div>
+
+    <div class="mt-6 text-center">
+      <%= back_link_to "戻る", account_parking_managers_settings_path(@parking_manager) %>
     </div>
 
   </div>

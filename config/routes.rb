@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :parking_managers, controllers: {
+    passwords: "parking_managers/passwords",
     sessions: "parking_managers/sessions",
     registrations: "parking_managers/registrations"
   }

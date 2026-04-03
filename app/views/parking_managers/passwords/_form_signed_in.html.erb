@@ -1,0 +1,16 @@
+<%= render layout: 'parking_managers/shared/auth_card', locals: { title: "パスワード変更" } do %>
+
+  <p class="text-sm text-blue-700 mt-2">
+  安全のため、現在ログイン中のメールアドレスに確認用リンクを送信します。<br>
+  <strong><%= current_parking_manager.email %></strong>
+  </p>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "mt-4" }) do |f| %>
+    <%= f.hidden_field :email, value: current_parking_manager.email %>
+    <%= f.submit "確認メールを送信する", class: "w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700" %>
+  <% end %>
+
+  <div class="mt-6 text-center"> 
+    <%= back_link_to "戻る", account_parking_managers_settings_path(@parking_manager) %>
+  </div>
+<% end %>

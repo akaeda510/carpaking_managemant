@@ -1,7 +1,22 @@
-<div class="flex justify-center min-h-screen bg-gray-100 pt-16">
-  <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg h-fit">
-    
+<% if parking_manager_signed_in? %>
+  <div class="container mx-auto px-4 py-10 max-w-2xl">
+
     <% if local_assigns[:title] %>
+      <h1 class="text-2xl font-black text-gray-900 mb-4 px-2">
+        <%= title %>
+      </h1>
+    <% end %>
+    <div class="sm:p-6">
+      <%= yield %>
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="flex justify-center items-start bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg h-fit">
+
+      <% if local_assigns[:title] %>
       <h2 class="text-3xl font-extrabold text-center text-gray-900">
         <%= title %>
       </h2>
@@ -9,5 +24,6 @@
 
     <%= yield %>
 
+    </div>
   </div>
-</div>
+<% end %>

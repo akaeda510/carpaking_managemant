@@ -15,16 +15,19 @@ class Device < ApplicationRecord
     /Macintosh/i => "Mac(パソコン)"
   }.freeze
 
+  # アクセスした場所を指定
   def self.get_city_name(ip_address)
     location = Geocoder.search(ip_address).first
     location&.city.present? ? "#{location.city}付近の" : "不明な場所の"
   end
 
+  # 端末のタイプを指定
   def self.get_type_by_user_agent(user_agent)
     user_agent_string = user_agent.to_s
     DEVICE_TYPES.find { |pattern, _name| user_agent_string.match?(pattern) }&.last || "不明な端末"
   end
 
+  # メールにアクセスした場所と端末名
   def self.generate_friendly_name(user_agent, ip_address)
     city = get_city_name(ip_address)
     device_type = get_type_by_user_agent(user_agent)
@@ -49,6 +52,24 @@ class Device < ApplicationRecord
 
   def verify!
     update(is_verified: true, device_token: SecureRandom.uuid)
+  end
+
+  # デバイスの確認、または再生成
+  def self.find_or_initialize_with_token(resource, token)
+    device_token = token.presence || SecureRandom.urlsafe_base64
+    resource.devices.find_or_initialize_by(device_token: device_token)
+  end
+
+  # デバイスの認証を更新・保存
+  def verify_with_agent!(user_agent)
+    self.assign_attributes(
+      name: self.class.get_type_by_user_agent(user_agent),
+      user_agent: user_agent,
+      last_login_at: Time.current,
+      is_verified: true,
+      expires_at: 1.month.from_now
+    )
+    save
   end
 
   private

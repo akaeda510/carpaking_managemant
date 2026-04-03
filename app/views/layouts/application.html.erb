@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "駐車場管理システム" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -23,7 +23,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
+  <body class="min-h-full flex flex-col bg-gray-100 m-0">
     <% if parking_manager_signed_in? &&
         !session[:needs_verification] &&
         controller_path != 'parking_managers/sessions' &&
@@ -44,17 +44,21 @@
           </div>
         </main>
       </div>
+
     <% else %>
       <%= render 'shared/header_public' %>
-      <main class="min-h-screen flex flex-col">
+      <main class="flex-grow flex flex-col justify-start">
         <%= render 'shared/flash_messages' %>
-        <div class="flex-grow">
+        <div class="w-full">
           <%= yield %>
         </div>
-        <% unless parking_manager_signed_in? %>
-          <%= render 'shared/footer_public' %>
-        <% end %>
       </main>
+
+      <% unless parking_manager_signed_in? %>
+        <footer class="mt-auto">
+          <%= render 'shared/footer_public' %>
+        </footer>
+      <% end %>
     <% end %>
   </body>
 </html>

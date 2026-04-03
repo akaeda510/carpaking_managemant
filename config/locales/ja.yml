@@ -1,9 +1,13 @@
 ja:
-  parking_manager:
+  parking_managers:
+    label:
+      passwords:
+        edit:
+          password: "新しいパスワード"
+          password_confirmation: "パスワード(確認用)"
     settings:
       index:
         title: "設定"
-      account:
         title: "アカウント設定"
   site:
     name: "tukigime-parking.com"
@@ -22,7 +26,6 @@ ja:
       subject: "件名"
       created_at: "作成日時"
       updated_at: "更新日時"
-      password: "パスワード"
       first_name: "氏名(姓)"
       last_name: "氏名(名)"
       prefecture: "都道府県"
