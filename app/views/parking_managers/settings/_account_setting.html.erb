@@ -7,11 +7,12 @@
       description: "アカウントの情報・変更"%>
 
 <%= render 'setting_item', 
-      path: '#', 
+      path: new_password_path(@parking_manager), 
       icon_class: "fas fa-key", 
       bg_class: "bg-red-100", 
       text_class: "text-red-600", 
-      title: "パスワードリセット" %>
+      title: "パスワードリセット",
+      description: "パスワード再設定をメールで送信"%>
 
 <%= render 'setting_item', 
       path: '#', 
