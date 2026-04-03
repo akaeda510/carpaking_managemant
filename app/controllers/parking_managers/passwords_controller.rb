@@ -28,7 +28,7 @@ class ParkingManagers::PasswordsController < Devise::PasswordsController
   end
 
   def edit
-      # パスワードリセット後、トークンを失効し、独自のパスを指定
+    # パスワードリセット後、トークンを失効し、独自のパスを指定
     resource = resource_class.with_reset_password_token(params[:reset_password_token])
 
     unless resource&& resource.reset_password_period_balid?
