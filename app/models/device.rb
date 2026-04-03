@@ -60,6 +60,18 @@ class Device < ApplicationRecord
     resource.devices.find_or_initialize_by(device_token: device_token)
   end
 
+  # デバイスの認証を更新・保存
+  def verify_with_agent!(user_agent)
+    self.assign_attributes(
+      name: self.class.get_type_by_user_agent(user_agent),
+      user_agent: user_agent,
+      last_login_at: Time.current,
+      is_verified: true,
+      expires_at: 1.month.from_now
+    )
+    save
+  end
+
   private
 
   def set_device_name
