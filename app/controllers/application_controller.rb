@@ -78,18 +78,16 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render file: Rails.public_path.join("403.html"), status: :forbiden, layout: false
+    render file: Rails.public_path.join("403.html").to_s, status: :forbidden, layout: false
   end
 
   def clear_auth_session_data(confirmation_token: nil)
     session.delete(:need_varification)
     session.delete(:pending_device_id)
     session.delete(:user_remember_me)
-
     if confirmation_token.present?
       EmailConfirmation.find_by(token: confirmation_token)&.destroy
     end
-
     Rails.logger.info "--- Auth session and token cleared ---"
   end
 
