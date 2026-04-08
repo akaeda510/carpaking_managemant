@@ -53,7 +53,7 @@ class ParkingManagers::PasswordsController < Devise::PasswordsController
       complete_auth_flow(resource, confirmation_token: params[:reset_password_token])
 
       # 未ログイン状態の場合、ログインを解除
-      unless signed_in_before_update
+      if !signed_in_before_update && parking_manager_signed_in?
         sign_out(resource_name)
       end
 
