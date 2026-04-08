@@ -23,14 +23,11 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
 
     if resource.save
-      EmailConfirmation.find_by(token: params[:token])&.destroy
-
-      # deviceテーブルを作成
+      # トークンとセッションクリア処理
+      clear_auth_session_data(confirmation_token: params[:token])
+      # デバイス登録（deviceテーブルを作成 + cookie作成)
       resource.set_initial_device(request.user_agent, request.remote_ip)
-      # 新しいトークンをcookieに渡す
       set_device_cookie(resource.devices.first)
-      # 古いトークンを削除
-      session.delete(:pending_device_id)
 
       if resource.active_for_authentication?
         set_flash_message! :success, :signed_up
