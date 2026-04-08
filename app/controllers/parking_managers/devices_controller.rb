@@ -22,9 +22,9 @@ class ParkingManagers::DevicesController < ApplicationController
       # 自動ログインクッキーを発行
       if session[:user_remember_me] && current_parking_manager
         current_parking_manager.remember_me!
-        session.delete(:user_remember_me)
       end
-
+      # トークンを削除
+      clear_auth_session_data
       # ブラウザに1ヶ月有効トークンを保存
       cookies[:device_token] = {
         value: @device.device_token,
