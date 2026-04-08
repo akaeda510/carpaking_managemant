@@ -100,7 +100,7 @@ class ApplicationController < ActionController::Base
       new_parking_manager_session_path
     end
   end
-  
+
   def persist_session_on_failure(resource)
     bypass_sign_in(resource, scope: :parking_manager)
   end

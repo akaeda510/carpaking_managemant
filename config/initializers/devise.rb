@@ -27,7 +27,7 @@ Devise.setup do |config|
   config.mailer_sender = "system@tukigime-parking.com"
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'ParkingManagerMailer'
+  config.mailer = "ParkingManagerMailer"
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'

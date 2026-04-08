@@ -13,11 +13,11 @@ class ParkingManagerMailer < BaseMailer
   def send_resend_mail(record, subject_text)
     text_part = render_to_string(
       template: "parking_managers/mailer/#{action_name}",
-      formats: [:text]
+      formats: [ :text ]
     )
     html_part = render_to_string(
       template: "parking_managers/mailer/#{action_name}",
-      formats: [:html]
+      formats: [ :html ]
     )
 
     deliver_via_api(
