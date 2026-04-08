@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render file: Rails.public_path.join("403.html"), status: :forbiden, layout: false
+    render file: Rails.public_path.join("403.html").to_s, status: :forbidden, layout: false
   end
 
   def clear_auth_session_data(confirmation_token: nil)
