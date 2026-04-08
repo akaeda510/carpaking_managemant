@@ -95,4 +95,10 @@ class ApplicationController < ActionController::Base
       secure: Rails.env.production?
     }
   end
+
+  def clear_device_verification_session
+    session.delete(:need_varification)
+    session.delete(:pending_device_id)
+    session.delete(:user_remember_me)
+  end
 end
