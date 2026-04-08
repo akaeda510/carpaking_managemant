@@ -75,7 +75,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
   protected
 
   def after_update_path_for(resource)
-    porfile_path
+    profile_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.
