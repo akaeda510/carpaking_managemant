@@ -78,7 +78,28 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    render file: Rails.public_path.join("403.html"), status: :forbidden, layout: false
+    render file: Rails.public_path.join("403.html"), status: :forbiden, layout: false
+  end
+
+  def clear_auth_session_data(confirmation_token: nil)
+
+    session.delete(:need_varification)
+    session.delete(:pending_device_id)
+    session.delete(:user_remember_me)
+
+    if confirmation_token.present?
+      EmailConfirmation.find_by(token: confirmation_token)&.destroy
+    end
+
+    Rails.logger.info "--- Auth session and token cleared ---"
+  end
+
+  def auth_dependent_redirect_path(resource)
+    if parking_manager_singed_in?
+      after_sign_in_path_for(resource)
+    else
+      new_parking_maanger_session_path
+    end
   end
 
   private
@@ -94,18 +115,5 @@ class ApplicationController < ActionController::Base
       path: "/",
       secure: Rails.env.production?
     }
-  end
-
-  def clear_auth_session_date(confirmation_token: nil)
-
-    session.delete(:need_varification)
-    session.delete(:pending_device_id)
-    session.delete(:user_remember_me)
-
-    if confirmation_token.present?
-      EmailConfirmation.find_by(token: confirmation_token)&.destroy
-    end
-
-    Rails.logger.info "--- Auth session and token cleared ---"
   end
 end
