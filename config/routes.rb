@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
+  get "devices/verify/:device_token", to: "parking_managers/devices#verify"
 
   namespace :admin do
     get "login", to: "sessions#new"
@@ -37,16 +38,6 @@ Rails.application.routes.draw do
 
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
 
-  resources :devices, only: [] do
-    collection do
-      get "verify/:device_token", to: "parking_managers/devices#verify", as: :verify
-    end
-
-    member do
-      post "resend_email", to: "parking_managers/devices#resend_email", as: :resend_email_parking_managers
-    end
-  end
-
   resources :parking_lots, only: %i[ new create index update edit destroy ] do
     resources :parking_areas, only: %i[ new create index edit update destroy ] do
       resources :parking_spaces, only: %i[ new create index show edit update destroy ]
@@ -60,7 +51,6 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   devise_scope :parking_manager do
-    get "parking_managers/sessions/wait_verification", to: "parking_managers/sessions#wait_verification", as: :wait_verification
     get "parking_managers/sign_up/:token", to: "parking_managers/registrations#new", as: :new_parking_manager_registration_with_token
 
     authenticated :parking_manager do
@@ -74,6 +64,15 @@ Rails.application.routes.draw do
   end
 
   namespace :parking_managers do
+    resources :devices, only: [] do
+      member do
+        post "resend_email", to: "devices#resend_email"
+      end
+      collection do
+        get :wait_verification
+      end
+    end
+
     resources :settings, only: %i[ index ] do
       collection do
         get :account
