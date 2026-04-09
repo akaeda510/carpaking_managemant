@@ -18,22 +18,23 @@ else
 end
 
 admin_password = ENV.fetch("ADMIN_PASSWORD")
+admin_email = ENV.fetch("ADMIN_EMAIL")
 
-site_owner = Admin.find_or_initialize_by(email: 'admin@example.com')
+site_owner = Admin.find_or_initialize_by(email: admin_email)
 site_owner.assign_attributes(
   password: admin_password,
   password_confirmation: admin_password,
   first_name: 'テスト',
   last_name: 'アプリ管理者',
-  phone_number: '09066666666',
+  phone_number: '09099999999',
   role: :site_owner,
   active: true
 )
 
 if site_owner.save
-  puts "Admin '#{site_owner.last_name}': saved successfully."
+  puts "Admin '#{site_owner.email}': saved successfully."
 else
-  puts "Admin save failed: #{site_owner.errors.full_messages.join(', ')}"
+   puts "Admin save failed: #{site_owner.errors.full_messages.join(', ')}"
 end
 
 owner_one = ParkingManager.find_or_create_by!(email: 'akaeda510@gmail.com') do |manager|
