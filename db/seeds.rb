@@ -17,21 +17,23 @@ else
   puts "ℹ️  ParkingManager with email #{target_email} not found. Skipping."
 end
 
-site_owner = Admin.find_or_create_by!(email: 'admin@example.com') do |admin|
-  admin.password = 'password'
+admin_password = ENV.fetch("ADMIN_PASSWORD")
 
-  admin.first_name = 'テスト'
-  admin.last_name = 'アプリ管理者'
-  admin.phone_number = '09066666666'
-  admin.role = :site_owner
-  admin.active = true
-end
-puts "Admin_id, 'テストアプリ管理者': created or found."
+site_owner = Admin.find_or_initialize_by(email: 'admin@example.com')
+site_owner.assign_attributes(
+  password: admin_password,
+  password_confirmation: admin_password,
+  first_name: 'テスト',
+  last_name: 'アプリ管理者',
+  phone_number: '09066666666',
+  role: :site_owner,
+  active: true
+)
 
-admin = Admin.find_by(email: 'admin@example.com')
-if admin
-  admin.update!(password: 'password')
-  puts 'Admin updated: Password has been re-hashed'
+if site_owner.save
+  puts "Admin '#{site_owner.last_name}': saved successfully."
+else
+  puts "Admin save failed: #{site_owner.errors.full_messages.join(', ')}"
 end
 
 owner_one = ParkingManager.find_or_create_by!(email: 'akaeda510@gmail.com') do |manager|
