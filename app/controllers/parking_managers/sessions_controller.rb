@@ -19,7 +19,7 @@ class ParkingManagers::SessionsController < Devise::SessionsController
       session[:user_remember_me] = params[:parking_manager][:remember_me] == "1"
 
       flash[:alert] = "新しい端末を感知しました。メールを確認してください。"
-      respond_with resource, location: wait_verification_path
+      respond_with resource, location: wait_verification_parking_managers_devices_path
     else
       set_flash_message!(:success, :signed_in)
       respond_with resource, location: after_sign_in_path_for(resource)
