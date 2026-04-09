@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "contractors/new"
   get "parking_managers/show"
   get "dashboards/show"
-  get "devices/verify/:device_token", to: "parking_managers/devices#verify"
+  get "devices/verify/:device_token", to: "parking_managers/devices#verify", as: :verify_device
 
   namespace :admin do
     get "login", to: "sessions#new"
