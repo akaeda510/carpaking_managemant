@@ -16,18 +16,13 @@ class ApplicationController < ActionController::Base
     current_parking_manager
   end
 
+
+  # ログイン時、デバイス未登録または失効時
   def confirm_device_verified!
     return if devise_controller? || !parking_manager_signed_in?
 
     if session[:needs_verification]
-      allowed_paths = [
-        wait_verification_path,
-        "/parking_managers/devices/verify",
-        destroy_parking_manager_session_path
-      ]
-      unless allowed_paths.any? { |path| request.path.include?(path) }
-        redirect_to wait_verification_path, alert: "この端末にはまだ承認されていません。メールを確認して承認を完了してください。"
-      end
+      wait_verification_parking_managers_devices_path unless request.path == wait_verification_parking_managers_devices_path
     end
   end
 
