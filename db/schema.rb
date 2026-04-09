@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_27_022157) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -303,7 +303,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_27_022157) do
   add_foreign_key "contractors", "parking_managers"
   add_foreign_key "devices", "parking_managers"
   add_foreign_key "garage_details", "parking_spaces"
-  add_foreign_key "inquiries", "parking_managers"
   add_foreign_key "parking_areas", "parking_lots"
   add_foreign_key "parking_lots", "parking_managers"
   add_foreign_key "parking_space_option_assignments", "parking_space_options"

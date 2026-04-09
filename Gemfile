@@ -75,6 +75,9 @@ group :development, :test do
   gem "binding_of_caller"
 
   gem "rspec-rails", "~> 8.0.0"
+
+  # 環境設定を読み込む
+  gem "dotenv-rails"
 end
 
 group :development do
