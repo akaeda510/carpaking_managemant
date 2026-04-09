@@ -1,5 +1,5 @@
 class ParkingManagers::DevicesController < ApplicationController
-  skip_before_action :confirm_device_verified!, only: [ :resend_email, :verify, :wait_verification ]
+  skip_before_action :enforce_device_verification, only: [ :resend_email, :verify, :wait_verification ]
   skip_before_action :authenticate_parking_manager!, only: [ :verify, :resend_email ], raise: false
 
   def wait_verification
@@ -49,7 +49,7 @@ class ParkingManagers::DevicesController < ApplicationController
     parking_manager = @device.parking_manager
 
     if parking_manager.present?
-      ParkingManagers::DeviceMailer.warning_new_device_login(parking_manager, @device).deliver_later
+      ParkingManagers::DeviceMailer.warning_new_device_login(parking_manager, @device, request.remote_ip).deliver_later
       redirect_to wait_verification_parking_managers_devices_path, success: "端末登録メールを再送しました"
     else
       redirect_to new_parking_managger_session_path, alert: "有効なアカウントが見つかりませんでした。"
