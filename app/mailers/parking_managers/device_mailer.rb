@@ -4,7 +4,7 @@ class ParkingManagers::DeviceMailer < BaseMailer
   def warning_new_device_login(parking_manager, device, remote_ip)
     @parking_manager = parking_manager.decorate
     @device = device.decorate
-    @verify_url = verify_devices_url(device_token: @device.device_token)
+    @verify_url = verify_device_url(device_token: @device.device_token)
     @friendly_device_name = device.decorate.friendly_name(remote_ip)
 
     login_time = @device.login_timestamp

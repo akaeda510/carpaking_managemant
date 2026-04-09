@@ -1,6 +1,6 @@
 class ParkingManagers::SettingsController < ApplicationController
   before_action :authenticate_parking_manager!
-  before_action :confirm_device_verified!
+  before_action :enforce_device_verification
 
   def index
     authorize :parking_manager, :index?

@@ -1,6 +1,6 @@
 class ContractorsController < ApplicationController
   before_action :authenticate_parking_manager!
-  before_action :confirm_device_verified!
+  before_action :enforce_device_verification
   before_action :set_contractor, only: %i[show edit update destroy]
   before_action :authorize_contract, only: %i[show edit update destroy]
   before_action :set_available_spaces, only: %i[new edit]
