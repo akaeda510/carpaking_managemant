@@ -28,6 +28,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
+  create_table "archived_inquiries", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.text "message", null: false
+    t.string "name", null: false
+    t.datetime "original_created_at"
+    t.datetime "original_updated_at"
+    t.integer "parking_manager_id"
+    t.integer "status"
+    t.string "subject", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_manager_id"], name: "index_archived_inquiries_on_parking_manager_id"
+  end
+
   create_table "contract_parking_spaces", force: :cascade do |t|
     t.bigint "contractor_id", null: false
     t.datetime "created_at", null: false
