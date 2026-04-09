@@ -3,7 +3,7 @@ require "pundit"
 class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
-  before_action :confirm_device_verified!, unless: :devise_controller?
+  before_action :enforce_device_verification, unless: :devise_controller?
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   layout :layout_by_resource
@@ -17,14 +17,14 @@ class ApplicationController < ActionController::Base
   end
 
 
-  # ログイン時、デバイス未登録または失効時
-  def confirm_device_verified!
-    return if devise_controller? || !parking_manager_signed_in?
-
-    if session[:needs_verification]
-      wait_verification_parking_managers_devices_path unless request.path == wait_verification_parking_managers_devices_path
+  def enforce_device_verification
+    if parking_manager_signed_in? && session[:needs_verification]
+      unless verification_related_path?
+        redirect_to wait_verification_parking_managers_devices_path,
+          alert: "セキュリティ保護のため、端末の登録を完了してください。"
+      end
     end
-  end
+  end  # ログイン時、デバイス未登録または失効時
 
   protected
 
@@ -111,5 +111,12 @@ class ApplicationController < ActionController::Base
       path: "/",
       secure: Rails.env.production?
     }
+  end
+
+
+  def verification_related_path?
+    request.path.include?("wait_verification") ||
+      request.path.include?("resend_email") ||
+      request.path.include?("verify")
   end
 end
