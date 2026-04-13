@@ -11,16 +11,11 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
   <body class="min-h-full flex flex-col bg-gray-100 m-0">
@@ -31,6 +26,7 @@
         action_name != 'verified_success' &&
         action_name != 'wait_verification' %>
 
+      <%# --- ログイン済み・承認済みメインレイアウト --- %>
       <%= render 'shared/header_signed_in' %>
       <div class="flex min-h-screen bg-sky-50 md:bg-transparent" id="wrapper">
         <%= render 'shared/sidebar_dashboard' %>
@@ -38,14 +34,20 @@
         <main class="flex-grow flex flex-col md:ml-64 mt-16 bg-sky-50 md:bg-background">
           <%= render 'shared/flash_messages' %>
           <div class="p-4 md:p-8 flex-grow">
-            <div class="bg-white md:bg-transparend rounded-xl p4 md:p-0 shadow-sm md:shadow-none">
+            <div class="bg-white md:bg-transparent rounded-xl p-4 md:p-0 shadow-sm md:shadow-none">
               <%= yield %>
             </div>
           </div>
+
+          <%# ログイン後のフッター（右寄せ） %>
+          <footer class="mt-auto p-4">
+            <%= render 'shared/footer_copyright', align: "right" %>
+          </footer>
         </main>
       </div>
 
     <% else %>
+      <%# --- ログイン前・承認待ち等レイアウト --- %>
       <%= render 'shared/header_public' %>
       <main class="flex-grow flex flex-col justify-start">
         <%= render 'shared/flash_messages' %>
@@ -54,11 +56,16 @@
         </div>
       </main>
 
-      <% unless parking_manager_signed_in? %>
-        <footer class="mt-auto">
+      <footer class="mt-auto">
+        <% if !parking_manager_signed_in? %>
+          <%# 完全な未ログイン状態 %>
           <%= render 'shared/footer_public' %>
-        </footer>
-      <% end %>
+        <% else %>
+          <div class="w-full max-w-4xl px-4">
+            <%= render 'shared/footer_copyright' %>
+          </div>
+        <% end %>
+      </footer>
     <% end %>
   </body>
 </html>

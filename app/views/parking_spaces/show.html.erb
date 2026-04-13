@@ -41,23 +41,23 @@
       </div>
       <dl class="divide-y divide-gray-200">
         <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">駐車タイプ</dt>
+          <dt class="auth-label">駐車タイプ</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 font-bold"><%= @parking_area.category_i18n %></dd>
         </div>
         <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">サイズ（幅 × 長さ）</dt>
+          <dt class="auth-label">サイズ（幅 × 長さ）</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <span class="font-bold"><%= @parking_space.width %>m</span> × <span class="font-bold"><%= @parking_space.length %>m</span>
           </dd>
         </div>
         <% if @parking_area&.category == 'garage' && @parking_space.garage_detail.present? %>
           <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-            <dt class="text-sm font-medium text-gray-500 text-indigo-600">高さ制限</dt>
+            <dt class="auth-label text-indigo-600">高さ制限</dt>
             <dd class="mt-1 text-sm text-indigo-700 sm:mt-0 sm:col-span-2 font-bold"><%= @parking_space.garage_detail.height %>m</dd>
           </div>
         <% end %>
         <div class="px-6 py-4 sm:grid sm:grid-cols-3 sm:gap-4">
-          <dt class="text-sm font-medium text-gray-500">オプション</dt>
+          <dt class="auth-label">オプション</dt>
           <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
             <% if @parking_space.parking_space_options.any? %>
               <div class="flex flex-wrap gap-2">
@@ -109,6 +109,6 @@
   </div>
 
   <div class="mt-10 text-center">
-    <%= back_link_to '一覧に戻る', parking_lot_parking_area_parking_spaces_path, class: "text-gray-500 hover:text-gray-800 font-medium" %>
+    <%= back_link_to '一覧に戻る', parking_lot_parking_area_parking_spaces_path, class: "text-indigo-600" %>
   </div>
 </div>

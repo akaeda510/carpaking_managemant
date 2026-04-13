@@ -7,7 +7,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8">
 
       <div class="col-span-1">
-        <%= f.label :name, '駐車番号', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :name, '駐車番号', class: "auth-label" %>
         <% has_history = parking_space.contract_parking_spaces.exists? %>
 
         <div class="mt-1 relative rounded-md shadow-sm max-w-[180px]">
@@ -32,7 +32,7 @@
       </div>
 
       <div class="col-span-1">
-        <%= f.label :price, '月額賃料', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :price, '月額賃料', class: "auth-label" %>
         <div class="mt-1 relative rounded-md shadow-sm max-w-[220px]">
           <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             <span class="text-gray-400 sm:text-sm">¥</span>
@@ -91,7 +91,7 @@
     <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">駐車スペースのサイズ</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div>
-        <%= f.label :width, '横幅 (m)', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :width, '横幅 (m)', class: "auth-label" %>
         <div class="mt-1 relative rounded-md shadow-sm max-w-[150px]">
           <%= f.number_field :width, step: '0.1', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
           <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -101,7 +101,7 @@
       </div>
 
       <div>
-        <%= f.label :length, '長さ (m)', class: "block text-sm font-medium text-gray-700" %>
+        <%= f.label :length, '長さ (m)', class: "auth-label" %>
         <div class="mt-1 relative rounded-md shadow-sm max-w-[150px]">
           <%= f.number_field :length, step: '0.1', min: 0, class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
           <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
@@ -113,7 +113,7 @@
       <div data-parking-space-form-target="garageFields"
            class="col-span-1 sm:col-span-2 <%= 'hidden' unless @parking_area.category == 'garage' %>">
            <%= f.fields_for :garage_detail do |g| %>
-             <%= g.label :height, "高さ (m)", class: "block text-sm font-medium text-gray-700" %>
+             <%= g.label :height, "高さ (m)", class: "auth-label" %>
              <div class="mt-1 relative rounded-md shadow-sm max-w-[150px]">
                <%= g.number_field :height, step: "0.1", min: 0, placeholder: "例: 2.1",
                  class: "block w-full border border-gray-300 rounded-md py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm pr-10" %>
@@ -128,14 +128,14 @@
 
   <section class="border border-gray-200 p-6 rounded-lg bg-white">
     <h3 class="text-xl font-semibold text-indigo-600 mb-4 border-b pb-2">説明 概要</h3>
-    <%= f.text_area :description, rows: 5, class: "mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm", placeholder: "車室に関する特記事項があれば入力してください" %>
+    <%= f.text_area :description, rows: 5, class: "auth-textarea", placeholder: "車室に関する特記事項があれば入力してください" %>
   </section>
 
   <%= render 'batch_registration_option', parking_sapce: @parking_space %>
 
   <div class="actions pt-4">
     <%= f.submit (parking_space.new_record? ? "作成" : "更新する"), 
-      class: "w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer transition-all active:scale-[0.98]" %>
+      class: "auth-submit" %>
   </div>
 
 <% end %>

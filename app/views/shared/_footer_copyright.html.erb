@@ -1,0 +1,7 @@
+<% text_align_class = local_assigns[:align] == 'right' ? 'text-right' : 'text-center' %>
+
+<div class="col-span-full w-full <%= text_align_class %> mt-8">
+  <p class="text-xs text-gray-500 italic inline-block">
+    &copy; <%= Time.current.year %> tukigime-parking.com
+  </p>
+</div>

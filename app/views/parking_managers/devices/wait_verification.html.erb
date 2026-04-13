@@ -12,6 +12,9 @@
     <p class="text-sm text-gray-500 mb-4">
     メールが届かない、またはリンクが無効になった場合は、下のボタンからログイン画面へ戻り、再度お試しください。
     </p>
-    <%= back_link_to "ログイン画面へ戻る", destroy_parking_manager_session_path, data: { turbo_method: :delete } %>
+
+    <div class="mt-4 text-center">
+      <%= back_link_to "ログインへ戻る", destroy_parking_manager_session_path, data: { turbo_method: :delete } %>
+    </div>
   </div>
 <% end %>
