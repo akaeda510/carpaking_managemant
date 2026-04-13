@@ -58,6 +58,10 @@
         <footer class="mt-auto">
           <%= render 'shared/footer_public' %>
         </footer>
+      <% else %>
+        <footer class="mt-auto">
+          <%= render 'shared/footer_copyright', align: center %>
+        </footer>
       <% end %>
     <% end %>
   </body>
