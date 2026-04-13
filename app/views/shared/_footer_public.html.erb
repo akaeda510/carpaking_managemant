@@ -10,7 +10,7 @@
             <%= link_to "お問い合わせ", new_contact_path, class: "hover:text-sky-400 transition-colors inline-block" %>
           </li>
           <li>
-            <%= link_to "利用規約", "#", class: "hover:text-sky-400 transition-colors inline-block" %>
+            <%= link_to "利用規約", terms_path, class: "hover:text-sky-400 transition-colors inline-block" %>
           </li>
           <li>
             <%= link_to "プライバシーポリシー", privacy_path, class: "hover:text-sky-400 transition-colors inline-block" %>
@@ -18,12 +18,7 @@
         </ul>
       </div>
 
-      <div class="md:col-span-2 flex flex-col justify-end items-center md:items-end">
-        <p class="text-xs text-gray-500 italic mt-8 md:mt-0">
-          &copy; <%= Time.current.year %> tukigime-parking.com
-        </p>
-      </div>
-
+      <%= render "shared/footer_copyright", align: "right" %>
     </div>
   </div>
 </footer>
