@@ -1,8 +1,7 @@
-<%# align: 'center' or 'right' を受け取れるようにする %>
-<% alignment_class = local_assigns[:align] == 'right' ? 'md:items-end' : 'md:items-center' %>
+<% text_align_class = local_assigns[:align] == 'right' ? 'text-right' : 'text-center' %>
 
-<div class="col-span-full flex flex-col justify-end items-center <%= alignment_class %> mt-8">
-  <p class="text-xs text-gray-500 italic">
+<div class="col-span-full w-full <%= text_align_class %> mt-8">
+  <p class="text-xs text-gray-500 italic inline-block">
     &copy; <%= Time.current.year %> tukigime-parking.com
   </p>
 </div>
