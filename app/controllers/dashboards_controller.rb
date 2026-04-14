@@ -22,7 +22,7 @@ class DashboardsController < ApplicationController
     # 有効契約数
     @active_tenants_count = @parking_lot.contract_parking_spaces.active.count
     # 操作ログ
-    @activities = raw_items.map(&:to_activity).sort_by { |log| log[:occurred_at] }.reverse.first(10)
+    @activities = raw_items.map(&:to_activity).sort_by { |log| log[:occurred_at] }.reverse.first(5)
     # 稼働率グラフ
     # @monthly_stats = nil
   end
