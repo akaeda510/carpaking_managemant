@@ -71,6 +71,19 @@ class ParkingSpace < ApplicationRecord
     .distinct
   }
 
+  def to_activity
+    decorator = ParkingSpaceDecorator.new(self)
+    config = decorator.activity_log_config
+
+    {
+      title: label[:label]
+      detail: decorator.activity_detail,
+      occurred_at: update_at,
+      icon: config[:icon],
+      color_class: config[:color]
+    }
+  end
+
   def self.total_revenue
     contracted.sum(:price)
   end
