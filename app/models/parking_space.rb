@@ -76,9 +76,9 @@ class ParkingSpace < ApplicationRecord
     config = decorator.activity_log_config
 
     {
-      title: label[:label]
+      title: config[:label],
       detail: decorator.activity_detail,
-      occurred_at: update_at,
+      occurred_at: updated_at,
       icon: config[:icon],
       color_class: config[:color]
     }
