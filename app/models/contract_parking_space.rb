@@ -20,6 +20,11 @@ class ContractParkingSpace < ApplicationRecord
     where("start_date <= :today AND (end_date >= :today OR end_date IS NULL)", today: today)
     }
 
+  # 今月に新たに作成されたデータ
+  scope :created_this_month, -> {
+    where(created_at: Time.current.all_month)
+  }
+
   # 終了した契約
   scope :terminated, -> {
     where("end_date < ?", Date.today)
