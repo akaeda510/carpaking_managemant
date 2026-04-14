@@ -49,4 +49,17 @@ class Contractor < ApplicationRecord
   def current_contractors_space
     active_contract_parking_spaces.order(start_date: :desc).first
   end
+
+  def to_activity
+    decorator = ContractorDecorator.new(self)
+    config = decorator.activity_log_config
+
+    {
+      title: config[:label],
+      detail: decorator.activity_detail,
+      occurred_at: updated_at,
+      icon: config[:icon],
+      color_class: config[:color]
+    }
+  end
 end
