@@ -16,8 +16,9 @@ class ContractParkingSpace < ApplicationRecord
 
   # 有効な契約
   scope :active, -> {
-    where("end_date >= ?", Date.today)
-  }
+    today = Date.current
+    where("start_date <= :today AND (end_date >= :today OR end_date IS NULL)", today: today)
+    }
 
   # 終了した契約
   scope :terminated, -> {
