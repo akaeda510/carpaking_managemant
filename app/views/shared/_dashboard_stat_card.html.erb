@@ -1,0 +1,45 @@
+<%
+  theme = local_assigns[:color_theme] || :indigo
+  colors = {
+    indigo: { bg: "bg-indigo-50", text: "text-indigo-600", sub_bg: "bg-indigo-50", sub_text: "text-indigo-700" },
+    teal:   { bg: "bg-teal-50",   text: "text-teal-600",   sub_bg: "bg-teal-50",   sub_text: "text-teal-700" },
+    blue:   { bg: "bg-blue-50",   text: "text-blue-600",   sub_bg: "bg-blue-50",   sub_text: "text-blue-700" },
+    rose:   { bg: "bg-rose-50",   text: "text-rose-600",   sub_bg: "bg-rose-50",   sub_text: "text-rose-700" }
+  }
+  config = colors[theme.to_sym] || colors[:indigo]
+%>
+
+<div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-between">
+  <div class="flex items-center justify-between mb-4">
+    <%# アイコン部分：色を動的に変更 %>
+    <div class="p-2 <%= local_assigns[:bg_color] || 'bg-indigo-50' %> <%= local_assigns[:text_color] || 'text-indigo-600' %> rounded-lg">
+      <span class="material-symbols-outlined"><%= icon %></span>
+    </div>
+    
+    <%# 変化率（もしあれば表示） %>
+    <% if local_assigns[:trend] %>
+      <span class="<%= trend_positive ? 'text-green-600' : 'text-red-600' %> font-bold text-xs flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">
+          <%= trend_positive ? 'trending_up' : 'trending_down' %>
+        </span>
+        <%= trend %>
+      </span>
+    <% end %>
+  </div>
+
+  <div>
+    <p class="text-gray-500 text-sm font-semibold mb-1"><%= title %></p>
+    <p class="font-headline text-3xl font-extrabold text-gray-900"><%= value %></p>
+  </div>
+
+  <%# 下部の補足情報（プログレスバーやテキスト） %>
+  <div class="mt-4">
+    <% if local_assigns[:progress] %>
+      <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden">
+        <div class="<%= local_assigns[:bar_color] || 'bg-indigo-600' %> h-full" style="width: <%= progress %>%"></div>
+      </div>
+    <% elsif local_assigns[:subtext] %>
+      <p class="text-xs text-gray-400"><%= subtext %></p>
+    <% end %>
+  </div>
+</div>

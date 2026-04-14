@@ -59,11 +59,34 @@ class ParkingSpace < ApplicationRecord
 
   # 駐車スペースの取得（すでに契約されているスペースは排除）
   scope :available, -> {
-    # 現在有効な契約(契約済み) ParkingSpace のIDをサブクエリで取得
-    occupied_ids = ContractParkingSpace.where("end_date >= ?", Date.current).select(:parking_space_id)
-    # 上記の以外のID(契約していない) ParkingSpace のレコードを取得
-    where.not(id: occupied_ids)
+  # 有効な契約を持つIDを抽出
+  occupied_ids = ContractParkingSpace.active.select(:parking_space_id)
+  # そのIDに含まれないものを「空き」とする
+  where.not(id: occupied_ids)
   }
+
+  scope :contracted, -> {
+ joins(:contract_parking_spaces)
+    .where("contract_parking_spaces.start_date <= :today AND (contract_parking_spaces.end_date >= :today OR contract_parking_spaces.end_date IS NULL)", today: Date.current)
+    .distinct
+  }
+
+  def to_activity
+    decorator = ParkingSpaceDecorator.new(self)
+    config = decorator.activity_log_config
+
+    {
+      title: config[:label],
+      detail: decorator.activity_detail,
+      occurred_at: updated_at,
+      icon: config[:icon],
+      color_class: config[:color]
+    }
+  end
+
+  def self.total_revenue
+    contracted.sum(:price)
+  end
 
   def self.sort_by_natural_name
     all.to_a.sort_by do |record|

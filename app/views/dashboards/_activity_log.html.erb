@@ -1,0 +1,20 @@
+<%# app/views/dashboards/_activity_log_item.html.erb %>
+<div class="flex gap-4 group">
+  <%# 日本語バッジ部分 %>
+  <div class="mt-1 flex-shrink-0 w-10 h-10 rounded-lg <%= activity_log[:color_class] %> flex items-center justify-center shadow-sm border border-white/50">
+    <span class="text-[10px] font-bold font-headline leading-none tracking-tighter">
+      <%= activity_log[:icon] %>
+    </span>
+  </div>
+
+  <%# テキスト内容部分 %>
+  <div class="flex-grow border-b border-gray-50 pb-4 group-last:border-none">
+    <div class="flex justify-between items-start">
+      <p class="text-sm font-bold text-gray-900"><%= activity_log[:title] %></p>
+      <span class="text-[10px] text-gray-400 font-medium">
+        <%= time_ago_in_words(activity_log[:occurred_at]) %>前
+      </span>
+    </div>
+    <p class="text-xs text-gray-500 mt-1 leading-relaxed"><%= activity_log[:detail] %></p>
+  </div>
+</div>
