@@ -1,10 +1,63 @@
-<div class="flex" id="wrapper">
-
-  <main class="flex-grow overflow-y-auto p-6">
-    <div class="row">
-      <div class="col-12">
-        <h1 class="mt-4">ダッシュボード</h1>
-        </div>
+<div class="space-y-8">
+  <div class="flex justify-between items-end">
+    <div>
+      <h2 class="font-headline text-3xl font-extrabold tracking-tighter text-gray-900">月極駐車場管理システム</h2>
+      <p class="text-gray-500 font-medium">運営状況の精密管理概要</p>
     </div>
-  </main>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <%# 稼働率：parking_space.id / total_space %>
+    <%= render 'shared/dashboard_stat_card', 
+    icon: 'directions_car', 
+    bg_color: 'bg-indigo-50',
+    text_color: 'text-indigo-600',
+    bar_color: 'bg-indigo-600',
+    title: '稼働率', 
+    value: "#{@occupancy_rate}%", 
+    progress: @occupancy_rate %>
+
+    <%# 月間収益：status: contracted の合計 %>
+    <%= render 'shared/dashboard_stat_card', 
+    icon: 'payments', 
+    bg_color: 'bg-green-50', 
+    text_color: 'text-green-700', 
+    title: '月間概算収益', 
+    value: "¥#{number_with_delimiter(@monthly_revenue)}", 
+    subtext: "契約済み #{@contracted_count} 区画" %>
+
+    <%# 有効な契約者：@contract_parking_space から算出 %>
+    <%= render 'shared/dashboard_stat_card', 
+    icon: 'group', 
+    bg_color: 'bg-blue-50', 
+    text_color: 'text-blue-600', 
+    title: '有効な契約者', 
+    value: "#{@active_tenants_count}", 
+    subtext: "現在有効な契約" %>
+
+    <%# 優先度タスク（現状は固定/将来的に動的化） %>
+    <% render 'shared/dashboard_stat_card', 
+    icon: 'assignment_late', 
+    bg_color: 'bg-orange-50', 
+    text_color: 'text-orange-600', 
+    title: '未処理タスク', 
+    value: "#{@pending_tasks_count}", 
+    subtext: "優先度：高" %>
+  </div>
+
+  <div class="grid grid-cols-12 gap-6">
+    <%# 稼働率の推移（パーシャル化したグラフ） %>
+    <%= render 'dashboards/occupancy_trend', stats: @monthly_stats %>
+  </div>
+
+  <div class="col-span-12 lg:col-span-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+    <h3 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+      <span class="material-symbols-outlined text-gray-400">history</span>
+      最近の活動
+    </h3>
+
+    <div class="space-y-4">
+      <%= render partial: 'dashboards/activity_log', collection: @activities %>
+    </div>
+  </div>
 </div>
