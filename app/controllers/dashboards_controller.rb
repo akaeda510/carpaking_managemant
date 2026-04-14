@@ -8,10 +8,10 @@ class DashboardsController < ApplicationController
     @parking_manager = current_parking_manager
     @parking_lot = @parking_manager.parking_lots.first
     raw_items = @parking_manager.contractors.order(created_at: :desc).limit(5) + @parking_manager.parking_spaces.order(created_at: :desc).limit(5)
-    
+
     # 契約スペース数
     @contracted_count = @parking_lot.parking_spaces.contracted.count
-   # 契約しているスペース数 
+    # 契約しているスペース数
     @available_count = @parking_lot.parking_spaces.available.count
     # 総スペース数
     @total_capacity = @parking_lot.parking_spaces.count

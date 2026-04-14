@@ -65,7 +65,7 @@ class ParkingSpace < ApplicationRecord
   where.not(id: occupied_ids)
   }
 
-  scope :contracted, -> { 
+  scope :contracted, -> {
  joins(:contract_parking_spaces)
     .where("contract_parking_spaces.start_date <= :today AND (contract_parking_spaces.end_date >= :today OR contract_parking_spaces.end_date IS NULL)", today: Date.current)
     .distinct
