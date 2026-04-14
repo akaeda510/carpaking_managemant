@@ -6,22 +6,22 @@ class ParkingSpaceDecorator < Draper::Decorator
   end
 
   def activity_log_config
-    case @parking_space.status
+    case object.status
     when "contracted"
-      { label: "契約中", icon: "check_circle", color: "bg-green-50 text-green-700" }
+      { label: "契約中", icon: "契約", color: "bg-green-50 text-green-700" }
     when "available"
-      { label: "空き区画", icon: "person_remove", color: "bg-blue-50 text-blue-700" }
+      { label: "空き区画", icon: "作成", color: "bg-blue-50 text-blue-700" }
     when "pending"
-      { label: "契約予約", icon: "pending_actions", color: "bg-yellow-50 text-yellow-700" }
+      { label: "契約予約", icon: "予約", color: "bg-yellow-50 text-yellow-700" }
     when "prohibited"
-      { label: "使用不可", icon: "block", color: "bg-red-50 text-red-700" }
+      { label: "使用不可", icon: "停止", color: "bg-red-50 text-red-700" }
     else
-      { label: "ステータス更新", icon: "sync", color: "bg-gray-50 text-gray-700" }
+      { label: "ステータス更新", icon: "更新", color: "bg-gray-50 text-gray-700" }
     end
   end
 
   def activity_detail
-    "No.#{@parking_space.name}"
+    "No.#{object.name}"
   end
 
   private
