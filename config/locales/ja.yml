@@ -55,7 +55,7 @@ ja:
         status: "対応状態"
       parking_lot:
         name: "駐車場エリア名"
-        prefexture: "都道府県"
+        prefecture: "都道府県"
         city: "市区町村"
         street_address: "丁目番地号"
         total_space: "総駐車場台数"
