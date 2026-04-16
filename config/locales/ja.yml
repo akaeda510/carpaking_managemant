@@ -37,15 +37,34 @@ ja:
         building: "マンション名、部屋番号等"
         phone_number: "携帯電話"
         contact_number: "連絡先番号"
+      contractor:
+        first_name: "氏名(姓)"
+        last_name: "氏名(名)"
+        password: "パスワード"
+        prefecture: "都道府県"
+        city: "市区町村"
+        street_address: "丁目番地号"
+        building: "マンション名、部屋番号等"
+        phone_number: "携帯電話"
+        contact_number: "連絡先番号"
       inquiry:
         name: "お名前"
         email: "メールアドレス"
         subject: "件名"
         message: "お問い合わせ内容"
         status: "対応状態"
+      parking_lot:
+        name: "駐車場エリア名"
+        prefexture: "都道府県"
+        city: "市区町村"
+        street_address: "丁目番地号"
+        total_space: "総駐車場台数"
       parking_area:
         category: "カテゴリー"
+        name: "エリア名"
+        default_price: "基準料金"
       parking_space:
+        name: "駐車番号、または駐車名"
         status: "契約状態"
   enums:
     parking_space:
