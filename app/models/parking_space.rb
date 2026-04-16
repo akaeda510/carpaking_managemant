@@ -1,22 +1,5 @@
 class ParkingSpace < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope :search_full_text,
-    against: {
-      name: "A",
-      description: "B"
-    },
-    associated_against: {
-      contractors: [ :first_name, :last_name ]
-    },
-    using: {
-      tsearch: {
-        prefix: true,
-        dictionary: "simple",
-        any_word: true
-      },
-      trigram: {}
-    }
+  include Searchable
 
   after_initialize :set_default_values
 
@@ -66,28 +49,16 @@ class ParkingSpace < ApplicationRecord
   }
 
   scope :contracted, -> {
- joins(:contract_parking_spaces)
-    .where("contract_parking_spaces.start_date <= :today AND (contract_parking_spaces.end_date >= :today OR contract_parking_spaces.end_date IS NULL)", today: Date.current)
+    joins(:contract_parking_spaces).
+    where("contract_parking_spaces.start_date <= :today AND (contract_parking_spaces.end_date >= :today OR contract_parking_spaces.end_date IS NULL)", today: Date.current)
     .distinct
   }
-
-  def to_activity
-    decorator = ParkingSpaceDecorator.new(self)
-    config = decorator.activity_log_config
-
-    {
-      title: config[:label],
-      detail: decorator.activity_detail,
-      occurred_at: updated_at,
-      icon: config[:icon],
-      color_class: config[:color]
-    }
-  end
 
   def self.total_revenue
     contracted.sum(:price)
   end
 
+  # 自然順ソート
   def self.sort_by_natural_name
     all.to_a.sort_by do |record|
       record.name.scan(/\d+|\D+/).map do |fragment|
@@ -118,6 +89,15 @@ class ParkingSpace < ApplicationRecord
   def current_price
     price > 0 ? price: parking_area.default_price
   end
+
+  def self.searchable_config
+    {
+      against: { name: "A", description: "B" },
+      associated_against: { contractors: [ :first_name, :last_name ] },
+      using: { tsearch: { any_word: true } }
+    }
+  end
+  configure_search
 
   private
 
