@@ -28,8 +28,7 @@ class ParkingManager < ApplicationRecord
   # 都道府県
   validates :prefecture, presence: true, inclusion: {
     in: ->(_) { I18n.t("prefectures").values },
-    message: "を正しく選択してください" },
-    allow_blank: true
+    message: "を正しく選択してください" }
   # 市区町村
   validates :city, presence: true, length: { maximum: 20 }
   # 丁目番地号

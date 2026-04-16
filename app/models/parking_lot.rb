@@ -2,8 +2,7 @@ class ParkingLot < ApplicationRecord
   validates :name, presence: true, length: { maximum: 40 }
   validates :prefecture, presence: true, inclusion: {
     in: ->(_) { I18n.t("prefectures").values },
-    message: "を正しく選択してください" },
-    allow_blank: true
+    message: "を正しく選択してください" }
   validates :city, presence: true, length: { maximum: 20 }
   validates :street_address, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 150 }
