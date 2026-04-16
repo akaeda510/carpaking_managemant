@@ -1,22 +1,5 @@
 class Contractor < ApplicationRecord
-  include PgSearch::Model
-
-  pg_search_scope :search_full_text,
-    against: {
-      first_name: "A",
-      last_name: "A",
-      phone_number: "B",
-      prefecture: "C",
-      city: "C",
-      street_address: "C"
-    },
-    using: {
-      tsearch: {
-        prefix: true,
-        dictionary: "simple"
-      },
-      trigram: {}
-    }
+  include Searchable
 
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
@@ -52,16 +35,17 @@ class Contractor < ApplicationRecord
     active_contract_parking_spaces.order(start_date: :desc).first
   end
 
-  def to_activity
-    decorator = ContractorDecorator.new(self)
-    config = decorator.activity_log_config
-
+  def self.searchable_config
     {
-      title: config[:label],
-      detail: decorator.activity_detail,
-      occurred_at: updated_at,
-      icon: config[:icon],
-      color_class: config[:color]
+      against: {
+        first_name: "A",
+        last_name: "A",
+        phone_number: "B",
+        prefecture: "C",
+        city: "C",
+        street_address: "C"
+      }
     }
   end
+  configure_search
 end
