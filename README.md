@@ -127,6 +127,5 @@ CI
 https://www.figma.com/design/BGppLhsjRgnQAr1qyjnxSh/my-app-%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=1-4749&p=f&t=iXNKxQ9F5HFhPF92-0
 
 # ER図
-https://gyazo.com/8a74862ee2f0726d6c92cca5099609d3
-
+https://www.figma.com/design/eJDCfy64ZNBNfs2Wgd03S0/%E9%A7%90%E8%BB%8A%E5%A0%B4%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E3%80%80%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=6-27&t=29JX289oLF79qGqt-0
 
