@@ -7,23 +7,40 @@ class DashboardsController < ApplicationController
 
     @parking_manager = current_parking_manager
     @parking_lot = @parking_manager.parking_lots.first
-    raw_items = @parking_manager.contractors.order(created_at: :desc).limit(5) + @parking_manager.parking_spaces.order(created_at: :desc).limit(5)
+    
+    # デフォルト設定
+    status = {
+      contracted_count: 0, availabel: 0, total_capacity: 0,
+      occupancy_rate: 0, monthly_revenue: 0,
+      active_tenants_count: 0
+    }
+
+    if @parking_lot
+      status = @parking_lot.dashboard_status
+    end
 
     # 契約スペース数
-    @contracted_count = @parking_lot.parking_spaces.contracted.count
+    @contracted_count     = status[:contracted_count]
     # 契約しているスペース数
-    @available_count = @parking_lot.parking_spaces.available.count
+    @available_count      = status[:availabel_count] 
     # 総スペース数
-    @total_capacity = @parking_lot.parking_spaces.count
+    @total_capacity       = status[:total_capacity]
     # 稼働率
-    @occupancy_rate = @total_capacity.positive? ? (@contracted_count.to_f / @total_capacity * 100).round(1) : 0
+    @occupancy_rate       = status[:occupancy_rate]
     # 月間収益
-    @monthly_revenue = @parking_lot.parking_spaces.contracted.sum(:price)
+    @monthly_revenue      = status[:monthly_revenue]
     # 有効契約数
-    @active_tenants_count = @parking_lot.contract_parking_spaces.active.count
+    @active_tenants_count = status[:active_renants_count]
     # 操作ログ
-    @activities = raw_items.map(&:to_activity).sort_by { |log| log[:occurred_at] }.reverse.first(5)
+    @activities = @parking_lot ? fetch_activities : []
     # 稼働率グラフ
     # @monthly_stats = nil
+  end
+
+  private
+
+  def fetch_activities
+     raw_items = @parking_manager.contractors.order(created_at: :desc).limit(5) + @parking_lot.parking_spaces.order(created_at: :desc).limit(5)
+     raw_items.map(&:to_activity).sort_by { |log| log[:occurred_at] }.reverse.first(5)
   end
 end
