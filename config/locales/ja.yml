@@ -5,10 +5,6 @@ ja:
         edit:
           password: "新しいパスワード"
           password_confirmation: "パスワード(確認用)"
-    settings:
-      index:
-        title: "設定"
-        title: "アカウント設定"
   site:
     name: "tukigime-parking.com"
     support_email: "support@tukigime-parking.com"
