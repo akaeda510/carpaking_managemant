@@ -22,7 +22,7 @@ class DashboardsController < ApplicationController
     # 契約スペース数
     @contracted_count     = status[:contracted_count]
     # 契約しているスペース数
-    @available_count      = status[:availabel_count]
+    @available_count      = status[:available_count]
     # 総スペース数
     @total_capacity       = status[:total_capacity]
     # 稼働率

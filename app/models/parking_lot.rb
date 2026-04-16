@@ -29,8 +29,8 @@ class ParkingLot < ApplicationRecord
     contracted = parking_spaces.contracted.count
 
     {
-      contractes_count: contacted,
-      availabel: parking_spaces.availabel.count,
+      contractes_count: contracted,
+      available: parking_spaces.available.count,
       total_capacity: total,
       occupancy_rate: total.positive? ? (contracted.to_f / total * 100).round(1) :0,
       monthly_revenue: parking_spaces.contracted.sum(:price),
