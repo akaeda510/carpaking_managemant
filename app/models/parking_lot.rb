@@ -24,4 +24,18 @@ class ParkingLot < ApplicationRecord
   def self.find_by_id_or_first(id)
     id.present? ? find_by(id: id) : first
   end
+
+  def dashboard_status
+    total = parking_spaces.count
+    contracted = parking_spaces.contracted.count
+
+    {
+      contractes_count: contacted,
+      availabel: parking_spaces.availabel.count,
+      total_capacity: total,
+      occupancy_rate: total.positive? ? (contracted.to_f / total * 100).round(1) :0,
+      monthly_revenue: parking_spaces.contracted.sum(:price),
+      active_tenants_count: contract_parking_spaces.active.count
+    }
+  end
 end
