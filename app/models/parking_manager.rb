@@ -26,7 +26,7 @@ class ParkingManager < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true, length: { maximum: 50 }
   # 都道府県
-  validates :prefecture, presence: true, inclusion: {
+  validates :prefecture, inclusion: {
     in: ->(_) { I18n.t("prefectures").values },
     message: "を正しく選択してください" }
   # 市区町村
