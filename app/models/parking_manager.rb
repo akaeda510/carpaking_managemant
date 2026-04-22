@@ -20,7 +20,7 @@ class ParkingManager < ApplicationRecord
     }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatablr
 
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
@@ -57,6 +57,7 @@ class ParkingManager < ApplicationRecord
            through: :parking_spaces,
            source: :contract_parking_spaces
   has_many :devices, dependent: :destroy
+  has_many :email_changes, class_name: 'ParkingManagers::EmailChange', dependent: :destroy
 
   def set_initial_device(user_agent, ip_address)
     devices.create!(
