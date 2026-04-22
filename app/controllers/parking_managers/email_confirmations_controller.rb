@@ -12,12 +12,7 @@ class ParkingManagers::EmailConfirmationsController < ApplicationController
     else
       Rails.logger.info "📧 [SEND] Preparing to send email to: #{email}の確認レコードを作成します"
 
-      confirmation = EmailConfirmation.create!(
-        email: email,
-        token: SecureRandom.urlsafe_base64(32),
-        expires_at: 30.minutes.from_now
-      )
-
+      confirmation = EmailConfirmation.create!(email: email)
       ParkingManagers::RegistrationMailer.confirmation_link(confirmation).deliver_later
 
       redirect_to new_parking_manager_session_path, success: "登録用メールが送信されました。"
