@@ -73,7 +73,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_22_084055) do
   end
 
   create_table "email_changes", force: :cascade do |t|
-    t.datetime "confirmation_sent_at"
+    t.datetime "confirmation_sent_at", null: false
     t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.string "new_email", null: false
