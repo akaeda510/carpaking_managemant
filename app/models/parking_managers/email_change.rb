@@ -1,17 +1,17 @@
 class ParkingManagers::EmailChange < ApplicationRecord
   include TokenConfirmable
   self.table_name = "email_changes"
-  
+
   attr_accessor :new_email_confirmation
 
   belongs_to :parking_manager
 
-  validates :new_email, 
-    presence: true, 
+  validates :new_email,
+    presence: true,
     format: { with: Devise.email_regexp },
-    uniqueness: { scope: :parking_manager_id, 
-                  conditions: -> { where(confirmed_at: nil) }, 
-                  message: "はすでにこの申請で使用されています。" 
+    uniqueness: { scope: :parking_manager_id,
+                  conditions: -> { where(confirmed_at: nil) },
+                  message: "はすでにこの申請で使用されています。"
     }
   validates :new_email, confirmation: true, on: :confirm_update
   validates :new_email_confirmation, presence: true, on: :confirm_update
