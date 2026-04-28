@@ -3,7 +3,7 @@ class ParkingManagers::EmailChangesController < ApplicationController
   before_action :enforce_device_verification
 
   EmailChange = ParkingManagers::EmailChange
-  def new 
+  def new
     @email_change = EmailChange.new
   end
 
@@ -15,7 +15,7 @@ class ParkingManagers::EmailChangesController < ApplicationController
       ParkingManagers::EmailChangeMailer.email_reset(@email_change, request.remote_ip).deliver_later
       redirect_to new_parking_managers_email_change_path, success: "メールアドレス変更申請メールが送信されました。"
     else
-      render :new, status: :unprocessable_entity    
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -24,7 +24,7 @@ class ParkingManagers::EmailChangesController < ApplicationController
 
     if @email_change.nil? || !@email_change.active?
       redirect_to new_parking_managers_email_change_path, alert: "こちらのリンクは有効期限切れまたは、無効になっています。もう一度申請してください。"
-      return
+      nil
     end
   end
 
@@ -52,6 +52,6 @@ class ParkingManagers::EmailChangesController < ApplicationController
   private
 
   def email_change_params
-    params.require(:email_change).permit(:new_email) 
+    params.require(:email_change).permit(:new_email)
   end
 end

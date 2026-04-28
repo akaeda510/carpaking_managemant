@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   devise_for :parking_managers, controllers: {
     passwords: "parking_managers/passwords",
     sessions: "parking_managers/sessions",
-    registrations: "parking_managers/registrations",
+    registrations: "parking_managers/registrations"
   }
 
   resource :account, only: [ :show ], controller: "parking_managers", path: "profile", as: :profile
