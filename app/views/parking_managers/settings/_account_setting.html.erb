@@ -1,22 +1,23 @@
-<%= render 'setting_item', 
-      path: profile_path, 
-      icon_class: "fas fa-id-card", 
-      bg_class: "bg-sky-100", 
-      text_class: "text-sky-600", 
+<%= render 'setting_item',
+      path: profile_path,
+      icon_class: "fas fa-id-card",
+      bg_class: "bg-sky-100",
+      text_class: "text-sky-600",
       title: "アカウント詳細",
-      description: "アカウントの情報・変更"%>
+      description: "アカウントの情報・変更" %>
 
-<%= render 'setting_item', 
-      path: new_password_path(@parking_manager), 
-      icon_class: "fas fa-key", 
-      bg_class: "bg-red-100", 
-      text_class: "text-red-600", 
+<%= render 'setting_item',
+      path: new_password_path(@parking_manager),
+      icon_class: "fas fa-key",
+      bg_class: "bg-red-100",
+      text_class: "text-red-600",
       title: "パスワードリセット",
-      description: "パスワード再設定をメールで送信"%>
+      description: "パスワード再設定をメールで送信" %>
 
-<%= render 'setting_item', 
-      path: '#', 
-      icon_class: "fas fa-id-card", 
-      bg_class: "bg-green-100", 
-      text_class: "text-green-600", 
-      title: "メールアドレス変更" %>
+<%= render 'setting_item',
+      path: new_parking_managers_email_change_path(@parking_manager),
+      icon_class: "fas fa-id-card",
+      bg_class: "bg-green-100",
+      text_class: "text-green-600",
+      title: "メールアドレス変更",
+      description: "メールアドレス変更申請メールを送信" %>

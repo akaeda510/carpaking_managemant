@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   end
 
   namespace :parking_managers do
+    resources "email_changes", only: %i[ new create edit update ]
     resources :devices, only: [] do
       member do
         post "resend_email", to: "devices#resend_email"

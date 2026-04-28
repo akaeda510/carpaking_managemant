@@ -76,6 +76,9 @@ group :development, :test do
 
   gem "rspec-rails", "~> 8.0.0"
 
+  # デバックツール
+  gem "pry-byebug"
+
   # 環境設定を読み込む
   gem "dotenv-rails"
 end

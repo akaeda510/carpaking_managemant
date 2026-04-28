@@ -1,0 +1,29 @@
+<%= render layout: 'parking_managers/shared/auth_card', locals: { title: "メールアドレスの変更" } do %>
+
+  <div class="mb-6">
+    <p class="text-sm text-gray-600">
+      新しいメールアドレスを設定するための本人確認を行います。
+    </p>
+    <div class="mt-4 p-4 bg-blue-50 border-l-4 border-blue-400">
+      <p class="text-xs text-blue-800 font-bold">送信先：現在のメールアドレス</p>
+      <p class="text-sm text-blue-700 break-all">
+        <strong><%= current_parking_manager.email %></strong>
+      </p>
+    </div>
+    <p class="text-xs text-gray-500 mt-2">
+      ※上記アドレス宛に、再設定用URLを記載したメールを送信します。
+    </p>
+  </div>
+
+  <%= form_with(url: parking_managers_email_changes_path, scope: :email_change, method: :post, class: "space-y-4") do |f| %>
+    <%= f.hidden_field :new_email, value: current_parking_manager.email %>
+    
+    <%= f.submit "確認メールを送信する", 
+        class: "w-full bg-blue-600 text-white py-2.5 rounded shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 transition-all font-medium" %>
+  <% end %>
+
+  <div class="mt-8 pt-4 border-t border-gray-100 text-center">
+    <%= back_link_to "戻る", account_parking_managers_settings_path(@parking_manager) %>
+  </div>
+
+<% end %>

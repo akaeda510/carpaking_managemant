@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_22_084055) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -26,20 +26,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
     t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
-  end
-
-  create_table "archived_inquiries", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.string "email", null: false
-    t.text "message", null: false
-    t.string "name", null: false
-    t.datetime "original_created_at"
-    t.datetime "original_updated_at"
-    t.integer "parking_manager_id"
-    t.integer "status"
-    t.string "subject", null: false
-    t.datetime "updated_at", null: false
-    t.index ["parking_manager_id"], name: "index_archived_inquiries_on_parking_manager_id"
   end
 
   create_table "contract_parking_spaces", force: :cascade do |t|
@@ -86,10 +72,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
     t.index ["parking_manager_id"], name: "index_devices_on_parking_manager_id"
   end
 
+  create_table "email_changes", force: :cascade do |t|
+    t.datetime "confirmation_sent_at", null: false
+    t.datetime "confirmed_at"
+    t.datetime "created_at", null: false
+    t.string "new_email", null: false
+    t.bigint "parking_manager_id", null: false
+    t.string "token", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parking_manager_id"], name: "index_email_changes_on_parking_manager_id"
+    t.index ["token"], name: "index_email_changes_on_token", unique: true
+  end
+
   create_table "email_confirmations", force: :cascade do |t|
+    t.datetime "confirmation_sent_at", null: false
+    t.datetime "confirmed_at"
     t.datetime "created_at", null: false
     t.string "email", null: false
-    t.datetime "expires_at", null: false
     t.string "token", null: false
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_email_confirmations_on_token", unique: true
@@ -316,6 +315,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_09_035107) do
   add_foreign_key "contract_parking_spaces", "parking_spaces"
   add_foreign_key "contractors", "parking_managers"
   add_foreign_key "devices", "parking_managers"
+  add_foreign_key "email_changes", "parking_managers"
   add_foreign_key "garage_details", "parking_spaces"
   add_foreign_key "parking_areas", "parking_lots"
   add_foreign_key "parking_lots", "parking_managers"
