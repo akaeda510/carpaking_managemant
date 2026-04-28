@@ -20,7 +20,7 @@ class ParkingManager < ApplicationRecord
     }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatablr
+         :recoverable, :rememberable, :validatable
 
   validates :first_name, presence: true, length: { maximum: 20 }
   validates :last_name, presence: true, length: { maximum: 20 }
