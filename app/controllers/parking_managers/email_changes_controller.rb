@@ -32,26 +32,31 @@ class ParkingManagers::EmailChangesController < ApplicationController
     @email_change = current_parking_manager.email_changes.find_by!(token: params[:id])
     @email_change.assign_attributes(email_change_params)
 
-    ActiveRecord::Base.transaction do
-      @email_change.update!(confirmed_at: Time.current)
-      current_parking_manager.update!(email: @email_change.new_email)
+    if @email_change.valid?(:confirm_update)
+
+      ActiveRecord::Base.transaction do
+        @email_change.update!(confirmed_at: Time.current)
+        current_parking_manager.update!(email: @email_change.new_email)
+      end
+
+      ParkingManagers::EmailUpdateMailer.email_update(@email_change).deliver_later
+      flash[:success] = "メールアドレスが更新されました。"
+      redirect_to my_dashboard_root_path(@parking_manager), status: :see_other
+      else
+        render :edit, status: :unprocessable_entity
+      end
+
+    rescue ActiveRecord::RecordInvalid => e
+      flash.now[:alert] = "更新が失敗しました。入力を確認してください。"
+      render :edit, status: :unprocessable_entity
+    rescue => e
+      logger.error "Email Update Error: #{e.message}"
+      redirect_to new_parking_managers_email_change_path, alert: "予期せぬエラーが発生しました。"
     end
-
-    ParkingManagers::EmailUpdateMailer.email_update(@email_change).deliver_later
-    flash[:success] = "メールアドレスが更新されました。"
-    redirect_to my_dashboard_root_path(@parking_manager), status: :see_other
-  rescue ActiveRecord::RecordInvalid => e
-    flash.now[:alert] = "更新が失敗しました。入力を確認してください。"
-    render :edit, status: :unprocessable_entity
-  rescue => e
-    logger.error "Email Update Error: #{e.message}"
-    redirect_to new_parking_managers_email_change_path, alert: "予期せぬエラーが発生しました。"
-  end
-
 
   private
 
   def email_change_params
-    params.require(:email_change).permit(:new_email)
+    params.require(:email_change).permit(:new_email, :new_email_confirmation)
   end
 end
