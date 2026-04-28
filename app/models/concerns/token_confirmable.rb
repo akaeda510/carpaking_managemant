@@ -10,7 +10,7 @@ module TokenConfirmable
   def active?(expires_in: 30.minutes)
     # 送信時刻が空または、すでに登録済みなら無効
     return false if confirmation_sent_at.nil? || confirmed_at.present?
-    (confirmed_sent_at + expires_in) > Time.current
+    (confirmation_sent_at + expires_in) > Time.current
   end
 
   def valid_token?(expires_in: 30.minutes)
