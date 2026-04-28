@@ -20,10 +20,11 @@ class ParkingManagers::EmailChangesController < ApplicationController
   end
 
   def edit
-    @email_change = current_parking_manager.email_changes.find_by!(token: params[:id])
+    @email_change = current_parking_manager.email_changes.find_by(token: params[:id])
 
-    if @email_change.active?
-      redirect_to new_parking_managers_email_change_path, alert: "有効期限が切れています。もう一度申請してください。"
+    if @email_change.nil? || !@email_change.active?
+      redirect_to new_parking_managers_email_change_path, alert: "こちらのリンクは有効期限切れまたは、無効になっています。もう一度申請してください。"
+      return
     end
   end
 
