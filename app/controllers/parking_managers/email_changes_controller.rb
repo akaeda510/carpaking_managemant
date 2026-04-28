@@ -8,6 +8,7 @@ class ParkingManagers::EmailChangesController < ApplicationController
   end
 
   def create
+    current_parking_manager.email_changes.where(confirmed_at: nil).destroy_all
     @email_change = current_parking_manager.email_changes.build(email_change_params)
 
     if @email_change.save
