@@ -4,7 +4,7 @@ class ParkingManagers::EmailChange < ApplicationRecord
 
   belongs_to :parking_manager
 
-  validates :new_email, presence: true, format: { with: Devise.email_regexp }, uniqueness: { scope: :parking_manager_id, message: "はすでにこの申請で使用されています。" }
+  validates :new_email, presence: true, format: { with: Devise.email_regexp }, uniqueness: { scope: :parking_manager_id, conditions: -> { where(confirmed_at: nil) }, message: "はすでにこの申請で使用されています。" }
 
   validate :email_must_be_different
   validate :email_must_not_be_taken
