@@ -32,12 +32,12 @@ class ParkingManagers::EmailChangesController < ApplicationController
     @email_change = current_parking_manager.email_changes.find_by!(token: params[:id])
     @email_change.assign_attributes(email_change_params)
 
-    AcitiveRecord::Base.transaction do
+    ActiveRecord::Base.transaction do
       @email_change.update!(confirmed_at: Time.current)
       current_parking_manager.update!(email: @email_change.new_email)
     end
 
-    #  ParkingManagers::EmailUpdateMailer.email_update(@new_email).deliver_later
+    ParkingManagers::EmailUpdateMailer.email_update(@email_change).deliver_later
     flash[:success] = "メールアドレスが更新されました。"
     redirect_to my_dashboard_root_path(@parking_manager), status: :see_other
   rescue ActiveRecord::RecordInvalid => e
