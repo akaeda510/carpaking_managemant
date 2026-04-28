@@ -2,17 +2,19 @@
 
   <div class="mb-6">
     <p class="text-sm text-gray-600">
-      本人確認が完了しました。新しいメールアドレスを入力してください。
+    本人確認が完了しました。新しいメールアドレスを入力してください。
     </p>
   </div>
 
   <%= form_with(model: @email_change, url: parking_managers_email_change_path(@email_change.token), scope: :email_change, method: :patch, class: "space-y-6") do |f| %>
-    
+
     <div>
       <%= f.label :new_email, "新しいメールアドレス", class: "auth-label" %>
       <%= f.email_field :new_email, 
-          required: true, 
-          class: "auth-input" %>
+        value: "",
+        required: true, 
+        class: "auth-input",
+        placeholder: "新しいメールアドレスを入力" %>
       <p class="mt-1 text-xs text-gray-500">※このアドレスに完了通知が届きます</p>
     </div>
 
