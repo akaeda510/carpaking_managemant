@@ -10,7 +10,7 @@ class ParkingManagers::RegistrationsController < Devise::RegistrationsController
     token = params[:token]
     confirmation = EmailConfirmation.find_by(token: token)
 
-    if confirmation && confirmation.expires_at > Time.current
+    if confirmation.active?
       build_resource({ email: confirmation.email })
       yield resource if block_given?
       respond_with resource
