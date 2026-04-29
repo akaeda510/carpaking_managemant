@@ -25,7 +25,7 @@ module TokenConfirmable
   private
 
   def generate_token
-    self.token =SecureRandom.urlsafe_base64(32)
+    self.token = SecureRandom.urlsafe_base64(32)
     self.confirmation_sent_at = Time.current
   end
 end
