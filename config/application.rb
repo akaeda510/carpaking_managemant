@@ -23,7 +23,7 @@ module Myapp
     #
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :local
-    # config.eager_load_paths << Rails.root.join("extras")
+    config.eager_load_paths << Rails.root.join("services")
 
     config.action_dispatch.rescue_responses["Pundit::NotAuthorizedError"] = :forbidden
 
