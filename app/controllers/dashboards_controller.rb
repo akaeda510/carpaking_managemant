@@ -34,7 +34,7 @@ class DashboardsController < ApplicationController
     # 操作ログ
     @activities = @parking_lot ? fetch_activities : []
     # 稼働率グラフ
-    # @monthly_stats = nil
+    @monthly_stats = ParkingStatisticsService.new(@parking_manager, nil).monthly_sales
   end
 
   private
