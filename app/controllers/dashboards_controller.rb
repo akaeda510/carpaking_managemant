@@ -30,7 +30,7 @@ class DashboardsController < ApplicationController
     # 月間収益
     @monthly_revenue      = status[:monthly_revenue]
     # 有効契約数
-    @active_tenants_count = status[:active_renants_count]
+    @active_tenants_count = status[:active_tenants_count]
     # 操作ログ
     @activities = @parking_lot ? fetch_activities : []
     # 稼働率グラフ
