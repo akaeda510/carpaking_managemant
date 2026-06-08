@@ -1,5 +1,4 @@
 class  ParkingStatisticsService
- 
   def initialize(parking_manager, scope = nil)
     @parking_manager = parking_manager
     @scope = scope
