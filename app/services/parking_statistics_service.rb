@@ -21,11 +21,16 @@ class  ParkingStatisticsService
   def monthly_sales
     today = Date.today
     start_period = 5.months.ago.to_date
+    total = parking_spaces.count
 
-    ContractParkingSpace
+    monthly_contracts = ContractParkingSpace
       .joins(:parking_space)
       .where(parking_manager_id: @parking_manager.id)
-      .group_by_month(:start_date, range: start_period..today)
-      .sum("parking_spaces.price")
+      .group_by_month(:start_date, range: start_period..today.end_of_day)
+      .count
+
+    monthly_contracts.transform_values do |count|
+      total.positive? ? (count.to_f / total * 100).round(1) : 0
+    end
   end
 end
