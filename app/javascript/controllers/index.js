@@ -11,4 +11,5 @@ import ParkingSpaceFormController from "./parking_space_form_controller"
 application.register("parking-space-form", ParkingSpaceFormController)
 import FormAutofocusController from "./form_autofocus_controller"
 application.register("form-autofocus", FormAutofocusController)
-
+import occupancyChartController from"./occupancy_chart_controller"
+application.register("occupancy-chart", occupancyChartController)
