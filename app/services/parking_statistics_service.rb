@@ -24,10 +24,8 @@ class  ParkingStatisticsService
 
     ContractParkingSpace
       .joins(:parking_space)
-      .where(parking_manager_id: @parking_manageri.id)
-      .where("start_date <= ?", today)
-      .where("end_date >= ?", start_period)
-      .group_by_month(:start_date)
+      .where(parking_manager_id: @parking_manager.id)
+      .group_by_month(:start_date, range: start_period..today)
       .sum("parking_spaces.price")
   end
 end
