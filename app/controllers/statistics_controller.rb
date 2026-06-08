@@ -9,4 +9,5 @@ class StatisticsController < ApplicationController
     
     @status_counts = stats.status_counts
     @monthly_sales = stats.monthly_sales
+  end
 end
