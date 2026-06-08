@@ -6,7 +6,7 @@ module DashboardStatistically
     contracted = parking_spaces.contracted.count
 
     {
-      contractes_count: contracted,
+      contracted_count: contracted,
       available: parking_spaces.available.count,
       total_capacity: total,
       occupancy_rate: total.positive? ? (contracted.to_f / total * 100).round(1) :0,

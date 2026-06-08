@@ -111,6 +111,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (5.2.1)
     childprocess (5.1.0)
       logger (~> 1.5)
     coderay (1.1.3)
@@ -164,6 +165,8 @@ GEM
       csv (>= 3.0.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    groupdate (6.8.0)
+      activesupport (>= 7.2)
     httparty (0.24.2)
       csv
       mini_mime (>= 1.0.0)
@@ -472,6 +475,7 @@ DEPENDENCIES
   brakeman
   bundler-audit
   capybara
+  chartkick
   cssbundling-rails
   debug
   devise
@@ -480,6 +484,7 @@ DEPENDENCIES
   draper
   enum_help
   geocoder
+  groupdate
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails

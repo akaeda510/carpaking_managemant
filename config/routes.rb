@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :parking_managers, only: %i[ index show ]
 
     resources :contractors, only: %i[ index show ]
+    resources :statistics, only: %i[ index ]
     resources :parking_lots, only: %i[ index show ], shallow: true do
       resources :parking_areas, only: %i[ show ], shallow: true do
         resources :parking_spaces, only: %i[ show ], shallow: true do

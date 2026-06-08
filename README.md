@@ -115,6 +115,8 @@
 - gem 'geocoder' 位置情報を取得
 - gem 'resend' メール機能
 - gem 'rspec-rails' テストコード
+- gem 'chartkick' javascript使用してのグラフ化
+- gem 'groupdate' データのグループ化、集計
 
 - QR code API
 - Resend API
