@@ -9,9 +9,9 @@
   <div data-controller="occupancy-chart">
     <%= column_chart @monthly_stats, 
       height: "300px",
-      prefix: "￥",
+      suffix: "%",
       thousands: ",",
-      label: "月間売上",
+      label: "月間稼働率",
       id: "occupancy-chart"
     %>
   </div>
