@@ -17,7 +17,7 @@ class  ParkingStatisticsService
     parking_spaces.group(:status).count
   end
 
-  def monthly_sales
+  def monthly_occupancy_rate
     today = Date.today
     start_period = 5.months.ago.to_date
     total = parking_spaces.count
