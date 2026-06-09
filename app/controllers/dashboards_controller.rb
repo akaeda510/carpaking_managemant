@@ -29,7 +29,7 @@ class DashboardsController < ApplicationController
     @total_capacity       = total_status[:total_capacity]
     # 稼働率
     @occupancy_rate       = total_status[:occupancy_rate].positive? ?
-      (total_status[:contracted_count].to_f / 
+      (total_status[:contracted_count].to_f /
        total_status[:total_capacity] * 100).round(1) : 0
     # 月間収益
     @monthly_revenue      = total_status[:monthly_revenue]
