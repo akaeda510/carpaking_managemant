@@ -18,18 +18,20 @@ class  ParkingStatisticsService
   end
 
   def monthly_occupancy_rate
-    today = Date.today
-    start_period = 5.months.ago.to_date
     total = parking_spaces.count
 
-    monthly_contracts = ContractParkingSpace
-      .joins(:parking_space)
+    (0..5).reverse_each.each_with_object({}) do |i, result|
+      target = i.months.ago.beginning_of_month.to_date
+
+    count = ContractParkingSpace
       .where(parking_manager_id: @parking_manager.id)
-      .group_by_month(:start_date, range: start_period..today.end_of_day)
+      .where("start_date <= ?", target.end_of_month)
+      .where("end_date >= ?", target.beginning_of_month)
+      .where("start_date != end_date")
       .count
 
-    monthly_contracts.transform_values do |count|
-      total.positive? ? (count.to_f / total * 100).round(1) : 0
+    result[target] = total.positive? ?
+      (count.to_f / total * 100).round(1) : 0
     end
   end
 end
