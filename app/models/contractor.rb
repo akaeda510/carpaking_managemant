@@ -1,5 +1,5 @@
 class Contractor < ApplicationRecord
-  include DashboardStatistically
+  include ActivityLoggable
   include Searchable
 
   validates :first_name, presence: true, length: { maximum: 20 }
