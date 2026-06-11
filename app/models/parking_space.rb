@@ -1,6 +1,6 @@
 class ParkingSpace < ApplicationRecord
   include Searchable
-  include DashboardStatistically
+  include ActivityLoggable
 
   after_initialize :set_default_values
 

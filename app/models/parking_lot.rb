@@ -1,5 +1,5 @@
 class ParkingLot < ApplicationRecord
-  include DashboardStatistically
+  include ActivityLoggable
 
   validates :name, presence: true, length: { maximum: 40 }
   validates :prefecture, inclusion: {
