@@ -152,6 +152,11 @@ GEM
       activesupport (>= 3.0.0)
     erb (6.0.4)
     erubi (1.13.1)
+    factory_bot (6.6.0)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     ffi (1.17.4-aarch64-linux-gnu)
     ffi (1.17.4-aarch64-linux-musl)
     ffi (1.17.4-arm-linux-gnu)
@@ -483,6 +488,7 @@ DEPENDENCIES
   dotenv-rails
   draper
   enum_help
+  factory_bot_rails
   geocoder
   groupdate
   image_processing (~> 1.2)
