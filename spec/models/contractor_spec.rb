@@ -35,7 +35,9 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'prefectureが選択されていない場合' do
-
+        contractor.prefecture = nil
+        expect(contractor).to be_invalid
+        expect(contractor.errors[:prefecture]).to contain_exactly("を正しく選択してください")
       end
 
       it 'cityが21文字以上の場合' do
