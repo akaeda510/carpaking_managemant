@@ -49,7 +49,7 @@ RSpec.configure do |config|
   # config.use_active_record = false
 
   # FactoryBotを有効
-  config.include FactorBot::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
