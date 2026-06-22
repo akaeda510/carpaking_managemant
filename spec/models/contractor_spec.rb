@@ -84,7 +84,9 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'phone_numberが他のユーザーと重複した場合' do
-
+        contractor = create(:contractor, phone_number: '09012341234')
+        contractor_1 = build(:contractor, phone_number: '09012341234')
+        expect(contractor_1).to be_invalid
       end
 
       it 'contact_numberが10文字以上11文字以内でなかった場合' do
