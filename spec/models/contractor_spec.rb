@@ -46,7 +46,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'cityが空欄の場合' do
-
+        contractor.city = nil
+        expect(contractor).to be_invalid
       end
 
       it 'street_addressが51文字以上の場合' do
