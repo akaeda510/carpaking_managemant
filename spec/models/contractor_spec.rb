@@ -10,6 +10,15 @@ RSpec.describe Contractor, type: :model do
       it '設定した全てのバリデーションが機能しているか' do
         expect(contractor).to be_valid
       end
+
+      it '別の管理者が同じphone_numberを登録する時' do
+        parking_manager_1 = create(:parking_manager)
+        parking_manager_2 = create(:parking_manager)
+        contractor = create(:contractor, parking_manager: parking_manager_1, phone_number: '09012341234')
+        contractor_1 = create(:contractor, parking_manager: parking_manager_2, phone_number: '09012341234')
+
+        expect(contractor_1).to be_valid
+      end
     end
 
     # 失敗パターン
