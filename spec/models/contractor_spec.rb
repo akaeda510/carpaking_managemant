@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Contractor, type: :model do
   describe 'create' do
     let(:contractor) { FactoryBot.build(:contractor) }
+    let(:parking_manager) { Factory.create(:parking_manager) }
 
     # 成功パターン
     context 'バリデーション' do
