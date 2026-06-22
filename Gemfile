@@ -82,6 +82,12 @@ group :development, :test do
 
   gem "rspec-rails", "~> 8.0.0"
 
+  # テストデータのセットアップサポート
+  gem "factory_bot_rails"
+
+  # ダミーデータ作成
+  gem "faker"
+
   # デバックツール
   gem "pry-byebug"
 
