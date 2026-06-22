@@ -108,7 +108,7 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'contact_numberが数字以外だった場合' do
-        contractor.contact_number = 'あいうえお！＠ー。、1' 
+        contractor.contact_number = 'あいうえお！＠ー。、1'
         expect(contractor).to be_invalid
       end
 
