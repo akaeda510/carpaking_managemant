@@ -25,7 +25,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'last_nameが21文字以上の場合' do
-
+        contractor.last_name = 'あ' * 21
+        expect(contractor).to be_invalid
       end
 
       it 'last_nameが空欄の場合' do
