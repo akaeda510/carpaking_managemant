@@ -7,6 +7,7 @@ RSpec.describe Contractor, type: :model do
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
+        expect(contractor).to be_valid
       end
     end
 
@@ -70,7 +71,7 @@ RSpec.describe Contractor, type: :model do
 
       it 'contact_numberが10文字以上11文字以内でなかった場合' do
 
-      ed
+      end
 
       it 'contact_numberが数字以外だった場合' do
 
@@ -82,5 +83,3 @@ RSpec.describe Contractor, type: :model do
     end
   end
 end
-
-    end
