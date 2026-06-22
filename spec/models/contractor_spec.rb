@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Contractor, type: :model do
   describe 'create' do
     let(:contractor) { FactoryBot.build(:contractor) }
-    let(:parking_manager) { Factory.create(:parking_manager) }
+    let(:parking_manager) { FactoryBot.create(:parking_manager) }
 
     # 成功パターン
     context 'バリデーション' do
@@ -15,7 +15,8 @@ RSpec.describe Contractor, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it 'first_nameが21文字以上の場合' do
-
+        contractor.first_name = 'あ' * 21
+        expect(contractor).to be_invalid
       end
 
       it 'first_nameが空欄の場合' do
