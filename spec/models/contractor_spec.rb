@@ -79,7 +79,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'phone_numberが空欄だった場合' do
-        
+        contractor.phone_number = nil
+       expect(contractor).to be_invalid
       end
 
       it 'phone_numberが他のユーザーと重複した場合' do
