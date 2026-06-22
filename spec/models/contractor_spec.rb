@@ -30,7 +30,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'last_nameが空欄の場合' do
-
+        contractor.last_name = nil
+        expect(contractor).to be_invalid
       end
 
       it 'prefectureが選択されていない場合' do
