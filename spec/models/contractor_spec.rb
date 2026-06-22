@@ -83,9 +83,10 @@ RSpec.describe Contractor, type: :model do
        expect(contractor).to be_invalid
       end
 
-      it 'phone_numberが他のユーザーと重複した場合' do
-        contractor = create(:contractor, phone_number: '09012341234')
-        contractor_1 = build(:contractor, phone_number: '09012341234')
+      it '同じ管理者でphone_numberが他のユーザーと重複した場合' do
+        parking_manager = create(:parking_manager)
+        contractor = create(:contractor, parking_manager: parking_manager, phone_number: '09012341234')
+        contractor_1 = build(:contractor, parking_manager: parking_manager, phone_number: '09012341234')
         expect(contractor_1).to be_invalid
       end
 
