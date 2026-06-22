@@ -41,7 +41,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'cityが21文字以上の場合' do
-
+        contractor.city = 'あ' * 21
+        expect(contractor).to be_invalid
       end
 
       it 'cityが空欄の場合' do
