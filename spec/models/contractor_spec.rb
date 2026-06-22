@@ -51,7 +51,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'street_addressが51文字以上の場合' do
-
+        contractor.street_address = 'あ' * 51
+        expect(contractor).to be_invalid
       end
 
       it 'street_addressが空欄の場合' do
