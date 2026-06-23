@@ -6,7 +6,7 @@ RSpec.describe ParkingLot, type: :model do
     let(:parking_lot) { FactoryBot.build(:parking_lot) }
 
     # 成功パターン
-    context 'バリデーション' do 
+    context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
         expect(parking_lot).to be_valid
       end
@@ -34,7 +34,7 @@ RSpec.describe ParkingLot, type: :model do
         expect(parking_lot).to be_invalid
       end
 
-      it 'prefectureが選択されていない場合' do 
+      it 'prefectureが選択されていない場合' do
         parking_lot.prefecture = nil
         expect(parking_lot).to be_invalid
         expect(parking_lot.errors[:prefecture]).to contain_exactly("を正しく選択してください")
@@ -83,7 +83,7 @@ RSpec.describe ParkingLot, type: :model do
         expect(parking_lot).to be_invalid
       end
 
-      it 'total_spacesが空欄だった場合' do 
+      it 'total_spacesが空欄だった場合' do
         parking_lot.total_spaces = nil
         expect(parking_lot).to be_invalid
       end
@@ -106,7 +106,7 @@ RSpec.describe ParkingLot, type: :model do
     end
 
     context 'parking_spaceが一度でも契約された場合' do
-      it '契約中のスペースがある場合、ParkingAreaも削除されずに残るか' do
+      it '契約中のスペースがある場合、ParkingAreaも削除されずに残る' do
         parking_lot = create(:parking_lot)
         parking_area = create(:parking_area, parking_lot: parking_lot)
         parking_space = create(:parking_space, parking_lot: parking_lot, parking_area: parking_area)
