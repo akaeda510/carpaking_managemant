@@ -12,9 +12,13 @@ RSpec.describe ParkingLot, type: :model do
       end
 
       it 'total_spacesが1だった場合' do
+        parking_lot.total_spaces = 1
+        expect(parking_lot).to be_valid
       end
 
       it 'total_spacesが99だった場合' do
+        parking_lot.total_spaces = 99
+        expect(parking_lot).to be_valid
       end
 
       it 'parking_lotが削除されるとparking_areaも削除される' do
