@@ -19,6 +19,51 @@ RSpec.describe Contractor, type: :model do
 
         expect(contractor_1).to be_valid
       end
+
+      it 'first_nameが20文字だった場合' do
+        contractor.first_name = 'あ' * 20
+        expect(contractor).to be_valid
+      end
+
+      it 'last_nameが20文字だった場合' do
+        contractor.last_name = 'あ' * 20
+        expect(contractor).to be_valid
+      end
+
+      it 'cityが20文字だった場合' do
+        contractor.city = 'あ' * 20
+        expect(contractor).to be_valid
+      end
+
+      it 'street_addressが50文字だった場合' do
+        contractor.street_address = 'あ' * 50
+        expect(contractor).to be_valid
+      end
+
+      it 'buildingが55文字だった場合' do
+        contractor.building = 'あ' * 55
+        expect(contractor).to be_valid
+      end
+
+      it 'phone_numberが11文字だった場合' do
+        contractor.phone_number = '1' * 11
+        expect(contractor).to be_valid
+      end
+
+      it 'contact_numberが10文字だった場合' do
+        contractor.contact_number = '1' * 10
+        expect(contractor).to be_valid
+      end
+
+      it 'contact_numberが11文字だった場合' do
+        contractor.contact_number = '1' * 11
+        expect(contractor).to be_valid
+      end
+
+      it 'notesが150文字だった場合' do
+        contractor.notes = 'あ' * 150
+        expect(contractor).to be_valid
+      end
     end
 
     # 失敗パターン
@@ -74,10 +119,12 @@ RSpec.describe Contractor, type: :model do
         expect(contractor).to be_invalid
       end
 
-      it 'phone_numberが11文字数以外だった場合' do
+      it 'phone_numberが10文字の場合' do
         contractor.phone_number = '1' * 10
         expect(contractor).to be_invalid
+      end
 
+      it 'phone_numberが12文字の場合' do
         contractor.phone_number = '1' * 12
         expect(contractor).to be_invalid
       end
@@ -89,7 +136,7 @@ RSpec.describe Contractor, type: :model do
 
       it 'phone_numberが空欄だった場合' do
         contractor.phone_number = nil
-       expect(contractor).to be_invalid
+        expect(contractor).to be_invalid
       end
 
       it '同じ管理者でphone_numberが他のユーザーと重複した場合' do
@@ -99,10 +146,12 @@ RSpec.describe Contractor, type: :model do
         expect(contractor_1).to be_invalid
       end
 
-      it 'contact_numberが10文字以上11文字以内でなかった場合' do
+      it 'contact_numberが9文字だった場合' do
         contractor.contact_number = '1' * 9
         expect(contractor).to be_invalid
+      end
 
+      it 'contact_numberが12文字だった場合' do
         contractor.contact_number = '1' * 12
         expect(contractor).to be_invalid
       end
@@ -116,6 +165,20 @@ RSpec.describe Contractor, type: :model do
         contractor.notes = 'あ' * 151
         expect(contractor).to be_invalid
       end
+
+      it 'parking_managerが紐づいていない場合' do
+        contractor.parking_manager = nil
+        expect(contractor).to be_invalid
+      end
+    end
+  end
+
+  describe 'アソシエーション' do
+    it '契約履歴がある場合、契約者は削除されない' do
+      contractor = create(:contractor)
+      contract = create(:contract_parking_space, contractor: contractor)
+
+      expect { contractor.destroy! }.to raise_error(ActiveRecord::DeleteRestrictionError)
     end
   end
 end
