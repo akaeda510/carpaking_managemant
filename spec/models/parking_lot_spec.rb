@@ -56,16 +56,21 @@ RSpec.describe ParkingLot, type: :model do
       end
 
       it 'total_specesが100以上だった場合' do
-        parking_lot.total_spaces = '100'
+        parking_lot.total_spaces = 100
         expect(parking_lot).to be_invalid
       end
 
       it 'total_spacesが数字以外だった場合' do
         parking_lot.total_spaces = 'あ'
         expect(parking_lot).to be_invalid
+
+        parking_lot.total_spaces = '!'
+        expect(parking_lot).to be_invalid
       end
 
       it 'total_spacesが0だった場合' do
+        parking_lot.total_spaces = 0
+        expect(parking_lot).to be_invalid
       end
 
       it 'total_spacesが空欄だった場合' do 
