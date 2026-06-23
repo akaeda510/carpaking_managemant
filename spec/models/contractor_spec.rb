@@ -174,7 +174,11 @@ RSpec.describe Contractor, type: :model do
   end
 
   describe 'アソシエーション' do
-    it '契約履歴がある場合、削除されない' do
+    it '契約履歴がある場合、契約者は削除されない' do
+      contractor = create(:contractor)
+      contract = create(:contract_parking_space, contractor: contractor)
+
+      expect { contractor.destroy! }.to raise_error(ActiveRecord::DeleteRestrictionError)
     end
   end
 end
