@@ -61,6 +61,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'notesが150文字だった場合' do
+        contractor.notes = 'あ' * 150
+        expect(contractor).to be_valid
       end
     end
 
