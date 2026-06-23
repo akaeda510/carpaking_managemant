@@ -89,6 +89,8 @@ RSpec.describe ParkingLot, type: :model do
       end
 
       it 'parking_managerが紐づいていない場合' do
+        parking_lot.parking_manager = nil
+        expect(parking_lot).to be_invalid
       end
     end
   end
@@ -100,6 +102,11 @@ RSpec.describe ParkingLot, type: :model do
         parking_area = create(:parking_area, parking_lot: parking_lot)
 
         expect { parking_lot.destroy }.to change(ParkingArea, :count).by(-1)
+      end
+    end
+
+    context 'parking_spaceが一度でも契約された場合' do
+      it '契約中のスペースがある場合、ParkingAreaも削除されずに残るか' do
       end
     end
   end
