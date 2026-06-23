@@ -36,6 +36,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'street_addressが50文字だった場合' do
+        contractor.street_address = 'あ' * 50
+        expect(contractor).to be_valid
       end
 
       it 'buildingが55文字だった場合' do
