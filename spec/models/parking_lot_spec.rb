@@ -15,6 +15,8 @@ RSpec.describe ParkingLot, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it 'nameが41文字以上だった場合' do
+        parking_lot.name = 'あ' * 41
+        expect(parking_lot).to be_invalid
       end
 
       it 'prefectureが選択されていない場合' do 
