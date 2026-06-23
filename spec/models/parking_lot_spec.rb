@@ -8,6 +8,7 @@ RSpec.describe ParkingLot, type: :model do
     # 成功パターン
     context 'バリデーション' do 
       it '設定した全てのバリデーションが機能しているか' do
+        expect(parking_lot).to be_valid
       end
     end
 
