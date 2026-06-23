@@ -116,6 +116,9 @@ RSpec.describe Contractor, type: :model do
         contractor.notes = 'あ' * 151
         expect(contractor).to be_invalid
       end
+
+      it 'parking_managerが紐づいていない場合' do
+      end
     end
   end
 end
