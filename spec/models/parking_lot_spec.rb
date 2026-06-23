@@ -50,8 +50,9 @@ RSpec.describe ParkingLot, type: :model do
         expect(parking_lot).to be_invalid
       end
 
-
       it 'descriptionが151文字以上だった場合' do
+        parking_lot.description = 'あ' * 151
+        expect(parking_lot).to be_invalid
       end
 
       it 'total_specesが100以上だった場合' do
