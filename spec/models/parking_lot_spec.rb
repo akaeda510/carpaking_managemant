@@ -10,6 +10,15 @@ RSpec.describe ParkingLot, type: :model do
       it '設定した全てのバリデーションが機能しているか' do
         expect(parking_lot).to be_valid
       end
+
+      it 'total_spacesが1だった場合' do
+      end
+
+      it 'total_spacesが99だった場合' do
+      end
+
+      it 'parking_lotが削除されるとparking_areaも削除される' do
+      end
     end
 
     # 失敗パターン
@@ -76,6 +85,9 @@ RSpec.describe ParkingLot, type: :model do
       it 'total_spacesが空欄だった場合' do 
         parking_lot.total_spaces = nil
         expect(parking_lot).to be_invalid
+      end
+
+      it 'parking_managerが紐づいていない場合' do
       end
     end
   end
