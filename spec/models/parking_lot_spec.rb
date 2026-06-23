@@ -4,7 +4,7 @@ RSpec.describe ParkingLot, type: :model do
   describe 'create' do
     let(:parking_manager) { FactoryBot.create(:parking_manager) }
     let(:parking_lot) { FactoryBot.build(:parking_lot) }
-    
+
     # 成功パターン
     context 'バリデーション' do 
       it '設定した全てのバリデーションが機能しているか' do
@@ -19,9 +19,6 @@ RSpec.describe ParkingLot, type: :model do
       it 'total_spacesが99だった場合' do
         parking_lot.total_spaces = 99
         expect(parking_lot).to be_valid
-      end
-
-      it 'parking_lotが削除されるとparking_areaも削除される' do
       end
     end
 
@@ -92,6 +89,17 @@ RSpec.describe ParkingLot, type: :model do
       end
 
       it 'parking_managerが紐づいていない場合' do
+      end
+    end
+  end
+
+  describe 'アソシエーション' do
+    context 'parking_spaceが契約がされていない場合' do
+      it 'parking_lotが削除されるとparking_areasも削除される' do
+        parking_lot = create(:parking_lot)
+        parking_area = create(:parking_area, parking_lot: parking_lot)
+
+        expect { parking_lot.destroy }.to change(ParkingArea, :count).by(-1)
       end
     end
   end
