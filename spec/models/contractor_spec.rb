@@ -19,6 +19,33 @@ RSpec.describe Contractor, type: :model do
 
         expect(contractor_1).to be_valid
       end
+
+      it 'first_nameが20文字だった場合' do
+      end
+
+      it 'last_nameが20文字だった場合' do
+      end
+
+      it 'cityが20文字だった場合' do
+      end
+
+      it 'street_addressが50文字だった場合' do
+      end
+
+      it 'buildingが55文字だった場合' do
+      end
+
+      it 'phone_numberが11文字だった場合' do
+      end
+
+      it 'contact_numberが10文字だった場合' do
+      end
+
+      it 'contact_numberが11文字だった場合' do
+      end
+
+      it 'notesが150文字だった場合' do
+      end
     end
 
     # 失敗パターン
@@ -91,7 +118,7 @@ RSpec.describe Contractor, type: :model do
 
       it 'phone_numberが空欄だった場合' do
         contractor.phone_number = nil
-       expect(contractor).to be_invalid
+        expect(contractor).to be_invalid
       end
 
       it '同じ管理者でphone_numberが他のユーザーと重複した場合' do
@@ -123,6 +150,11 @@ RSpec.describe Contractor, type: :model do
         contractor.parking_manager = nil
         expect(contractor).to be_invalid
       end
+    end
+  end
+
+  describe 'アソシエーション' do
+    it '契約履歴がある場合、削除されない' do
     end
   end
 end
