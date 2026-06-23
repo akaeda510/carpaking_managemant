@@ -19,6 +19,11 @@ RSpec.describe ParkingLot, type: :model do
         expect(parking_lot).to be_invalid
       end
 
+      it 'nameが空欄だった場合' do
+        parking_lot.name = nil
+        expect(parking_lot).to be_invalid
+      end
+
       it 'prefectureが選択されていない場合' do 
       end
 
