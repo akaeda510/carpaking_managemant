@@ -46,6 +46,8 @@ RSpec.describe ParkingLot, type: :model do
       end
 
       it 'street_addressが空欄の場合' do
+        parking_lot.street_address = nil
+        expect(parking_lot).to be_invalid
       end
 
 
