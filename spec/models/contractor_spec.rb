@@ -21,6 +21,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'first_nameが20文字だった場合' do
+        contractor.first_name = 'あ' * 20
+        expect(contractor).to be_valid
       end
 
       it 'last_nameが20文字だった場合' do
