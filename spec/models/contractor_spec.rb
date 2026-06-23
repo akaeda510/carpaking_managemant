@@ -128,10 +128,12 @@ RSpec.describe Contractor, type: :model do
         expect(contractor_1).to be_invalid
       end
 
-      it 'contact_numberが10文字以上11文字以内でなかった場合' do
+      it 'contact_numberが9文字だった場合' do
         contractor.contact_number = '1' * 9
         expect(contractor).to be_invalid
+      end
 
+      it 'contact_numberが12文字だった場合' do
         contractor.contact_number = '1' * 12
         expect(contractor).to be_invalid
       end
