@@ -107,6 +107,13 @@ RSpec.describe ParkingLot, type: :model do
 
     context 'parking_spaceが一度でも契約された場合' do
       it '契約中のスペースがある場合、ParkingAreaも削除されずに残るか' do
+        parking_lot = create(:parking_lot)
+        parking_area = create(:parking_area, parking_lot: parking_lot)
+        parking_space = create(:parking_space, parking_lot: parking_lot, parking_area: parking_area)
+        create(:contract_parking_space, parking_space: parking_space)
+
+        expect { parking_lot.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
+        expect(ParkingArea.exists?(parking_area.id)).to be true
       end
     end
   end
