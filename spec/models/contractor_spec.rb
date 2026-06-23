@@ -46,6 +46,8 @@ RSpec.describe Contractor, type: :model do
       end
 
       it 'phone_numberが11文字だった場合' do
+        contractor.phone_number = '1' * 11
+        expect(contractor).to be_valid
       end
 
       it 'contact_numberが10文字だった場合' do
