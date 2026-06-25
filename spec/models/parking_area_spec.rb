@@ -46,6 +46,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'default_priceが文字だった場合' do
+        parking_area.default_price = 'あ'
+        expect(parking_area).to be_invalid
       end
 
       it 'default_priceが記号が入力されて場合' do
