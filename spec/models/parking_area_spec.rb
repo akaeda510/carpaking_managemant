@@ -8,7 +8,8 @@ RSpec.describe ParkingArea, type: :model do
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
-    end
+        expect(parking_area).to be_valid
+      end
 
       it 'nameが20文字だった場合' do
       end
@@ -35,7 +36,7 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'default_priceが記号が入力されて場合' do
-    end
+      end
 
       it 'default_priceが空欄だった場合' do
       end
@@ -46,16 +47,17 @@ RSpec.describe ParkingArea, type: :model do
       it 'parking_lotが紐づいていなかった場合' do
       end
     end
+  end
 
-     describe 'アソシエーション' do
-       context 'parking_spaceが契約がされていない場合' do
-         it 'parking_spaceが契約された場合、削除されない' do
-         end
-       end
+  describe 'アソシエーション' do
+    context 'parking_spaceが契約がされていない場合' do
+      it 'parking_spaceが契約された場合、削除されない' do
+      end
+    end
 
-       context 'parking_spaceが一度でも契約された場合' do
-       it '契約中のスペースがある場合、ParkingAreaも削除されずに残る' do
-       end
-     end
+    context 'parking_spaceが一度でも契約された場合' do
+      it '契約中のスペースがある場合、ParkingAreaも削除されずに残る' do
+      end
+    end
   end
 end
