@@ -1,5 +1,61 @@
 require 'rails_helper'
 
 RSpec.describe ParkingArea, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'create' do
+    let(:parking_lot) { FactoryBot.create(:parking_lot) }
+    let(:parking_area) { FactoryBot.build(:parking_area) }
+
+    # 成功パターン
+    context 'バリデーション' do
+      it '設定した全てのバリデーションが機能しているか' do
+    end
+
+      it 'nameが20文字だった場合' do
+      end
+
+      it 'default_priceが数字だった場合' do
+      end
+
+      it 'descriptionが150文字だった場合' do
+      end
+    end
+
+    # 失敗パターン
+    context 'バリデーション' do
+      it 'nameが21文字以上だった場合' do
+      end
+
+      it '同じnameが既に登録されていた場合' do
+      end
+
+      it 'nameが空欄だった場合' do
+      end
+
+      it 'default_priceが文字だった場合' do
+      end
+
+      it 'default_priceが記号が入力されて場合' do
+    end
+
+      it 'default_priceが空欄だった場合' do
+      end
+
+      it 'descriptionが151文字以上だった場合' do
+      end
+
+      it 'parking_lotが紐づいていなかった場合' do
+      end
+    end
+
+     describe 'アソシエーション' do
+       context 'parking_spaceが契約がされていない場合' do
+         it 'parking_spaceが契約された場合、削除されない' do
+         end
+       end
+
+       context 'parking_spaceが一度でも契約された場合' do
+       it '契約中のスペースがある場合、ParkingAreaも削除されずに残る' do
+       end
+     end
+  end
 end
