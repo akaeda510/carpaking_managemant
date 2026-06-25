@@ -74,7 +74,7 @@ RSpec.describe ParkingArea, type: :model do
 
   describe 'アソシエーション' do
     context 'parking_spaceが契約がされていない場合' do
-      it 'parking_spaceが契約された場合、削除されない' do
+      it 'parking_areaを削除すると、parking_spaceも削除されるか' do
       end
     end
 
