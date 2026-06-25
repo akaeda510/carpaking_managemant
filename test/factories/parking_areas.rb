@@ -3,6 +3,6 @@ FactoryBot.define do
     name { Faker::Name.name }
     default_price = 5000
     association :parking_lot
-    category = 0
+    category = asphalt
   end
 end
