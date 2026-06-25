@@ -41,6 +41,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'nameが空欄だった場合' do
+        parking_area.name = nil
+        expect(parking_area).to be_invalid
       end
 
       it 'default_priceが文字だった場合' do
