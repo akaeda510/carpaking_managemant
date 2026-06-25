@@ -35,6 +35,9 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it '同じnameが既に登録されていた場合' do
+        parking_area = create(:parking_area, name: 'エリア1', parking_lot: parking_lot)
+        parking_area_1 = build(:parking_area, name: 'エリア1', parking_lot: parking_lot)
+        expect(parking_area_1).to be_invalid
       end
 
       it 'nameが空欄だった場合' do
