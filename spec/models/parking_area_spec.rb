@@ -16,7 +16,7 @@ RSpec.describe ParkingArea, type: :model do
         expect(parking_area).to be_valid
       end
 
-      it 'default_priceが数字だった場合' do
+      it 'default_priceが数値だった場合' do
         parking_area.default_price = 5000
         expect(parking_area).to be_valid
       end
@@ -45,12 +45,14 @@ RSpec.describe ParkingArea, type: :model do
         expect(parking_area).to be_invalid
       end
 
-      it 'default_priceが文字だった場合' do
+      it 'default_priceが文字列だった場合' do
         parking_area.default_price = 'あ'
         expect(parking_area).to be_invalid
       end
 
-      it 'default_priceが記号が入力されて場合' do
+      it 'default_priceが記号が含まれていた場合' do
+        parking_area.default_price = '5000~'
+        expect(parking_area).to be_invalid
       end
 
       it 'default_priceが空欄だった場合' do
