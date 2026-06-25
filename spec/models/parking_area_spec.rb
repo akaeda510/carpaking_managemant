@@ -17,6 +17,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'default_priceが数字だった場合' do
+        parking_area.default_price = 5000
+        expect(parking_area).to be_valid
       end
 
       it 'descriptionが150文字だった場合' do
