@@ -36,23 +36,33 @@ class ParkingAreasController < ApplicationController
   end
 
   def destroy
-    @parking_area.destroy
-    redirect_to parking_lot_parking_areas_path(@parking_lot),
-      success: "エリアを削除しました。",
-      status: :see_other
+    begin
+      @parking_area.destroy!
+      flash[:success] = "#{@parking_area.name} が削除されました"
+      redirect_to parking_lot_parking_areas_path(@parking_lot), status: :see_other
+
+    rescue ActiveRecord::DeleteRestrictionError
+      flash[:alert] = "この駐車場には契約中の駐車スペースがあるため、削除することができません"
+      redirect_to parking_lot_parking_areas_path(@parking_lot), status: :see_other
+
+    rescue => e
+      logger.error "駐車場削除エラー: #{e.message}"
+      flash[:alert] = "システムエラーが発生したため削除できませんでした"
+      redirect_to parking_lot_parking_area_path(@parking_lot), status: :see_other
+    end
   end
 
-  private
+    private
 
-  def parking_area_params
-    params.require(:parking_area).permit(:name, :default_price, :category, :description)
-  end
+    def parking_area_params
+      params.require(:parking_area).permit(:name, :default_price, :category, :description)
+    end
 
-  def set_parking_lot
-    @parking_lot = current_parking_manager.parking_lots.find(params[:parking_lot_id])
-  end
+    def set_parking_lot
+      @parking_lot = current_parking_manager.parking_lots.find(params[:parking_lot_id])
+    end
 
-  def set_parking_area
-    @parking_area = @parking_lot.parking_areas.find(params[:id])
+    def set_parking_area
+      @parking_area = @parking_lot.parking_areas.find(params[:id])
+    end
   end
-end
