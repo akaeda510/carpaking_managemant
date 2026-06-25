@@ -16,6 +16,9 @@ RSpec.describe ParkingArea, type: :model do
         expect(parking_area).to be_valid
       end
 
+      it '別の管理者と同じnamaだった場合' do
+      end
+
       it 'default_priceが数値だった場合' do
         parking_area.default_price = 5000
         expect(parking_area).to be_valid
