@@ -56,6 +56,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'default_priceが空欄だった場合' do
+        parking_area.default_price = nil
+        expect(parking_area).to be_invalid
       end
 
       it 'descriptionが151文字以上だった場合' do
