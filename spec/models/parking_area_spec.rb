@@ -30,6 +30,8 @@ RSpec.describe ParkingArea, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it 'nameが21文字以上だった場合' do
+        parking_area.name = 'あ' * 21
+        expect(parking_area).to be_invalid
       end
 
       it '同じnameが既に登録されていた場合' do
