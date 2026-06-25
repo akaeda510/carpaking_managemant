@@ -11,7 +11,7 @@ class ParkingSpace < ApplicationRecord
   validates :parking_area, presence: true
   validates :price, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
-  validate :name_id_immutable_if_contracted, on: :update
+  validate :name_immutable_if_contracted, on: :update
 
   enum :status, { available: 0, contracted: 1, pending: 2, prohibited: 3 }, prefix: true, default: :available
 
