@@ -61,6 +61,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'descriptionが151文字以上だった場合' do
+        parking_area.description = 'あ' * 151
+        expect(parking_area).to be_invalid
       end
 
       it 'parking_lotが紐づいていなかった場合' do
