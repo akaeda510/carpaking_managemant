@@ -22,6 +22,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'descriptionが150文字だった場合' do
+        parking_area.description = 'あ' * 150
+        expect(parking_area).to be_valid
       end
     end
 
