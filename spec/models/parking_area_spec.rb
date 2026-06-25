@@ -12,6 +12,8 @@ RSpec.describe ParkingArea, type: :model do
       end
 
       it 'nameが20文字だった場合' do
+        parking_area.name = 'あ' * 20
+        expect(parking_area).to be_valid
       end
 
       it 'default_priceが数字だった場合' do
