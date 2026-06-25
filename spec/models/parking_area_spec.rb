@@ -16,7 +16,15 @@ RSpec.describe ParkingArea, type: :model do
         expect(parking_area).to be_valid
       end
 
-      it '別の管理者と同じnamaだった場合' do
+      it '別の管理者と同じnameだった場合' do
+        parking_manager_1 = create(:parking_manager)
+        parking_manager_2 = create(:parking_manager)
+        parking_lot_1 = create(:parking_lot, parking_manager: parking_manager_1)
+        parking_lot_2 = create(:parking_lot, parking_manager: parking_manager_2)
+        parking_area_1 = create(:parking_area, name: 'エリア1', parking_lot: parking_lot_1)
+        parking_area_2 = build(:parking_area, name: 'エリア1', parking_lot: parking_lot_2)
+
+        expect(parking_area_2).to be_valid
       end
 
       it 'default_priceが数値だった場合' do
