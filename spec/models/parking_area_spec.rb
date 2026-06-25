@@ -77,7 +77,7 @@ RSpec.describe ParkingArea, type: :model do
       it 'parking_areaを削除すると、parking_spaceも削除されるか' do
         parking_area = create(:parking_area)
         parking_space = create(:parking_space, parking_area: parking_area)
-      
+
         expect { parking_area.destroy }.to change(ParkingSpace, :count).by(-1)
       end
     end

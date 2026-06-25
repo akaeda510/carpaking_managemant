@@ -4,7 +4,7 @@ FactoryBot.define do
     width { Faker::Number.number(digits: 1) }
     length { Faker::Number.number(digits: 1) }
     price = 5000
-    status = 'available'
+    status = "available"
     association :parking_area
   end
 end
