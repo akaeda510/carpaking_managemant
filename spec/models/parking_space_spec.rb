@@ -171,7 +171,10 @@ RSpec.describe ParkingSpace, type: :model do
   describe 'アソシエーション' do
     context 'parking_spaceが一度でも駐車場契約された' do
       it 'parking_spaceを削除されずに残る' do
-
+        parking_space = create(:parking_space, parking_area: parking_area)
+        create(:contract_parking_space, parking_space: parking_space)
+        expect { parking_space.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
+         expect(ParkingSpace.exists?(parking_space.id)).to be true
       end
     end
   end
