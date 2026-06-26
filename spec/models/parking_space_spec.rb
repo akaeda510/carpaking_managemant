@@ -120,9 +120,6 @@ RSpec.describe ParkingSpace, type: :model do
         expect(parking_space).to be_invalid
       end
 
-      it 'priceが文字列だった場合' do
-      end
-
       it 'priceが空欄だった場合' do
       end
 
