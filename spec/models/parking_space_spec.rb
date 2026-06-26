@@ -161,9 +161,6 @@ RSpec.describe ParkingSpace, type: :model do
           expect(space).to be_invalid
         end
 
-        it '過去に一度でも契約した場合、nameを変更できずにそのであること' do
-        end
-
         it 'statusが"contracted"に変更されるか' do
           skip '未実装のため後日実装'
         end
@@ -174,6 +171,7 @@ RSpec.describe ParkingSpace, type: :model do
   describe 'アソシエーション' do
     context 'parking_spaceが一度でも駐車場契約された' do
       it 'parking_spaceを削除されずに残る' do
+
       end
     end
   end
