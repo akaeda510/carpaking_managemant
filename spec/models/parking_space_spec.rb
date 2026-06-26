@@ -66,6 +66,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'desctiptionが151文字以上だった場合' do
+        parking_space.description = 'あ' * 151
+        expect(parking_space).to be_invalid
       end
 
       it 'widthが-1だった場合' do
