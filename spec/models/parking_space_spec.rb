@@ -61,6 +61,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'nameが空欄だった場合' do
+        parking_space.name = nil
+        expect(parking_space).to be_invalid
       end
 
       it 'desctiptionが151文字以上だった場合' do
