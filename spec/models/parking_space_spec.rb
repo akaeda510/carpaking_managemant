@@ -42,6 +42,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'priceが0だった場合' do
+        parking_space.price = 0
+        expect(parking_space).to be_valid
       end
     end
 
