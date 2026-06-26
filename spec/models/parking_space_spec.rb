@@ -166,6 +166,7 @@ RSpec.describe ParkingSpace, type: :model do
           parking_space.name = '2'
           expect(parking_space).to be_invalid
         end
+        it 'parking_spaceが現在契約時、契約終了するとstatusが"available"に変更されるか' do
       end
     end
   end
