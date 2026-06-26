@@ -76,6 +76,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'widthが10だった場合' do
+        parking_space.width = 10
+        expect(parking_space).to be_invalid
       end
 
       it 'widthが文字列だった場合' do
