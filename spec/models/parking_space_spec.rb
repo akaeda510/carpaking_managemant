@@ -37,6 +37,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'lengthが9.9だった場合' do
+        parking_space.length = 9.9
+        expect(parking_space).to be_valid
       end
 
       it 'priceが0だった場合' do
