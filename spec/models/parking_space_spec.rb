@@ -166,7 +166,15 @@ RSpec.describe ParkingSpace, type: :model do
           parking_space.name = '2'
           expect(parking_space).to be_invalid
         end
+
         it 'parking_spaceが現在契約時、契約終了するとstatusが"available"に変更されるか' do
+          parking_space = create(:parking_space, status: 'contracted', parking_area: parking_area)
+          contract = create(:contract_parking_space, parking_space: parking_space)
+          expect(parking_space.reload.status).to eq 'contracted'
+          contract.update(end_date: Date.yesterday)
+
+          expect(parking_space.reload.status).to eq 'available'
+        end
       end
     end
   end
