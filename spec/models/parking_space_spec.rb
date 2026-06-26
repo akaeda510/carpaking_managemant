@@ -45,6 +45,9 @@ RSpec.describe ParkingSpace, type: :model do
         parking_space.price = 0
         expect(parking_space).to be_valid
       end
+
+      it 'priceが空欄だった場合' do
+      end
     end
 
     # 失敗パターン
@@ -118,9 +121,6 @@ RSpec.describe ParkingSpace, type: :model do
       it 'priceが小数だった場合' do
         parking_space.price = '1000.1'
         expect(parking_space).to be_invalid
-      end
-
-      it 'priceが空欄だった場合' do
       end
 
       it 'parking_areaが紐づいていなかった場合' do
