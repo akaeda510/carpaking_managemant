@@ -138,9 +138,9 @@ RSpec.describe ParkingSpace, type: :model do
     context 'バリデーション' do
       context 'parking_spaceが契約記録がない場合' do
         it 'nameが変更することができる' do
-          space = create(:parking_space, name: '1', parking_area: parking_area)
-          space.name = '2'
-          expect(space).to be_valid
+          parking_space = create(:parking_space, name: '1', parking_area: parking_area)
+          parking_space.name = '2'
+          expect(parking_space).to be_valid
         end
       end
     end
@@ -148,17 +148,17 @@ RSpec.describe ParkingSpace, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it '作成されたスペースのpriceを空欄にした場合' do
-        space = create(:parking_space, price: 5000, parking_area: parking_area)
-        space.update(price: nil)
-        expect(space).to be_invalid
+        parking_space = create(:parking_space, price: 5000, parking_area: parking_area)
+        parking_space.update(price: nil)
+        expect(parking_space).to be_invalid
       end
 
       context 'parking_spaceが契約履歴がある時' do
         it 'nameの変更を無効になる' do
-          space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
-          create(:contract_parking_space, parking_space: space)
-          space.name = '2'
-          expect(space).to be_invalid
+          parking_space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
+          create(:contract_parking_space, parking_space: parking_space)
+          parking_space.name = '2'
+          expect(parking_space).to be_invalid
         end
 
         it 'statusが"contracted"に変更されるか' do
