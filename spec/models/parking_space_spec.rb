@@ -134,22 +134,8 @@ RSpec.describe ParkingSpace, type: :model do
   end
 
   describe 'update' do
+    # 成功パターン
     context 'バリデーション' do
-      it '作成されたスペースのpriceを空欄にした場合' do
-        space = create(:parking_space, price: 5000, parking_area: parking_area)
-        space.update(price: nil)
-        expect(space).to be_invalid
-      end
-
-      context 'parking_spaceに契約記録がある場合' do
-        it 'nameが変更を無効になる' do
-          space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
-          create(:contract_parking_space, parking_space: space)
-          space.name = '2'
-          expect(space).to be_invalid
-        end
-      end
-
       context 'parking_spaceが契約記録がない場合' do
         it 'nameが変更することができる' do
           space = create(:parking_space, name: '1', parking_area: parking_area)
@@ -159,15 +145,28 @@ RSpec.describe ParkingSpace, type: :model do
       end
     end
 
-    context 'parking_spaceが駐車場契約された時' do
-      it '現在契約しており、nameを変更でないずにそのままだあること' do
+    # 失敗パターン
+    context 'バリデーション' do
+      it '作成されたスペースのpriceを空欄にした場合' do
+        space = create(:parking_space, price: 5000, parking_area: parking_area)
+        space.update(price: nil)
+        expect(space).to be_invalid
       end
 
-      it '過去に一度でも契約した場合、nameを変更できずにそのであること' do
-      end
+      context 'parking_spaceが契約履歴がある時' do
+        it 'nameの変更を無効になる' do
+          space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
+          create(:contract_parking_space, parking_space: space)
+          space.name = '2'
+          expect(space).to be_invalid
+        end
 
-      it 'statusが"contracted"に変更されるか' do
-        skip '未実装のため後日実装'
+        it '過去に一度でも契約した場合、nameを変更できずにそのであること' do
+        end
+
+        it 'statusが"contracted"に変更されるか' do
+          skip '未実装のため後日実装'
+        end
       end
     end
   end
