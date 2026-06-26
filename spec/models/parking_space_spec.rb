@@ -50,6 +50,8 @@ RSpec.describe ParkingSpace, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it 'nameが11文字だった場合' do
+        parking_space.name = 'あ' * 11
+        expect(parking_space).to be_invalid
       end
 
       it 'nameが既に登録されていた場合' do
