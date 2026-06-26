@@ -126,6 +126,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'parking_areaが紐づいていなかった場合' do
+        parking_space.parking_area = nil
+        expect(parking_space).to be_invalid
       end
     end
   end
