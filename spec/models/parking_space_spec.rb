@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ParkingSpace, type: :model do
-    let(:parking_area) { FactoryBot.create(:parking_area) }
-    let(:parking_space) { FactoryBot.build(:parking_space) }
+  let(:parking_area) { FactoryBot.create(:parking_area) }
+  let(:parking_space) { FactoryBot.build(:parking_space) }
 
   describe 'create' do
     # 成功パターン
@@ -141,6 +141,33 @@ RSpec.describe ParkingSpace, type: :model do
           parking_space.name = '2'
           expect(parking_space).to be_valid
         end
+
+        it '契約時、statusが"contracted"に変更されるか' do
+          parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
+          create(:contract_parking_space, parking_space: parking_space)
+
+          expect(parking_space.reload.status).to eq 'contracted'
+        end
+      end
+
+      context 'parking_spaceが現在契約している場合' do
+        it '契約終了するとstatusが"available"に変更されるか' do
+          parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
+          contract = create(:contract_parking_space, parking_space: parking_space)
+          expect(parking_space.reload.status).to eq 'contracted'
+          contract.update(end_date: Date.yesterday)
+
+          expect(parking_space.reload.status).to eq 'available'
+        end
+
+        it '即日契約終了するとき、今日までは契約しておりstatusは"contracted"であるか' do
+          parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
+          contract = create(:contract_parking_space, parking_space: parking_space)
+          expect(parking_space.reload.status).to eq 'contracted'
+
+          contract.update(end_date: Date.current)
+          expect(parking_space.reload.status).to eq 'contracted'
+        end
       end
     end
 
@@ -154,14 +181,10 @@ RSpec.describe ParkingSpace, type: :model do
 
       context 'parking_spaceが契約履歴がある時' do
         it 'nameの変更を無効になる' do
-          parking_space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
+          parking_space = create(:parking_space, name: '1', parking_area: parking_area)
           create(:contract_parking_space, parking_space: parking_space)
           parking_space.name = '2'
           expect(parking_space).to be_invalid
-        end
-
-        it 'statusが"contracted"に変更されるか' do
-          skip '未実装のため後日実装'
         end
       end
     end
@@ -173,7 +196,7 @@ RSpec.describe ParkingSpace, type: :model do
         parking_space = create(:parking_space, parking_area: parking_area)
         create(:contract_parking_space, parking_space: parking_space)
         expect { parking_space.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
-         expect(ParkingSpace.exists?(parking_space.id)).to be true
+        expect(ParkingSpace.exists?(parking_space.id)).to be true
       end
     end
   end
