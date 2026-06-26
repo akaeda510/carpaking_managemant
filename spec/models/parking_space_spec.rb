@@ -152,6 +152,9 @@ RSpec.describe ParkingSpace, type: :model do
 
       context 'parking_spaceが契約記録がない場合' do
         it 'nameが変更することができる' do
+          space = create(:parking_space, name: '1', parking_area: parking_area)
+          space.name = '2'
+          expect(space).to be_valid
         end
       end
     end
