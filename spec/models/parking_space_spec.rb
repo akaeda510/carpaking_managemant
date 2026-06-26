@@ -110,7 +110,9 @@ RSpec.describe ParkingSpace, type: :model do
         expect(parking_space).to be_invalid
       end
 
-      it 'priceが-1だった場合' do
+      it 'priceが負の数値だった場合' do
+        parking_space.price = '-5000'
+        expect(parking_space).to be_invalid
       end
 
       it 'priceが小数だった場合' do
