@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ParkingSpace, type: :model do
-    let(:parking_area) { FactoryBot.create(:parking_area) }
-    let(:parking_space) { FactoryBot.build(:parking_space) }
+  let(:parking_area) { FactoryBot.create(:parking_area) }
+  let(:parking_space) { FactoryBot.build(:parking_space) }
 
   describe 'create' do
     # 成功パターン
@@ -145,13 +145,14 @@ RSpec.describe ParkingSpace, type: :model do
         it '契約時、statusが"contracted"に変更されるか' do
           parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
           create(:contract_parking_space, parking_space: parking_space)
-          
+
           expect(parking_space.reload.status).to eq 'contracted'
         end
       end
-      context 'parking_spaceが現在契約している場合'
+
+      context 'parking_spaceが現在契約している場合' do
         it '契約終了するとstatusが"available"に変更されるか' do
-          parking_space = create(:parking_space, status: 'contracted', parking_area: parking_area)
+          parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
           contract = create(:contract_parking_space, parking_space: parking_space)
           expect(parking_space.reload.status).to eq 'contracted'
           contract.update(end_date: Date.yesterday)
@@ -160,6 +161,12 @@ RSpec.describe ParkingSpace, type: :model do
         end
 
         it '即日契約終了するとき、今日までは契約しておりstatusは"contracted"であるか' do
+          parking_space = create(:parking_space, status: 'available', parking_area: parking_area)
+          contract = create(:contract_parking_space, parking_space: parking_space)
+          expect(parking_space.reload.status).to eq 'contracted'
+
+          contract.update(end_date: Date.current)
+          expect(parking_space.reload.status).to eq 'contracted'
         end
       end
     end
@@ -189,7 +196,7 @@ RSpec.describe ParkingSpace, type: :model do
         parking_space = create(:parking_space, parking_area: parking_area)
         create(:contract_parking_space, parking_space: parking_space)
         expect { parking_space.destroy }.to raise_error(ActiveRecord::DeleteRestrictionError)
-         expect(ParkingSpace.exists?(parking_space.id)).to be true
+        expect(ParkingSpace.exists?(parking_space.id)).to be true
       end
     end
   end
