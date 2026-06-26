@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ParkingSpace, type: :model do
-    let(:parking_area) { FactoryBot.create(:parking_area) }   
+    let(:parking_area) { FactoryBot.create(:parking_area) }
     let(:parking_space) { FactoryBot.build(:parking_space) }
 
   describe 'create' do
-
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
