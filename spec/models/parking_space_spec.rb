@@ -47,6 +47,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'priceが空欄だった場合' do
+        parking_space.price = nil
+        expect(parking_space).to be_valid
       end
     end
 
@@ -130,6 +132,9 @@ RSpec.describe ParkingSpace, type: :model do
 
   describe 'update' do
     context 'バリデーション' do
+      it '作成されたスペースのpriceを空欄にした場合' do
+      end
+
       context 'parking_spaceがcontractedの場合' do
         it 'nameが変更を無効になる' do
         end
@@ -142,6 +147,12 @@ RSpec.describe ParkingSpace, type: :model do
     end
 
     context 'parking_spaceが駐車場契約された時' do
+      it '現在契約しており、nameを変更でないずにそのままだあること' do
+      end
+
+      it '過去に一度でも契約した場合、nameを変更できずにそのであること' do
+      end
+
       it 'statusが"contracted"に変更されるか' do
         skip '未実装のため後日実装'
       end
