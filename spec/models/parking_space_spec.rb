@@ -8,6 +8,7 @@ RSpec.describe ParkingSpace, type: :model do
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
+        expect(parking_space).to be_valid
       end
 
       it 'nameが10文字だった場合' do
