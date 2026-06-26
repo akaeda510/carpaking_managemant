@@ -14,6 +14,9 @@ class ContractParkingSpace < ApplicationRecord
   delegate :parking_area, to: :parking_space
   delegate :parking_lot, to: :parking_area
 
+  after_save :sync_parking_space_status
+  after_destroy :sync_parking_space_status
+
   # 有効な契約
   scope :active, -> {
     today = Date.current
@@ -43,5 +46,20 @@ class ContractParkingSpace < ApplicationRecord
 
   def parking_area
     parking_space&.parking_area
+  end
+
+  private
+
+  # 契約状況によってparking_space.statusを同期
+  def sync_parking_space_status
+    return if parking_space.status_prohibited?
+
+    new_status =
+      if parking_space.contract_parking_spaces.active.exists?
+        :contracted
+      else
+        :available
+      end
+    parking_space.update!(status: new_status) unless parking_space.status == new_status.to_s
   end
 end
