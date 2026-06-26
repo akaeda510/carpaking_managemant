@@ -141,12 +141,16 @@ RSpec.describe ParkingSpace, type: :model do
         expect(space).to be_invalid
       end
 
-      context 'parking_spaceがcontractedの場合' do
+      context 'parking_spaceに契約記録がある場合' do
         it 'nameが変更を無効になる' do
+          space = create(:parking_space, name: '1', status: 'contracted', parking_area: parking_area)
+          create(:contract_parking_space, parking_space: space)
+          space.name = '2'
+          expect(space).to be_invalid
         end
       end
 
-      context 'parking_spaceがcontractedでない場合' do
+      context 'parking_spaceが契約記録がない場合' do
         it 'nameが変更することができる' do
         end
       end
