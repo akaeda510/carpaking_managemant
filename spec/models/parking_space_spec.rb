@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ParkingSpace, type: :model do
-  describe 'create' do
     let(:parking_area) { FactoryBot.create(:parking_area) }   
     let(:parking_space) { FactoryBot.build(:parking_space) }
+
+  describe 'create' do
 
     # 成功パターン
     context 'バリデーション' do
@@ -135,6 +136,9 @@ RSpec.describe ParkingSpace, type: :model do
   describe 'update' do
     context 'バリデーション' do
       it '作成されたスペースのpriceを空欄にした場合' do
+        space = create(:parking_space, price: 5000, parking_area: parking_area)
+        space.update(price: nil)
+        expect(space).to be_invalid
       end
 
       context 'parking_spaceがcontractedの場合' do
