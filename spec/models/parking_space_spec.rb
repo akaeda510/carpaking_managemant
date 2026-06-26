@@ -106,6 +106,8 @@ RSpec.describe ParkingSpace, type: :model do
       end
 
       it 'lengthが空欄だった場合' do
+        parking_space.length = nil
+        expect(parking_space).to be_invalid
       end
 
       it 'priceが-1だった場合' do
