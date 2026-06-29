@@ -138,8 +138,10 @@ RSpec.describe ContractParkingSpace, type: :model do
     end
   end
 
-  describe '#expirigng_soon?' do
+  describe '#expiring_soon?' do
     it '終了日が30日以内の場合は、trueを返す' do
+      contract_parking_space = create(:contract_parking_space, end_date: Date.today + 30.days)
+      expect(contract_parking_space.expiring_soon?).to be true
     end
 
     it '終了日が31日以上先の場合、falseを返す' do
