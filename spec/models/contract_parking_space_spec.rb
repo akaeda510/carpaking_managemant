@@ -55,6 +55,9 @@ RSpec.describe ContractParkingSpace, type: :model do
     # 成功パターン
     context 'バリデーション' do
       it 'end_dateを今日に設定できるか' do
+        contract_parking_space = create(:contract_parking_space)
+        contract_parking_space.end_date = Date.today
+        expect(contract_parking_space).to be_valid
       end
     end
 
