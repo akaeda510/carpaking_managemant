@@ -63,13 +63,19 @@ RSpec.describe ContractParkingSpace, type: :model do
 
     # 失敗パターン
     context 'バリデーション' do
-      it 'start_dateを変更した場合' do
-      end
+      context '契約が有効な場合' do
+        it 'start_dateを変更した場合' do
+          skip "未実装"
+          contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date)
+          contract_parking_space.start_date = Date.today
+          expect(contract_parking_space).to be_invalid
+        end
 
-      it '契約者を変更した場合' do
-      end
+        it '契約者を変更した場合' do
+        end
 
-      it '駐車スペースを変更した場合' do
+        it '駐車スペースを変更した場合' do
+        end
       end
     end
   end
