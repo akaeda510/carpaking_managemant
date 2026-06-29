@@ -155,8 +155,10 @@ contract_parking_space = create(:contract_parking_space, end_date: Date.today + 
   end
   end
 
-  describe '#expired' do
+  describe '#expired?' do
     it '終了日が過去の場合、trueを返す' do
+      contract_parking_space = create(:contract_parking_space, start_date: 2.months.ago, end_date: Date.yesterday)
+      expect(contract_parking_space.expired?).to be true
     end
 
     it '終了日が未来の場合、falseを返す' do
