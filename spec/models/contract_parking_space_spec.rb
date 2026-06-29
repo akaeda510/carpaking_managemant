@@ -121,7 +121,7 @@ RSpec.describe ContractParkingSpace, type: :model do
     end
 
     describe '.created_this_month' do
-      it '今月作成された場合は、含まれる' do
+      it '今月の1日作成された場合は、含まれる' do
       end
     end
   end
