@@ -13,12 +13,17 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'end_dateが空欄の時、"2999/12/31"になるか' do
+        skip "実装予定"
+        contract_parking_space.end_date = nil
+        expect(contract_parking_space).to eq '2999/12/31'
       end
     end
 
     # 失敗パターン
     context 'バリデーション' do
       it 'end_dateがstert_dateよりも前だった場合' do
+        contract_parking_space = build(:contract_parking_space, start_date: Date.today, end_date: Date.yesterday)
+        expect(contract_parking_space).to be_invalid
       end
 
       it 'contractorが紐づいていない場合' do
