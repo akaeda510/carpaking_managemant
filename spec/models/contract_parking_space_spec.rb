@@ -107,7 +107,7 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'end_dateがnilで開始日が過去の場合、含まれる' do
-        skip "end_dateがnilの場合のバリデーション未実装"
+        skip "end_dateがnilの場合default設定の未実装ため"
         contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: nil)
         expect(ContractParkingSpace.active).to include(contract_parking_space)
       end
@@ -115,6 +115,8 @@ RSpec.describe ContractParkingSpace, type: :model do
 
     describe '.terminated' do
       it '終了日が過去の場合は、含まれる' do
+        contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: Date.yesterday)
+        expect(ContractParkingSpace.terminated).to include(contract_parking_space)
       end
     end
 
