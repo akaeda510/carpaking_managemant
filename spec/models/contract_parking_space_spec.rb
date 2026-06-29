@@ -27,6 +27,8 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'contractorが紐づいていない場合' do
+        contract_parking_space.contractor = nil
+        expect(contract_parking_space).to be_invalid
       end
 
       it '既にparking_spaceが契約していた場合' do
