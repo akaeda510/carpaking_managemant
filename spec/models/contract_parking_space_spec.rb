@@ -132,6 +132,8 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it '今月作成されなかった場合は、含まれない' do
+        contract_parking_space = create(:contract_parking_space, created_at: 1.month.ago)
+        expect(ContractParkingSpace.created_this_month).not_to include(contract_parking_space)
       end
     end
   end
