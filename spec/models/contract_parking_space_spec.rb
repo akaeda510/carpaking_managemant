@@ -102,6 +102,8 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it '契約期間外（終了済み)の場合は、含まない' do
+        contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: Date.yesterday)
+        expect(ContractParkingSpace.active).not_to include(contract_parking_space)
       end
 
       it 'end_dateがnilで開始日が過去の場合、含まれる' do
