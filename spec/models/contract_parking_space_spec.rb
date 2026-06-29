@@ -45,6 +45,8 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'parking_managerが紐づいていない場合' do
+        contract_parking_space.parking_manager = nil
+        expect(contract_parking_space).to be_invalid
       end
     end
   end
