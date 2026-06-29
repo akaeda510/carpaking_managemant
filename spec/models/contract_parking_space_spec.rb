@@ -71,6 +71,9 @@ RSpec.describe ContractParkingSpace, type: :model do
           expect(contract_parking_space).to be_invalid
         end
 
+        it '契約終了が契約開始日よりも後の場合' do
+        end
+
         it '契約者を変更した場合' do
           skip "未実装"
           contractor_1 = create(:contractor)
