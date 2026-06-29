@@ -3,11 +3,13 @@ require 'rails_helper'
 RSpec.describe ContractParkingSpace, type: :model do
   let(:parking_space) { FactoryBot.create(:parking_space) }
   let(:contractor) { FactoryBot.create(:contractor) }
+  let(:contract_parking_space) { FactoryBot.build(:contract_parking_space) }
 
   describe 'create' do
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
+        expect(contract_parking_space).to be_valid
       end
 
       it 'end_dateが空欄の時、"2999/12/31"になるか' do
