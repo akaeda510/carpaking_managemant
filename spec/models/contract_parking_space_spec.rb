@@ -97,6 +97,8 @@ RSpec.describe ContractParkingSpace, type: :model do
   describe 'スコープ' do
     describe '.active' do
       it '契約期間内の場合は、含まれる' do
+        contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: Date.today)
+        expect(ContractParkingSpace.active).to include(contract_parking_space)
       end
 
       it '契約期間外（終了済み)の場合は、含まない' do
