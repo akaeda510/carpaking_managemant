@@ -32,6 +32,11 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it '既にparking_spaceが契約していた場合' do
+        skip "未実装"
+        parking_space = create(:parking_space)
+        contract_parking_space_1 = create(:contract_parking_space, parking_space: parking_space)
+        contract_parking_space_2 = build(:contract_parking_space, parking_space: parking_space)
+        expect(contract_parking_space_2).to be_invalid
       end
 
       it 'parking_spaceが紐づいていない場合' do
