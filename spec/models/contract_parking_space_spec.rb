@@ -76,12 +76,19 @@ RSpec.describe ContractParkingSpace, type: :model do
           contractor_1 = create(:contractor)
           contractor_2 = create(:contractor)
           contract_parking_space = create(:contract_parking_space, contractor: contractor_1)
-          contract_parking_space.contractor = contractor_2
 
+          contract_parking_space.contractor = contractor_2
           expect(contract_parking_space).to be_invalid
         end
 
         it '駐車スペースを変更した場合' do
+          skip "未実装"
+          parking_space_1 = create(:parking_space)
+          parking_space_2 = create(:parking_space)
+          contract_parking_space = create(:contract_parking_space, parking_space: parking_space_1)
+
+          contract_parking_space.parking_space = parking_space_2
+          expect(contract_parking_space).to be_invalid
         end
       end
     end
