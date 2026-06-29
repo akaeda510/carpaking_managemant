@@ -21,7 +21,7 @@ RSpec.describe ContractParkingSpace, type: :model do
 
     # 失敗パターン
     context 'バリデーション' do
-      it 'end_dateがstert_dateよりも前だった場合' do
+      it 'end_dateがstart_dateよりも前だった場合' do
         contract_parking_space = build(:contract_parking_space, start_date: Date.today, end_date: Date.yesterday)
         expect(contract_parking_space).to be_invalid
       end
