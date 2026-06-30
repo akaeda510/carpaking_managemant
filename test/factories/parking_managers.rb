@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :parking_manager do
-    first_name { Faker::Name.first_name }
-    last_name { Faker::Name.last_name }
+    first_name { Faker::Name.last_name }
+    last_name { Faker::Name.first_name }
     email { Faker::Internet.email }
     password { Faker::Internet.password }
     prefecture { I18n.t("prefectures").values.sample }
