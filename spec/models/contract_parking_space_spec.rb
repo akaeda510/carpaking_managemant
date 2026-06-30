@@ -13,7 +13,6 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'end_dateが空欄の時、"2999/12/31"になるか' do
-        skip "実装予定"
         contract_parking_space.end_date = nil
         expect(contract_parking_space).to eq '2999/12/31'
       end
@@ -22,7 +21,6 @@ RSpec.describe ContractParkingSpace, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it '契約終了日が契約開始日よりも前だった場合' do
-        skip "未実装"
         contract_parking_space = build(:contract_parking_space, start_date: Date.today, end_date: Date.yesterday)
         expect(contract_parking_space).to be_invalid
       end
@@ -33,7 +31,6 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it '既にparking_spaceが契約していた場合' do
-        skip "未実装"
         parking_space = create(:parking_space)
         contract_parking_space_1 = create(:contract_parking_space, parking_space: parking_space)
         contract_parking_space_2 = build(:contract_parking_space, parking_space: parking_space)
@@ -66,21 +63,18 @@ RSpec.describe ContractParkingSpace, type: :model do
     context 'バリデーション' do
       context '契約が有効な場合' do
         it 'start_dateを変更した場合' do
-          skip "未実装"
           contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date)
           contract_parking_space.start_date = Date.today
           expect(contract_parking_space).to be_invalid
         end
 
         it '契約終了が契約開始日よりも後の場合' do
-          skip "未実装"
           contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date)
           contract_parking_space.end_date = 2.months.ago.to_date
           expect(contract_parking_space).to be_invalid
         end
 
         it '契約者を変更した場合' do
-          skip "未実装"
           contractor_1 = create(:contractor)
           contractor_2 = create(:contractor)
           contract_parking_space = create(:contract_parking_space, contractor: contractor_1)
@@ -90,7 +84,6 @@ RSpec.describe ContractParkingSpace, type: :model do
         end
 
         it '駐車スペースを変更した場合' do
-          skip "未実装"
           parking_space_1 = create(:parking_space)
           parking_space_2 = create(:parking_space)
           contract_parking_space = create(:contract_parking_space, parking_space: parking_space_1)
@@ -115,7 +108,6 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'end_dateがnilで開始日が過去の場合、含まれる' do
-        skip "end_dateがnilの場合default設定の未実装ため"
         contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: nil)
         expect(ContractParkingSpace.active).to include(contract_parking_space)
       end
@@ -153,14 +145,14 @@ RSpec.describe ContractParkingSpace, type: :model do
     end
 
     it '終了日が31日以上先の場合、falseを返す' do
-contract_parking_space = create(:contract_parking_space, end_date: Date.today + 31.days)
+      contract_parking_space = create(:contract_parking_space, end_date: Date.today + 31.days)
       expect(contract_parking_space.expiring_soon?).to be false
     end
 
     it 'end_dateが"2999/12/31"の場合、falseを返す' do
- contract_parking_space = create(:contract_parking_space, end_date: "2999/12/31")
+      contract_parking_space = create(:contract_parking_space, end_date: "2999/12/31")
       expect(contract_parking_space.expiring_soon?).to be false
-  end
+    end
   end
 
   describe '#expired?' do
