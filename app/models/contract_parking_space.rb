@@ -1,4 +1,6 @@
 class ContractParkingSpace < ApplicationRecord
+  before_validation :undetermined
+
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :contractor, presence: true
@@ -15,13 +17,14 @@ class ContractParkingSpace < ApplicationRecord
   delegate :parking_lot, to: :parking_area
 
   after_save :sync_parking_space_status
+
   after_destroy :sync_parking_space_status
 
   # 有効な契約
   scope :active, -> {
     today = Date.current
     where("start_date <= :today AND (end_date >= :today OR end_date IS NULL)", today: today)
-    }
+  }
 
   # 今月に新たに作成されたデータ
   scope :created_this_month, -> {
@@ -61,5 +64,11 @@ class ContractParkingSpace < ApplicationRecord
         :available
       end
     parking_space.update!(status: new_status) unless parking_space.status == new_status.to_s
+  end
+
+  def undetermined
+    if end_date_undetermined?
+      self.end_date = '2999-12-31'
+    end
   end
 end
