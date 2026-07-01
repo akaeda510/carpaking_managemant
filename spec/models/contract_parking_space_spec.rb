@@ -32,6 +32,7 @@ RSpec.describe ContractParkingSpace, type: :model do
       it '契約終了日が契約開始日よりも前だった場合' do
         contract_parking_space = build(:contract_parking_space, start_date: Date.today, end_date: Date.yesterday)
         expect(contract_parking_space).to be_invalid
+        expect(contract_parking_space.errors[:end_date]).to eq ["は契約開始日より前ですので設定できません。"]
       end
 
       it 'contractorが紐づいていない場合' do
