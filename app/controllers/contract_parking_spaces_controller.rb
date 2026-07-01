@@ -65,7 +65,7 @@ class ContractParkingSpacesController < ApplicationController
 
   def contract_params
     params.require(:contract_parking_space).permit(
-      :start_date, :end_date, :contractor_id, :parking_space_id
+      :start_date, :end_date, :contractor_id, :parking_space_id, :end_date_undetermined
     )
   end
 

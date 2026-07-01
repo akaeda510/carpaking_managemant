@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_29_043742) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_30_073619) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -32,9 +32,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_043742) do
     t.bigint "contractor_id", null: false
     t.datetime "created_at", null: false
     t.date "end_date", default: "2999-12-31", null: false
+    t.boolean "end_date_undetermined", default: false, null: false
     t.bigint "parking_manager_id", null: false
     t.bigint "parking_space_id", null: false
-    t.date "start_date", default: "1999-12-31", null: false
+    t.date "start_date", null: false
     t.datetime "updated_at", null: false
     t.index ["contractor_id"], name: "index_contract_parking_spaces_on_contractor_id"
     t.index ["parking_manager_id"], name: "index_contract_parking_spaces_on_parking_manager_id"

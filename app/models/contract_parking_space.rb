@@ -1,9 +1,17 @@
 class ContractParkingSpace < ApplicationRecord
+  before_validation :undetermined
+
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :contractor, presence: true
   validates :parking_space, presence: true
   validates :parking_manager, presence: true
+
+  validate :end_date_after_start_date
+  validate :parking_space_available
+  validate :start_date_immutable_if_active, on: :update
+  validate :contractor_immutable_if_active, on: :update
+  validate :parking_space_immutable_if_active, on: :update
 
   belongs_to :contractor
   belongs_to :parking_space
@@ -15,13 +23,14 @@ class ContractParkingSpace < ApplicationRecord
   delegate :parking_lot, to: :parking_area
 
   after_save :sync_parking_space_status
+
   after_destroy :sync_parking_space_status
 
   # 有効な契約
   scope :active, -> {
     today = Date.current
     where("start_date <= :today AND (end_date >= :today OR end_date IS NULL)", today: today)
-    }
+  }
 
   # 今月に新たに作成されたデータ
   scope :created_this_month, -> {
@@ -61,5 +70,45 @@ class ContractParkingSpace < ApplicationRecord
         :available
       end
     parking_space.update!(status: new_status) unless parking_space.status == new_status.to_s
+  end
+
+  def undetermined
+    if end_date.present? && end_date.to_s != "2999-12-31"
+      self.end_date_undetermined = false
+    elsif end_date_undetermined?
+      self.end_date = "2999-12-31"
+    end
+  end
+
+  def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
+    if end_date < start_date
+      errors.add(:end_date, "は契約開始日より前ですので設定できません。")
+    end
+  end
+
+  def parking_space_available
+    return if parking_space.blank?
+    if parking_space.contract_parking_spaces.active.where.not(id: id).exists?
+      errors.add(:parking_space, "はすでに契約されています。")
+    end
+  end
+
+  def start_date_immutable_if_active
+    return unless ContractParkingSpace.active.exists?(id)
+    return unless start_date_changed?
+    errors.add(:start_date, "契約が有効のため変更できません。")
+  end
+
+  def contractor_immutable_if_active
+    return unless ContractParkingSpace.active.exists?(id)
+    return unless contractor_changed?
+    errors.add(:contractor, "契約が有効のため変更できません。")
+  end
+
+  def parking_space_immutable_if_active
+    return unless ContractParkingSpace.active.exists?(id)
+    return unless parking_space_changed?
+    errors.add(:parking_space, "契約が有効のため変更できません。")
   end
 end
