@@ -20,6 +20,10 @@ RSpec.describe ContractParkingSpace, type: :model do
       end
 
       it 'end_date_undeterminedがtrue、且つend_dateの日付を設定した場合' do
+        contract_parking_space = build(:contract_parking_space, end_date: 2.months.from_now, end_date_undetermined: true)
+        contract_parking_space.valid?
+
+        expect(contract_parking_space.end_date_undetermined).to eq false
       end
     end
 
@@ -102,7 +106,7 @@ RSpec.describe ContractParkingSpace, type: :model do
 
   describe 'スコープ' do
     describe '.active' do
-      it '契約期間内の場合は、含まれる' do
+      it '契約期間が今日までの場合は、含まれる' do
         contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: Date.today)
         expect(ContractParkingSpace.active).to include(contract_parking_space)
       end
@@ -112,8 +116,8 @@ RSpec.describe ContractParkingSpace, type: :model do
         expect(ContractParkingSpace.active).not_to include(contract_parking_space)
       end
 
-      it 'end_dateがnilで開始日が過去の場合、含まれる' do
-        contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: nil)
+      it 'end_dateが未設定"2999-12-31"で開始日が過去の場合、含まれる' do
+        contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date, end_date: '2999-12-31')
         expect(ContractParkingSpace.active).to include(contract_parking_space)
       end
     end
