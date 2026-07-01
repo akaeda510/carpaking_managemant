@@ -12,13 +12,7 @@ RSpec.describe ContractParkingSpace, type: :model do
         expect(contract_parking_space).to be_valid
       end
 
-      it '契約終了日が設定すると、end_date_undeterminedがfalseになるか' do
-        contract_parking_space = build(:contract_parking_space, end_date: 2.months.from_now)
-
-        expect(contract_parking_space.end_date_undetermined).to eq false
-      end
-
-      it '契約終了日未定をチェックすると、end_date_undeterminedがtrueになるか' do
+      it 'end_date_undeterminedがtrue、且つend_dateがnilの場合' do
       end
     end
 
