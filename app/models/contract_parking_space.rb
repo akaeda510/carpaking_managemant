@@ -67,8 +67,11 @@ class ContractParkingSpace < ApplicationRecord
   end
 
   def undetermined
-    if end_date_undetermined?
-      self.end_date = '2999-12-31'
+    if end_date.present? && end_date.to_s != '2999-12-31'
+      self.end_date_undetermined = false
+    elsif end_date_undetermined?
+      end_date.present?
+      self.end_date_undetermined = '2999-12-31'
     end
   end
 end
