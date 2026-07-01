@@ -77,7 +77,9 @@ RSpec.describe ContractParkingSpace, type: :model do
         it 'start_dateを変更した場合' do
           contract_parking_space = create(:contract_parking_space, start_date: 1.month.ago.to_date)
           contract_parking_space.start_date = Date.today
+
           expect(contract_parking_space).to be_invalid
+          expect(contract_parking_space.errors[:start_date]).to eq ["契約が有効のため変更できません。"]
         end
 
         it '契約終了が契約開始日よりも後の場合' do
