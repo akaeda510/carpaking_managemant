@@ -11,6 +11,7 @@ class ContractParkingSpace < ApplicationRecord
   validate :parking_space_available
   validate :start_date_immutable_if_active, on: :update
   validate :contractor_immutable_if_active, on: :update
+  validate :parking_space_immutable_if_active, on: :update
 
   belongs_to :contractor
   belongs_to :parking_space
@@ -103,5 +104,11 @@ class ContractParkingSpace < ApplicationRecord
     return unless ContractParkingSpace.active.exists?(id)
     return unless contractor_changed?
     errors.add(:contractor, "契約が有効のため変更できません。")
+  end
+
+  def parking_space_immutable_if_active
+    return unless ContractParkingSpace.active.exists?(id)
+    return unless parking_space_changed?
+    errors.add(:parking_space, "契約が有効のため変更できません。")
   end
 end
