@@ -7,6 +7,8 @@ class ContractParkingSpace < ApplicationRecord
   validates :parking_space, presence: true
   validates :parking_manager, presence: true
 
+  validate :end_date_after_start_date
+
   belongs_to :contractor
   belongs_to :parking_space
   belongs_to :parking_manager
@@ -70,8 +72,14 @@ class ContractParkingSpace < ApplicationRecord
     if end_date.present? && end_date.to_s != '2999-12-31'
       self.end_date_undetermined = false
     elsif end_date_undetermined?
-      end_date.present?
-      self.end_date_undetermined = '2999-12-31'
+      self.end_date = '2999-12-31'
+    end
+  end
+
+  def end_date_after_start_date
+    return if end_date.blank? || start_date.blank?
+    if end_date < start_date
+      errors.add(:end_date, "は契約開始日より前ですので設定できません。")
     end
   end
 end
