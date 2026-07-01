@@ -7,10 +7,13 @@
           <i class="fa-solid fa-file-contract mr-2 text-blue-600"></i>
           新規契約作成：<%= @contractor.full_name %> 様
         </h3>
+
         <%= link_to contractor_path(@contractor), data: { turbo_frame: "_top" }, class: "text-gray-400 hover:text-gray-600" do %>
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         <% end %>
       </div>
+
+      <%= render "shared/error_messages", object: @contract_parking_space %>
 
       <div class="p-6 space-y-6">
         <%# ステップ1 & 2：駐車場とエリアの選択（これらはGETメソッドで自分自身をリロード） %>
