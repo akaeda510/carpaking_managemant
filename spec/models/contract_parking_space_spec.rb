@@ -32,7 +32,7 @@ RSpec.describe ContractParkingSpace, type: :model do
       it '契約終了日が契約開始日よりも前だった場合' do
         contract_parking_space = build(:contract_parking_space, start_date: Date.today, end_date: Date.yesterday)
         expect(contract_parking_space).to be_invalid
-        expect(contract_parking_space.errors[:end_date]).to eq ["は契約開始日より前ですので設定できません。"]
+        expect(contract_parking_space.errors[:end_date]).to eq [ "は契約開始日より前ですので設定できません。" ]
       end
 
       it 'contractorが紐づいていない場合' do
@@ -46,7 +46,7 @@ RSpec.describe ContractParkingSpace, type: :model do
         contract_parking_space_2 = build(:contract_parking_space, parking_space: parking_space)
 
         expect(contract_parking_space_2).to be_invalid
-        expect(contract_parking_space_2.errors[:parking_space]).to eq ["はすでに契約されています。"]
+        expect(contract_parking_space_2.errors[:parking_space]).to eq [ "はすでに契約されています。" ]
       end
 
       it 'parking_spaceが紐づいていない場合' do
@@ -79,7 +79,7 @@ RSpec.describe ContractParkingSpace, type: :model do
           contract_parking_space.start_date = Date.today
 
           expect(contract_parking_space).to be_invalid
-          expect(contract_parking_space.errors[:start_date]).to eq ["契約が有効のため変更できません。"]
+          expect(contract_parking_space.errors[:start_date]).to eq [ "契約が有効のため変更できません。" ]
         end
 
         it '契約終了が契約開始日よりも後の場合' do
@@ -95,7 +95,7 @@ RSpec.describe ContractParkingSpace, type: :model do
 
           contract_parking_space.contractor = contractor_2
           expect(contract_parking_space).to be_invalid
-          expect(contract_parking_space.errors[:contractor]).to eq ["契約が有効のため変更できません。"]
+          expect(contract_parking_space.errors[:contractor]).to eq [ "契約が有効のため変更できません。" ]
         end
 
         it '駐車スペースを変更した場合' do
@@ -104,7 +104,7 @@ RSpec.describe ContractParkingSpace, type: :model do
           contract_parking_space = create(:contract_parking_space, parking_space: parking_space_1)
           contract_parking_space.parking_space = parking_space_2
           expect(contract_parking_space).to be_invalid
-          expect(contract_parking_space.errors[:parking_space]).to eq ["契約が有効のため変更できません。"]
+          expect(contract_parking_space.errors[:parking_space]).to eq [ "契約が有効のため変更できません。" ]
         end
       end
     end
