@@ -95,6 +95,7 @@ RSpec.describe ContractParkingSpace, type: :model do
 
           contract_parking_space.contractor = contractor_2
           expect(contract_parking_space).to be_invalid
+          expect(contract_parking_space.errors[:contractor]).to eq ["契約が有効のため変更できません。"]
         end
 
         it '駐車スペースを変更した場合' do
