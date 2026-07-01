@@ -18,6 +18,9 @@ RSpec.describe ContractParkingSpace, type: :model do
 
         expect(contract_parking_space.end_date).to eq Date.parse('2999-12-31')
       end
+
+      it 'end_date_undeterminedがtrue、且つend_dateの日付を設定した場合' do
+      end
     end
 
     # 失敗パターン
