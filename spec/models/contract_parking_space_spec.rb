@@ -102,9 +102,9 @@ RSpec.describe ContractParkingSpace, type: :model do
           parking_space_1 = create(:parking_space)
           parking_space_2 = create(:parking_space)
           contract_parking_space = create(:contract_parking_space, parking_space: parking_space_1)
-
           contract_parking_space.parking_space = parking_space_2
           expect(contract_parking_space).to be_invalid
+          expect(contract_parking_space.errors[:parking_space]).to eq ["契約が有効のため変更できません。"]
         end
       end
     end
