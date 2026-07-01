@@ -8,6 +8,7 @@ class ContractParkingSpace < ApplicationRecord
   validates :parking_manager, presence: true
 
   validate :end_date_after_start_date
+  validate :parking_space_available
 
   belongs_to :contractor
   belongs_to :parking_space
@@ -80,6 +81,13 @@ class ContractParkingSpace < ApplicationRecord
     return if end_date.blank? || start_date.blank?
     if end_date < start_date
       errors.add(:end_date, "は契約開始日より前ですので設定できません。")
+    end
+  end
+
+  def parking_space_available
+    return if parking_space.blank?
+    if parking_space.contract_parking_spaces.active.where.not(id: id).exists?
+      errors.add(:parking_space, "はすでに契約されています。")
     end
   end
 end
