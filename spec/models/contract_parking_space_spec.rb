@@ -12,7 +12,7 @@ RSpec.describe ContractParkingSpace, type: :model do
         expect(contract_parking_space).to be_valid
       end
 
-      it 'end_dateが空欄の時、"2999/12/31"になるか' do
+      it '契約終了日が未定チェックすると、"2999/12/31"になるか' do
         contract_parking_space.end_date = nil
         expect(contract_parking_space).to eq '2999/12/31'
       end
