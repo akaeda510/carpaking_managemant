@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_30_073619) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_02_080333) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -62,7 +62,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_30_073619) do
     t.datetime "created_at", null: false
     t.string "device_token", null: false
     t.datetime "expires_at", null: false
-    t.boolean "is_verified", default: false
+    t.boolean "is_verified", default: false, null: false
     t.datetime "last_login_at"
     t.string "name"
     t.bigint "parking_manager_id", null: false
