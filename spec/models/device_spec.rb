@@ -160,6 +160,10 @@ RSpec.describe Device, type: :model do
       end
 
       it 'ログインするとexpires_atはログイン時の1ヶ月後になる' do
+        device = create(:device, expires_at: Time.current)
+        device.verify_with_agent!("iPhone")
+
+        expect(device.expires_at).to be_within(1.second).of(1.month.from_now)
       end
     end
   end
