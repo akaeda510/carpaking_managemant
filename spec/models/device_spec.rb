@@ -127,6 +127,10 @@ RSpec.describe Device, type: :model do
       end
 
       it 'last_login_atが現在時刻に更新されるか' do
+        device = create(:device, last_login_at: 1.month.ago, expires_at: Time.current)
+        device.extend_expiration!
+
+        expect(device.last_login_at).to be_within(1.second).of(Time.current)
       end
     end
 
