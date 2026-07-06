@@ -88,7 +88,7 @@ RSpec.describe Device, type: :model do
         expect(device.name).to eq "Android端末(スマホ)"
       end
 
-      it '不明の端末からログインするとnameが"不明な端末"になる' do
+      it '対応していない端末からログインするとnameが"不明な端末"になる' do
         device = build(:device, user_agent: "UnknownBrowser/1.0")
         device.valid?
 
