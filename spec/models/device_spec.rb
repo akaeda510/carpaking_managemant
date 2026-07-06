@@ -28,6 +28,8 @@ RSpec.describe Device, type: :model do
       end
 
       it 'device_tokenがnilの場合' do
+        device.device_token = nil
+        expect(device).to be_invalid
       end
 
       it 'expires_atがnilの場合' do
