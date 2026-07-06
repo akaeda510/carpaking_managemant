@@ -27,7 +27,7 @@ RSpec.describe Device, type: :model do
         token = SecureRandom.uuid
         device = create(:device, device_token: token)
         device_1 = build(:device, device_token: token)
-        
+
         expect(device_1).to be_invalid
       end
 
@@ -101,7 +101,7 @@ RSpec.describe Device, type: :model do
     describe '#active_and_verified?' do
       it '期間内かつ認証済みの場合、trueを返す' do
         device = create(:device, expires_at: 1.month.from_now, is_verified: true)
-        
+
         expect(device.active_and_verified?).to eq true
       end
 
