@@ -153,6 +153,10 @@ RSpec.describe Device, type: :model do
 
     describe '#verify_with_agent!' do
       it 'ログインするとlast_login_atが現在時刻になる' do
+        device = create(:device, last_login_at: 1.month.ago)
+        device.verify_with_agent!("iPhone")
+
+        expect(device.last_login_at).to be_within(1.second).of(Time.current)
       end
 
       it 'ログインするとexpires_atはログイン時の1ヶ月後になる' do
