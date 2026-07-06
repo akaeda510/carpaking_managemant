@@ -8,6 +8,7 @@ RSpec.describe Device, type: :model do
     # 成功パターン
     context 'バリデーション' do
       it '設定した全てのバリデーションが機能しているか' do
+        expect(device).to be_valid
       end
     end
 
