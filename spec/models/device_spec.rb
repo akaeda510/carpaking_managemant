@@ -171,6 +171,9 @@ RSpec.describe Device, type: :model do
   describe 'クラスメソッド' do
     describe '.get_type_by_user_agent' do
       it 'iPhoneのUser-Agentを返すと"iPhone(スマホ)"を返す' do
+        result = Device.get_type_by_user_agent("iPhone")
+
+        expect(result).to eq "iPhone(スマホ)"
       end
 
       it 'iPadのUser-Agentを返すと"iPad(タブレット)"を返す' do
