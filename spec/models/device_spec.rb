@@ -143,6 +143,11 @@ RSpec.describe Device, type: :model do
       end
 
       it 'device_tokenが再構成されるか' do
+        device = create(:device)
+        old_token = device.device_token
+        device.verify!
+
+        expect(device.device_token).not_to eq old_token
       end
     end
 
