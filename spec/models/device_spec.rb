@@ -209,6 +209,11 @@ RSpec.describe Device, type: :model do
 
     describe '.generate_token' do
       it 'ユニークなトークンを生成するか' do
+        token_1 = Device.generate_token
+        token_2 = Device.generate_token
+
+        expect(token_1).not_to eq token_2
+        expect(token_1).to match(/\A[0-9a-f-]{36}\z/)
       end
     end
   end
