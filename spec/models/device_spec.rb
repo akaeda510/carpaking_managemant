@@ -38,6 +38,8 @@ RSpec.describe Device, type: :model do
       end
 
       it 'parking_managerが紐づいていない場合' do
+        device.parking_manager = nil
+        expect(device).to be_invalid
       end
     end
 
