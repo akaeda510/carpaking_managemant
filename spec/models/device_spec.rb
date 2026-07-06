@@ -60,7 +60,7 @@ RSpec.describe Device, type: :model do
         expect(device.name).to eq "iPhone(スマホ)"
       end
 
-      it 'iPadからログインするとnameが"iPad"になる' do
+      it 'iPadからログインするとnameが"iPad(タブレット)"になる' do
         device = build(:device, user_agent: "ipad")
         device.valid?
 
