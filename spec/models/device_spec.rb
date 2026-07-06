@@ -4,6 +4,15 @@ RSpec.describe Device, type: :model do
   let(:parking_manager) { FactoryBot.create(:parking_manager) }
   let(:device) { FactoryBot.build(:device) }
 
+  USER_AGENTS = {
+    iphone:  "iPhone",
+    iPad:    "iPad",
+    android: "Android",
+    windows: "Windows",
+    mac:     "Mac",
+    unknown: "UnknownBrowser"
+  }.freeze
+
   describe 'create' do
     # 成功パターン
     context 'バリデーション' do
@@ -45,6 +54,10 @@ RSpec.describe Device, type: :model do
 
     context 'コールバック' do
       it 'iPhoneからログインするとnameが"iPhone(スマホ)"になる' do
+        device = build(:device, user_agent: "iphone")
+        device.valid?
+
+        expect(device.name).to eq "iPhone(スマホ)"
       end
 
       it 'iPadからログインするとnameが"iPad"になる' do
