@@ -75,6 +75,10 @@ RSpec.describe Device, type: :model do
       end
 
       it 'Windowsからログインするとnameが"Windows(パソコン)"になる' do
+        device = build(:device, user_agent: "windows")
+        device.valid?
+
+        expect(device.name).to eq "Windows(パソコン)"
       end
 
       it 'Androidからログインするとnameが"Android端末(スマホ)"になる' do
