@@ -33,6 +33,8 @@ RSpec.describe Device, type: :model do
       end
 
       it 'expires_atがnilの場合' do
+        device.expires_at = nil
+        expect(device).to be_invalid
       end
 
       it 'parking_managerが紐づいていない場合' do
