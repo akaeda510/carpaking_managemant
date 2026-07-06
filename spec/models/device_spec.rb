@@ -136,6 +136,10 @@ RSpec.describe Device, type: :model do
 
     describe '#verify!' do
       it 'is_verifiedがtrueになるか' do
+        device = create(:device, is_verified: false)
+        device.verify!
+
+        expect(device.is_verified).to eq true
       end
 
       it 'device_tokenが再構成されるか' do
