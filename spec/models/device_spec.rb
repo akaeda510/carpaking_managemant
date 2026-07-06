@@ -120,7 +120,7 @@ RSpec.describe Device, type: :model do
 
     describe '#extend_expiration!' do
       it 'expires_atが1ヶ月延長されるか' do
-        device = build(:device, last_login_at: 1.month.ago, expires_at: Time.current)
+        device = create(:device, last_login_at: 1.month.ago, expires_at: Time.current)
         device.extend_expiration!
 
         expect(device.expires_at).to be_within(1.second).of(1.month.from_now)
