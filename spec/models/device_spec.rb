@@ -201,6 +201,9 @@ RSpec.describe Device, type: :model do
       end
 
       it '対応していない端末のUser-Agentを返すと"不明な端末"を返す' do
+        result = Device.get_type_by_user_agent("UnknownBrowser/1.0")
+
+        expect(result).to eq '不明な端末'
       end
     end
 
