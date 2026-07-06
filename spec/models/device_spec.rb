@@ -183,6 +183,9 @@ RSpec.describe Device, type: :model do
       end
 
       it 'MacBookのUser-Agentを返すと"Mac(パソコン)"を返す' do
+        result = Device.get_type_by_user_agent("Macintosh")
+
+        expect(result).to eq 'Mac(パソコン)'
       end
 
       it 'WindowsのUser-Agentを返すと"Windows(パソコン)"を返す' do
