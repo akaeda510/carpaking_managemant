@@ -99,16 +99,19 @@ RSpec.describe Device, type: :model do
 
   describe 'インスタンスメソッド' do
     describe '#active_and_verified?' do
-      it '期間内&&認証済みの場合、trueを返す' do
+      it '期間内かつ認証済みの場合、trueを返す' do
         device = create(:device, expires_at: 1.month.from_now, is_verified: true)
         
         expect(device.active_and_verified?).to eq true
       end
 
-      it '期間切れ&&認証済みの場合、falseを返す' do
+      it '期間切れかつ認証済みの場合、falseを返す' do
+        device = create(:device, expires_at: Date.yesterday, is_verified: true)
+
+        expect(device.active_and_verified?).to eq false
       end
 
-      it '期間内&&未認証の場合は、falseを返す' do
+      it '期間内かつ未認証の場合は、falseを返す' do
       end
     end
 
