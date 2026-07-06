@@ -195,6 +195,9 @@ RSpec.describe Device, type: :model do
       end
 
       it 'AndroidのUser-Agentを返すと"Android端末(スマホ)"を返す' do
+        result = Device.get_type_by_user_agent("Android")
+
+        expect(result).to eq 'Android端末(スマホ)'
       end
 
       it '不明な端末のUser-Agentを返すと"不明な端末"を返す' do
