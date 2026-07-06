@@ -50,6 +50,7 @@ class Device < ApplicationRecord
     SecureRandom.uuid
   end
 
+  # トークンが有効でログインすると、device_tokenを更新する
   def verify!
     update(is_verified: true, device_token: SecureRandom.uuid)
   end
