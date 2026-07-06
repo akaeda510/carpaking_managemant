@@ -23,6 +23,8 @@ RSpec.describe Device, type: :model do
       end
 
       it 'user_agentがnilの場合' do
+        device.user_agent = nil
+        expect(device).to be_invalid
       end
 
       it 'device_tokenがnilの場合' do
