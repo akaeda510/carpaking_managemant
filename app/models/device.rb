@@ -45,11 +45,12 @@ class Device < ApplicationRecord
     update!(expires_at: 1.month.from_now, last_login_at: Time.current)
   end
 
-  # 新しいトークンを生成
+  # 新しいdevice_tokenを生成
   def self.generate_token
     SecureRandom.uuid
   end
 
+  # トークンが有効でログインすると、device_tokenを更新する
   def verify!
     update(is_verified: true, device_token: SecureRandom.uuid)
   end
