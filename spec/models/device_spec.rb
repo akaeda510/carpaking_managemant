@@ -112,6 +112,9 @@ RSpec.describe Device, type: :model do
       end
 
       it '期間内かつ未認証の場合は、falseを返す' do
+        device = create(:device, expires_at: 1.month.from_now, is_verified: false)
+
+        expect(device.active_and_verified?).to eq false
       end
     end
 
