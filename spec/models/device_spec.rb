@@ -200,7 +200,7 @@ RSpec.describe Device, type: :model do
         expect(result).to eq 'Android端末(スマホ)'
       end
 
-      it '不明な端末のUser-Agentを返すと"不明な端末"を返す' do
+      it '対応していない端末のUser-Agentを返すと"不明な端末"を返す' do
       end
     end
 
