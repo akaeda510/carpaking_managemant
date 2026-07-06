@@ -15,6 +15,11 @@ RSpec.describe Device, type: :model do
     # 失敗パターン
     context 'バリデーション' do
       it 'device_tokenが重複していた場合' do
+        token = SecureRandom.uuid
+        device = create(:device, device_token: token)
+        device_1 = build(:device, device_token: token)
+        
+        expect(device_1).to be_invalid
       end
 
       it 'user_agentがnilの場合' do
