@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :device do
     device_token { Device.generate_token }
     name { "iPhone(スマホ)" }
-    user_agent { "Mozilla/5.0 (iPhone; CPU iPhone OS 14_0 like Mac OS X" }
+    user_agent { "iphone" }
     last_login_at { Date.today }
     expires_at { 1.month.from_now}
     is_verified { false }
