@@ -26,7 +26,7 @@ parking_lot:
       image_url: null
       note: null
     - step: 3
-      description: "項目を変更後、更新するボタンをクリックしてください。"
+      description: "項目を変更後、下の更新するを選択します。"
       image_url: null
       note: null
   title: "駐車場の削除"
