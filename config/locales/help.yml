@@ -48,3 +48,16 @@ parking_area:
     - step: 3
       description: "必要な項目を記入し、エリアを作成を選択します。"
       image_url: null
+  title: "駐車エリアの編集"
+  description: "駐車エリアの編集手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場一覧から駐車場名をクリックします。"
+      image_url: null
+    - step: 2
+      description: "駐車エリア一覧から作成された駐車エリアのアクション'編集'を選択します。"
+      image_url: null
+    - step: 3
+      description: "変更したい項目を編集し、更新するを選択します。なお、エリアの標準料金は変更した後から駐車スペースを作成した変更した値段が表示されます。"
+      image_url: null
+
