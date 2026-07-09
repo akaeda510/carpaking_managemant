@@ -161,4 +161,14 @@ contractor:
       description: "必要な項目を記入し、契約者作成を選択します。"
       image_url: null
       note: "作成しない場合は契約者一覧に戻るを選択"
-
+  title: "契約者の編集"
+  description: "契約者情報の編集手順を説明します"
+  steps:
+    - step: 1
+      description: "契約者管理から作成した契約者の項目から編集を選択します。"
+      image_url: null
+      note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+    - step: 2
+      description: "変更したい項目を記入し、下の更新するを選択します。"
+      image_url: null
+      note: "変更を取り消す場合は、契約者一覧に戻るを選択"
