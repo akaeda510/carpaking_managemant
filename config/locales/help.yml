@@ -23,3 +23,15 @@ parking_lot:
     - step: 3
       description: "項目を変更後、更新するボタンをクリックしてください"
       image_url: null
+  title: "駐車場の削除"
+  description: "登録された駐車場の削除手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場一覧から作成した駐車場のアクション'削除'を選択します"
+      image_url: null
+    - step: 2
+      description: "ボタンを押すと'本当にこの駐車場を削除しますか？'のメッセージが表示されるので削除する場合は'OK'ボタンを押してください。"
+      image_url: null
+    - step: 3
+      description: "一度駐車場契約登録をしてしまうと削除できないのでご了承ください"
+      image_url: null
