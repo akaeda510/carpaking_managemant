@@ -37,8 +37,9 @@ parking_lot:
       image_url: null
       note: null
     - step: 2
-      description: "ボタンを押すとメッセージが表示されるので削除する場合はOKを選択します。取り消したい場合はキャンセルを選択します。"
+      description: "ボタンを押すとメッセージが表示されるので削除する場合はOKを選択します。"
       image_url: null
+      note: "取り消したい場合はキャンセルを選択します。"
       note: "一度駐車場契約登録をしてしまうと削除できないのでご了承ください。"
 parking_area:
   title: "駐車エリアの登録"
