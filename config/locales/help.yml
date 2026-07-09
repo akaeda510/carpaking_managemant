@@ -3,7 +3,7 @@ parking_lot:
   description: "駐車場の登録手順を説明します"
   steps:
     - step: 1
-      description: "駐車場作成にはまず右上のメニューバーから'駐車場管理'を選択します(PCの方はサイドバーの駐車場一覧から)"
+      description: "駐車場作成にはまず右上のメニューバーから'駐車場管理'を選択します(PCの方はサイドバーの駐車場一覧を選択)"
       image_url: null
       note: null
     - step: 2
@@ -145,3 +145,20 @@ parking_space:
       note: 
         - "削除を取り消したい場合はキャンセルを選択します。"
         - "一度駐車場契約登録すると削除することはできません。"
+contractor:
+  title: "契約者の作成"
+  description: "契約者作成の手順を説明します"
+  steps:
+    - step: 1
+      description: "右上のメニューバーから契約者管理を選択します。(PCの場合は左メニューから契約者管理を選択)"
+      image_url: null
+      note: null
+    - step: 2
+      description: "右上の新しい契約者を登録を選択します。"
+      image_url: null
+      note: null
+    - step: 3
+      description: "必要な項目を記入し、契約者作成を選択します。"
+      image_url: null
+      note: "作成しない場合は契約者一覧に戻るを選択"
+
