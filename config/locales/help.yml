@@ -72,3 +72,19 @@ parking_area:
     - step: 3
       description: "削除ボタンを押すとメッセージが表示され、削除する場合はOKボタンを選択してください。取り消したい場合はキャンセルを選択してください。"
       image_url: null
+parking_space:
+  title: "駐車スペースの作成"
+  description: "駐車スペースの作成手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場一覧から作成した駐車場をクリックします。"
+      image_url: null
+    - step: 2
+      description: "駐車エリア一覧から作成した駐車エリア名をクリックします。"
+      image_url: null
+    - step: 3
+      description: "右上の区画を新規登録を選択します。"
+      image_url: null
+    - step: 4
+      description: "必要な項目を記入し、作成を選択します。"
+      image_url: null
