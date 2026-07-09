@@ -172,3 +172,16 @@ contractor:
       description: "変更したい項目を記入し、下の更新するを選択します。"
       image_url: null
       note: "変更を取り消す場合は、契約者一覧に戻るを選択"
+  title: "契約者の削除"
+  description: "契約者の削除手順を説明します"
+  steps:
+    - step: 1
+      description: "契約者管理から作成した契約者の項目の削除を選択します"
+      image_url: null
+      note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+      - step: 2
+      description: "削除を選択するとメッセージが表示され、そのまま削除する場合はOKを選択します。"
+      image_url: null
+      note:
+        - "削除を取り消す場合は、キャンセルを選択"
+        - "一度駐車場契約すると削除することはできません"
