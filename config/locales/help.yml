@@ -1,1 +1,13 @@
-
+parking_lot:
+  title: "駐車場の登録"
+  description: "駐車場の登録手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場作成にはまず右上のメニューバーから'駐車場管理'を選択します(PCの方はサイドバーの駐車場一覧から)"
+      image_url: null
+    - step: 2
+      description: "駐車場の作成するには右上の'新しい駐車場を登録'ボタンを選択します"
+      image_url: null
+    - step: 3
+      description: "駐車場エリア作成では必要事項を記入し、作成ボタンを選択します"
+      image_url: null
