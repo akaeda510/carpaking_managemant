@@ -13,7 +13,7 @@ parking_lot:
     - step: 3
       description: "駐車場エリア作成では必要事項を記入し、作成ボタンを選択します。"
       image_url: null
-      note: null
+      note: "作成を取り消す場合はエリア一覧に戻るを選択してください。"
   title: "駐車場の編集"
   description: "駐車場の編集手順を説明します。"
   steps:
