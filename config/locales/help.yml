@@ -30,10 +30,10 @@ parking_lot:
       description: "駐車場一覧から作成した駐車場のアクション'削除'を選択します。"
       image_url: null
     - step: 2
-      description: "ボタンを押すと'本当にこの駐車場を削除しますか？'のメッセージが表示されるので削除する場合は'OK'ボタンを押してください。間違えた方はキャンセルを押してください。"
+      description: "ボタンを押すとメッセージが表示されるので削除する場合はOKを選択してください。取り消したい場合はキャンセルを選択してください。"
       image_url: null
     - step: 3
-      description: "一度駐車場契約登録をしてしまうと削除できないのでご了承ください"
+      description: "一度駐車場契約登録をしてしまうと削除できないのでご了承ください。"
       image_url: null
 parking_area:
   title: "駐車エリアの登録"
@@ -60,4 +60,15 @@ parking_area:
     - step: 3
       description: "変更したい項目を編集し、更新するを選択します。なお、エリアの標準料金は変更した後から駐車スペースを作成した変更した値段が表示されます。"
       image_url: null
-
+  title: "駐車エリアの削除"
+  description: "駐車エリアの削除手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場一覧から駐車場名をクリックします。"
+      image_url: null
+    - step: 2 
+      description: "駐車エリア一覧から作成した駐車エリアのアクション'削除'を選択します。"
+      image_url: null
+    - step: 3
+      description: "削除ボタンを押すとメッセージが表示され、削除する場合はOKボタンを選択してください。取り消したい場合はキャンセルを選択してください。"
+      image_url: null
