@@ -1,187 +1,248 @@
 parking_lot:
-  title: "駐車場の登録"
-  description: "駐車場の登録手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車場作成にはまず右上のメニューバーから'駐車場管理'を選択します(PCの方はサイドバーの駐車場一覧を選択)"
-      image_url: null
-      note: null
-    - step: 2
-      description: "駐車場の作成するには右上の'新しい駐車場を登録'ボタンを選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "駐車場エリア作成では必要事項を記入し、作成ボタンを選択します。"
-      image_url: null
-      note: "作成を取り消す場合はエリア一覧に戻るを選択してください。"
-  title: "駐車場の編集"
-  description: "駐車場の編集手順を説明します。"
-  steps:
-    - step: 1
-      description: "駐車場一覧から作成された駐車場のアクション(編集)を選択します。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "変更したい項目をクリックし、項目を変更してください。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "項目を変更後、下の更新するを選択します。"
-      image_url: null
-      note: "編集を取り消したい場合は、エリア一覧に戻るを選択します。"
-  title: "駐車場の削除"
-  description: "登録された駐車場の削除手順を説明します。"
-  steps:
-    - step: 1
-      description: "駐車場一覧から作成した駐車場のアクション'削除'を選択します。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "ボタンを押すとメッセージが表示されるので削除する場合はOKを選択します。"
-      image_url: null
-      note: 
-        - "取り消したい場合はキャンセルを選択します。"
-        - "一度駐車場契約登録をしてしまうと削除することはできません。"
-parking_area:
-  title: "駐車エリアの登録"
-  description: "駐車エリアの登録手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車場一覧から作成された駐車場名をクリックします。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "右上の'新しいエリアを登録'を選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "必要な項目を記入し、エリアを作成を選択します。"
-      image_url: null
-      note: "エリアの標準料金は駐車スペース作成時の初期値になります。"
-  title: "駐車エリアの編集"
-  description: "駐車エリアの編集手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車場一覧から駐車場名をクリックします。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "駐車エリア一覧から作成された駐車エリアのアクション'編集'を選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "変更したい項目を編集し、更新するを選択します。"
-      image_url: null
-      note: "エリアの標準料金は変更した後から駐車スペースを作成した変更した値段が表示されます。"
-  title: "駐車エリアの削除"
-  description: "駐車エリアの削除手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車場一覧から駐車場名をクリックします。"
-      image_url: null
-      note: null
-    - step: 2 
-      description: "駐車エリア一覧から作成した駐車エリアのアクション'削除'を選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "削除ボタンを押すとメッセージが表示され、削除する場合はOKボタンを選択します。"
-      image_url: null
-      note: 
-        - "取り消したい場合はキャンセルを選択します。"
-        - "一度駐車場契約登録をしてしまうと削除することはできません。"
-parking_space:
-  title: "駐車スペースの作成"
-  description: "駐車スペースの作成手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車場一覧から作成した駐車場をクリックします。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "駐車エリア一覧から作成した駐車エリア名をクリックします。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "右上の区画を新規登録を選択します。"
-      image_url: null
-      note: null
-    - step: 4
-      description: "必要な項目を記入し、作成を選択します。"
-      image_url: null
-      note:
-        - "月額賃料は駐車エリアで設定した金額が表示されます。"
-        - "必要に応じてオプション設定をチェックしてください。"
-        - "同じ条件で複数の区画を一括で作成するには'複数の区画を一括で作成する'をクリックし、作成したい区画数を記入します。(例：A-1,A-2,A-3)"
-  title: "駐車スペースの編集"
-  description: "駐車スペースの編集手順を説明します"
-  steps:
-    - step: 1
-      description: "駐車スペース一覧から作成した区画のアクション'詳細'を選択します。"
-      image_url: null
-      note: "区画名または契約者名を探す場合は検索欄から検索できます。"
-    - step: 2
-      description: "駐車エリア一覧から作成した区画のアクション'詳細'を選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "右上の編集を選択します。"
-      image_url: null
-      note: null
-    - step: 4
-      description: "変更したい項目を選択し、更新するを選択します。"
-      image_url: null
-      note: "一度でも駐車場契約すると駐車番号は変更できません。"
-  title: "駐車スペースの削除"
-  description: "駐車スペースの削除手順の説明します"
-  steps:
-    - step: 1
-      description: "駐車スペース一覧から作成した区画のアクション'削除'を選択します。"
-      image_url: null
-      note: null
-    - step: 2
-      description: "削除を選択するとメッセージが表示されそのまま削除する場合はOKを選択します。"
-      image_url: null
-      note: 
-        - "削除を取り消したい場合はキャンセルを選択します。"
-        - "一度駐車場契約登録すると削除することはできません。"
-contractor:
-  title: "契約者の作成"
-  description: "契約者作成の手順を説明します"
-  steps:
-    - step: 1
-      description: "右上のメニューバーから契約者管理を選択します。(PCの場合は左メニューから契約者管理を選択)"
-      image_url: null
-      note: null
-    - step: 2
-      description: "右上の新しい契約者を登録を選択します。"
-      image_url: null
-      note: null
-    - step: 3
-      description: "必要な項目を記入し、契約者作成を選択します。"
-      image_url: null
-      note: "作成しない場合は契約者一覧に戻るを選択"
-  title: "契約者の編集"
-  description: "契約者情報の編集手順を説明します"
-  steps:
-    - step: 1
-      description: "契約者管理から作成した契約者の項目から編集を選択します。"
-      image_url: null
-      note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
-    - step: 2
-      description: "変更したい項目を記入し、下の更新するを選択します。"
-      image_url: null
-      note: "変更を取り消す場合は、契約者一覧に戻るを選択"
-  title: "契約者の削除"
-  description: "契約者の削除手順を説明します"
-  steps:
-    - step: 1
-      description: "契約者管理から作成した契約者の項目の削除を選択します"
-      image_url: null
-      note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+  create:
+    title: "駐車場の登録"
+    description: "駐車場の登録手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車場作成にはまず右上のメニューバーから'駐車場管理'を選択します(PCの方はサイドバーの駐車場一覧を選択)"
+        image_url: null
+        note: null
       - step: 2
-      description: "削除を選択するとメッセージが表示され、そのまま削除する場合はOKを選択します。"
-      image_url: null
-      note:
-        - "削除を取り消す場合は、キャンセルを選択"
-        - "一度駐車場契約すると削除することはできません"
+        description: "駐車場の作成するには右上の'新しい駐車場を登録'ボタンを選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "駐車場エリア作成では必要事項を記入し、作成ボタンを選択します。"
+        image_url: null
+        note: "作成を取り消す場合はエリア一覧に戻るを選択してください。"
+  edit:
+    title: "駐車場の編集"
+    description: "駐車場の編集手順を説明します。"
+    steps:
+      - step: 1
+        description: "駐車場一覧から作成された駐車場のアクション(編集)を選択します。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "変更したい項目をクリックし、項目を変更してください。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "項目を変更後、下の更新するを選択します。"
+        image_url: null
+        note: "編集を取り消したい場合は、エリア一覧に戻るを選択します。"
+  destroy:
+    title: "駐車場の削除"
+    description: "登録された駐車場の削除手順を説明します。"
+    steps:
+      - step: 1
+        description: "駐車場一覧から作成した駐車場のアクション'削除'を選択します。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "ボタンを押すとメッセージが表示されるので削除する場合はOKを選択します。"
+        image_url: null
+        note: 
+      - "取り消したい場合はキャンセルを選択します。"
+      - "一度駐車場契約登録をしてしまうと削除することはできません。"
+parking_area:
+  create:
+    title: "駐車エリアの登録"
+    description: "駐車エリアの登録手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車場一覧から作成された駐車場名をクリックします。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "右上の'新しいエリアを登録'を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "必要な項目を記入し、エリアを作成を選択します。"
+        image_url: null
+        note: "エリアの標準料金は駐車スペース作成時の初期値になります。"
+  edit:
+    title: "駐車エリアの編集"
+    description: "駐車エリアの編集手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車場一覧から駐車場名をクリックします。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "駐車エリア一覧から作成された駐車エリアのアクション'編集'を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "変更したい項目を編集し、更新するを選択します。"
+        image_url: null
+        note: "エリアの標準料金は変更した後から駐車スペースを作成した変更した値段が表示されます。"
+  destroy:
+    title: "駐車エリアの削除"
+    description: "駐車エリアの削除手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車場一覧から駐車場名をクリックします。"
+        image_url: null
+        note: null
+      - step: 2 
+        description: "駐車エリア一覧から作成した駐車エリアのアクション'削除'を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "削除ボタンを押すとメッセージが表示され、削除する場合はOKボタンを選択します。"
+        image_url: null
+        note: 
+      - "取り消したい場合はキャンセルを選択します。"
+      - "一度駐車場契約登録をしてしまうと削除することはできません。"
+parking_space:
+  create:
+    title: "駐車スペースの作成"
+    description: "駐車スペースの作成手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車場一覧から作成した駐車場をクリックします。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "駐車エリア一覧から作成した駐車エリア名をクリックします。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "右上の区画を新規登録を選択します。"
+        image_url: null
+        note: null
+      - step: 4
+        description: "必要な項目を記入し、作成を選択します。"
+        image_url: null
+        note:
+          - "月額賃料は駐車エリアで設定した金額が表示されます。"
+          - "必要に応じてオプション設定をチェックしてください。"
+          - "同じ条件で複数の区画を一括で作成するには'複数の区画を一括で作成する'をクリックし、作成したい区画数を記入します。(例：A-1,A-2,A-3)"
+  edit:
+    title: "駐車スペースの編集"
+    description: "駐車スペースの編集手順を説明します"
+    steps:
+      - step: 1
+        description: "駐車スペース一覧から作成した区画のアクション'詳細'を選択します。"
+        image_url: null
+        note: "区画名または契約者名を探す場合は検索欄から検索できます。"
+      - step: 2
+        description: "駐車エリア一覧から作成した区画のアクション'詳細'を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "右上の編集を選択します。"
+        image_url: null
+        note: null
+      - step: 4
+        description: "変更したい項目を選択し、更新するを選択します。"
+        image_url: null
+        note: "一度でも駐車場契約すると駐車番号は変更できません。"
+  destroy:
+    title: "駐車スペースの削除"
+    description: "駐車スペースの削除手順の説明します"
+    steps:
+      - step: 1
+        description: "駐車スペース一覧から作成した区画のアクション'削除'を選択します。"
+        image_url: null
+        note: null
+      - step: 2
+        description: "削除を選択するとメッセージが表示されそのまま削除する場合はOKを選択します。"
+        image_url: null
+        note: 
+          - "削除を取り消したい場合はキャンセルを選択します。"
+          - "一度駐車場契約登録すると削除することはできません。"
+contractor:
+  create:
+    title: "契約者の作成"
+    description: "契約者作成の手順を説明します"
+    steps:
+      - step: 1
+        description: "右上のメニューバーから契約者管理を選択します。(PCの場合は左メニューから契約者管理を選択)"
+        image_url: null
+        note: null
+      - step: 2
+        description: "右上の新しい契約者を登録を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "必要な項目を記入し、契約者作成を選択します。"
+        image_url: null
+        note: "作成しない場合は契約者一覧に戻るを選択"
+  edit:
+    title: "契約者の編集"
+    description: "契約者情報の編集手順を説明します"
+    steps:
+      - step: 1
+        description: "契約者管理から作成した契約者の項目から編集を選択します。"
+        image_url: null
+        note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+      - step: 2
+        description: "変更したい項目を記入し、下の更新するを選択します。"
+        image_url: null
+        note: "変更を取り消す場合は、契約者一覧に戻るを選択"
+  destroy:
+    title: "契約者の削除"
+    description: "契約者の削除手順を説明します"
+    steps:
+      - step: 1
+        description: "契約者管理から作成した契約者の項目の削除を選択します"
+        image_url: null
+        note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+      - step: 2
+        description: "削除を選択するとメッセージが表示され、そのまま削除する場合はOKを選択します。"
+        image_url: null
+        note:
+          - "削除を取り消す場合は、キャンセルを選択"
+          - "一度駐車場契約すると削除することはできません"
+contract_parking_space:
+  create:
+    title: "駐車場契約の作成"
+    description: "駐車場契約の作成手順を説明します"
+    steps:
+      - step: 1
+        description: "右上のメニューバーから契約者管理を選択します。(PCの場合は左メニューから契約者管理を選択)"
+        image_url: null
+        note: null
+      - step: 2
+        description: "作成した契約者の項目'詳細'を選択します。"
+        image_url: null
+        note: "契約者を検索するには検索欄に名前・電話番号・住所で検索できます。"
+      - step: 3
+        description: "契約者情報詳細から'契約・管理(追加・編集)'を選択します。"
+        image_url: null
+        note: null
+      - step: 4
+        description: "新規契約を追加を選択します。"
+        image_url: null
+        note: null
+      - step: 5
+        description: "項目を記入して契約を確定するを選択します。"
+        image_url: null
+        note: 
+          - "契約終了日が決まっていない場合は'契約終了日が未定'にチェックします。"
+          - "契約しない場合は戻るを選択してください。"
+  edit:
+    title: "駐車場契約の契約終了日の設定"
+    description: "駐車場契約の契約終了日の設定手順を説明します"
+    steps:
+      - step: 1
+        description: "契約者管理から作成した契約者の項目の'詳細'を選択します。"
+        image_url: null
+        note: "契約者の検索は検索欄に名前・電話・住所で検索できます。"
+      - step: 2
+        description: "契約者情報詳細にある'契約・管理(追加・編集)'を選択します。"
+        image_url: null
+        note: null
+      - step: 3
+        description: "現在契約している欄の操作'管理'を選択します。"
+        image_url: null
+        note: null
+      - step: 4
+        description: "契約内容の変更・管理から契約終了日の日付を設定し、変更を保存するを選択します。"
+        image_url: null
+        note:
+          - "現在契約している契約開始日は変更できません。"
+          - "本日中に契約を終了するときは、即日解約するをチェックします。"
