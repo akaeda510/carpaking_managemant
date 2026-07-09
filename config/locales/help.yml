@@ -11,3 +11,15 @@ parking_lot:
     - step: 3
       description: "駐車場エリア作成では必要事項を記入し、作成ボタンを選択します"
       image_url: null
+  title: "駐車場の編集"
+  description: "駐車場の編集手順を説明します"
+  steps:
+    - step: 1
+      description: "駐車場一覧から作成された駐車場のアクション(編集)を選択します"
+      image_url: null
+    - step: 2
+      description: "変更したい項目をクリックし、項目を変更してください"
+      image_url: null
+    - step: 3
+      description: "項目を変更後、更新するボタンをクリックしてください"
+      image_url: null
